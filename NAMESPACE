@@ -1,0 +1,30 @@
+
+#	Imports
+import(grDevices)
+importFrom(graphics, plot)
+importFrom(plyr, join)
+
+#	Exports
+#	class repro.check.data
+export(repro.check.data)
+S3method(print, repro.check.data)
+
+#	class repro.data
+export(repro.data)
+S3method(summary, repro.data)
+S3method(print, repro.data)
+
+#	class repro.fit
+export(repro.fit)
+export(repro.parfit)
+S3method(summary, repro.fit)
+S3method(print, repro.fit)
+S3method(plot, repro.fit)
+
+#	plot functions
+export(repro.survplot,
+	   repro.cumulplot,
+	   repro.fullsurvplot)
+	 
+#	other functions
+export(repro.convergence)	 
