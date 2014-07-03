@@ -62,7 +62,7 @@ repro.survplot <-
 	if(type == "generic"){	
 
 		#	calculate number of point by coordinate
-		tt <- xyTable(cbind(data$conc,data$Nsurv))
+		tt <- xyTable(na.omit(cbind(data$conc2, data$Nsurv)))
 		
 		# plot
 		if(missing(pch))

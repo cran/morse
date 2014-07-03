@@ -1,7 +1,8 @@
-06106bd8c2e26b3ca709a737989d5bf9 *DESCRIPTION
+2d2ea20c1fb27f434dea8582c46f10c6 *DESCRIPTION
 995c0ac8b7d4857ca5eb45fcf67ea594 *NAMESPACE
+25e060caf6421bdf76e82e0af272eae1 *NEWS
 ae2e528c76d0f9aead94a6326ce6c483 *R/morse-internal.R
-123767254f516cd4d95164fba8af05f9 *R/plot.repro.fit.R
+e0ab632b757ccd80aacca3764d6da6c7 *R/plot.repro.fit.R
 d8874bdbd8bbdc0d047367da04bb77ca *R/print.repro.check.data.R
 d4b4d35d8bf90c1743dbafdeac789bba *R/print.repro.data.R
 3d15fa03d8efc29bcaafc6d3a5957e10 *R/print.repro.fit.R
@@ -12,7 +13,7 @@ e196d70db917ce8e42458e30f5dbea8e *R/repro.data.R
 8d6b843716af737e5275fb0b425fb4bf *R/repro.fit.R
 ffd4781fb064db135955f015db533931 *R/repro.fullsurvplot.R
 f08ed08393f6f688b551bcb5cb9f8a55 *R/repro.parfit.R
-aa13ffd368b6374d8f51f06420065354 *R/repro.survplot.R
+1bb458c3e658bc3eb77e5128579f4069 *R/repro.survplot.R
 7c891348d77468dcb9182320fd17ea9a *R/summary.repro.data.R
 5729d8e8d8809f7bb50b78f1c5a0aa28 *R/summary.repro.fit.R
 0adddaba8ae5fcb1831eeeb63e2b0104 *data/cadmium1.rda
@@ -24,7 +25,7 @@ c90cce5676bdfc5c68d04bb3c02ebf17 *data/copper.rda
 14f8f713c6e69d582fa1b7c4edf3254c *man/cadmium2.Rd
 5fec483ef94f301e63fa2fe64df79849 *man/chlordan.Rd
 853e2abb9a53361f9e04827e251b7e71 *man/copper.Rd
-bbc080f6f1973875c9cc1d479f0e3c85 *man/morse-package.Rd
+df4f928f061d0762188c8fc403895ca8 *man/morse-package.Rd
 8cc99436d5f12996236983ae09b8fe81 *man/repro.check.data.Rd
 254a837db51d5d689fe1c2deb1af8366 *man/repro.convergence.Rd
 35ba5701f42679232904313127c2e0cb *man/repro.cumulplot.Rd

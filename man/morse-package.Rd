@@ -23,8 +23,8 @@ For instructions on downloading JAGS, see the home page at \url{http://mcmc-jags
 \tabular{ll}{
 Package: \tab morse\cr
 Type: \tab Package\cr
-Version: \tab 1.0.1\cr
-Date: \tab 2014-06-19\cr
+Version: \tab 1.0.2\cr
+Date: \tab 2014-06-24\cr
 License: \tab GPL (>=2)\cr
 }
 }

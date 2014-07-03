@@ -152,9 +152,10 @@ plot.repro.fit <-
 					pch = mortality,
 					xaxt = "n",
 					yaxt = "n",
+					ylim = c(0, max(response)),
 					log = if(log.scale) "x" else "",					
 					...)
-			axis(side = 2, at = .repro.keep.only.ints(pretty(c(0,max(response)))))
+			axis(side = 2, at = .repro.keep.only.ints(pretty(c(0, max(response)))))
 			axis(side = 1, at = unique(concentrations), labels = unique(concentrations))
 			
 			## Plotting the theoretical curve
@@ -177,7 +178,7 @@ plot.repro.fit <-
 					ylim = c(0,max(qsup95)),
 					log = if(log.scale) "x" else "",
 					...)
-			axis(side = 2, at = .repro.keep.only.ints(pretty(c(0,max(qsup95)))))
+			axis(side = 2, at = .repro.keep.only.ints(pretty(c(0, max(qsup95)))))
 			axis(side = 1, at = unique(concentrations), labels = unique(concentrations))
 			
 			## Plotting the theoretical curve
@@ -228,10 +229,10 @@ plot.repro.fit <-
 		
 		# colors
 		# points vector
-		n <- 2
+		n <- length(unique(data.one$mortality))
 		cols <- hcl(h=seq(15, 375-360/n, length=n)%%360, c=100, l=65)
-		cols1 <- cols[1:2]
-		names(cols1) <- c("No", "Yes")
+		cols1 <- cols[1:n]
+		names(cols1) <- sort(unique(data.one$mortality))
 		# fitted curve
 		cols2 <- fitcol
 		names(cols2) <- c("Fitted curve")
