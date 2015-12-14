@@ -35,7 +35,6 @@
 #' class(dat)
 #'
 #' @export
-#'
 reproData <- function(x) {
 
   # test the integrity of the data with reproDataCheck
@@ -53,6 +52,8 @@ reproData <- function(x) {
   }
 
   x <- cbind(x,Nreprocumul)
+  # force concentration as type double
+  x$conc <- as.double(x$conc)
   class(x) <- c("reproData", "survData","data.frame")
   return(x)
 }

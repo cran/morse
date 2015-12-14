@@ -39,10 +39,10 @@
 #' # (2) Create an objet of class 'survData'
 #' dat <- survData(zinc)
 #' class(dat)
-#
-#' @export
+#' 
 #' @importFrom dplyr left_join rename
-# @importFrom plyr rename
+#' 
+#' @export
 survData <- function(data) {
   ### INPUT
   # [data]: a [data.frame] with above mentionned requirements
@@ -51,7 +51,6 @@ survData <- function(data) {
   # a [data.frame] with additional class [survData]
   # containing columns:
   # - replicate, conc, time, Nsurv as in [data]
-  # - ID: a string identifier built from replicate, conc and time columns
   # - Ninit: number of initial individuals for the corresponding time series
 
   # test the integrity of the data with survDataCheck
@@ -59,9 +58,6 @@ survData <- function(data) {
     stop("The [data] argument is not well-formed, please use [survDataCheck] for details.")
 
   data <- data[order(data$replicate, data$conc, data$time), ]
-
-  # create an ID column of triplet replicate_conc_time
-  data[, "ID"] <- idCreate(data)
 
   data.t0 <- data[data$time == 0, c("replicate", "conc", "Nsurv")]
   data.t0 <- rename(data.t0, Ninit = Nsurv)
@@ -79,7 +75,8 @@ survData <- function(data) {
   }
 
   out <- cbind(out, Nindtime)
-
+  # force concentration as type double
+  out$conc <- as.double(out$conc)
   class(out) <- c("survData", "data.frame")
   return(out)
 }

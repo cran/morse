@@ -1,5 +1,46 @@
 === morse : MOdelling tools for Reproduction and Survival data in Ecotoxicology ===
 
+Version 2.1.0
+=============
+
+SYSTEM REQUIREMENTS
+- JAGS version 4.0.0 or higher is required
+- rjags version 4.4 or higher is required
+
+NEW FEATURES
+- the dataset cadmium2 now reports the number of eggs instead of the number of
+  clutches.
+- add S3 method ppc to plot the posterior predictive check on reproFitTT and
+  survFitTT objects.
+- added a new argument 'remove.someLabels' to plot.reproData and plot.survData
+  functions to avoid the overlap of labels of the X-axis in ggplot style.
+
+BUG FIXES
+- the check on replicate's label has been removed in the survDatacheck
+  function.
+- minor changes in the tutorial vignette.
+- remove titles in legend of plot.reproFitTT and plot.survFitTT in
+  ggplot style.
+- remove observed value points in plot.reproFitTT.
+- survDataCheck and reproDataCheck would fail on datasets with integer-only
+  concentrations.
+- the summary functions for survData and reproData now don't show the
+  number of datapoints per concentration and the number of datapoints
+  per time. This was considered misleading in the case where some
+  replicates have a different initial number of individuals.
+- plot.survData (and plot.reproData) don't display a legend anymore with
+  unconstrained time and concentration. They used to display a misleading
+  "replicate" legend, which would not correspond to a real replication unit
+  (beaker).
+- in plot.survData all ggplot style graphique start at 0,0.
+
+OTHER CHANGES
+- the DIC is not calculated in survFiTT anymore. Since we don't
+  perform model selection, this was not really useful and we thus
+  obtain a significant speed-up.
+- the column ID was removed in survData and reproData objects.
+
+
 Version 2.0.0
 =============
 
@@ -43,7 +84,7 @@ Version 1.0.2
 
 BUG FIXES
 - correction of points color in the legend for the plot.repro.fit function (ggplot).
-- change the ylim range for the plot.repro.fit function (generic). 
+- change the ylim range for the plot.repro.fit function (generic).
 - correction of the log.scale option for the repro.survplot function.
 
 Version 1.0.1

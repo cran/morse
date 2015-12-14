@@ -1,11 +1,10 @@
 ---
 title: "MORSE tutorial"
-author: "Marie-Laure Delignette-Muller, Philippe Ruiz and Philippe Veber"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 self_contained: no
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Tutorial}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
   
@@ -50,7 +49,7 @@ the package (like `cadmium2`). First, we load the dataset and use the function
 
 ```{r, cache=TRUE}
 data(cadmium2)
-survDataCheck(cadmium2, diagnosis.plot = TRUE)
+survDataCheck(cadmium2)
 ```
 
 ## Step 2: create a `survData` object
@@ -123,14 +122,15 @@ a `survData` object and the levels of $LC_x$ we need:
 
 ```{r, results="hide", cache=TRUE}
 fit <- survFitTT(dat,
-                lcx = c(10, 20, 30, 40, 50))
+                 target.time = 21,
+                 lcx = c(10, 20, 30, 40, 50))
 ```
 
-The return value is an object of class `survFitTT` and provides the estimated 
-parameters as a probability distribution, in order to model our uncertainty on
+The returned value is an object of class `survFitTT` and provides the estimated 
+parameters as a posterior[^1] distribution, in order to model our uncertainty on
 their true value. For the parameters of the models, as well as the $LC_x$
 values, we report the median (as the estimated value) and the 2.5 \% and 97.5 \%
-quantiles of the distribution (as a measure of uncertainty, a.k.a. credible
+quantiles of the posterior (as a measure of uncertainty, a.k.a. credible
 intervals). These can seen using the `summary` method:
 
 
@@ -138,29 +138,40 @@ intervals). These can seen using the `summary` method:
 summary(fit)
 ```
 
-or in a plot:
+If the inference went well, it is expected that the difference between 
+quantiles in the posterior will be reduced compared to the prior, meaning
+that the data was helpful to reduce the uncertainty on the true value of
+the parameters. This simple check can be performed using the summary function.
+
+The fit can also be plotted:
 ```{r, cache=TRUE}
 plot(fit, log.scale = TRUE, ci = TRUE, style = "ggplot",
      addlegend = TRUE)
 ```
-
-
-<!--
-* Step five, check the obseved versus predicted values
-  
-```{r,cache=TRUE, eval=FALSE}
-ppc(out2, style = "ggplot")
-```
--->
+This representation shows the estimated relation between concentration of
+pollutant and survival rate (red curve). It is computed by choosing for each
+parameter the median value of its posterior. To assess the uncertainty on this
+estimation, we compute many such curves this time by sampling the parameters 
+in the posterior distribution. This gives rise to the pink band, showing for
+any given concentration an interval (called credible interval) containing the
+survival rate 95% of the time in the posterior distribution. The experimental
+data points are represented in black and correspond to the observed survival
+rate when
+pooling all replicates. The black error bars correspond to a 95% confidence
+interval, which is another, more straightforward way to bound the most
+probable value of the survival rate for a tested concentration. In favorable
+situations, we expect that the credible interval around the estimated curve
+and the confidence interval around experimental points will largely overlap.
 
 Note that `survFitTT` will warn you if the estimated $LC_{50}$ lies outside the
-range of tested concentrations:
+range of tested concentrations, as in the following example:
 
 ```{r, results="hide", cache=TRUE}
 data("cadmium1")
-fit <- survFitTT(survData(cadmium1),
-                lcx = c(10, 20, 30, 40, 50))
-plot(fit, log.scale = TRUE, ci = TRUE, style = "ggplot",
+wrong_fit <- survFitTT(survData(cadmium1),
+                       target.time = 21,
+                       lcx = c(10, 20, 30, 40, 50))
+plot(wrong_fit, log.scale = TRUE, ci = TRUE, style = "ggplot",
      addlegend = TRUE)
 ```
 
@@ -168,6 +179,32 @@ In this example, the experimental design did not include sufficiently high
 concentrations, and we are missing measurements that would have a major 
 influence on the final estimation. For this reason this result should be 
 considered unreliable.
+
+
+
+## Step 5: validate the model with a posterior predictive check
+
+The estimation can be further validated using so-called posterior
+predictive checks: the idea is to plot the observed values against the
+corresponding estimated predictions, along with their 95% credible
+interval. If the fit is correct, we expect to see 95% of the data
+inside the intervals.
+
+```{r,cache=TRUE, results="hide"}
+ppc(fit, style = "ggplot")
+```
+
+In this plot, each black dot represents an observation made at some
+concentration, and the number of survivors at target time is given by
+the value on X-axis. Using the concentration and the fitted model, we
+can produce a corresponding prediction of the expected number of
+survivors at that concentration. This prediction is given by the
+Y-axis. Ideally observations and predictions should coincide, so we'd
+expect to see the black dots on the points of coordinate $Y = X$. Our
+model provides a tolerable variation around the predited mean value
+as an interval where we expect 95% of the dots to be in average. The
+intervals are represented in green if they overlap with the line $Y=X$,
+and in red otherwise.
 
 # Reproduction data analyses
   
@@ -181,7 +218,7 @@ Here is a typical session:
 data(cadmium2)
 
 # (2) check structure and integrity of the dataset
-reproDataCheck(cadmium2, diagnosis.plot = TRUE)
+reproDataCheck(cadmium2)
 
 # (3) create a `reproData` object
 dat <- reproData(cadmium2)
@@ -199,10 +236,19 @@ summary(dat)
 
 # (6) fit an exposure-response model at target-time
 fit <- reproFitTT(dat, stoc.part = "bestfit",
+                  target.time = 21,
                   ecx = c(10, 20, 30, 40, 50),
                   quiet = TRUE)
-plot(fit, log.scale = TRUE, ci = TRUE, 
-     style = "ggplot", addlegend = TRUE)
+summary(fit)
+```
+
+```{r, cache=TRUE}
+plot(fit, log.scale = TRUE, ci = TRUE,
+     style = "ggplot")
+```
+
+```{r, cache=TRUE}
+ppc(fit, style = "ggplot")
 ```
 As in survival analysis, we assume that the reproduction rate per individual-day
 is a log-logistic function of the concentration. More details and parameter
@@ -214,17 +260,17 @@ signification can be found in the Modeling vignette.
 For reproduction analysis, we consider one model which neglects inter-individual
 variability (named "Poisson") and another one which takes it into account
 (named "gamma Poisson"). You can choose either one using the option `stoc.part`,
-but by setting it to "bestfit", you let `reproFitTT` decide which models fits the
+but by setting it to `"bestfit"`, you let `reproFitTT` decide which models fits the
 data best. The choice can be seen by calling the `summary` function:
 ```{r, cache=TRUE}
 summary(fit)
 ```
 When the gamma Poisson model is selected, the summary shows an additional
 parameter called `omega`, which quantifies the inter-individual variability
-(the higher `omega` the higher variability).
+(the higher `omega` the higher the variability).
 
 
-## Reproduction data and survival function
+## Reproduction data and survival functions
 
 In MORSE, reproduction datasets are a special case of survival datasets: a 
 reproduction dataset includes the same information than a survival dataset plus
@@ -238,6 +284,15 @@ conversion function:
 dat <- reproData(cadmium2)
 plot(as.survData(dat))
 ```
+
+[^1]: In Bayesian inference, the parameters of a model are estimated
+from the data starting from a so-called *prior*, which is a probability
+distribution representing an initial guess on the true parameters, before
+seing the data. The *posterior* distribution represents the uncertainty on
+the parameters after seeing the data and combining it with the prior. To obtain
+a point estimate of the parameters, it is typical to compute the mean or median
+of the posterior and quantify the uncertainty by reporting the standard
+deviation or inter-quantile distance.
 
 
 <!--

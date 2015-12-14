@@ -85,8 +85,10 @@ test_that("survDataCheck", {
   zinc9[, "replicate"] <- as.character(zinc9[, "replicate"])
   zinc9[12, "replicate"] <- "D"
   zinc9[, "replicate"] <- as.factor(zinc9[, "replicate"])
-  expect_equal(survDataCheck(zinc9, diagnosis.plot = FALSE)$id[4],
-               "ReplicateLabel")
+  expect_equal(survDataCheck(zinc9, diagnosis.plot = FALSE)$id[1],
+               "firstTime0")
+  expect_equal(survDataCheck(zinc9, diagnosis.plot = FALSE)$id[3],
+               "missingReplicate")
 
   zinc10 <- zinc
   zinc10[46, "time"] <- "A"
@@ -95,8 +97,10 @@ test_that("survDataCheck", {
 
   cadmium19 <- cadmium1
   cadmium19[12, "replicate"] <- 5
-  expect_equal(survDataCheck(cadmium19, diagnosis.plot = FALSE)$id[4],
-               "ReplicateLabel")
+  expect_equal(survDataCheck(cadmium19, diagnosis.plot = FALSE)$id[1],
+               "firstTime0")
+  expect_equal(survDataCheck(cadmium19, diagnosis.plot = FALSE)$id[3],
+               "missingReplicate")
 })
 
 test_that("survData", {
@@ -104,8 +108,7 @@ test_that("survData", {
   lapply(d, function(x) {
     dat <- survData(x)
     expect_is(dat, c("survData", "data.frame"))
-    expect_is(dat$conc, c("numeric", "integer"))
-    expect_true("ID" %in% names(dat))
+    expect_is(dat$conc, "numeric")
     expect_true(!is.null(dat))
     expect_true(any(!is.na(dat)))
     expect_true(all(dat[-1] >= 0))

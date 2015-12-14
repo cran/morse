@@ -11,7 +11,7 @@ library(ggplot2)
 
 ## ---- cache=TRUE---------------------------------------------------------
 data(cadmium2)
-survDataCheck(cadmium2, diagnosis.plot = TRUE)
+survDataCheck(cadmium2)
 
 ## ---- cache=TRUE---------------------------------------------------------
 dat <- survData(cadmium2)
@@ -36,7 +36,8 @@ summary(dat)
 
 ## ---- results="hide", cache=TRUE-----------------------------------------
 fit <- survFitTT(dat,
-                lcx = c(10, 20, 30, 40, 50))
+                 target.time = 21,
+                 lcx = c(10, 20, 30, 40, 50))
 
 ## ---- cache=TRUE---------------------------------------------------------
 summary(fit)
@@ -45,22 +46,23 @@ summary(fit)
 plot(fit, log.scale = TRUE, ci = TRUE, style = "ggplot",
      addlegend = TRUE)
 
-## ----cache=TRUE, eval=FALSE----------------------------------------------
-#  ppc(out2, style = "ggplot")
-
 ## ---- results="hide", cache=TRUE-----------------------------------------
 data("cadmium1")
-fit <- survFitTT(survData(cadmium1),
-                lcx = c(10, 20, 30, 40, 50))
-plot(fit, log.scale = TRUE, ci = TRUE, style = "ggplot",
+wrong_fit <- survFitTT(survData(cadmium1),
+                       target.time = 21,
+                       lcx = c(10, 20, 30, 40, 50))
+plot(wrong_fit, log.scale = TRUE, ci = TRUE, style = "ggplot",
      addlegend = TRUE)
+
+## ----cache=TRUE, results="hide"------------------------------------------
+ppc(fit, style = "ggplot")
 
 ## ---- cache=TRUE---------------------------------------------------------
 # (1) load dataset
 data(cadmium2)
 
 # (2) check structure and integrity of the dataset
-reproDataCheck(cadmium2, diagnosis.plot = TRUE)
+reproDataCheck(cadmium2)
 
 # (3) create a `reproData` object
 dat <- reproData(cadmium2)
@@ -78,10 +80,17 @@ summary(dat)
 
 # (6) fit an exposure-response model at target-time
 fit <- reproFitTT(dat, stoc.part = "bestfit",
+                  target.time = 21,
                   ecx = c(10, 20, 30, 40, 50),
                   quiet = TRUE)
-plot(fit, log.scale = TRUE, ci = TRUE, 
-     style = "ggplot", addlegend = TRUE)
+summary(fit)
+
+## ---- cache=TRUE---------------------------------------------------------
+plot(fit, log.scale = TRUE, ci = TRUE,
+     style = "ggplot")
+
+## ---- cache=TRUE---------------------------------------------------------
+ppc(fit, style = "ggplot")
 
 ## ---- cache=TRUE---------------------------------------------------------
 summary(fit)

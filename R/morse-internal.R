@@ -3,7 +3,7 @@
 if(getRversion() >= "2.15.1")  utils::globalVariables(c(
   "response", "Nreprocumul", "resp", "Mortality", "qinf95", "qsup95",
   "transf_conc", "obs", "pred", "..n..", "Points", "conc", "Line", "Nsurv",
-  "time", "Conf.Int", "Cred.Lim"
+  "time", "Conf.Int", "Cred.Lim", "Obs", "P50", "P2.5", "P97.5"
 ))
 
 
@@ -177,9 +177,6 @@ fCols <- function(data, fitcol, cicol, analyse) {
                 cols4 = cols4))
            
     } else if (analyse == "repro") {
-    #points
-    cols1 <- c("black", "white")
-    names(cols1) <- sort(unique(data$Mortality))
     # fitted curve
     cols2 <- fitcol
     names(cols2) <- "loglogistic"
@@ -187,8 +184,12 @@ fCols <- function(data, fitcol, cicol, analyse) {
     cols3 <- cicol
     names(cols3) <- "Credible limits"
     
-    return(list(cols1 = cols1,
-                cols2 = cols2,
+    return(list(cols2 = cols2,
                 cols3 = cols3))
     }
+}
+
+exclude_labels <- function(x) {
+  x[-seq.int(1, length(x), 4)] <- ""
+  return(x)
 }

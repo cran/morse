@@ -19,7 +19,7 @@
 #' \dontrun{
 #' # (3) Run the reproFitTT function with the log-logistic
 #' # model
-#' out <- reproFitTT(dat, ecx = c(5, 10, 15, 20, 30, 50, 80),
+#' out <- reproFitTT(cadmium1, ecx = c(5, 10, 15, 20, 30, 50, 80),
 #' quiet = TRUE)
 #' 
 #' # (4) Print the reproFitTT object
@@ -29,7 +29,6 @@
 #' @keywords print
 #' 
 #' @export
-#' 
 print.reproFitTT <- function(x, ...) {
   # print the model text and the Jags Computing information
   # for an object of class reproFitTT
