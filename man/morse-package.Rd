@@ -48,7 +48,7 @@ on downloading JAGS, see the home page at
 described in the tutorial vignette.
 
 \tabular{ll}{ Package: \tab morse\cr Type: \tab Package\cr Version: \tab
-2.1.0\cr Date: \tab 2015-12-14\cr License: \tab GPL (>=2)\cr }
+2.1.1\cr Date: \tab 2015-12-21\cr License: \tab GPL (>=2)\cr }
 }
 \author{
 Marie Laure Delignette-Muller

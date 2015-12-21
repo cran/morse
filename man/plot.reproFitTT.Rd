@@ -46,7 +46,7 @@ Plotting method for \code{reproFitTT} objects
 }
 \note{
 When \code{style = "ggplot"}, the function calls package
-\code{\link[ggplot2]{ggplot2}} and returns an object of class \code{ggplot}.
+\code{\link[ggplot2]{ggplot}} and returns an object of class \code{ggplot}.
 
 For an example, see the paragraph on \code{\link{reproFitTT}}.
 }
