@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{An object of class \code{survFitTT}}
 
-\item{\dots}{Further arguments to be passed to generic methods.}
+\item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
 This is the generic \code{print} S3 method for the \code{survFitTT} class.
@@ -33,9 +33,6 @@ out <- survFitTT(cadmium1, lcx = c(5, 10, 15, 20, 30, 50, 80),
 out
 }
 
-}
-\seealso{
-\code{\link{survFitTT}}
 }
 \keyword{print}
 

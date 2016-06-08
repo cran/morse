@@ -5,9 +5,10 @@
 \title{Plotting method for \code{survFitTT} objects}
 \usage{
 \method{plot}{survFitTT}(x, xlab = "Concentration", ylab = "Survival rate",
-  main = NULL, fitcol = "red", fitlty = 1, fitlwd = 1, ci = FALSE,
-  cicol = "pink1", cilty = 1, cilwd = 1, addlegend = FALSE,
-  log.scale = FALSE, style = "generic", ...)
+  main = NULL, fitcol = "red", fitlty = 1, fitlwd = 1,
+  spaghetti = FALSE, cicol = "pink1", cilty = 1, cilwd = 1,
+  adddata = FALSE, addlegend = FALSE, log.scale = FALSE,
+  style = "generic", ...)
 }
 \arguments{
 \item{x}{an object of class \code{survFitTT}}
@@ -24,13 +25,17 @@
 
 \item{fitlwd}{width of the fitted curve}
 
-\item{ci}{if \code{TRUE}, draws the 95 \% confidence interval on observed data}
+\item{spaghetti}{if \code{TRUE}, the credible interval is represented by 
+multiple curves}
 
-\item{cicol}{color of the 95 \% confidence interval limits}
+\item{cicol}{color of the 95 \% credible interval limits}
 
-\item{cilty}{line type for the 95 \% confidence interval limits}
+\item{cilty}{line type for the 95 \% credible interval limits}
 
-\item{cilwd}{width of the 95 \% confidence interval limits}
+\item{cilwd}{width of the 95 \% credible interval limits}
+
+\item{adddata}{if \code{TRUE}, adds the observed data with confidence interval
+to the plot}
 
 \item{addlegend}{if \code{TRUE}, adds a default legend to the plot}
 
@@ -38,29 +43,58 @@
 
 \item{style}{graphical backend, can be \code{'generic'} or \code{'ggplot'}}
 
-\item{\dots}{Further arguments to be passed to generic methods.}
+\item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
-This function plots exposure-response fits for target time survival
-analysis (a.k.a. \code{survFitTT} objects).
+This is the generic \code{plot} S3 method for the \code{survFitTT} class. It
+plots exposure-response fits for target time survival analysis.
 }
 \details{
 The fitted curve represents the \strong{estimated survival rate} after
 the target time has passed as a function of the concentration of pollutant;
-the black dots depict the \strong{observed survival rate} at each tested
-concentration. Note that since our model does not take inter-replicate
-variability into consideration, replicates are systematically pooled in this
-plot. When \code{ci = TRUE}, the function plots both credible intervals for
-the estimated survival rate (by default the red area around the fitted
-curve) and confidence intervals for the observed survival rate (as black
-error bars). Both types of intervals are taken at the same level. Typically
+When \code{adddata = TRUE} the black dots depict the \strong{observed survival
+rate} at each tested concentration. Note that since our model does not take
+inter-replicate variability into consideration, replicates are systematically
+pooled in this plot.
+The function plots both 95 \% credible intervals for the estimated survival
+rate (by default the red area around the fitted curve) and 95 \% confidence
+intervals for the observed survival rate (as black error bars if
+\code{adddata = TRUE}).
+Both types of intervals are taken at the same level. Typically
 a good fit is expected to display a large overlap between the two intervals.
+If spaghetti = TRUE, the credible intervals are represented by two dotted
+lines limiting the credible band, and a spaghetti plot is added to this band.
+It consists of the representation of simulated curves using parameter values
+sampled in the posterior distribution (10 \% of the MCMC chains are randomly
+taken for this sample).
 }
 \note{
-When \code{style = "ggplot"}, the function calls package
+When \code{style = "ggplot"}, the function calls function
 \code{\link[ggplot2]{ggplot}} and returns an object of class \code{ggplot}.
+}
+\examples{
 
-For an example, see the paragraph on \code{\link{reproFitTT}}.
+# (1) Load the data
+data(cadmium1)
+
+# (2) Create an object of class "survData"
+dat <- survData(cadmium1)
+
+\dontrun{
+# (3) Run the survFitTT function with the log-logistic
+#     binomial model
+out <- survFitTT(dat, lcx = c(5, 10, 15, 20, 30, 50, 80),
+                 quiet = TRUE)
+
+# (4) Plot the fitted curve
+plot(out, log.scale = TRUE, adddata = TRUE)
+
+# (5) Plot the fitted curve with ggplot style
+plot(out, xlab = expression("Concentration in" ~ mu~g.L^{-1}),
+     fitcol = "blue", adddata = TRUE, cicol = "blue",
+     style = "ggplot")
+}
+
 }
 \keyword{plot}
 

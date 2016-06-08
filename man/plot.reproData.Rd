@@ -5,9 +5,9 @@
 \title{Plotting method for \code{reproData} objects}
 \usage{
 \method{plot}{reproData}(x, xlab, ylab = "Cumulated Number of offspring",
-  main = NULL, target.time = NULL, concentration = NULL,
-  style = "generic", pool.replicate = FALSE, log.scale = FALSE,
-  addlegend = FALSE, remove.someLabels = FALSE, ...)
+  main = NULL, concentration = NULL, style = "generic",
+  pool.replicate = FALSE, addlegend = FALSE, remove.someLabels = FALSE,
+  ...)
 }
 \arguments{
 \item{x}{an object of class \code{reproData}}
@@ -18,34 +18,28 @@
 
 \item{main}{main title for the plot}
 
-\item{target.time}{a numeric value corresponding to some observed time in \code{data}}
-
-\item{concentration}{a numeric value corresponding to some concentration in \code{data}}
+\item{concentration}{a numeric value corresponding to some concentration in
+\code{data}. If \code{concentration = NULL}, draws a plot for each concentration}
 
 \item{style}{graphical backend, can be \code{'generic'} or \code{'ggplot'}}
 
 \item{pool.replicate}{if \code{TRUE}, the datapoints of each replicate are
 summed for a same concentration}
 
-\item{log.scale}{if \code{TRUE}, displays \eqn{x}-axis in log-scale}
-
 \item{addlegend}{if \code{TRUE}, adds a default legend to the plot}
 
 \item{remove.someLabels}{if \code{TRUE}, removes 3/4 of X-axis labels in
 \code{'ggplot'} style to avoid the label overlap}
 
-\item{\dots}{Further arguments to be passed to generic methods.}
+\item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
-Plots the cumulated number of offspring as a
-function of either time and concentration, time only (for a fixed
-concentration), concentration only (for a given target time). If both
-concentration and target time are fixed, the function additionally plots
-the experimental values for the minimum available concentration.
+This is the generic \code{plot} S3 method for the \code{reproData} class.
+It plots the cumulated number of offspring as a function of time.
 }
 \note{
-When \code{style = "ggplot"}, the function calls package
-\code{\link[ggplot2]{ggplot}} and returns an object of class \code{ggplot}.
+When \code{style = "ggplot"}, the function calls function
+\code{\link[ggplot2]{ggplot}} and returns an object of class \code{ggplot}
 }
 \examples{
 
@@ -58,14 +52,8 @@ cadmium1 <- reproData(cadmium1)
 # (2) Plot the reproduction data
 plot(cadmium1)
 
-# (3) Plot the reproduction data for a fixed time with a ggplot style
-plot(cadmium1, target.time = 21, style = "ggplot")
-
-# (4) Plot the reproduction data for a fixed concentration
+# (3) Plot the reproduction data for a fixed concentration
 plot(cadmium1, concentration = 4.36, style = "ggplot")
-
-# (5) Plot the reproduction data for a fixed concentration and target.time
-plot(cadmium1, target.time = 21, concentration = 0.86)
 
 }
 \keyword{plot}

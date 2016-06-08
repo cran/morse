@@ -1,7 +1,7 @@
 ## ----include=FALSE, echo=FALSE-------------------------------------------
 
-knitr::opts_chunk$set(fig.width = 7, 
-                      fig.height = 4, 
+knitr::opts_chunk$set(fig.width = 7,
+                      fig.height = 4,
                       cache = TRUE)
 
 
@@ -25,11 +25,7 @@ plot(dat, concentration = 124, addlegend = TRUE,
      pool.replicate = FALSE, style = "ggplot")
 
 ## ---- cache=TRUE---------------------------------------------------------
-plot(dat, target.time = 21, pool.replicate = FALSE, style = "ggplot",
-     addlegend = TRUE)
-
-## ---- cache=TRUE---------------------------------------------------------
-plot(dat, concentration = 232, target.time = 21)
+plotDoseResponse(dat, target.time = 21, style = "ggplot", addlegend = TRUE)
 
 ## ---- cache=TRUE---------------------------------------------------------
 summary(dat)
@@ -43,7 +39,7 @@ fit <- survFitTT(dat,
 summary(fit)
 
 ## ---- cache=TRUE---------------------------------------------------------
-plot(fit, log.scale = TRUE, ci = TRUE, style = "ggplot",
+plot(fit, log.scale = TRUE, style = "ggplot", adddata = TRUE,
      addlegend = TRUE)
 
 ## ---- results="hide", cache=TRUE-----------------------------------------
@@ -51,10 +47,36 @@ data("cadmium1")
 wrong_fit <- survFitTT(survData(cadmium1),
                        target.time = 21,
                        lcx = c(10, 20, 30, 40, 50))
-plot(wrong_fit, log.scale = TRUE, ci = TRUE, style = "ggplot",
+plot(wrong_fit, log.scale = TRUE, style = "ggplot", adddata = TRUE,
      addlegend = TRUE)
 
 ## ----cache=TRUE, results="hide"------------------------------------------
+ppc(fit, style = "ggplot")
+
+## ---- cache=TRUE---------------------------------------------------------
+# (1) load dataset
+data(propiconazole)
+
+# (2) check structure and integrity of the dataset
+survDataCheck(propiconazole)
+
+# (3) create a `survData` object
+dat <- survData(propiconazole)
+
+# (4) represent the number of survivor as a function time
+plot(dat, style = "ggplot", pool.replicate = FALSE)
+
+# (5) check information on the experimental design
+summary(dat)
+
+# (6) fit a TKTD model
+fit <- survFitTKTD(dat, quiet = TRUE)
+summary(fit)
+
+## ---- cache=TRUE---------------------------------------------------------
+plot(fit, style = "ggplot", adddata = TRUE, one.plot = FALSE)
+
+## ---- cache=TRUE---------------------------------------------------------
 ppc(fit, style = "ggplot")
 
 ## ---- cache=TRUE---------------------------------------------------------
@@ -69,16 +91,16 @@ dat <- reproData(cadmium2)
 
 # (4) represent the cumulated number of offspring as a function time
 plot(dat, style = "ggplot", pool.replicate = FALSE)
-plot(dat, target.time = 21, addlegend = TRUE, style = "ggplot",
-     pool.replicate = FALSE)
 plot(dat, concentration = 124, addlegend = TRUE, style = "ggplot",
      pool.replicate = FALSE)
-plot(dat, concentration = 124, target.time = 21, style = "ggplot")
 
-# (5) check information on the experimental design
+# (5) represent the reproduction rate as a function of concentration
+plotDoseResponse(dat, target.time = 56, style = "ggplot")
+
+# (6) check information on the experimental design
 summary(dat)
 
-# (6) fit an exposure-response model at target-time
+# (7) fit an exposure-response model at target-time
 fit <- reproFitTT(dat, stoc.part = "bestfit",
                   target.time = 21,
                   ecx = c(10, 20, 30, 40, 50),
@@ -86,8 +108,8 @@ fit <- reproFitTT(dat, stoc.part = "bestfit",
 summary(fit)
 
 ## ---- cache=TRUE---------------------------------------------------------
-plot(fit, log.scale = TRUE, ci = TRUE,
-     style = "ggplot")
+plot(fit, log.scale = TRUE, style = "ggplot", adddata = TRUE,
+     addlegend = TRUE)
 
 ## ---- cache=TRUE---------------------------------------------------------
 ppc(fit, style = "ggplot")
@@ -98,7 +120,4 @@ summary(fit)
 ## ---- cache=TRUE---------------------------------------------------------
 dat <- reproData(cadmium2)
 plot(as.survData(dat))
-
-## ---- cache=TRUE, eval=FALSE---------------------------------------------
-#  ppc(out, style = "ggplot")
 

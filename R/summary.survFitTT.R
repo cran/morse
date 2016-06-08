@@ -1,18 +1,17 @@
-#' Summary for survFitTT objects
+#' Summary for \code{survFitTT} objects
 #'
-#' The summary shows the quantiles of priors and posteriors on parameters
-#' and the quantiles of the posterior on the LCx.
+#' This is the generic \code{summary} S3 method for the \code{survFitTT} class.
+#' It shows the quantiles of priors and posteriors on parameters and the quantiles
+#' of the posterior on the LCx.
 #'
 #' @param object an object of class \code{survFitTT}
 #' @param quiet when \code{FALSE}, prints summary on standard output
-#' @param \dots Further arguments to be passed to generic methods.
+#' @param \dots Further arguments to be passed to generic methods
 #'
 #' @return The function returns a list with the following fields:
 #' \item{Qpriors}{quantiles for the model's prior}
 #' \item{Qposteriors}{quantiles for the model's posteriors}
 #' \item{QLCx}{quantiles for LCx values}
-#'
-#' @seealso survFitTT
 #'
 #' @examples
 #' # (1) Load the data
@@ -67,15 +66,15 @@ summary.survFitTT <- function(object, quiet = FALSE, ...) {
     res <- rbind(b, e)
   }
 
-  ans1 <- round(data.frame(res), digits = 3)
+  ans1 <- format(data.frame(res), scientific = TRUE, digits = 4)
   colnames(ans1) <- c("50%", "2.5%", "97.5%")
 
   # quantiles of estimated model parameters
-  ans2 <- round(object$estim.par, digits = 3)
+  ans2 <- format(object$estim.par, scientific = TRUE, digits = 4)
   colnames(ans2) <- c("50%", "2.5%", "97.5%")
 
   # estimated ECx and their CIs 95%
-  ans3 <- round(object$estim.LCx, digits = 3)
+  ans3 <- format(object$estim.LCx, scientific = TRUE, digits = 4)
   colnames(ans3) <- c("50%", "2.5%", "97.5%")
 
   # print

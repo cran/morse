@@ -2,20 +2,32 @@
 % Please edit documentation in R/ppc.reproFitTT.R
 \name{ppc.reproFitTT}
 \alias{ppc.reproFitTT}
-\title{Posterior predictive check plot for reproFitTT objects}
+\title{Posterior predictive check plot for \code{reproFitTT} objects}
 \usage{
 \method{ppc}{reproFitTT}(x, style = "generic", ...)
 }
 \arguments{
 \item{x}{An object of class \code{reproFitTT}}
 
-\item{style}{Graphical package method: \code{generic} or \code{ggplot}.}
+\item{style}{graphical backend, can be \code{'generic'} or \code{'ggplot'}}
 
-\item{\dots}{Further arguments to be passed to generic methods.}
+\item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
-The \code{ppc} function plot the observed versus predicted values for the
-\code{reporFitTT} objects.
+This is the generic \code{ppc} S3 method for the \code{reproFitTT} class.
+It Plots the predicted values with 95 \% credible intervals versus the observed
+values.
+}
+\details{
+The coordinates of black points are the observed values of the cumulated number
+of reproduction outputs for a given concentration (x-scale) and the corresponding 
+predicted values (y-scale). 95 \% prediction intervals are added to each predicted
+value, colored in green if this interval contains the observed value and in red
+in the other case. As replicates are not pooled in this plot, overlapped points
+are shifted on the x-axis to help the visualization of replicates. The bisecting
+line (y = x) is added to the plot in order to see if each prediction interval
+contains each observed value. As replicates are shifted on the x-axis, this
+line is represented by steps.
 }
 \examples{
 

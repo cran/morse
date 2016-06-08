@@ -2,7 +2,7 @@
 % Please edit documentation in R/as.survData.R
 \name{as.survData}
 \alias{as.survData}
-\title{Cast for classes derived from survData}
+\title{Cast for classes derived from \code{survData}}
 \usage{
 as.survData(x)
 }
@@ -23,5 +23,8 @@ plot(x)
 #and
 plot(as.survData(x))
 
+}
+\seealso{
+\code{\link{reproData}} and \code{\link{survData}}
 }
 

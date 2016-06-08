@@ -3,6 +3,8 @@ data(cadmium1)
 data(cadmium2)
 data(copper)
 data(chlordan)
+data(dichromate)
+data(propiconazole)
 data(zinc)
 
 # no error dataset
@@ -10,7 +12,9 @@ d <- list(cadmium1 = cadmium1,
           cadmium2 = cadmium2,
           copper = copper,
           chlordan = chlordan,
-          zinc = zinc)
+          dichromate = dichromate,
+          zinc = zinc,
+          propiconazole = propiconazole)
 
 ## tests
 
@@ -117,7 +121,9 @@ test_that("survData", {
 
 test_that("survFitTT", {
   skip_on_cran()
-  lapply(d, function(x) {
+  d_without_cadmium1 <- d
+  d_without_cadmium1[["cadmium1"]] <- NULL
+  lapply(d_without_cadmium1, function(x) {
     dat <- survData(x)
     # select Data at target.time
     dataTT <- morse:::selectDataTT(dat, max(dat$time))
@@ -133,5 +139,21 @@ test_that("survFitTT", {
     } else {
       expect_true(out$det.part == "loglogisticbinom_2")
     }
+  })
+  dat <- survData(cadmium1)
+  expect_warning(survFitTT(dat, quiet = T))
+})
+
+test_that("survFitTKTD", {
+  skip_on_cran()
+  d.tktd <- list(cadmium1 = d[["cadmium1"]],
+                 chlordan = d[["chlordan"]])
+  lapply(d.tktd, function(x) {
+    dat <- survData(x)
+    expect_warning(out <- survFitTKTD(dat, quiet = T))
+    expect_is(out, "survFitTKTD")
+    expect_equal(typeof(out), "list")
+    expect_true(!is.null(out))
+    expect_true(any(!is.na(out)))
   })
 })

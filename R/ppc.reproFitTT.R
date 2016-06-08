@@ -1,11 +1,22 @@
-#' Posterior predictive check plot for reproFitTT objects
+#' Posterior predictive check plot for \code{reproFitTT} objects
 #'
-#' The \code{ppc} function plot the observed versus predicted values for the
-#' \code{reporFitTT} objects.
+#' This is the generic \code{ppc} S3 method for the \code{reproFitTT} class.
+#' It Plots the predicted values with 95 \% credible intervals versus the observed
+#' values.
+#' 
+#' The coordinates of black points are the observed values of the cumulated number
+#' of reproduction outputs for a given concentration (x-scale) and the corresponding 
+#' predicted values (y-scale). 95 \% prediction intervals are added to each predicted
+#' value, colored in green if this interval contains the observed value and in red
+#' in the other case. As replicates are not pooled in this plot, overlapped points
+#' are shifted on the x-axis to help the visualization of replicates. The bisecting
+#' line (y = x) is added to the plot in order to see if each prediction interval
+#' contains each observed value. As replicates are shifted on the x-axis, this
+#' line is represented by steps.
 #'
 #' @param x An object of class \code{reproFitTT}
-#' @param style Graphical package method: \code{generic} or \code{ggplot}.
-#' @param \dots Further arguments to be passed to generic methods.
+#' @param style graphical backend, can be \code{'generic'} or \code{'ggplot'}
+#' @param \dots Further arguments to be passed to generic methods
 #'
 #' @examples
 #'
@@ -45,23 +56,24 @@ EvalreproPpc <- function(x) {
   tot.mcmc <- do.call("rbind", x$mcmc)
 
   if (x$model.label == "GP") {
-    omega <- 10^sample(tot.mcmc[, "log10omega"], 5000)
+    omega <- 10^tot.mcmc[, "log10omega"]
   }
-  b <- 10^sample(tot.mcmc[, "log10b"], 5000)
-  d <- sample(tot.mcmc[, "d"], 5000)
-  e <- 10^sample(tot.mcmc[, "log10e"], 5000)
+  b <- 10^tot.mcmc[, "log10b"]
+  d <- tot.mcmc[, "d"]
+  e <- 10^tot.mcmc[, "log10e"]
 
+  niter <- nrow(tot.mcmc)
   n <- x$jags.data$n
   xconc <- x$jags.data$xconc
   Nindtime <- x$jags.data$Nindtime
   NcumulObs <- x$jags.data$Ncumul
-  NcumulPred <- matrix(NA, nrow = 5000, ncol = n)
+  NcumulPred <- matrix(NA, nrow = niter, ncol = n)
 
   if (x$model.label == "GP") {
     for (i in 1:n) {
       popmean <- d / (1 + (xconc[i]/e)^b)
-      indmean <- rgamma(n = 5000, shape = popmean / omega, rate = 1 / omega)
-      NcumulPred[, i] <- rpois(5000, indmean * Nindtime[i])
+      indmean <- rgamma(n = niter, shape = popmean / omega, rate = 1 / omega)
+      NcumulPred[, i] <- rpois(niter, indmean * Nindtime[i])
     }
 
   }
@@ -69,7 +81,7 @@ EvalreproPpc <- function(x) {
     for (i in 1:n) {
       ytheo <- d / (1 + (xconc[i]/e)^b)
       nbtheo <- ytheo * Nindtime[i]
-      NcumulPred[, i] <- rpois(5000, nbtheo)
+      NcumulPred[, i] <- rpois(niter, nbtheo)
     }
   }
   QNreproPred <- t(apply(NcumulPred, 2, quantile,

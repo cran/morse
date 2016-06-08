@@ -3,7 +3,9 @@
 if(getRversion() >= "2.15.1")  utils::globalVariables(c(
   "response", "Nreprocumul", "resp", "Mortality", "qinf95", "qsup95",
   "transf_conc", "obs", "pred", "..n..", "Points", "conc", "Line", "Nsurv",
-  "time", "Conf.Int", "Cred.Lim", "Obs", "P50", "P2.5", "P97.5"
+  "time", "Conf.Int", "Cred.Lim", "Obs", "P50", "P2.5", "P97.5", "variable",
+  "value", "jittered_conc", "reproRateInf", "reproRateSup", "curv_conc", "q50",
+  "psurv"
 ))
 
 
@@ -35,7 +37,7 @@ selectDataTT <- function(data, target.time) {
     }
 
     # correct target time
-    if (!any(data$time == target.time))
+    if (!any(data$time == target.time) || target.time == 0)
       stop("target.time is not one of the possible time !")
 
     dataTT <- filter(data, time == target.time)
@@ -155,41 +157,83 @@ legendGgplotFit <- function(a.gplot) {
   return(legend)
 }
 
-fCols <- function(data, fitcol, cicol, analyse) {
+fCols <- function(data, fitcol, cicol) {
   
-  if (analyse == "surv") {
-    #points
-    cols1 <- "black"
-    names(cols1) <- unique(data$Points)
-    # curve
-    cols2 <- fitcol
-    names(cols2) <- "loglogistic"
-    # CI
-    cols3 <- "black"
-    names(cols3) <- "Confidence interval"
-    # CI2
-    cols4 <- cicol
-    names(cols4) <- "Credible limits"
-    
-    return(list(cols1 = cols1,
-                cols2 = cols2,
-                cols3 = cols3,
-                cols4 = cols4))
-           
-    } else if (analyse == "repro") {
-    # fitted curve
-    cols2 <- fitcol
-    names(cols2) <- "loglogistic"
-    # CI
-    cols3 <- cicol
-    names(cols3) <- "Credible limits"
-    
-    return(list(cols2 = cols2,
-                cols3 = cols3))
-    }
+  # points
+  cols1 <- "black"
+  names(cols1) <- unique(data$Points)
+  # curve
+  cols2 <- fitcol
+  names(cols2) <- "loglogistic"
+  # Conf Int
+  cols3 <- "black"
+  names(cols3) <- "Confidence interval"
+  # Cred Int
+  cols4 <- cicol
+  names(cols4) <- "Credible limits"
+  # tktd mean curve
+  cols5 <- fitcol
+  names(cols5) <- "Mean curve"
+  
+  return(list(cols1 = cols1,
+              cols2 = cols2,
+              cols3 = cols3,
+              cols4 = cols4,
+              cols5 = cols5))
 }
 
 exclude_labels <- function(x) {
   x[-seq.int(1, length(x), 4)] <- ""
   return(x)
 }
+
+stepCalc <- function(obs_val) {
+  # calculation of steps coordinate
+  sObs <- sort(obs_val)
+  stepX <- c(0, sapply(2:length(sObs), function(i) {
+    sObs[i-1] + (sObs[i] - sObs[i-1]) / 2}), max(sObs))
+  return(list(sObs = sObs, stepX = stepX))
+}
+
+jitterObsGenerator <- function(stepX, tab, obs_val, ppc = FALSE) {
+  # uniform jittering of observed values
+  if (ppc) {
+    allSpaceX <- sapply(2:length(stepX),
+                        function(i) { stepX[i] - stepX[i-1] })
+    spaceX <- min(allSpaceX[which(allSpaceX != 0)]) / 2
+  } else {
+    allSpaceX <- sapply(2:length(stepX),
+                        function(i) { obs_val[i] - obs_val[i-1] })
+    spaceX <- min(allSpaceX[which(allSpaceX != 0)]) / 4
+  }
+  
+  lengthX <- table(tab[, "Obs"])
+  jitterObs <- mapply(function(x, y) {
+    if (y == 1) {
+      seq(x, x, length.out = y)
+    } else {
+      seq(x - spaceX + (2 * spaceX / (y + 1)),
+          x + spaceX - (2 * spaceX / (y + 1)), length.out = y)
+    }
+  }, x = sort(obs_val), y = lengthX)
+  return(list(spaceX = spaceX,
+              jitterObs = unlist(jitterObs)))
+}
+
+# [plotMatrixGeometry(n)] returns a vector [c(w,h)] such that a matrix of plots
+# of dimension ([w], [h]) is big enough to display [n] plots in a pretty way.
+# This will typically be used in [par(mfrow)] calls.
+plotMatrixGeometry <- function(nblevels) {
+  PlotPar <- c(c(2, 2), c(2, 3), c(2, 4), c(3, 3), c(2, 5), c(3, 4), c(3, 5),
+               c(4, 4))
+  NbPlotTheo <- matrix(ncol = 2, nrow = 8)
+  NbPlotTheo[, 1] <- c(1, 3, 5, 7, 9, 11, 13, 15)
+  NbPlotTheo[, 2] <- c(4, 6, 8, 9, 10, 12, 15, 16)
+  if (nblevels < 15) {
+    i <- NbPlotTheo[NbPlotTheo[, 2] - nblevels > 0, 1][1]
+  } else {
+    i <- 15
+  }
+  return(c(PlotPar[i], PlotPar[i + 1]))
+}
+

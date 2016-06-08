@@ -18,7 +18,7 @@ reproFitTT(data, stoc.part = "bestfit", target.time = NULL, ecx = c(5, 10,
 \item{ecx}{desired values of \eqn{x} (in percent) for which to compute
 \eqn{EC_{x}}{ECx}}
 
-\item{n.chains}{number of MCMC chains. The minimum required number of chains is}
+\item{n.chains}{number of MCMC chains. The minimum required number of chains is 2}
 
 \item{quiet}{if \code{TRUE}, does not print messages and progress bars from JAGS}
 }
@@ -32,15 +32,22 @@ concentrations (by default) and their 95 \% credible intervals}
 credible intervals}
 \item{mcmc}{an object of class \code{mcmc.list} with the posterior distributions}
 \item{model}{a JAGS model object}
+\item{model.label}{a character string, \code{"P"} if the poisson model is used,
+\code{"GP"} if the gamma-poisson is used}
 \item{parameters}{a list of the parameters names used in the model}
 \item{n.chains}{an integer value corresponding to the number of chains used
-for the MCMC computation.}
+for the MCMC computation}
 \item{n.iter}{a list of two indices indicating the beginning and
 the end of monitored iterations}
 \item{n.thin}{a numerical value corresponding to the thinning interval}
+\item{jags.data}{a list a the data passed to the jags model}
+\item{transformed.data}{the \code{survData} object passed to the function}
+\item{dataTT}{the dataset with which one the parameters are estimated}
 }
 \description{
-This function estimates a model of the cumulated reproduction outputs of a
+This function estimates the parameters of an exposure-response model for
+target-time reproduction analysis using Bayesian inference.
+In this model the response is the cumulated reproduction outputs of a
 population in a given time period in presence of mortality.
 }
 \details{
@@ -70,20 +77,6 @@ dat <- reproData(cadmium1)
 # (3) Run the reproFitTT function with the log-logistic gamma-poisson model
 out <- reproFitTT(dat, stoc.part = "gammapoisson",
                   ecx = c(5, 10, 15, 20, 30, 50, 80), quiet = TRUE)
-
-# (4) Summary look the estimated values (ECx and parameters)
-out$estim.ECx
-out$estim.par
-
-# (5) Plot the fitted curve with credible limits
-plot(out, log.scale = TRUE, ci = TRUE,
-     main = "log-logistic gamma-poisson model")
-
-# (6) Plot the fitted curve with ggplot style
-require("ggplot2")
-plot(out, xlab = expression("Concentration in" ~ mu~g.L^{-1}),
-     fitcol = "blue", ci = TRUE, cicol = "blue", style = "ggplot",
-     main = "Log-logistic response to concentration")
 }
 
 }

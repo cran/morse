@@ -2,20 +2,31 @@
 % Please edit documentation in R/ppc.survFitTT.R
 \name{ppc.survFitTT}
 \alias{ppc.survFitTT}
-\title{Posterior predictive check plot for survFitTT objects}
+\title{Posterior predictive check plot for \code{survFitTT} objects}
 \usage{
 \method{ppc}{survFitTT}(x, style = "generic", ...)
 }
 \arguments{
 \item{x}{An object of class \code{survFitTT}}
 
-\item{style}{Graphical package method: \code{generic} or \code{ggplot}.}
+\item{style}{Graphical package method: \code{generic} or \code{ggplot}}
 
-\item{\dots}{Further arguments to be passed to generic methods.}
+\item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
-The \code{ppc} function plot the observed versus predicted values for the
-\code{survFitTT} objects.
+This is the generic \code{ppc} S3 method for the \code{survFitTT} class. It
+plots the predicted values with 95 \% credible intervals versus the observed
+values for \code{survFitTT} objects.
+}
+\details{
+The coordinates of black points are the observed values of the number of survivor
+(poolled replicates) for a given concentration (x-scale) and the corresponding 
+predicted values (y-scale). 95 \% prediction intervals are added to each predicted
+value, colored in green if this interval contains the observed value and in red
+in the other case.
+The bisecting line (y = x) is added to the plot in order to see if each
+prediction interval contains each observed value. As replicates are shifted
+on the x-axis, this line is represented by steps.
 }
 \examples{
 

@@ -13,6 +13,8 @@ of \eqn{LC_{x}} (Lethal Concentration for x\% of individuals) or
 \eqn{EC_{x}} (x\% Effect Concentration) values by fitting exposure-response
 curves. The \eqn{LC_{x}}/\eqn{EC_{x}} and parameters of the curve are
 provided along with an indication of the uncertainty of the estimation.
+It can be used to perform an estimation of \eqn{NEC} (No Effect Concentration)
+value by fitting a toxico-kinetic toxico-dynamic model.
 }
 \details{
 Estimation procedures in MORSE can be used without a deep knowledge of
@@ -48,7 +50,7 @@ on downloading JAGS, see the home page at
 described in the tutorial vignette.
 
 \tabular{ll}{ Package: \tab morse\cr Type: \tab Package\cr Version: \tab
-2.1.1\cr Date: \tab 2015-12-21\cr License: \tab GPL (>=2)\cr }
+2.2.0\cr Date: \tab 2016-03-03\cr License: \tab GPL (>=2)\cr }
 }
 \author{
 Marie Laure Delignette-Muller
@@ -66,7 +68,7 @@ Maintainer: Philippe Ruiz <philippe.ruiz@univ-lyon1.fr>
 Delignette-Muller, M.L., Lopes, C., Veber, P. and Charles, S.
 (2014) \emph{Statistical handling of reproduction data for exposure-response
 modelling}.
-\url{http://pubs.acs.org/doi/abs/10.1021/es502009r?journalCode=esthag}.
+\url{http://dx.doi.org/10.1021/es502009r}.
 
 Plummer, M. (2013) \emph{JAGS Version 4.0.0 user manual}.
 \url{http://sourceforge.net/projects/mcmc-jags/files/Manuals/4.x/jags_user_manual.pdf/download}.

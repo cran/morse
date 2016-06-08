@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary.reproData.R
 \name{summary.reproData}
 \alias{summary.reproData}
-\title{Summary for reproData objects}
+\title{Summary for \code{reproData} objects}
 \usage{
 \method{summary}{reproData}(object, quiet = FALSE, ...)
 }
@@ -11,7 +11,7 @@
 
 \item{quiet}{if \code{TRUE}, does no prints}
 
-\item{\dots}{Further arguments to be passed to generic methods.}
+\item{\dots}{Further arguments to be passed to generic methods}
 }
 \value{
 The function returns a list with the same fields than 
@@ -19,8 +19,9 @@ The function returns a list with the same fields than
 \item{NboffTimeConc}{nb of offspring for all concentrations and time points}
 }
 \description{
-The generic \code{summary} S3 method for the \code{reproData} class provides
-information about the structure of the dataset and the experimental design.
+This is the generic \code{summary} S3 method for the \code{reproData} class.
+It provides information about the structure of the dataset and the experimental
+design.
 }
 \examples{
 # (1) Load the data
@@ -32,9 +33,6 @@ cadmium1 <- reproData(cadmium1)
 # (3) Summarize the dataset
 summary(cadmium1)
 
-}
-\seealso{
-\code{\link{reproData}}, \code{\link{summary.survData}}
 }
 \keyword{summary}
 

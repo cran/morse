@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary.survData.R
 \name{summary.survData}
 \alias{summary.survData}
-\title{Summary for survData objects}
+\title{Summary for \code{survData} objects}
 \usage{
 \method{summary}{survData}(object, quiet = FALSE, ...)
 }
@@ -11,7 +11,7 @@
 
 \item{quiet}{when \code{FALSE}, prints summary on standard output}
 
-\item{\dots}{Further arguments to be passed to generic methods.}
+\item{\dots}{Further arguments to be passed to generic methods}
 }
 \value{
 The function returns a list with the following fields:
@@ -32,9 +32,6 @@ cadmium1 <- survData(cadmium1)
 # (3) Summarize the dataset
 summary(cadmium1)
 
-}
-\seealso{
-\code{\link{survData}}
 }
 \keyword{summary}
 

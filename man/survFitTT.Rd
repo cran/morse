@@ -40,9 +40,12 @@ for the MCMC computation}
 \item{n.iter}{a list of two indices indicating the beginning and end of
 monitored iterations}
 \item{n.thin}{a numerical value corresponding to the thinning interval}
+\item{jags.data}{a list a the data passed to the jags model}
+\item{transformed.data}{the \code{survData} object passed to the function}
+\item{dataTT}{the dataset with which one the parameters are estimated}
 }
 \description{
-The \code{survFitTT} function estimates the parameters of an exposure-response
+This function estimates the parameters of an exposure-response
 model for target-time survival analysis using Bayesian inference. In this model,
 the survival rate of individuals after some time (called target time) is modeled
 as a function of the pollutant's concentration. The actual number of
@@ -69,18 +72,6 @@ dat <- survData(cadmium1)
 #     binomial model
 out <- survFitTT(dat, lcx = c(5, 10, 15, 20, 30, 50, 80),
                  quiet = TRUE)
-
-# (4) Summary look the estimated values (LCx and parameters)
-out$estim.LCx
-out$estim.par
-
-# (5) Plot the fitted curve
-plot(out, log.scale = TRUE, ci = TRUE)
-
-# (6) Plot the fitted curve with ggplot style
-require(ggplot2)
-plot(out, xlab = expression("Concentration in" ~ mu~g.L^{-1}),
-     fitcol = "blue", ci = TRUE, cicol = "blue",  style = "ggplot")
 }
 
 }

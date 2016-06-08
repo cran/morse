@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary.reproFitTT.R
 \name{summary.reproFitTT}
 \alias{summary.reproFitTT}
-\title{Summary for reproFitTT objects}
+\title{Summary for \code{reproFitTT} objects}
 \usage{
 \method{summary}{reproFitTT}(object, quiet = FALSE, ...)
 }
@@ -11,7 +11,7 @@
 
 \item{quiet}{when \code{FALSE}, prints summary on standard output}
 
-\item{\dots}{Further arguments to be passed to generic methods.}
+\item{\dots}{Further arguments to be passed to generic methods}
 }
 \value{
 The function returns a list with the following fields:
@@ -20,7 +20,8 @@ The function returns a list with the following fields:
 \item{QECx}{quantiles for ECx values}
 }
 \description{
-The summary shows the quantiles of priors and posteriors on parameters
+This is the generic \code{summary} S3 method for the \code{reproFitTT} class.
+It shows the quantiles of priors and posteriors on parameters
 and the quantiles of the posterior on the ECx.
 }
 \examples{
@@ -33,16 +34,13 @@ cadmium1 <- reproData(cadmium1)
 \dontrun{
 # (3) Run the reproFitTT function with the log-logistic
 # model
-out <- reproFitTT(dat, ecx = c(5, 10, 15, 20, 30, 50, 80),
+out <- reproFitTT(cadmium1, ecx = c(5, 10, 15, 20, 30, 50, 80),
 quiet = TRUE)
 
 # (4) summarize the reproFitTT object
 summary(out)
 }
 
-}
-\seealso{
-reproFitTT
 }
 \keyword{summary}
 

@@ -9,10 +9,10 @@
 \arguments{
 \item{x}{An object of class \code{reproFitTT}}
 
-\item{\dots}{Further arguments to be passed to generic methods.}
+\item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
-This is the generic \code{print} S3 method for the \code{survFitTT} class.
+This is the generic \code{print} S3 method for the \code{reproFitTT} class.
 It prints the underlying JAGS model and some information on the Bayesian 
 inference procedure.
 }
@@ -33,9 +33,6 @@ quiet = TRUE)
 out
 }
 
-}
-\seealso{
-\code{\link{reproFitTT}}
 }
 \keyword{print}
 

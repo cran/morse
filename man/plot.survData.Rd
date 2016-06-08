@@ -5,9 +5,9 @@
 \title{Plotting method for \code{survData} objects}
 \usage{
 \method{plot}{survData}(x, xlab, ylab = "Number of surviving individuals",
-  main = NULL, target.time = NULL, concentration = NULL,
-  style = "generic", pool.replicate = FALSE, log.scale = FALSE,
-  addlegend = FALSE, remove.someLabels = FALSE, ...)
+  main = NULL, concentration = NULL, style = "generic",
+  pool.replicate = FALSE, addlegend = FALSE, remove.someLabels = FALSE,
+  ...)
 }
 \arguments{
 \item{x}{an object of class \code{survData}}
@@ -18,33 +18,27 @@
 
 \item{main}{main title for the plot}
 
-\item{target.time}{a numeric value corresponding to some observed time in \code{data}}
-
-\item{concentration}{a numeric value corresponding to some concentration in \code{data}}
+\item{concentration}{a numeric value corresponding to some concentration in
+\code{data}. If \code{concentration = NULL}, draws a plot for each concentration}
 
 \item{style}{graphical backend, can be \code{'generic'} or \code{'ggplot'}}
 
 \item{pool.replicate}{if \code{TRUE}, the datapoints of each replicate are
 summed for a same concentration}
 
-\item{log.scale}{if \code{TRUE}, displays \eqn{x}-axis in log scale}
-
 \item{addlegend}{if \code{TRUE}, adds a default legend to the plot}
 
 \item{remove.someLabels}{if \code{TRUE}, removes 3/4 of X-axis labels in
 \code{'ggplot'} style to avoid label overlap}
 
-\item{\dots}{Further arguments to be passed to generic methods.}
+\item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
-Plots the number of survivors as a
-function of either time and concentration, time only (for a fixed
-concentration), concentration only (for a given target time). If both
-concentration and target time are fixed, the function additionally plots
-the experimental values for the minimum available concentration.
+This is the generic \code{plot} S3 method for the \code{survData} class.
+It plots the number of survivors as a function of time.
 }
 \note{
-When \code{style = "ggplot"}, the function calls package
+When \code{style = "ggplot"}, the function calls function
 \code{\link[ggplot2]{ggplot}} and returns an object of class \code{ggplot}.
 }
 \examples{
@@ -55,21 +49,11 @@ library(ggplot2)
 data(zinc)
 zinc <- survData(zinc)
 
-# (2) Plot survival data
-plot(zinc)
+# (2) Plot survival data with a ggplot style
+plot(zinc, style = "ggplot")
 
-# (3) Plot survival data with a ggplot style
-plot(zinc, style = "ggplot", remove.someLabels = TRUE)
-
-# (4) Plot the survival data for a fixed time with a ggplot style
-plot(zinc, target.time = 21, style = "ggplot")
-
-# (5) Plot the survival data for a fixed concentration
-plot(zinc, concentration = 0.66, addlegend = TRUE)
-
-# (6) Plot survival data for a fixed concentration and
-# target.time with ggplot style
-plot(zinc, style = "ggplot", target.time = 21, concentration = 0.66)
+# (3) Plot the survival data for a fixed concentration
+plot(zinc, concentration = 0.66, style = "ggplot")
 
 }
 \keyword{plot}

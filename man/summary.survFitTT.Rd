@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary.survFitTT.R
 \name{summary.survFitTT}
 \alias{summary.survFitTT}
-\title{Summary for survFitTT objects}
+\title{Summary for \code{survFitTT} objects}
 \usage{
 \method{summary}{survFitTT}(object, quiet = FALSE, ...)
 }
@@ -11,7 +11,7 @@
 
 \item{quiet}{when \code{FALSE}, prints summary on standard output}
 
-\item{\dots}{Further arguments to be passed to generic methods.}
+\item{\dots}{Further arguments to be passed to generic methods}
 }
 \value{
 The function returns a list with the following fields:
@@ -20,8 +20,9 @@ The function returns a list with the following fields:
 \item{QLCx}{quantiles for LCx values}
 }
 \description{
-The summary shows the quantiles of priors and posteriors on parameters
-and the quantiles of the posterior on the LCx.
+This is the generic \code{summary} S3 method for the \code{survFitTT} class.
+It shows the quantiles of priors and posteriors on parameters and the quantiles
+of the posterior on the LCx.
 }
 \examples{
 # (1) Load the data
@@ -40,9 +41,6 @@ out <- survFitTT(cadmium1, lcx = c(5, 10, 15, 20, 30, 50, 80),
 summary(out)
 }
 
-}
-\seealso{
-survFitTT
 }
 \keyword{summary}
 

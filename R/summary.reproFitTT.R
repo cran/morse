@@ -1,18 +1,17 @@
-#' Summary for reproFitTT objects
+#' Summary for \code{reproFitTT} objects
 #'
-#' The summary shows the quantiles of priors and posteriors on parameters
+#' This is the generic \code{summary} S3 method for the \code{reproFitTT} class.
+#' It shows the quantiles of priors and posteriors on parameters
 #' and the quantiles of the posterior on the ECx.
 #'
 #' @param object an object of class \code{reproFitTT}
 #' @param quiet when \code{FALSE}, prints summary on standard output
-#' @param \dots Further arguments to be passed to generic methods.
+#' @param \dots Further arguments to be passed to generic methods
 #'
 #' @return The function returns a list with the following fields:
 #' \item{Qpriors}{quantiles for the model's prior}
 #' \item{Qposteriors}{quantiles for the model's posteriors}
 #' \item{QECx}{quantiles for ECx values}
-#'
-#' @seealso reproFitTT
 #'
 #' @examples
 #' # (1) Load the data
@@ -24,7 +23,7 @@
 #' \dontrun{
 #' # (3) Run the reproFitTT function with the log-logistic
 #' # model
-#' out <- reproFitTT(dat, ecx = c(5, 10, 15, 20, 30, 50, 80),
+#' out <- reproFitTT(cadmium1, ecx = c(5, 10, 15, 20, 30, 50, 80),
 #' quiet = TRUE)
 #'
 #' # (4) summarize the reproFitTT object
@@ -74,15 +73,15 @@ summary.reproFitTT <- function(object, quiet = FALSE, ...) {
     res <- rbind(b, d, e, omega)
   }
 
-  ans1 <-  round(data.frame(res), digits = 3)
+  ans1 <-  format(data.frame(res), scientific = TRUE, digits = 4)
   colnames(ans1) <- c("50%", "2.5%", "97.5%")
 
   # quantiles of estimated model parameters
-  ans2 <- round(object$estim.par, digits = 3)
+  ans2 <- format(object$estim.par, scientific = TRUE, digits = 4)
   colnames(ans2) <- c("50%", "2.5%", "97.5%")
 
   # estimated ECx and their CIs 95%
-  ans3 <- round(object$estim.ECx, digits = 3)
+  ans3 <- format(object$estim.ECx, scientific = TRUE, digits = 4)
   colnames(ans3) <- c("50%", "2.5%", "97.5%")
 
   if (! quiet) {
