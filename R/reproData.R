@@ -7,11 +7,13 @@
 #' survival analysis can be used with \code{reproData} objects.
 #'
 #' The \code{x} argument contains the experimental data, and should have
-#' the same structure that the argument of \code{survData}, plus a single
-#' additional colum providing the total number of offspring observed since the
+#' the same structure than the argument of \code{survData}, plus a single
+#' additional column providing the total number of offspring observed since the
 #' last time point. The function fails if \code{x} does not meet the
 #' expected requirements. Please run \code{\link{reproDataCheck}} to ensure
 #' \code{x} is well-formed.
+#'
+#' Note that experimental data with time-variable exposure are not supported.
 #'
 #' @aliases reproData
 #'
@@ -40,8 +42,31 @@ reproData <- function(x) {
   if (dim(reproDataCheck(x, diagnosis.plot = FALSE))[1] > 0)
     stop("The [x] argument is not well-formed, please use [reproDataCheck] for details.")
 
-  x <- survData(x)
+  if (!is_exposure_constant(x)) {
+    stop("[x] displays variable exposure, which is not supported for reproduction analysis")
+  }
 
+  x <- survData(x)
+  x$Nindtime <- Nindtime(x)
+  x$Nreprocumul <- Nreprocumul(x)
+
+  # force concentration as type double
+  x$conc <- as.double(x$conc)
+  class(x) <- c("reproData", class(x))
+  return(x)
+}
+
+# Computes cumulated offspring for each line of a
+# \code{reproData} object
+#
+# @param x an object of class \code{reproData}
+# @return an integer vector
+#
+# @importFrom dplyr left_join
+#
+# @export
+#
+Nreprocumul <- function(x) {
   T <- sort(unique(x$time)) # observation times
   Nreprocumul <- x$Nrepro
   for (i in 2:length(T)) {
@@ -50,9 +75,5 @@ reproData <- function(x) {
     Nreprocumul[now] <- Nreprocumul[before] + x$Nrepro[now]
   }
 
-  x <- cbind(x,Nreprocumul)
-  # force concentration as type double
-  x$conc <- as.double(x$conc)
-  class(x) <- c("reproData", "survData","data.frame")
-  return(x)
+  return(Nreprocumul)
 }

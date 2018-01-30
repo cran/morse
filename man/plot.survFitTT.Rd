@@ -5,17 +5,17 @@
 \title{Plotting method for \code{survFitTT} objects}
 \usage{
 \method{plot}{survFitTT}(x, xlab = "Concentration", ylab = "Survival rate",
-  main = NULL, fitcol = "red", fitlty = 1, fitlwd = 1,
-  spaghetti = FALSE, cicol = "pink1", cilty = 1, cilwd = 1,
-  adddata = FALSE, addlegend = FALSE, log.scale = FALSE,
-  style = "generic", ...)
+  main = NULL, fitcol = "orange", fitlty = 1, fitlwd = 1,
+  spaghetti = FALSE, cicol = "orange", cilty = 2, cilwd = 1,
+  ribcol = "grey70", adddata = FALSE, addlegend = FALSE,
+  log.scale = FALSE, style = "ggplot", ...)
 }
 \arguments{
 \item{x}{an object of class \code{survFitTT}}
 
-\item{xlab}{a title for the \eqn{x}-axis}
+\item{xlab}{a label for the \eqn{X}-axis, default is \code{Concentration}}
 
-\item{ylab}{a title for the \eqn{y}-axis}
+\item{ylab}{a label for the \eqn{Y}-axis, default is \code{Survival rate}}
 
 \item{main}{main title for the plot}
 
@@ -34,12 +34,15 @@ multiple curves}
 
 \item{cilwd}{width of the 95 \% credible interval limits}
 
-\item{adddata}{if \code{TRUE}, adds the observed data with confidence interval
+\item{ribcol}{color of the ribbon between lower and upper credible limits.
+Transparent if \code{NULL}}
+
+\item{adddata}{if \code{TRUE}, adds the observed data with confidence intervals
 to the plot}
 
 \item{addlegend}{if \code{TRUE}, adds a default legend to the plot}
 
-\item{log.scale}{if \code{TRUE}, displays \eqn{x}-axis in log scale}
+\item{log.scale}{if \code{TRUE}, displays \eqn{X}-axis in log-scale}
 
 \item{style}{graphical backend, can be \code{'generic'} or \code{'ggplot'}}
 
@@ -47,25 +50,25 @@ to the plot}
 }
 \description{
 This is the generic \code{plot} S3 method for the \code{survFitTT} class. It
-plots exposure-response fits for target time survival analysis.
+plots concentration-response fit under target time survival analysis.
 }
 \details{
-The fitted curve represents the \strong{estimated survival rate} after
-the target time has passed as a function of the concentration of pollutant;
+The fitted curve represents the \strong{estimated survival rate} at
+the target time as a function of the concentration of chemical compound;
 When \code{adddata = TRUE} the black dots depict the \strong{observed survival
 rate} at each tested concentration. Note that since our model does not take
 inter-replicate variability into consideration, replicates are systematically
 pooled in this plot.
-The function plots both 95 \% credible intervals for the estimated survival
-rate (by default the red area around the fitted curve) and 95 \% confidence
-intervals for the observed survival rate (as black error bars if
+The function plots both 95\% credible intervals for the estimated survival
+rate (by default the grey area around the fitted curve) and 95\% binomial confidence
+intervals for the observed survival rate (as black segments if
 \code{adddata = TRUE}).
 Both types of intervals are taken at the same level. Typically
 a good fit is expected to display a large overlap between the two intervals.
 If spaghetti = TRUE, the credible intervals are represented by two dotted
 lines limiting the credible band, and a spaghetti plot is added to this band.
-It consists of the representation of simulated curves using parameter values
-sampled in the posterior distribution (10 \% of the MCMC chains are randomly
+This spaghetti plot consists of the representation of simulated curves using parameter values
+sampled in the posterior distribution (10\% of the MCMC chains are randomly
 taken for this sample).
 }
 \note{
@@ -97,4 +100,3 @@ plot(out, xlab = expression("Concentration in" ~ mu~g.L^{-1}),
 
 }
 \keyword{plot}
-

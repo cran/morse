@@ -2,7 +2,7 @@
 % Please edit documentation in R/survFitTKTD.R
 \name{survFitTKTD}
 \alias{survFitTKTD}
-\title{Fits a TKTD for survival analysis using Bayesian inference}
+\title{Fits a TKTD for survival analysis using Bayesian inference for \code{survDataTKTD} object}
 \usage{
 survFitTKTD(data, n.chains = 3, quiet = FALSE)
 }
@@ -16,29 +16,27 @@ is 2.}
 }
 \value{
 The function returns an object of class \code{survFitTKTD}, which is
-a list with the following fields:
-\item{estim.par}{a table of the estimated parameters (medians) and 95 \%
+a list with the following information:
+\item{estim.par}{a table of the estimated parameters as medians and 95\%
 credible intervals}
 \item{mcmc}{an object of class \code{mcmc.list} with the posterior
-distributions}
+distribution}
+\item{warnings}{a table with warning messages}
 \item{model}{a JAGS model object}
-\item{parameters}{a list of the parameters names used in the model}
+\item{parameters}{a list of parameter names used in the model}
 \item{n.chains}{an integer value corresponding to the number of chains used
 for the MCMC computation}
-\item{n.iter}{a list of two indices indicating the beginning and end of
+\item{n.iter}{a list of two indices indicating the beginning and the end of
 monitored iterations}
 \item{n.thin}{a numerical value corresponding to the thinning interval}
-\item{jags.data}{a list a the data passed to the jags model}
+\item{jags.data}{a list of data passed to the JAGS model}
 }
 \description{
 This function estimates the parameters of a TKTD
 model for survival analysis using Bayesian inference. In this model,
-the survival rate of individuals is modeled as a function of the pollutant's
-concentration with a mechanistic description of toxic effects on survival over
+the survival rate of individuals is modeled as a function of the chemical compound
+concentration with a mechanistic description of the effects on survival over
 time.
-}
-\details{
-Details of the model are presented in the vignette accompanying the package.
 }
 \examples{
 
@@ -46,23 +44,27 @@ Details of the model are presented in the vignette accompanying the package.
 data(propiconazole)
 
 # (2) Create an object of class "survData"
-dat <- survData(propiconazole)
+dataset <- survData(propiconazole)
 
 \dontrun{
 # (3) Run the survFitTKTD function
-out <- survFitTKTD(dat)
+out <- survFitTKTD(dataset)
 
-# (4) Summary look the estimated values (parameters)
+# (4) Summarize look the estimated parameters
 summary(out)
 
 # (5) Plot the fitted curve
 plot(out, adddata = TRUE)
 
 # (6) Plot the fitted curve with ggplot style and CI as spaghetti
-plot(out, spaghetti = TRUE , adddata = TRUE, 
+plot(out, spaghetti = TRUE , adddata = TRUE,
      style = "ggplot")
 }
 
 }
+\references{
+Bedaux, J., Kooijman, SALM (1994) Statistical analysis of toxicity tests,
+based on hazard modeling, \emph{Environmental and Ecological Statistics}, 1,
+303-314.
+}
 \keyword{estimation}
-

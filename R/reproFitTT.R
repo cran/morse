@@ -1,28 +1,28 @@
-#' Fits a Bayesian exposure-response model for target-time reproduction analysis
+#' Fits a Bayesian concentration-effect model for target-time reproduction analysis
 #'
-#' This function estimates the parameters of an exposure-response model for
+#' This function estimates the parameters of a concentration-effect model for
 #' target-time reproduction analysis using Bayesian inference.
-#' In this model the response is the cumulated reproduction outputs of a
-#' population in a given time period in presence of mortality.
+#' In this model the endpoint is the cumulated number of reproduction outputs over
+#' time, with potential mortality all along the experiment.
 #'
 #' Because some individuals may die during the observation period, the
 #' reproduction rate alone is not sufficient to account for the observed number
-#' of offspring. In addition, we need the time individuals have stayed alive
-#' during the experiment. The \code{reproFitTT} function estimates the number
+#' of offspring at a given time point. In addition, we need the time individuals have stayed alive
+#' during this observation period. The \code{reproFitTT} function estimates the number
 #' of individual-days in an experiment between its start and the target time.
-#' This covariable is then used to estimate a relation between the toxicant
+#' This covariable is then used to estimate a relation between the chemical compound
 #' concentration and the reproduction rate \emph{per individual-day}.
 #'
 #' The \code{reproFitTT} function fits two models, one where inter-individual
 #' variability is neglected ("Poisson" model) and one where it is taken into
 #' account ("gamma-Poisson" model). When setting \code{stoc.part} to
 #' \code{"bestfit"}, a model comparison procedure is used to choose between
-#' them. More details are presented in the vignette accompanying the package.
+#' both. More details are presented in the vignette accompanying the package.
 #'
 #' @param data an object of class \code{reproData}
 #' @param stoc.part stochastic part of the model. Possible values are \code{"bestfit"},
 #' \code{"poisson"} and \code{"gammapoisson"}
-#' @param target.time defines the observation period. By default the last time point
+#' @param target.time defines the target time point at which to analyse the repro data. By default the last time point
 #' @param ecx desired values of \eqn{x} (in percent) for which to compute
 #' \eqn{EC_{x}}{ECx}
 #' @param n.chains number of MCMC chains. The minimum required number of chains is 2
@@ -36,19 +36,20 @@
 #' concentrations (by default) and their 95 \% credible intervals}
 #' \item{estim.par}{a table of the estimated parameters as medians and 95 \%
 #' credible intervals}
-#' \item{mcmc}{an object of class \code{mcmc.list} with the posterior distributions}
+#' \item{mcmc}{an object of class \code{mcmc.list} with the posterior distribution}
 #' \item{model}{a JAGS model object}
-#' \item{model.label}{a character string, \code{"P"} if the poisson model is used,
-#' \code{"GP"} if the gamma-poisson is used}
-#' \item{parameters}{a list of the parameters names used in the model}
+#' \item{warnings}{a data.frame with warning messages}
+#' \item{model.label}{a character string, \code{"P"} if the Poisson model is used,
+#' \code{"GP"} if the gamma-Poisson is used}
+#' \item{parameters}{a list of the parameter names used in the model}
 #' \item{n.chains}{an integer value corresponding to the number of chains used
 #' for the MCMC computation}
 #' \item{n.iter}{a list of two indices indicating the beginning and
 #' the end of monitored iterations}
 #' \item{n.thin}{a numerical value corresponding to the thinning interval}
-#' \item{jags.data}{a list a the data passed to the jags model}
+#' \item{jags.data}{a list of the data passed to the jags model}
 #' \item{transformed.data}{the \code{survData} object passed to the function}
-#' \item{dataTT}{the dataset with which one the parameters are estimated}
+#' \item{dataTT}{the dataset with which the parameters are estimated}
 #'
 #' @keywords estimation
 #'
@@ -58,16 +59,16 @@
 #' data(cadmium1)
 #'
 #' # (2) Create an object of class "reproData"
-#' dat <- reproData(cadmium1)
+#' dataset <- reproData(cadmium1)
 #'
 #' \dontrun{
-#' # (3) Run the reproFitTT function with the log-logistic gamma-poisson model
-#' out <- reproFitTT(dat, stoc.part = "gammapoisson",
+#' # (3) Run the reproFitTT function with the log-logistic gamma-Poisson model
+#' out <- reproFitTT(dataset, stoc.part = "gammapoisson",
 #'                   ecx = c(5, 10, 15, 20, 30, 50, 80), quiet = TRUE)
 #' }
 #'
 #' @import rjags
-#' 
+#'
 #' @export
 reproFitTT <- function(data,
                        stoc.part = "bestfit",
@@ -245,10 +246,20 @@ reproFitTT <- function(data,
 
   # check if the maximum measured concentration is in the EC50's range of
   # 95% percentile
+
+  warnings <- msgTableCreate()
+
   EC50 <- log10(estim.par["e", "median"])
-  if (!(min(log10(data$conc)) < EC50 & EC50 < max(log10(data$conc))))
-    warning("The EC50 estimation (model parameter e) lies outside the range of tested concentration and may be unreliable as the prior distribution on this parameter is defined from this range !",
-            call. = FALSE)
+  if (!(min(log10(data$conc)) < EC50 & EC50 < max(log10(data$conc)))){
+    ##store warning in warnings table
+    msg <- "The EC50 estimation (model parameter e) lies outside the range of
+    tested concentration and may be unreliable as the prior distribution on
+    this parameter is defined from this range !"
+    warnings <- msgTableAdd(warnings, "EC50outRange", msg)
+    ## print the message
+    warning(msg, call. = FALSE)
+  }
+
 
   # output
   OUT <- list(DIC = coda.arg$DIC,
@@ -256,6 +267,7 @@ reproFitTT <- function(data,
               estim.par = estim.par,
               det.part = "loglogistic",
               mcmc = mcmc,
+              warnings = warnings,
               model = coda.arg$model,
               model.label = coda.arg$model.label,
               parameters = coda.arg$parameters,
@@ -451,4 +463,3 @@ reproPARAMS <- function(mcmc, MODEL = "P") {
 llm.poisson.model.text <- "\nmodel # Loglogistic Poisson model\n{\n#\nfor (j in 1:n) # loop on replicates\n{\n# Explicit writting of a Poisson law for each replicate\n# mean is given by the theoretical curve\nytheo[j] <- d / (1 + pow(xconc[j]/e, b))\nnbtheo[j] <- ytheo[j]*Nindtime[j]\nNcumul[j] ~ dpois(nbtheo[j])\n}\n# Prior distributions\nd ~ dnorm(meand, taud)T(0,)\nlog10b ~ dunif(log10bmin, log10bmax)\nlog10e ~ dnorm(meanlog10e, taulog10e)\n\nb <- pow(10,log10b)\ne <- pow(10,log10e)\n}\n"
 
 llm.gammapoisson.model.text <- "\nmodel # Loglogisitc Gamma poisson model\n{\n#\nfor (j in 1:n) # loop on replicates\n{\n# Explicit writting of a gamma-Poisson law for each replicate\n# the mean is given by a gamma law centered on the theoretical curve\nrate[j] <- d / (1 + pow(xconc[j]/e, b)) / omega\np[j] <- 1 / (Nindtime[j] * omega + 1)\nNcumul[j] ~ dnegbin(p[j], rate[j])\n}\n# Prior distributions\nd ~ dnorm(meand, taud)T(0,)\nlog10b ~ dunif(log10bmin, log10bmax)\nlog10e ~ dnorm(meanlog10e, taulog10e)\nlog10omega ~ dunif(log10omegamin, log10omegamax)\n\nomega <- pow(10,log10omega)\nb <- pow(10,log10b)\ne <- pow(10,log10e)\n}\n"
-

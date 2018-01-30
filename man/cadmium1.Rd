@@ -6,8 +6,10 @@
 \title{Reproduction and survival datasets for \emph{Daphnia magna} exposed to
 cadmium during 21 days}
 \format{A data frame with 200 observations of the following five variables:
-\describe{ \item{\code{replicate}}{A vector of class \code{integer} with
-the replicate code (\code{1} to \code{4}).} \item{\code{conc}}{A vector of
+\describe{
+\item{\code{replicate}}{A vector of class \code{numeric} with
+the replicate code (\code{1} to \code{20}).}
+\item{\code{conc}}{A vector of
 class \code{numeric} with the cadmium concentrations in \eqn{\mu g.L^{-1}}.}
 \item{\code{time}}{A vector of class \code{integer} with the time points
 (in days from the beginning of the experiment \eqn{t = 0}).}
@@ -20,18 +22,17 @@ replicate.} }}
 data(cadmium1)
 }
 \description{
-Reproduction and survival datasets of chronic laboratory bioassays with
+Reproduction and survival datasets of chronic laboratory toxicity tests with
 \emph{Daphnia magna} freshwater invertebrate exposed to five concentrations
-of one metal contaminant (cadmium) during 21 days. Five concentrations were
+of cadmium during 21 days. Five concentrations were
 tested, with four replicates per concentration. Each replicate contained 10
 organisms. Reproduction and survival were monitored at 10 time points.
 }
 \references{
 Billoir, E., Delhaye, H., Forfait, C., Clement, B.,
 Triffault-Bouchet, G., Charles, S. and Delignette-Muller, M.L. (2012)
-Comparison of bioassays with different exposure time patterns: The added
+Comparison of toxicity tests with different exposure time patterns: The added
 value of dynamic modelling in predictive ecotoxicology, \emph{Ecotoxicology
 and Environmental Safety}, 75, 80-86.
 }
-\keyword{datasets}
-
+\keyword{dataset}

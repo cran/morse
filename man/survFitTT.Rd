@@ -2,78 +2,15 @@
 % Please edit documentation in R/survFitTT.R
 \name{survFitTT}
 \alias{survFitTT}
-\title{Fits a Bayesian exposure-response model for target-time survival analysis}
+\title{Fits a Bayesian concentration-response model for target-time survival analysis}
 \usage{
-survFitTT(data, target.time = NULL, lcx = c(5, 10, 20, 50), n.chains = 3,
-  quiet = FALSE)
+survFitTT(data, ...)
 }
 \arguments{
-\item{data}{an object of class \code{survData}}
+\item{data}{an object used to select a method 'survFitTT'}
 
-\item{target.time}{the chosen endpoint to evaluate the effect of a given
-concentration of pollutant, by default the last time point available for
-all concentrations}
-
-\item{lcx}{desired values of \eqn{x} (in percent) for which to compute
-\eqn{LC_{x}}{LCx}}
-
-\item{n.chains}{number of MCMC chains, the minimum required number of chains
-is 2}
-
-\item{quiet}{if \code{TRUE}, does not print messages and progress bars from
-JAGS}
-}
-\value{
-The function returns an object of class \code{survFitTT}, which is a
-list with the following fields:
-\item{estim.LCx}{a table of the estimated LCX along with their 95 \%
-credible intervals}
-\item{estim.par}{a table of the estimated parameters (medians) and 95 \%
-credible intervals}
-\item{det.part}{the name of the deterministic part of the used model}
-\item{mcmc}{an object of class \code{mcmc.list} with the posterior
-distributions}
-\item{model}{a JAGS model object}
-\item{parameters}{a list of the parameters names used in the model}
-\item{n.chains}{an integer value corresponding to the number of chains used
-for the MCMC computation}
-\item{n.iter}{a list of two indices indicating the beginning and end of
-monitored iterations}
-\item{n.thin}{a numerical value corresponding to the thinning interval}
-\item{jags.data}{a list a the data passed to the jags model}
-\item{transformed.data}{the \code{survData} object passed to the function}
-\item{dataTT}{the dataset with which one the parameters are estimated}
+\item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
-This function estimates the parameters of an exposure-response
-model for target-time survival analysis using Bayesian inference. In this model,
-the survival rate of individuals after some time (called target time) is modeled
-as a function of the pollutant's concentration. The actual number of
-surviving individuals is then modeled as a stochastic function of the survival
-rate. Details of the model are presented in the
-vignette accompanying the package.
+Fits a Bayesian concentration-response model for target-time survival analysis
 }
-\details{
-The function returns
-parameter estimates of the exposure-response model and estimates of the so-called
-LCx, that is the concentration of pollutant required to obtain an 1 - x survival
-rate.
-}
-\examples{
-
-# (1) Load the data
-data(cadmium1)
-
-# (2) Create an object of class "survData"
-dat <- survData(cadmium1)
-
-\dontrun{
-# (3) Run the survFitTT function with the log-logistic
-#     binomial model
-out <- survFitTT(dat, lcx = c(5, 10, 15, 20, 30, 50, 80),
-                 quiet = TRUE)
-}
-
-}
-\keyword{estimation}
-

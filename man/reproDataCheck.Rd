@@ -9,7 +9,7 @@ reproDataCheck(data, diagnosis.plot = TRUE)
 \arguments{
 \item{data}{any object}
 
-\item{diagnosis.plot}{if \code{TRUE}, may produce a diagnosis plot}
+\item{diagnosis.plot}{if \code{TRUE}, produces a diagnosis plot}
 }
 \value{
 The function returns a \code{data.frame} similar to the one returned
@@ -18,7 +18,7 @@ additional error \code{id}s:
 \itemize{
 \item \code{NreproInteger}: column \code{Nrepro} contains values of class other than \code{integer}
 \item \code{Nrepro0T0}: \code{Nrepro} is not 0 at time 0 for each concentration and each replicate
-\item \code{Nsurvt0Nreprotp1P}: at a giving time \eqn{T}, the number of
+\item \code{Nsurvt0Nreprotp1P}: at a given time \eqn{T}, the number of
 alive individuals is null and the number of collected offspring is not null
 for the same replicate and the same concentration at time \eqn{T+1}
 }
@@ -29,7 +29,7 @@ containing data from a reproduction toxicity assay meets the expectations
 of the function \code{\link{reproData}}.
 }
 \details{
-Since in MORSE reproduction datasets are a special case of survival datasets,
+Since in morse' reproduction datasets are a special case of survival datasets,
 \code{reproDataCheck} performs the same verifications than
 \code{\link{survDataCheck}} plus additional ones that are specific to
 reproduction data.
@@ -50,7 +50,7 @@ reproDataCheck(copper)
 # Now we insert an error in the dataset, by setting a non-zero number of
 # offspring at some time, although there is no surviving individual in the
 # replicate from the previous time point.
-copper$Nrepro[148] <- as.integer(1)
+copper[148, "Nrepro"] <- as.integer(1)
 reproDataCheck(copper)
 
 }
@@ -58,4 +58,3 @@ reproDataCheck(copper)
 \code{\link{reproData}}
 }
 \keyword{check}
-

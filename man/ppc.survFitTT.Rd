@@ -4,12 +4,14 @@
 \alias{ppc.survFitTT}
 \title{Posterior predictive check plot for \code{survFitTT} objects}
 \usage{
-\method{ppc}{survFitTT}(x, style = "generic", ...)
+\method{ppc}{survFitTT}(x, style = "ggplot", main = NULL, ...)
 }
 \arguments{
 \item{x}{An object of class \code{survFitTT}}
 
-\item{style}{Graphical package method: \code{generic} or \code{ggplot}}
+\item{style}{graphical backend, can be \code{'generic'} or \code{'ggplot'}}
+
+\item{main}{main title for the plot}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
@@ -19,11 +21,11 @@ plots the predicted values with 95 \% credible intervals versus the observed
 values for \code{survFitTT} objects.
 }
 \details{
-The coordinates of black points are the observed values of the number of survivor
-(poolled replicates) for a given concentration (x-scale) and the corresponding 
-predicted values (y-scale). 95 \% prediction intervals are added to each predicted
+The coordinates of black points are the observed values of the number of survivors
+(pooled replicates) for a given concentration (\eqn{X}-axis) and the corresponding 
+predicted values (\eqn{Y}-axis). 95\% prediction intervals are added to each predicted
 value, colored in green if this interval contains the observed value and in red
-in the other case.
+otherwise.
 The bisecting line (y = x) is added to the plot in order to see if each
 prediction interval contains each observed value. As replicates are shifted
 on the x-axis, this line is represented by steps.
@@ -46,4 +48,3 @@ ppc(out)
 }
 
 }
-

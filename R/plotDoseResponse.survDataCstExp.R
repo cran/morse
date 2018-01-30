@@ -1,29 +1,32 @@
-#' Plotting method for \code{survData} objects
+#' Plot dose-response from \code{survData} objects
 #'
 #' This is the generic \code{plotDoseResponse} S3 method for the \code{survData}
-#' class. It plots the survival rate as a function of concentration (for a given
-#' target time).
+#' class. It plots the survival rate as a function of concentration at a given
+#' target time.
 #' 
-#' The function plots the observed values of the survival rate for a given time
+#' The function plots the observed values of the survival rate at a given time point
 #' as a function of concentration. The 95 \% binomial confidence interval is added
 #' to each survival rate. It is calculated using function
 #' \code{\link[stats]{binom.test}} from package \code{stats}.
 #' Replicates are systematically pooled in this plot.
 #'
 #' @param x an object of class \code{survData}
-#' @param xlab a title for the \eqn{x}-axis (optional)
-#' @param ylab a label for the \eqn{y}-axis
+#' @param xlab a label for the \eqn{X}-axis, by default \code{Concentration}
+#' @param ylab a label for the \eqn{Y}-axis, by default \code{Survival rate}
 #' @param main main title for the plot
 #' @param target.time a numeric value corresponding to some observed time in \code{data}
-#' @param style graphical backend, can be \code{'generic'} or \code{'ggplot'}
-#' @param log.scale if \code{TRUE}, displays \eqn{x}-axis in log scale
-#' @param remove.someLabels if \code{TRUE}, removes 3/4 of X-axis labels in
+#' @param style graphical backend, can be \code{'ggplot'} or \code{'generic'}
+#' @param log.scale if \code{TRUE}, displays \eqn{X}-axis in log-scale
+#' @param remove.someLabels if \code{TRUE}, removes 75\% of X-axis labels in
 #' \code{'ggplot'} style to avoid the label overlap
 #' @param addlegend if \code{TRUE}, adds a default legend to the plot
 #' @param \dots Further arguments to be passed to generic methods
 #' 
-#' @note When \code{style = "ggplot"}, the function calls function
-#' \code{\link[ggplot2]{ggplot}} and returns an object of class \code{ggplot}.
+#' @note When \code{style = "generic"}, the function calls the generic function
+#' \code{\link[graphics]{plot}}
+#' @note When \code{style = "ggplot"}, the function return an object of class
+#'  \code{ggplot}, see function \code{\link[ggplot2]{ggplot}} 
+#' 
 #' 
 #' @seealso \code{\link[stats]{binom.test}}
 #'
@@ -35,13 +38,15 @@
 #'
 #' # (1) Load the data
 #' data(zinc)
+#' 
+#' # (2) Create an object of class 'survData'
 #' zinc <- survData(zinc)
 #'
-#' # (2) Plot dose-response
+#' # (3) Plot dose-response
 #' plotDoseResponse(zinc)
 #'
-#' # (3) Plot dose-response with a ggplot style
-#' plotDoseResponse(zinc, style = "ggplot")
+#' # (4) Plot dose-respo nse with a generic style
+#' plotDoseResponse(zinc, style = "generic")
 #'
 #' @import ggplot2
 #' @import grDevices
@@ -57,7 +62,7 @@ plotDoseResponse.survData <- function(x,
                                       ylab = "Survival rate",
                                       main = NULL,
                                       target.time = NULL,
-                                      style = "generic",
+                                      style = "ggplot",
                                       log.scale = FALSE,
                                       remove.someLabels = FALSE,
                                       addlegend = TRUE,
@@ -128,7 +133,7 @@ plotDoseResponse.survData <- function(x,
              lty = c(NA, 1),
              lwd = c(NA, 1),
              col = c(1, 1),
-             legend = c("Observed values", "Confidence interval"),
+             legend = c("Observed values", "Confidence intervals"),
              bty = "n")
     }
   }
@@ -143,7 +148,7 @@ plotDoseResponse.survData <- function(x,
     dfCI <- data.frame(conc = transf_data_conc,
                        qinf95 = conf.int["qinf95",],
                        qsup95 = conf.int["qsup95",],
-                       Conf.Int = "Confidence interval")
+                       Conf.Int = "Confidence intervals")
     
     fd <- ggplot(df) +
       geom_point(aes(x = transf_data_conc, y = resp, fill = Points),

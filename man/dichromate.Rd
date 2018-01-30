@@ -3,10 +3,10 @@
 \docType{data}
 \name{dichromate}
 \alias{dichromate}
-\title{Survival datasets for \emph{Daphnia magna} exposed to dichromate
+\title{Survival dataset for \emph{Daphnia magna} exposed to dichromate
 during 21 days}
 \format{A data frame with 60 observations on the following four variables:
-\describe{ \item{\code{replicate}}{A vector of class \code{factor} with the
+\describe{ \item{\code{replicate}}{A vector of class \code{numeric} with the
 replicate code (\code{1}).} \item{\code{conc}}{A vector of
 class \code{numeric} with dichromate concentrations in \eqn{mg.L^{-1}}.}
 \item{\code{time}}{A vector of class \code{integer} with the time points
@@ -18,16 +18,15 @@ replicate.}}}
 data(dichromate)
 }
 \description{
-Survival datasets of chronic laboratory bioassays with
+Survival dataset of chronic laboratory toxicity tests with
 \emph{Daphnia magna} freshwater invertebrate exposed to six concentrations
 of one oxidizing agent (potassium dichromate) during 21 days. Six
 concentrations were tested with one replicate of 50 organisms per concentration.
 Survival is monitored at 10 time points.
 }
 \references{
-Bedaux, J., Kooijman, SALM (1994) Statistical analysis of bioassays,
+Bedaux, J., Kooijman, SALM (1994) Statistical analysis of toxicity tests,
 based on hazard modeling, \emph{Environmental and Ecological Statistics}, 1,
 303-314.
 }
-\keyword{datasets}
-
+\keyword{dataset}

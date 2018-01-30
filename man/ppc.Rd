@@ -7,12 +7,11 @@
 ppc(x, ...)
 }
 \arguments{
-\item{x}{an object used to select a method}
+\item{x}{an object used to select a method \code{ppc}}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
-Plots posterior predictive check for \code{reproFitTT}, \code{survFitTT} and
-\code{survFitTKTD} objects.
+Plots posterior predictive check for \code{reproFitTT}, \code{survFitTT},
+ \code{survFitTKTD}, \code{survFitCstExp} and \code{survFitVarExp} objects.
 }
-

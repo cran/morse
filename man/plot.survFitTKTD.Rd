@@ -7,7 +7,7 @@
 \method{plot}{survFitTKTD}(x, xlab = "Time", ylab = "Survival rate",
   main = NULL, concentration = NULL, spaghetti = FALSE,
   one.plot = FALSE, adddata = FALSE, addlegend = FALSE,
-  style = "generic", ...)
+  style = "ggplot", ...)
 }
 \arguments{
 \item{x}{An object of class \code{survFitTKTD}.}
@@ -18,17 +18,17 @@
 
 \item{main}{A main title for the plot.}
 
-\item{concentration}{A numeric value corresponding to some concentration in
+\item{concentration}{A numeric value corresponding to some specific concentration in
 \code{data}. If \code{concentration = NULL}, draws a plot for each concentration.}
 
 \item{spaghetti}{if \code{TRUE}, draws a set of survival curves using
 parameters drawn from the posterior distribution}
 
 \item{one.plot}{if \code{TRUE}, draws all the estimated curves in
-one plot instead of one per concentration.}
+one plot instead of one plot per concentration.}
 
 \item{adddata}{if \code{TRUE}, adds the observed data to the plot
-with (frequentist) confidence intervals}
+with (frequentist binomial) confidence intervals}
 
 \item{addlegend}{if \code{TRUE}, adds a default legend to the plot.}
 
@@ -38,8 +38,8 @@ with (frequentist) confidence intervals}
 }
 \description{
 This is the generic \code{plot} S3 method for the
-\code{survFitTKTD}.  It plots the fits obtained for each
-concentration of pollutant in the original dataset.
+\code{survFitTKTD}.  It plots the fit obtained for each
+concentration of chemical compound in the original dataset.
 }
 \details{
 The fitted curves represent the \strong{estimated survival rate} as a function
@@ -48,17 +48,16 @@ When \code{adddata = TRUE} the black dots depict the \strong{observed survival
 rate} at each time point. Note that since our model does not take
 inter-replicate variability into consideration, replicates are systematically
 pooled in this plot.
-The function plots both 95 \% credible intervals for the estimated survival
-rate (by default the red area around the fitted curve) and 95 \% confidence
+The function plots both 95\% credible intervals for the estimated survival
+rate (by default the grey area around the fitted curve) and 95\% binomial confidence
 intervals for the observed survival rate (as black error bars if
 \code{adddata = TRUE}).
 Both types of intervals are taken at the same level. Typically
-a good fit is expected to display a large overlap between the two intervals.
+a good fit is expected to display a large overlap between the two types of intervals.
 If \code{spaghetti = TRUE}, the credible intervals are represented by two
-dotted lines limiting the credible band, and a spaghetti plot is added to this
-band.
-It consists of the representation of simulated curves using parameter values
-sampled in the posterior distribution (2 \% of the MCMC chains are randomly
+dotted lines limiting the credible band, and a spaghetti plot is added to this band.
+This spaghetti plot consists of the representation of simulated curves using parameter values
+sampled in the posterior distribution (2\% of the MCMC chains are randomly
 taken for this sample).
 }
 \examples{
@@ -67,25 +66,24 @@ taken for this sample).
 data(propiconazole)
 
 # (2) Create an object of class "survData"
-dat <- survData(propiconazole)
+dataset <- survData(propiconazole)
 
 \dontrun{
-# (3) Run the survFitTKTD function
-out <- survFitTKTD(dat)
+# (3) Run the survFitTKTD function ('SD' model only)
+out <- survFitTKTD(dataset)
 
 # (4) Plot the fitted curves in one plot 
 plot(out)
 
-# (5) Plot one fitted curve by concentration with credible limits as
+# (5) Plot one fitted curve per concentration with credible limits as
 # spaghetti, data and confidence intervals
 # and with a ggplot style
 plot(out, spaghetti = TRUE , adddata = TRUE, one.plot = FALSE,
      style = "ggplot")
 
-# (6) Plt fitted curve for one specific concentration
+# (6) Plot fitted curve for one specific concentration
 plot(out, concentration = 36, style = "ggplot")
 }
 
 }
 \keyword{plot}
-

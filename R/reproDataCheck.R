@@ -4,7 +4,7 @@
 #' containing data from a reproduction toxicity assay meets the expectations
 #' of the function \code{\link{reproData}}.
 #'
-#' Since in MORSE reproduction datasets are a special case of survival datasets,
+#' Since in morse' reproduction datasets are a special case of survival datasets,
 #' \code{reproDataCheck} performs the same verifications than
 #' \code{\link{survDataCheck}} plus additional ones that are specific to
 #' reproduction data.
@@ -12,7 +12,7 @@
 #' @aliases reproDataCheck
 #'
 #' @param data any object
-#' @param diagnosis.plot if \code{TRUE}, may produce a diagnosis plot
+#' @param diagnosis.plot if \code{TRUE}, produces a diagnosis plot
 #'
 #' @return The function returns a \code{data.frame} similar to the one returned
 #' by \code{\link{survDataCheck}}, except that it may contain the following
@@ -20,7 +20,7 @@
 #' \itemize{
 #' \item \code{NreproInteger}: column \code{Nrepro} contains values of class other than \code{integer}
 #' \item \code{Nrepro0T0}: \code{Nrepro} is not 0 at time 0 for each concentration and each replicate
-#' \item \code{Nsurvt0Nreprotp1P}: at a giving time \eqn{T}, the number of
+#' \item \code{Nsurvt0Nreprotp1P}: at a given time \eqn{T}, the number of
 #' alive individuals is null and the number of collected offspring is not null
 #' for the same replicate and the same concentration at time \eqn{T+1}
 #' }
@@ -44,7 +44,7 @@
 #' # Now we insert an error in the dataset, by setting a non-zero number of
 #' # offspring at some time, although there is no surviving individual in the
 #' # replicate from the previous time point.
-#' copper$Nrepro[148] <- as.integer(1)
+#' copper[148, "Nrepro"] <- as.integer(1)
 #' reproDataCheck(copper)
 #'
 #' @export
@@ -62,7 +62,7 @@ reproDataCheck <- function(data, diagnosis.plot = TRUE) {
   ##
   if (! "Nrepro" %in% colnames(data)) {
     msg <- "The column Nrepro is missing."
-    errors <- errorTableAdd(errors, "missingColumn", msg)
+    errors <- msgTableAdd(errors, "missingColumn", msg)
     return(errors)
   }
 
@@ -71,7 +71,7 @@ reproDataCheck <- function(data, diagnosis.plot = TRUE) {
   ##
   if (!is.integer(data$Nrepro)) {
     msg <- "Column 'Nrepro' must contain only integer values."
-    errors <- errorTableAdd(errors, "NreproInteger", msg)
+    errors <- msgTableAdd(errors, "NreproInteger", msg)
   }
 
   ##
@@ -80,7 +80,7 @@ reproDataCheck <- function(data, diagnosis.plot = TRUE) {
   datatime0 <- data[data$time == 0, ] # select data for initial time points
   if (any(datatime0$Nrepro > 0)) { # test if Nrepro > 0 at time 0
     msg <- "Nrepro should be 0 at time 0 for each concentration and each replicate."
-    errors <- errorTableAdd(errors, "Nrepro0T0", msg)
+    errors <- msgTableAdd(errors, "Nrepro0T0", msg)
   }
 
   subdata <- split(data, list(data$replicate, data$conc), drop = TRUE)
@@ -91,7 +91,7 @@ reproDataCheck <- function(data, diagnosis.plot = TRUE) {
     #   - if at each time T for which Nsurv = 0, Nrepro = 0 at time T+1
 
     # errors consitency dataframe
-    errors <- errorTableCreate()
+    errors <- msgTableCreate()
 
     ##
     ## 4' test Nsurv = 0 at time t => Nrepro > 0 at time t-1
@@ -104,13 +104,13 @@ reproDataCheck <- function(data, diagnosis.plot = TRUE) {
                    " and concentration ", unique(subdata$conc),
                    ", there are some Nsurv = 0 followed by Nrepro > 0 at the next time point.",
                    sep = "")
-      errors <- errorTableAdd(errors, "Nsurvt0Nreprotp1P", msg)
+      errors <- msgTableAdd(errors, "Nsurvt0Nreprotp1P", msg)
     }
     return(errors)
   }
   res <- by(data, list(data$replicate, data$conc), consistency)
-  consistency.errors <- do.call("errorTableAppend", res)
-  errors <- errorTableAppend(errors, consistency.errors)
+  consistency.errors <- do.call("msgTableAppend", res)
+  errors <- msgTableAppend(errors, consistency.errors)
 
   if (diagnosis.plot && "NsurvIncrease" %in% errors$id) {
     survDataPlotFull(data, ylab = "Number of surviving individuals")

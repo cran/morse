@@ -1,123 +1,13 @@
 ## ----include=FALSE, echo=FALSE-------------------------------------------
-
 knitr::opts_chunk$set(fig.width = 7,
                       fig.height = 4,
                       cache = TRUE)
 
+## ---- echo=TRUE, cache=TRUE----------------------------------------------
+# (6) fit the TK-TD model SD
+fit_varSD <- survFit(dat, quiet = TRUE, model_type = "SD")
 
-## ---- echo=FALSE, cache=TRUE, results='hide'-----------------------------
-library(morse)
-library(ggplot2)
-
-## ---- cache=TRUE---------------------------------------------------------
-data(cadmium2)
-survDataCheck(cadmium2)
-
-## ---- cache=TRUE---------------------------------------------------------
-dat <- survData(cadmium2)
-head(dat)
-
-## ---- cache=TRUE---------------------------------------------------------
-plot(dat, style = "ggplot", pool.replicate = FALSE)
-
-## ---- cache=TRUE---------------------------------------------------------
-plot(dat, concentration = 124, addlegend = TRUE,
-     pool.replicate = FALSE, style = "ggplot")
-
-## ---- cache=TRUE---------------------------------------------------------
-plotDoseResponse(dat, target.time = 21, style = "ggplot", addlegend = TRUE)
-
-## ---- cache=TRUE---------------------------------------------------------
-summary(dat)
-
-## ---- results="hide", cache=TRUE-----------------------------------------
-fit <- survFitTT(dat,
-                 target.time = 21,
-                 lcx = c(10, 20, 30, 40, 50))
-
-## ---- cache=TRUE---------------------------------------------------------
-summary(fit)
-
-## ---- cache=TRUE---------------------------------------------------------
-plot(fit, log.scale = TRUE, style = "ggplot", adddata = TRUE,
-     addlegend = TRUE)
-
-## ---- results="hide", cache=TRUE-----------------------------------------
-data("cadmium1")
-wrong_fit <- survFitTT(survData(cadmium1),
-                       target.time = 21,
-                       lcx = c(10, 20, 30, 40, 50))
-plot(wrong_fit, log.scale = TRUE, style = "ggplot", adddata = TRUE,
-     addlegend = TRUE)
-
-## ----cache=TRUE, results="hide"------------------------------------------
-ppc(fit, style = "ggplot")
-
-## ---- cache=TRUE---------------------------------------------------------
-# (1) load dataset
-data(propiconazole)
-
-# (2) check structure and integrity of the dataset
-survDataCheck(propiconazole)
-
-# (3) create a `survData` object
-dat <- survData(propiconazole)
-
-# (4) represent the number of survivor as a function time
-plot(dat, style = "ggplot", pool.replicate = FALSE)
-
-# (5) check information on the experimental design
-summary(dat)
-
-# (6) fit a TKTD model
-fit <- survFitTKTD(dat, quiet = TRUE)
-summary(fit)
-
-## ---- cache=TRUE---------------------------------------------------------
-plot(fit, style = "ggplot", adddata = TRUE, one.plot = FALSE)
-
-## ---- cache=TRUE---------------------------------------------------------
-ppc(fit, style = "ggplot")
-
-## ---- cache=TRUE---------------------------------------------------------
-# (1) load dataset
-data(cadmium2)
-
-# (2) check structure and integrity of the dataset
-reproDataCheck(cadmium2)
-
-# (3) create a `reproData` object
-dat <- reproData(cadmium2)
-
-# (4) represent the cumulated number of offspring as a function time
-plot(dat, style = "ggplot", pool.replicate = FALSE)
-plot(dat, concentration = 124, addlegend = TRUE, style = "ggplot",
-     pool.replicate = FALSE)
-
-# (5) represent the reproduction rate as a function of concentration
-plotDoseResponse(dat, target.time = 56, style = "ggplot")
-
-# (6) check information on the experimental design
-summary(dat)
-
-# (7) fit an exposure-response model at target-time
-fit <- reproFitTT(dat, stoc.part = "bestfit",
-                  target.time = 21,
-                  ecx = c(10, 20, 30, 40, 50),
-                  quiet = TRUE)
-summary(fit)
-
-## ---- cache=TRUE---------------------------------------------------------
-plot(fit, log.scale = TRUE, style = "ggplot", adddata = TRUE,
-     addlegend = TRUE)
-
-## ---- cache=TRUE---------------------------------------------------------
-ppc(fit, style = "ggplot")
-
-## ---- cache=TRUE---------------------------------------------------------
-summary(fit)
-
-## ---- cache=TRUE---------------------------------------------------------
-dat <- reproData(cadmium2)
-plot(as.survData(dat))
+## ---- echo=TRUE, cache=TRUE----------------------------------------------
+# fit a TK-TD model IT
+fit_varIT <- survFit(dat, quiet = TRUE, model_type = "IT")
 

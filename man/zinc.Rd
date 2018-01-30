@@ -6,8 +6,8 @@
 \title{Reproduction and survival datasets for \emph{Daphnia magna} exposed to zinc
 during 21 days}
 \format{A data frame with 180 observations on the following five variables:
-\describe{ \item{\code{replicate}}{A vector of class \code{factor} with the
-replicate code (\code{A} to \code{C}).} \item{\code{conc}}{A vector of
+\describe{ \item{\code{replicate}}{A vector of class \code{numeric} with the
+replicate code (\code{1} to \code{12}).} \item{\code{conc}}{A vector of
 class \code{numeric} with zinc concentrations in \eqn{mg.L^{-1}}.}
 \item{\code{time}}{A vector of class \code{integer} with the time points
 (in days from the beginning of the experiment \eqn{t = 0}).}
@@ -20,9 +20,9 @@ replicate.} }}
 data(zinc)
 }
 \description{
-Reproduction and survival datasets of chronic laboratory bioassays with
+Reproduction and survival datasets of a chronic laboratory toxicity tests with
 \emph{Daphnia magna} freshwater invertebrate exposed to four concentrations
-of one metal contaminant (zinc) during 21 days. Four concentrations were
+of zinc during 21 days. Four concentrations were
 tested with three replicates per concentration. Each replicate contained 20
 organisms. Reproduction and survival were monitored at 15 time points.
 }
@@ -31,5 +31,4 @@ Billoir, E.,Delignette-Muller, M.L., Pery, A.R.R. and
 Charles S. (2008) A Bayesian Approach to Analyzing Ecotoxicological Data,
 \emph{Environmental Science & Technology}, 42 (23), 8978-8984.
 }
-\keyword{datasets}
-
+\keyword{dataset}

@@ -10,22 +10,21 @@
 #' @param data any object
 #' @param diagnosis.plot if \code{TRUE}, the function may produce diagnosis plots
 #'
-#' @return The function returns a dataframe with two columns \code{id} and \code{msg} of
-#' character strings. When no error is detected this dataframe is empty.
-#' Here is the list of possible error \code{id}s and their signification:
+#' @return The function returns a dataframe of class \code{msgTable} and \code{data.frame} with two columns: \code{id} and \code{msg} of
+#' character strings. When no error is detected the object is empty.
+#' Here is the list of possible error \code{id}s with their meaning:
 #' \tabular{rl}{
 #' \code{dataframeExpected} \tab an object of class \code{data.frame} is expected \cr
 #' \code{missingColumn} \tab at least one expected column heading is missing \cr
-#' \code{firstTime0} \tab the first time point for some (concentration, replicate) is not 0 \cr
+#' \code{firstTime0} \tab the first time point for some (concentration, replicate) couples is not 0 \cr
 #' \code{concNumeric} \tab column \code{conc} contains a value of class other than \code{numeric} \cr
 #' \code{timeNumeric} \tab column \code{time} contains a value of class other than \code{numeric} \cr
 #' \code{NsurvInteger} \tab column \code{Nsurv} contains a value of class other than \code{integer} \cr
 #' \code{tablePositive} \tab some data are negative \cr
 #' \code{Nsurv0T0} \tab \code{Nsurv} is 0 at time 0 for some (concentration, replicate) \cr
 #' \code{duplicateID} \tab there are two identical (\code{replicate}, \code{conc}, \code{time}) triplets \cr
-#' \code{missingReplicate} \tab a replicate is missing at some (time point, concentration) \cr
 #' \code{NsurvIncrease} \tab \code{Nsurv} increases at some time point of some (concentration, replicate) \cr
-#' \code{ReplicateLabel} \tab replicate labels differ between two time points at some concentration \cr
+#' \code{maxTimeDiffer} \tab maximum time for concentration is lower than maximum time for survival \cr
 #' }
 #'
 #' @note If an error of type \code{dataframeExpected} or \code{missingColumn} is
@@ -40,21 +39,24 @@
 #' survDataCheck(zinc)
 #'
 #' # Now we insert an error in the dataset, by artificially increasing the
-#' # number of survivors at some time point, in such a way that the number
-#' # of indivuals increases in some replicate
+#' # number of survivors at a given time point, in such a way that the number
+#' # of indivuals increases in the corresponding replicate
 #' zinc[25, "Nsurv"] <- as.integer(20)
 #' survDataCheck(zinc, diagnosis.plot = TRUE)
 #'
-#' @importFrom stringr str_c
-#' 
+#' @importFrom magrittr '%>%'
+#' @importFrom dplyr arrange
+#' @importFrom dplyr mutate
+#'
 #' @export
-survDataCheck <- function(data, diagnosis.plot = TRUE) {
+survDataCheck <- function(data, diagnosis.plot = FALSE) {
+
 
   ##
   ## 0. check we have a data.frame
   ##
-  if (class(data) != "data.frame") {
-    return(errorTableSingleton("dataframeExpected",
+  if (!("data.frame" %in% class(data))) {
+    return(msgTableSingleton("dataframeExpected",
                                 "A dataframe is expected."))
   }
 
@@ -66,19 +68,19 @@ survDataCheck <- function(data, diagnosis.plot = TRUE) {
   if (length(missing.names) != 0) {
     msg <- paste("The column ", missing.names,
                  " is missing.", sep = "")
-    return(errorTableSingleton("missingColumn",msg))
+    return(msgTableSingleton("missingColumn",msg))
   }
 
   # Next errors do not prevent from checking others
-  errors <- errorTableCreate()
+  errors <- msgTableCreate()
 
   ##
   ## 2. assert the first time point is zero for each (replicate, concentration)
   ##
-  subdata <- split(data, list(data$replicate, data$conc), drop = TRUE)
+  subdata <- split(data, list(data$replicate), drop = TRUE)
   if (any(unlist(lapply(subdata, function(x) x$time[1] != 0)))) {
-    msg <- "Data are required at time 0 for each concentration and each replicate."
-    errors <- errorTableAdd(errors, "firstTime0", msg)
+    msg <- "Data are required at time 0 for each replicate."
+    errors <- msgTableAdd(errors, "firstTime0", msg)
   }
 
   ##
@@ -86,7 +88,7 @@ survDataCheck <- function(data, diagnosis.plot = TRUE) {
   ##
   if (!is.double(data$conc) && !is.integer(data$conc)) {
     msg <- "Column 'conc' must contain only numerical values."
-    errors <- errorTableAdd(errors, "concNumeric", msg)
+    errors <- msgTableAdd(errors, "concNumeric", msg)
   }
 
   ##
@@ -94,7 +96,7 @@ survDataCheck <- function(data, diagnosis.plot = TRUE) {
   ##
   if (!is.numeric(data$time)) {
     msg <- "Column 'time' must contain only numerical values."
-    errors <- errorTableAdd(errors, "timeNumeric", msg)
+    errors <- msgTableAdd(errors, "timeNumeric", msg)
   }
 
   ##
@@ -102,16 +104,16 @@ survDataCheck <- function(data, diagnosis.plot = TRUE) {
   ##
   if (!is.integer(data$Nsurv)) {
     msg <- "Column 'Nsurv' must contain only integer values."
-    errors <- errorTableAdd(errors, "NsurvInteger", msg)
+    errors <- msgTableAdd(errors, "NsurvInteger", msg)
   }
 
   ##
   ## 6. assert all data are positive
   ##
   table <- subset(data, select = -c(replicate)) # remove replicate column
-  if (any(table < 0.0)) {
+  if (any(table < 0.0, na.rm = TRUE)) {
     msg <- "Data must contain only positive values."
-    errors <- errorTableAdd(errors, "tablePositive", msg)
+    errors <- msgTableAdd(errors, "tablePositive", msg)
   }
 
   ##
@@ -120,54 +122,81 @@ survDataCheck <- function(data, diagnosis.plot = TRUE) {
   datatime0 <- data[data$time == 0, ]  # select data for initial time points
   if (any(datatime0$Nsurv == 0)) { # test if Nsurv != 0 at time 0
     msg <- "Nsurv should be different to 0 at time 0 for each concentration and each replicate."
-    errors <- errorTableAdd(errors, "Nsurv0T0", msg)
+    errors <- msgTableAdd(errors, "Nsurv0T0", msg)
   }
 
   ##
-  ## 8 assert each (replicate, concentration, time) triplet is unique
+  ## 8. assert each (replicate, time) pair is unique
   ##
   ID <- idCreate(data) # ID vector
   if (any(duplicated(ID))) {
-    msg <- paste("The (replicate, conc, time) triplet ",
+    msg <- paste("The (replicate, time) pair ",
                  ID[duplicated(ID)],
                  " is duplicated.", sep = "")
-    errors <- errorTableAdd(errors, "duplicatedID", msg)
+    errors <- msgTableAdd(errors, "duplicatedID", msg)
   }
-  consistency <- function(subdata) {
-    # Function to be used on a subdataset corresponding to one replicate at one
-    # concentration.
-    # This function checks:
-    #   - if each replicate appears once and only once at each time
-    #   - if Nsurv is never increasing with time
 
-    errors <- errorTableCreate()
+  ##
+  ## 9. assert all replicates are available for each time point
+  ##
+  # df_repl <- data %>%
+  #   filter(!is.na(Nsurv)) %>%
+  #   group_by(time) %>%
+  #   summarise(set = paste(sort(replicate), collapse = '-'))
+  # 
+  # if (length(unique(df_repl$set)) > 1) {
+  #   sets <- df_repl %>%
+  #     group_by(set) %>%
+  #     summarise(cardinal = length(set))
+  #   reference_set <- sets$set[which.max(sets$cardinal)]
+  #   diffs <- which(df_repl$set != reference_set)
+  #   msg <- paste(
+  #       "Changing set of replicates for time point(s) ",
+  #       paste(diffs, collapse = ", "),
+  #       ".",
+  #       sep = "")
+  #   errors <- msgTableAdd(errors, "missingReplicate", msg)
+  # }
 
-    ##
-    ## 9. assert there is the same number of replicates for each conc and time
-    ##
-    if (length(subdata$replicate) != length(unique(data$time))) {
-      msg <- paste("Replicate ", unique(subdata$replicate),
-                   " is missing for at least one time points at concentration ",
-                   unique(subdata$conc), ".", sep = "")
-      errors <- errorTableAdd(errors, "missingReplicate", msg)
-    }
+  ##
+  ## 10. assert Nsurv never increases with time
+  ##
+  df_variation <- data %>%
+    filter(!is.na(Nsurv)) %>%
+    group_by(replicate) %>%
+    arrange(time) %>%
+    mutate(Nprec = ifelse(time == min(time), Nsurv, lag(Nsurv))) %>%
+    mutate(decrease = Nsurv <= Nprec) %>%
+    summarise(decreasing = all(decrease))
 
-    ##
-    ## 10. assert Nsurv never increases with time
-    ##
-    nsurv.increase <- subdata$Nsurv[-length(subdata$Nsurv)] < subdata$Nsurv[-1]
-    if (any(nsurv.increase)) {
-      msg <- paste("For replicate ", unique(subdata$replicate),
-                   " and concentration ", unique(subdata$conc),
-                   ", Nsurv increases at some time points.",
-                   sep = "")
-      errors <- errorTableAdd(errors, "NsurvIncrease", msg)
-    }
-    errors
+  if (! all(df_variation$decreasing)) {
+    replicates <- df_variation$replicate[! df_variation$decreasing]
+    msg <- paste(
+        "'Nsurv' increases at some time points in replicate(s) ",
+        paste(replicates, collapse=", "),
+        ".",
+        sep = "")
+    errors <- msgTableAdd(errors, "NsurvIncrease", msg)
   }
-  res <- by(data, list(data$replicate, data$conc), consistency)
-  consistency.errors <- do.call("errorTableAppend", res)
-  errors <- errorTableAppend(errors, consistency.errors)
+
+  ##
+  ## 11. Assert max(time in data_conc) >= max(time in data_surv)
+  ##
+  df_checkMaxTimeSurv <- data %>%
+    filter(!is.na(Nsurv)) %>%
+    group_by(replicate) %>%
+    filter(time == max(time))
+  
+  df_checkMaxTimeConc <- data %>%
+    filter(!is.na(conc)) %>%
+    group_by(replicate) %>%
+    filter(time == max(time))
+  
+  if(!all(df_checkMaxTimeConc$time >= df_checkMaxTimeSurv$time) ){
+    msg <- "In each 'replicate', maximum time for concentration record should
+    be greater or equal to maximum time in survival data observation."
+    errors <- msgTableAdd(errors, "maxTimeDiffer", msg)
+  }
 
   if (diagnosis.plot && "NsurvIncrease" %in% errors$id) {
     survDataPlotFull(data, ylab = "Number of surviving individuals")

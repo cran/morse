@@ -1,40 +1,44 @@
 #' Plotting method for \code{reproFitTT} objects
 #' 
 #' This is the generic \code{plot} S3 method for the \code{reproFitTT} class.
-#' It plots exposure-response fits for target time reproduction
+#' It plots the concentration-effect fit under target time reproduction
 #' analysis.
 #' 
-#' The fitted curve represents the \strong{estimated reproduction rate} after
-#' the target time has passed as a function of the concentration of pollutant.
-#' The function plots 95 \% credible intervals for the estimated reproduction
-#' rate (by default the red area around the fitted curve).
-#' Both types of intervals are taken at the same level. Typically
-#' a good fit is expected to display a large overlap between the two intervals.
+#' The fitted curve represents the \strong{estimated reproduction rate} at the target time
+#'  as a function of the chemical compound concentration.
+#' The function plots 95\% credible intervals for the estimated reproduction
+#' rate (by default the grey area around the fitted curve). Typically
+#' a good fit is expected to display a large overlap between the two types of intervals.
 #' If spaghetti = TRUE, the credible intervals are represented by two dotted
 #' lines limiting the credible band, and a spaghetti plot is added to this band.
 #' It consists of the representation of simulated curves using parameter values
-#' sampled in the posterior distribution (10 \% of the MCMC chains are randomly
+#' sampled in the posterior distribution (10\% of the MCMC chains are randomly
 #' taken for this sample).
 #'
 #' @param x an object of class \code{reproFitTT}
-#' @param xlab a title for the \eqn{x}-label
-#' @param ylab a title for the \eqn{y}-label
+#' @param xlab a label for the \eqn{X}-axis, by default \code{Concentration}
+#' @param ylab a label for the \eqn{Y}-axis, by default \code{Nb of offspring per ind/day}
 #' @param main main title for the plot
-#' @param fitcol color used for the fitted curve
-#' @param fitlty line type for the fitted curve
+#' @param fitcol color of the fitted curve
+#' @param fitlty line type of the fitted curve
 #' @param fitlwd width of the fitted curve
 #' @param spaghetti if \code{TRUE}, the credible interval is represented by 
 #' multiple curves
-#' @param cicol color for the 95 \% credible limits of the fitted curve
-#' @param cilty line type for the 95 \% credible limits of the fitted curve
-#' @param cilwd width of the 95 \% credible limits of the fitted curve
+#' @param cicol color of the 95 \% credible limits
+#' @param cilty line type of the 95 \% credible limits
+#' @param cilwd width of the 95 \% credible limits
+#' @param ribcol color of the ribbon between lower and upper credible limits.
+#' Transparent if \code{NULL}
 #' @param addlegend if \code{TRUE}, adds a default legend to the plot
-#' @param log.scale if \code{TRUE}, displays \eqn{x}-axis in log-scale
-#' @param style graphical backend, can be \code{'generic'} or \code{'ggplot'}
+#' @param log.scale if \code{TRUE}, displays \eqn{X}-axis in log-scale
+#' @param style graphical backend, can be \code{'ggplot'} or \code{'generic'}
 #' @param \dots Further arguments to be passed to generic methods
 #' 
-#' @note When \code{style = "ggplot"}, the function calls function
-#' \code{\link[ggplot2]{ggplot}} and returns an object of class \code{ggplot}.
+#' @note When \code{style = "generic"}, the function calls the generic function
+#' \code{\link[graphics]{plot}}
+#' @note When \code{style = "ggplot"}, the function return an object of class
+#'  \code{ggplot}, see function \code{\link[ggplot2]{ggplot}} 
+#'
 #' 
 #' @import ggplot2
 #' @import grDevices
@@ -52,35 +56,36 @@
 #' data(cadmium1)
 #'
 #' # (2) Create an object of class "reproData"
-#' dat <- reproData(cadmium1)
+#' dataset <- reproData(cadmium1)
 #'
 #' \dontrun{
-#' # (3) Run the reproFitTT function with the log-logistic gamma-poisson model
-#' out <- reproFitTT(dat, stoc.part = "gammapoisson",
+#' # (3) Run the reproFitTT function with the log-logistic gamma-Poisson model
+#' out <- reproFitTT(dataset, stoc.part = "gammapoisson",
 #'                   ecx = c(5, 10, 15, 20, 30, 50, 80), quiet = TRUE)
 #'
 #'
-#' # (4) Plot the fitted curve with ggplot style
+#' # (4) Plot the fitted curve with generic style
 #' plot(out, xlab = expression("Concentration in" ~ mu~g.L^{-1}),
-#'      fitcol = "blue", cicol = "blue", style = "ggplot",
+#'      fitcol = "blue", cicol = "lightblue",
 #'      main = "Log-logistic response to concentration")
 #' }
 #' 
 #' @export
 plot.reproFitTT <- function(x,
                             xlab = "Concentration",
-                            ylab = "Nb of offspring per ind.day",
+                            ylab = "Nb of offspring per ind/day",
                             main = NULL,
-                            fitcol = "red",
+                            fitcol = "orange",
                             fitlty = 1,
                             fitlwd = 1,
                             spaghetti = FALSE,
-                            cicol = "pink1",
-                            cilty = 1,
+                            cicol = "orange",
+                            cilty = 2,
                             cilwd = 1,
+                            ribcol = "grey70",
                             addlegend = FALSE,
                             log.scale = FALSE,
-                            style = "generic", ...) {
+                            style = "ggplot", ...) {
   # plot the fitted curve estimated by reproFitTT
   # INPUTS
   # - x:  reproFitTT object
@@ -137,7 +142,7 @@ plot.reproFitTT <- function(x,
                                cred.int, spaghetti.CI, dataCIm,
                                xlab, ylab, fitcol, fitlty, fitlwd,
                                main, addlegend,
-                               cicol, cilty, cilwd, log.scale, ylim_CI)
+                               cicol, cilty, cilwd, ribcol, log.scale, ylim_CI)
   }
   else if (style == "ggplot") {
     reproFitPlotGG(x, dataTT$conc, transf_data_conc, dataTT$resp,
@@ -145,7 +150,7 @@ plot.reproFitTT <- function(x,
                    cred.int, spaghetti.CI, dataCIm,
                    xlab, ylab, fitcol, fitlty, fitlwd,
                    main, addlegend,
-                   cicol, cilty, cilwd, log.scale, ylim_CI)
+                   cicol, cilty, cilwd, ribcol, log.scale, ylim_CI)
   }
   else stop("Unknown style")
 }
@@ -247,7 +252,7 @@ reproFitPlotGenericCredInt <- function(x, data_conc, transf_data_conc, data_resp
                                        cred.int, spaghetti.CI, dataCIm,
                                        xlab, ylab, fitcol, fitlty, fitlwd,
                                        main, addlegend,
-                                       cicol, cilty, cilwd, log.scale, ylim_CI) {
+                                       cicol, cilty, cilwd, ribcol, log.scale, ylim_CI) {
 
   # plot the fitted curve estimated by reproFitTT
   # with generic style with credible interval
@@ -278,7 +283,7 @@ reproFitPlotGenericCredInt <- function(x, data_conc, transf_data_conc, data_resp
   } else {
     polygon(c(curv_conc, rev(curv_conc)), c(cred.int[["qinf95"]],
                                             rev(cred.int[["qsup95"]])),
-            col = cicol, border = NA)
+            col = ribcol, border = NA)
   }
   
   lines(curv_conc, cred.int[["qsup95"]], type = "l", col = cicol, lty = cilty,
@@ -302,7 +307,7 @@ reproFitPlotGenericCredInt <- function(x, data_conc, transf_data_conc, data_resp
 }
 
 reproFitPlotGGCredInt <- function(curv_resp, cred.int, spaghetti.CI, dataCIm,
-                                  cicol, cilty, cilwd, valCols, fitlty, fitlwd,
+                                  cicol, cilty, cilwd, valCols, fitlty, fitlwd, ribcol,
                                   xlab, ylab, main, ylim_CI) {
   # IC
   data.three <- data.frame(conc = curv_resp$conc,
@@ -318,7 +323,7 @@ reproFitPlotGGCredInt <- function(curv_resp, cred.int, spaghetti.CI, dataCIm,
     ggplot(data.three) + geom_ribbon(data = data.three, aes(x = conc,
                                                             ymin = qinf95,
                                                             ymax = qsup95),
-                                     fill = valCols$cols4, col = valCols$cols4,
+                                     fill = ribcol, col = NA,
                                      alpha = 0.4)
   }
   
@@ -342,8 +347,8 @@ reproFitPlotGGCredInt <- function(curv_resp, cred.int, spaghetti.CI, dataCIm,
                                                aes(x = conc,
                                                    ymin = qinf95,
                                                    ymax = qsup95),
-                                               fill = valCols$cols4,
-                                               col = valCols$cols4, alpha = 0.4)
+                                               fill = ribcol,
+                                               col = NA, alpha = 0.4)
   }
   
   plt_4 <- plt_40 +
@@ -366,7 +371,7 @@ reproFitPlotGG <- function(x, data_conc, transf_data_conc, data_resp,
                            cred.int, spaghetti.CI, dataCIm,
                            xlab, ylab, fitcol, fitlty, fitlwd,
                            main, addlegend,
-                           cicol, cilty, cilwd, log.scale, ylim_CI) {
+                           cicol, cilty, cilwd, ribcol, log.scale, ylim_CI) {
   
   if (Sys.getenv("RSTUDIO") == "") {
     dev.new() # create a new page plot
@@ -379,7 +384,7 @@ reproFitPlotGG <- function(x, data_conc, transf_data_conc, data_resp,
 
   plt_4 <-
     reproFitPlotGGCredInt(curv_resp, cred.int, spaghetti.CI, dataCIm,
-                          cicol, cilty, cilwd, valCols, fitlty, fitlwd, xlab,
+                          cicol, cilty, cilwd, valCols, fitlty, fitlwd, ribcol, xlab,
                           ylab, main, ylim_CI)$plt_4
   
   if (addlegend) {
@@ -400,7 +405,7 @@ reproFitPlotGG <- function(x, data_conc, transf_data_conc, data_resp,
     
     plt_3 <- reproFitPlotGGCredInt(curv_resp, cred.int, spaghetti.CI, dataCIm,
                                    cicol, cilty, cilwd, valCols, fitlty,
-                                   fitlwd, xlab, ylab, main, ylim_CI)$plt_3
+                                   fitlwd, ribcol, xlab, ylab, main, ylim_CI)$plt_3
     
     mylegend_3 <- legendGgplotFit(plt_3)
     

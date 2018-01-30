@@ -1,11 +1,11 @@
-#' Plotting method for \code{reproData} objects
+#' Plot dose-response from \code{reproData} objects
 #'
 #' This is the generic \code{plotDoseResponse} S3 method for the \code{reproData}
 #' class. It plots the number of offspring per individual-days as a function of
-#' concentration (for a given target time).
+#' concentration at a given target time.
 #' 
 #' The function plots the observed values of the reproduction rate (number of
-#' reproduction outputs per individual-day) for a given time as a function of
+#' reproduction outputs per individual-day) at a given time point as a function of
 #' concentration. The 95 \% Poisson confidence interval is added to each reproduction
 #' rate. It is calculated using function \code{\link[epitools]{pois.exact}}
 #' from package \code{epitools}.
@@ -13,39 +13,40 @@
 #' the x-axis to help the visualization of replicates.
 #'
 #' @param x an object of class \code{reproData}
-#' @param xlab a title for the \eqn{x}-axis (optional)
-#' @param ylab a label for the \eqn{y}-axis
+#' @param xlab a label for the \eqn{X}-axis, by default \code{Concentration}
+#' @param ylab a label for the \eqn{Y}-axis, by default \code{Nb of offspring per ind.day}
 #' @param main main title for the plot
-#' @param ylim Y-axis limits
-#' @param target.time a numeric value corresponding to some observed time in \code{data}
-#' @param style graphical backend, can be \code{'generic'} or \code{'ggplot'}
-#' @param log.scale if \code{TRUE}, displays \eqn{x}-axis in log scale
-#' @param remove.someLabels if \code{TRUE}, removes 3/4 of X-axis labels in
+#' @param ylim \eqn{Y}-axis limits
+#' @param target.time a numeric value corresponding to some observed time points in \code{data}
+#' @param style graphical backend, can be \code{'ggplot'} or \code{'generic'}
+#' @param log.scale if \code{TRUE}, displays \eqn{X}-axis in log-scale
+#' @param remove.someLabels if \code{TRUE}, removes 75\% of \eqn{X}-axis labels in
 #' \code{'ggplot'} style to avoid the label overlap
 #' @param axis if \code{TRUE} displays ticks and label axis
 #' @param addlegend if \code{TRUE}, adds a default legend to the plot
 #' @param \dots Further arguments to be passed to generic methods
 #' 
-#' @note When \code{style = "ggplot"}, the function calls function
-#' \code{\link[ggplot2]{ggplot}} and returns an object of class \code{ggplot}.
+#' @note When \code{style = "generic"}, the function calls the generic function
+#' \code{\link[graphics]{plot}}
+#' @note When \code{style = "ggplot"}, the function return an object of class
+#' \code{ggplot}, see function \code{\link[ggplot2]{ggplot}} 
 #' 
 #' @seealso \code{\link[epitools]{pois.exact}}
 #'
 #' @keywords plot
 #'
 #' @examples
-#'
-#' library(ggplot2)
-#'
 #' # (1) Load the data
 #' data(zinc)
-#' zinc <- reproData(zinc)
+#' 
+#' # (2) Create an object of class 'reproData'
+#' zinc_rpr <- reproData(zinc)
 #'
-#' # (2) Plot dose-response
-#' plotDoseResponse(zinc)
+#' # (3) Plot dose-response
+#' plotDoseResponse(zinc_rpr)
 #'
-#' # (3) Plot dose-response with a ggplot style
-#' plotDoseResponse(zinc, style = "ggplot")
+#' # (4) Plot dose-response with a generic style
+#' plotDoseResponse(zinc_rpr, style = "generic")
 #'
 #' @import ggplot2
 #' @import grDevices
@@ -59,11 +60,11 @@
 #' @export
 plotDoseResponse.reproData <- function(x,
                                        xlab = "Concentration",
-                                       ylab = "Nb of offspring / Nb individual-days",
+                                       ylab = "Nb of offspring per ind.day",
                                        main = NULL,
                                        ylim = NULL,
                                        target.time = NULL,
-                                       style = "generic",
+                                       style = "ggplot",
                                        log.scale = FALSE,
                                        remove.someLabels = FALSE,
                                        axis = TRUE,
@@ -115,6 +116,7 @@ reproDoseResponseCIGeneric <- function(x, conc_val, jittered_conc,
                                        transf_data_conc, display.conc, ylim,
                                        axis, main, addlegend) {
   
+  x <- as.data.frame(x)
   if (is.null(ylim)) ylim <- c(0, max(x$reproRateSup))
   plot(jittered_conc, x$resp,
        ylim = ylim,
@@ -143,7 +145,7 @@ reproDoseResponseCIGeneric <- function(x, conc_val, jittered_conc,
            lty = c(NA, 1),
            lwd = c(NA, 1),
            col = c(1, 1),
-           legend = c("Observed values", "Confidence interval"),
+           legend = c("Observed values", "Confidence intervals"),
            bty = "n")
   }
 }
@@ -162,7 +164,7 @@ reproDoseResponseCIGG <- function(x, conc_val, jittered_conc, transf_data_conc,
   dfCI <- data.frame(x0,
                      transf_data_conc,
                      display.conc,
-                     Conf.Int = "Confidence interval")
+                     Conf.Int = "Confidence intervals")
   
   # colors
   valCols <- fCols(df, fitcol = NA, cicol = NA)

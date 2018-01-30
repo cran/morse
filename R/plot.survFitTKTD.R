@@ -1,8 +1,8 @@
 #' Plotting method for \code{survFitTKTD} objects
 #' 
 #' This is the generic \code{plot} S3 method for the
-#' \code{survFitTKTD}.  It plots the fits obtained for each
-#' concentration of pollutant in the original dataset.
+#' \code{survFitTKTD}.  It plots the fit obtained for each
+#' concentration of chemical compound in the original dataset.
 #' 
 #' The fitted curves represent the \strong{estimated survival rate} as a function
 #' of time for each concentration
@@ -10,31 +10,30 @@
 #' rate} at each time point. Note that since our model does not take
 #' inter-replicate variability into consideration, replicates are systematically
 #' pooled in this plot.
-#' The function plots both 95 \% credible intervals for the estimated survival
-#' rate (by default the red area around the fitted curve) and 95 \% confidence
+#' The function plots both 95\% credible intervals for the estimated survival
+#' rate (by default the grey area around the fitted curve) and 95\% binomial confidence
 #' intervals for the observed survival rate (as black error bars if
 #' \code{adddata = TRUE}).
 #' Both types of intervals are taken at the same level. Typically
-#' a good fit is expected to display a large overlap between the two intervals.
+#' a good fit is expected to display a large overlap between the two types of intervals.
 #' If \code{spaghetti = TRUE}, the credible intervals are represented by two
-#' dotted lines limiting the credible band, and a spaghetti plot is added to this
-#' band.
-#' It consists of the representation of simulated curves using parameter values
-#' sampled in the posterior distribution (2 \% of the MCMC chains are randomly
+#' dotted lines limiting the credible band, and a spaghetti plot is added to this band.
+#' This spaghetti plot consists of the representation of simulated curves using parameter values
+#' sampled in the posterior distribution (2\% of the MCMC chains are randomly
 #' taken for this sample).
 #' 
 #' @param x An object of class \code{survFitTKTD}.
 #' @param xlab A label for the \eqn{X}-axis, by default \code{Time}.
 #' @param ylab A label for the \eqn{Y}-axis, by default \code{Survival rate}.
 #' @param main A main title for the plot.
-#' @param concentration A numeric value corresponding to some concentration in
+#' @param concentration A numeric value corresponding to some specific concentration in
 #' \code{data}. If \code{concentration = NULL}, draws a plot for each concentration.
 #' @param spaghetti if \code{TRUE}, draws a set of survival curves using
 #' parameters drawn from the posterior distribution
 #' @param one.plot if \code{TRUE}, draws all the estimated curves in
-#' one plot instead of one per concentration.
+#' one plot instead of one plot per concentration.
 #' @param adddata if \code{TRUE}, adds the observed data to the plot
-#' with (frequentist) confidence intervals
+#' with (frequentist binomial) confidence intervals
 #' @param addlegend if \code{TRUE}, adds a default legend to the plot.
 #' @param style graphical backend, can be \code{'generic'} or \code{'ggplot'}
 #' @param \dots Further arguments to be passed to generic methods.
@@ -47,22 +46,22 @@
 #' data(propiconazole)
 #' 
 #' # (2) Create an object of class "survData"
-#' dat <- survData(propiconazole)
+#' dataset <- survData(propiconazole)
 #' 
 #' \dontrun{
-#' # (3) Run the survFitTKTD function
-#' out <- survFitTKTD(dat)
+#' # (3) Run the survFitTKTD function ('SD' model only)
+#' out <- survFitTKTD(dataset)
 #'
 #' # (4) Plot the fitted curves in one plot 
 #' plot(out)
 #'
-#' # (5) Plot one fitted curve by concentration with credible limits as
+#' # (5) Plot one fitted curve per concentration with credible limits as
 #' # spaghetti, data and confidence intervals
 #' # and with a ggplot style
 #' plot(out, spaghetti = TRUE , adddata = TRUE, one.plot = FALSE,
 #'      style = "ggplot")
 #'
-#' # (6) Plt fitted curve for one specific concentration
+#' # (6) Plot fitted curve for one specific concentration
 #' plot(out, concentration = 36, style = "ggplot")
 #' }
 #' 
@@ -84,7 +83,7 @@ plot.survFitTKTD <- function(x,
                              one.plot = FALSE,
                              adddata = FALSE,
                              addlegend = FALSE,
-                             style = "generic", ...) {
+                             style = "ggplot", ...) {
   
   if (one.plot && !is.null(concentration))
     one.plot <- FALSE
@@ -118,12 +117,10 @@ plot.survFitTKTD <- function(x,
     survFitPlotTKTDGeneric(data.credInt, dobs, xlab, ylab, main, concentration,
                            one.plot, spaghetti,
                            adddata, addlegend)
-  }
-  else if (style == "ggplot") {
+  }  else if (style == "ggplot") {
     survFitPlotTKTDGG(data.credInt, dobs, xlab, ylab, main, concentration,
                       one.plot, spaghetti, adddata, addlegend)
-  }
-  else stop("Unknown style")
+  }  else stop("Unknown style")
 }
 
 Surv <- function(Cw, time, ks, kd, NEC, m0)
@@ -197,22 +194,20 @@ survFitPlotCITKTD <- function(x) {
   qsup95 <- apply(dtheo, 1, quantile, probs = 0.975, na.rm = TRUE)
   q50 <- apply(dtheo, 1, quantile, probs = 0.5, na.rm = TRUE)
   
-  
-  dtheo <- as.data.frame(cbind(rep(concobs, rep(npoints, length(concobs))),
-                               rep(tfin, length(concobs)),
-                               dtheo))
-
-  names(dtheo) <- c("conc", "time", paste0("X", 1:length(nec)))
-  
+  dtheo <- as.data.frame(dtheo)
+  colnames(dtheo) <- paste0("X", 1:length(kd))
   # divide number of mcmc by 50
-  sel <- sample(ncol(dtheo[3:ncol(dtheo)]))[1:ceiling(ncol(dtheo) / 50)]
-  dtheo <- cbind(dtheo[, 1:2], dtheo[, sel])
+  sel <- sample(ncol(dtheo))[1:ceiling(ncol(dtheo) / 50)]
+  dtheo <- dtheo[, sel]
+  
+  dtheo$conc <- rep(concobs, rep(npoints, length(concobs)))
+  dtheo$time <- rep(tfin, length(concobs))
   
   # add credible limits
   dtheo$qinf95 <- qinf95
   dtheo$qsup95 <- qsup95
   dtheo$q50 <- q50
-  
+
   # names for legend plots
   dtheo$Cred.Lim <- "Credible limits"
   dtheo$Mean.C <- "Mean curve"
@@ -316,7 +311,7 @@ survFitPlotTKTDGenericNoOnePlot <- function(data, dobs, xlab, ylab, spaghetti,
          main = paste0("Concentration = ", unique(x[, "conc"])))
     
     if (spaghetti) {
-      color <- "gray"
+      color <- "grey"
       color_transparent <- adjustcolor(color, alpha.f = 0.05)
       by(z, z$variable, function(x) {
         lines(x[, "time"], x[, "value"], col = color_transparent)
@@ -324,15 +319,15 @@ survFitPlotTKTDGenericNoOnePlot <- function(data, dobs, xlab, ylab, spaghetti,
     } else {
       polygon(c(x[, "time"], rev(x[, "time"])), c(x[, "qinf95"],
                                                   rev(x[, "qsup95"])),
-              col = "pink", border = NA)
+              col = "grey70", border = NA)
     }
     
     lines(x[, "time"], x[, "q50"], # lines
-          col = "red")
+          col = "orange")
     lines(x[, "time"], x[, "qinf95"],
-          col = "pink")
+          col = "gray70")
     lines(x[, "time"], x[, "qsup95"], 
-          col = "pink")
+          col = "gray70")
     
     if (adddata) {
       points(y[, "time"],
@@ -349,7 +344,7 @@ survFitPlotTKTDGenericNoOnePlot <- function(data, dobs, xlab, ylab, spaghetti,
              lty = c(NA, ifelse(adddata, 1, NA), 1, 1),
              col = c(ifelse(adddata, "black", NA),
                      ifelse(adddata, "black", NA),
-                     "red", "pink"),
+                     "orange", "grey70"),
              legend = c(ifelse(adddata, "Observed values", NA),
                         ifelse(adddata, "Confidence interval", NA),
                         "Mean curve", "Credible limits"),
@@ -400,7 +395,7 @@ survFitPlotTKTDGGNoOnePlot <- function(data, dobs, xlab, ylab, main, spaghetti,
                                        addlegend = FALSE) {
   
   # colors
-  valCols <- fCols(data, "red", "pink")
+  valCols <- fCols(data, "orange", "gray70")
   dataTmp <- data
   dataTmp[, c("Cred.Lim", "Mean.C")] <- list(NULL)
   dtheoQm <- melt(dataTmp,
@@ -424,7 +419,9 @@ survFitPlotTKTDGGNoOnePlot <- function(data, dobs, xlab, ylab, main, spaghetti,
     gf <- ggplot(dobs) +
       geom_ribbon(data = data, aes(x = time, ymin = qinf95,
                                    ymax = qsup95),
-                  fill = valCols$cols4, col = valCols$cols4, alpha = 0.4)
+                  fill = valCols$cols4,
+                  # color = valCols$cols4,
+                  alpha = 0.4)
   }
   
   if (!is.null(concentration)) {
@@ -435,10 +432,9 @@ survFitPlotTKTDGGNoOnePlot <- function(data, dobs, xlab, ylab, main, spaghetti,
     gf <- gf + geom_line(data = data, aes(x = time, y = q50),
                          color = valCols$cols5)
   }
-  gf <- gf + geom_line(data = data, aes(x = time, y = qinf95,
-                                        color = Cred.Lim)) +
-    geom_line(data = data, aes(x = time, y = qsup95,
-                               color = Cred.Lim)) +
+  gf <- gf +
+    # geom_line(data = data, aes(x = time, y = qinf95), color = "grey70") +
+    # geom_line(data = data, aes(x = time, y = qsup95), color = "grey70") +
     facet_wrap(~conc) +
     scale_linetype(name = "") +
     labs(x = xlab, y = ylab) + ggtitle(main) +

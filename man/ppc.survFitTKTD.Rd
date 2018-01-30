@@ -4,12 +4,14 @@
 \alias{ppc.survFitTKTD}
 \title{Posterior predictive check plot for \code{survFitTKTD} objects}
 \usage{
-\method{ppc}{survFitTKTD}(x, style = "generic", ...)
+\method{ppc}{survFitTKTD}(x, style = "ggplot", main = NULL, ...)
 }
 \arguments{
 \item{x}{An object of class \code{survFitTKTD}}
 
 \item{style}{graphical backend, can be \code{'generic'} or \code{'ggplot'}}
+
+\item{main}{main title for the plot}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
@@ -38,7 +40,7 @@ data(propiconazole)
 dat <- survData(propiconazole)
 
 \dontrun{
-# (3) Run the survFitTKTD function with the TKTD model
+# (3) Run the survFitTKTD function with the TKTD model ('SD' only)
 out <- survFitTKTD(dat)
 
 # (4) Plot observed versus predicted values
@@ -46,4 +48,3 @@ ppc(out)
 }
 
 }
-

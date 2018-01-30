@@ -2,27 +2,27 @@
 % Please edit documentation in R/summary.survFitTT.R
 \name{summary.survFitTT}
 \alias{summary.survFitTT}
-\title{Summary for \code{survFitTT} objects}
+\title{Summary of \code{survFitTT} object}
 \usage{
 \method{summary}{survFitTT}(object, quiet = FALSE, ...)
 }
 \arguments{
 \item{object}{an object of class \code{survFitTT}}
 
-\item{quiet}{when \code{FALSE}, prints summary on standard output}
+\item{quiet}{when \code{TRUE}, does not print}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
 \value{
-The function returns a list with the following fields:
-\item{Qpriors}{quantiles for the model's prior}
-\item{Qposteriors}{quantiles for the model's posteriors}
-\item{QLCx}{quantiles for LCx values}
+The function returns a list with the following information:
+\item{Qpriors}{quantiles of the model priors}
+\item{Qposteriors}{quantiles of the model posteriors}
+\item{QLCx}{quantiles of LCx estimates}
 }
 \description{
 This is the generic \code{summary} S3 method for the \code{survFitTT} class.
 It shows the quantiles of priors and posteriors on parameters and the quantiles
-of the posterior on the LCx.
+of the posteriors on the LCx estimates.
 }
 \examples{
 # (1) Load the data
@@ -43,4 +43,3 @@ summary(out)
 
 }
 \keyword{summary}
-

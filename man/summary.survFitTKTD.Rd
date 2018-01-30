@@ -2,21 +2,21 @@
 % Please edit documentation in R/summary.survFitTKTD.R
 \name{summary.survFitTKTD}
 \alias{summary.survFitTKTD}
-\title{Summary for \code{survFitTKTD} objects}
+\title{Summary of \code{survFitTKTD} object}
 \usage{
 \method{summary}{survFitTKTD}(object, quiet = FALSE, ...)
 }
 \arguments{
 \item{object}{an object of class \code{survFitTKTD}}
 
-\item{quiet}{when \code{FALSE}, prints summary on standard output}
+\item{quiet}{when \code{TRUE}, does not print}
 
 \item{\dots}{Further arguments to be passed to generic methods.}
 }
 \value{
-The function returns a list with the following fields:
-\item{Qpriors}{quantiles for the model's prior}
-\item{Qposteriors}{quantiles for the model's posteriors}
+The function returns a list with the following information:
+\item{Qpriors}{quantiles of the model priors}
+\item{Qposteriors}{quantiles of the model posteriors}
 }
 \description{
 This is the generic \code{summary} S3 methode for the \code{survFitTKTD} class.
@@ -39,4 +39,3 @@ summary(out)
 
 }
 \keyword{summary}
-

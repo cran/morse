@@ -2,20 +2,20 @@
 % Please edit documentation in R/summary.reproData.R
 \name{summary.reproData}
 \alias{summary.reproData}
-\title{Summary for \code{reproData} objects}
+\title{Summary of \code{reproData} object}
 \usage{
 \method{summary}{reproData}(object, quiet = FALSE, ...)
 }
 \arguments{
 \item{object}{an object of class \code{reproData}}
 
-\item{quiet}{if \code{TRUE}, does no prints}
+\item{quiet}{if \code{TRUE}, does not print}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
 \value{
-The function returns a list with the same fields than 
-\code{\link{summary.survData}} plus an additional one:
+The function returns a list with the same information than 
+\code{\link{summary.survDataCstExp}} plus an additional one:
 \item{NboffTimeConc}{nb of offspring for all concentrations and time points}
 }
 \description{
@@ -35,4 +35,3 @@ summary(cadmium1)
 
 }
 \keyword{summary}
-

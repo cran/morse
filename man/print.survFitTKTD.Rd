@@ -20,17 +20,16 @@ inference procedure.
 # (1) Load the data
 data(propiconazole)
 
-# (2) Create a survData object
+# (2) Create an object of class 'survData'
 dat <- survData(propiconazole)
 
 \dontrun{
 # (3) Run the survFitTKTD function
-out <- survFitTT(dat, quiet = TRUE)
+out <- survFitTKTD(dat, quiet = TRUE)
 
 # (4) Print the survFitTKTD object
-out
+print(out)
 }
 
 }
 \keyword{print}
-

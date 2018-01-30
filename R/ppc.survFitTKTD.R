@@ -16,6 +16,7 @@
 #'
 #' @param x An object of class \code{survFitTKTD}
 #' @param style graphical backend, can be \code{'generic'} or \code{'ggplot'}
+#' @param main main title for the plot
 #' @param \dots Further arguments to be passed to generic methods
 #'
 #' @examples
@@ -27,7 +28,7 @@
 #' dat <- survData(propiconazole)
 #'
 #' \dontrun{
-#' # (3) Run the survFitTKTD function with the TKTD model
+#' # (3) Run the survFitTKTD function with the TKTD model ('SD' only)
 #' out <- survFitTKTD(dat)
 #'
 #' # (4) Plot observed versus predicted values
@@ -39,14 +40,14 @@
 #' @importFrom graphics plot
 #' 
 #' @export
-ppc.survFitTKTD <- function(x, style = "generic", ...) {
+ppc.survFitTKTD <- function(x, style = "ggplot", main = NULL,...) {
   if (!is(x, "survFitTKTD"))
     stop("x is not of class 'survFitTKTD'!")
   
-  xlab <- "Observed Nbr. of survivor"
-  ylab <- "Predicted Nbr. of survivor"
+  xlab <- "Observed nb of survivors"
+  ylab <- "Predicted nb of survivors"
   
-  ppc_gen(EvalsurvTKTDPpc(x), style, xlab, ylab)
+  ppc_gen(EvalsurvTKTDPpc(x), style, xlab, ylab, main)
 }
 
 #' @importFrom stats rbinom quantile

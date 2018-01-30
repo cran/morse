@@ -5,19 +5,19 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c(
   "transf_conc", "obs", "pred", "..n..", "Points", "conc", "Line", "Nsurv",
   "time", "Conf.Int", "Cred.Lim", "Obs", "P50", "P2.5", "P97.5", "variable",
   "value", "jittered_conc", "reproRateInf", "reproRateSup", "curv_conc", "q50",
-  "psurv"
+  "psurv", "concentration", ".", "time_ID", "i_row", "nbrReplicate_ConcTime",
+  "time_ID_red", "x.pts", "y.pts", "pts.leg", "survRate_key", "survRate_value",
+  "Nsurv_qinf95", "Nsurv_qsup95", "col_range", "Nsurv_q50", "Nprec", "decrease",
+  "time_ID_long"
 ))
 
 
-# Generates a character string vector from a data.frame using its replicate,
-# conc and time columns. The result can be used as identifiers for the rows
-# of the data.set.
+# Generates a character string vector from a data.frame using its
+# replicate, and time columns. The result can be used as identifiers
+# for the rows of the data.set.
 #
-#' @importFrom stringr str_c
-#'
 idCreate <- function(data) {
-  str_c(data[, "replicate"],
-        data[, "conc"],
+  paste(data[, "replicate"],
         data[, "time"],
         sep = "_")
 }
@@ -50,7 +50,7 @@ selectDataTT <- function(data, target.time) {
 
 #' @import rjags
 #' @importFrom coda raftery.diag
-modelSamplingParameters <- function(model, parameters, n.chains, quiet = quiet) {
+modelSamplingParameters <- function(model, parameters, n.chains, quiet) {
   # estimate the number of iteration required for the estimation
   # by using the raftery.diag
   # INPUTS:
@@ -89,7 +89,7 @@ modelSamplingParameters <- function(model, parameters, n.chains, quiet = quiet) 
 }
 
 #' @import rjags
-calcDIC <- function(m.M, sampling.parameters, quiet = quiet) {
+calcDIC <- function(m.M, sampling.parameters, quiet) {
   # calculate the dic for a jags model
   # INPUTS
   # - m.M:  jags model object

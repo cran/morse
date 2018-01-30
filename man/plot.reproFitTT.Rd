@@ -5,64 +5,69 @@
 \title{Plotting method for \code{reproFitTT} objects}
 \usage{
 \method{plot}{reproFitTT}(x, xlab = "Concentration",
-  ylab = "Nb of offspring per ind.day", main = NULL, fitcol = "red",
-  fitlty = 1, fitlwd = 1, spaghetti = FALSE, cicol = "pink1",
-  cilty = 1, cilwd = 1, addlegend = FALSE, log.scale = FALSE,
-  style = "generic", ...)
+  ylab = "Nb of offspring per ind/day", main = NULL, fitcol = "orange",
+  fitlty = 1, fitlwd = 1, spaghetti = FALSE, cicol = "orange",
+  cilty = 2, cilwd = 1, ribcol = "grey70", addlegend = FALSE,
+  log.scale = FALSE, style = "ggplot", ...)
 }
 \arguments{
 \item{x}{an object of class \code{reproFitTT}}
 
-\item{xlab}{a title for the \eqn{x}-label}
+\item{xlab}{a label for the \eqn{X}-axis, by default \code{Concentration}}
 
-\item{ylab}{a title for the \eqn{y}-label}
+\item{ylab}{a label for the \eqn{Y}-axis, by default \code{Nb of offspring per ind/day}}
 
 \item{main}{main title for the plot}
 
-\item{fitcol}{color used for the fitted curve}
+\item{fitcol}{color of the fitted curve}
 
-\item{fitlty}{line type for the fitted curve}
+\item{fitlty}{line type of the fitted curve}
 
 \item{fitlwd}{width of the fitted curve}
 
 \item{spaghetti}{if \code{TRUE}, the credible interval is represented by 
 multiple curves}
 
-\item{cicol}{color for the 95 \% credible limits of the fitted curve}
+\item{cicol}{color of the 95 \% credible limits}
 
-\item{cilty}{line type for the 95 \% credible limits of the fitted curve}
+\item{cilty}{line type of the 95 \% credible limits}
 
-\item{cilwd}{width of the 95 \% credible limits of the fitted curve}
+\item{cilwd}{width of the 95 \% credible limits}
+
+\item{ribcol}{color of the ribbon between lower and upper credible limits.
+Transparent if \code{NULL}}
 
 \item{addlegend}{if \code{TRUE}, adds a default legend to the plot}
 
-\item{log.scale}{if \code{TRUE}, displays \eqn{x}-axis in log-scale}
+\item{log.scale}{if \code{TRUE}, displays \eqn{X}-axis in log-scale}
 
-\item{style}{graphical backend, can be \code{'generic'} or \code{'ggplot'}}
+\item{style}{graphical backend, can be \code{'ggplot'} or \code{'generic'}}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
 This is the generic \code{plot} S3 method for the \code{reproFitTT} class.
-It plots exposure-response fits for target time reproduction
+It plots the concentration-effect fit under target time reproduction
 analysis.
 }
 \details{
-The fitted curve represents the \strong{estimated reproduction rate} after
-the target time has passed as a function of the concentration of pollutant.
-The function plots 95 \% credible intervals for the estimated reproduction
-rate (by default the red area around the fitted curve).
-Both types of intervals are taken at the same level. Typically
-a good fit is expected to display a large overlap between the two intervals.
+The fitted curve represents the \strong{estimated reproduction rate} at the target time
+ as a function of the chemical compound concentration.
+The function plots 95\% credible intervals for the estimated reproduction
+rate (by default the grey area around the fitted curve). Typically
+a good fit is expected to display a large overlap between the two types of intervals.
 If spaghetti = TRUE, the credible intervals are represented by two dotted
 lines limiting the credible band, and a spaghetti plot is added to this band.
 It consists of the representation of simulated curves using parameter values
-sampled in the posterior distribution (10 \% of the MCMC chains are randomly
+sampled in the posterior distribution (10\% of the MCMC chains are randomly
 taken for this sample).
 }
 \note{
-When \code{style = "ggplot"}, the function calls function
-\code{\link[ggplot2]{ggplot}} and returns an object of class \code{ggplot}.
+When \code{style = "generic"}, the function calls the generic function
+\code{\link[graphics]{plot}}
+
+When \code{style = "ggplot"}, the function return an object of class
+ \code{ggplot}, see function \code{\link[ggplot2]{ggplot}}
 }
 \examples{
 
@@ -70,20 +75,19 @@ When \code{style = "ggplot"}, the function calls function
 data(cadmium1)
 
 # (2) Create an object of class "reproData"
-dat <- reproData(cadmium1)
+dataset <- reproData(cadmium1)
 
 \dontrun{
-# (3) Run the reproFitTT function with the log-logistic gamma-poisson model
-out <- reproFitTT(dat, stoc.part = "gammapoisson",
+# (3) Run the reproFitTT function with the log-logistic gamma-Poisson model
+out <- reproFitTT(dataset, stoc.part = "gammapoisson",
                   ecx = c(5, 10, 15, 20, 30, 50, 80), quiet = TRUE)
 
 
-# (4) Plot the fitted curve with ggplot style
+# (4) Plot the fitted curve with generic style
 plot(out, xlab = expression("Concentration in" ~ mu~g.L^{-1}),
-     fitcol = "blue", cicol = "blue", style = "ggplot",
+     fitcol = "blue", cicol = "lightblue",
      main = "Log-logistic response to concentration")
 }
 
 }
 \keyword{plot}
-

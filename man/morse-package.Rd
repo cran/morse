@@ -2,41 +2,42 @@
 % Please edit documentation in R/morse.R
 \docType{package}
 \name{morse-package}
-\alias{morse}
 \alias{morse-package}
-\title{MOdelling Tools for Reproduction and Survival Data in Ecotoxicology}
+\alias{morse}
+\title{MOdelling tools for Reproduction and Survival data in Ecotoxicology}
 \description{
 Provides tools for the analysis of survival/reproduction
-bioassay data in quantitative environmental risk assessment. It can be
-used to explore/visualize experimental data, and to perform an estimation
-of \eqn{LC_{x}} (Lethal Concentration for x\% of individuals) or
-\eqn{EC_{x}} (x\% Effect Concentration) values by fitting exposure-response
-curves. The \eqn{LC_{x}}/\eqn{EC_{x}} and parameters of the curve are
+toxicity test data in quantitative environmental risk assessment. It can be
+used to explore/visualize experimental data, and to get estimates
+of \eqn{LC_{x}} (\eqn{X}\% Lethal Concentration) or
+\eqn{EC_{x}} (\eqn{X}\% Effective Concentration) by fitting exposure-response
+curves. The \eqn{LC_{x}}, \eqn{EC_{x}} and parameters of the curve are
 provided along with an indication of the uncertainty of the estimation.
-It can be used to perform an estimation of \eqn{NEC} (No Effect Concentration)
-value by fitting a toxico-kinetic toxico-dynamic model.
+\code{morse} can also be used to get an estimation of the \eqn{NEC} (No Effect Concentration)
+by fitting a Toxico-Kinetic Toxico-Dynamic (TK-TD) model.
 }
 \details{
-Estimation procedures in MORSE can be used without a deep knowledge of
+Estimation procedures in \code{morse} can be used without a deep knowledge of
 their underlying probabilistic model or inference methods. Rather, they
 were designed to behave as well as possible without requiring a user to
-provide values for some obscure parameters. That said, MORSE models can also
+provide values for some obscure parameters. That said, \code{morse} models can also
 be used as a first step to tailor new models for more specific situations.
 
 The package currently handles survival and reproduction data. Functions
 dedicated to survival (resp. reproduction) analysis start with a
-\code{surv} (resp. \code{repro}) prefix. MORSE provides a similar
+\code{surv} (resp. \code{repro}) prefix. \code{morse} provides a similar
 workflow in both cases:
 \enumerate{
 \item create and validate a dataset
 \item explore a dataset
 \item plot a dataset
 \item fit a model on a dataset and output the expected estimates
+\item check goodness of fit with posterior preditive check plot (ppc)
 }
 Those steps are presented in more details in the "Tutorial" vignette, while
 a more formal description of the estimation procedures are provided in the
-vignette called "Models in MORSE package". Please refer to these documents
-for further introduction to the use of MORSE.
+vignette called "Models in \code{morse} package". Please refer to these documents
+for further introduction to the use of \code{morse}.
 
 This reference manual is a detailed description of the functions exposed in
 the package.
@@ -50,32 +51,35 @@ on downloading JAGS, see the home page at
 described in the tutorial vignette.
 
 \tabular{ll}{ Package: \tab morse\cr Type: \tab Package\cr Version: \tab
-2.2.0\cr Date: \tab 2016-03-03\cr License: \tab GPL (>=2)\cr }
-}
-\author{
-Marie Laure Delignette-Muller
-<marielaure.delignettemuller@vetagro-sup.fr>, Philippe Ruiz
-<philippe.ruiz@univ-lyon1.fr>, Sandrine Charles
-<sandrine.charles@univ-lyon1.fr>, Wandrille Duchemin
-<wandrille.duchemin@insa-lyon.fr>, Christelle Lopes
-<christelle.lopes@univ-lyon1.fr>, Guillaume Kon-Kam-king
-<guillaume.kon-kam-king@univ-lyon1.fr>, Philippe Veber
-<philippe.veber@univ-lyon1.fr>
-
-Maintainer: Philippe Ruiz <philippe.ruiz@univ-lyon1.fr>
+3.0.0\cr Date: \tab 2017-09-15\cr License: \tab GPL (>=2)\cr }
 }
 \references{
 Delignette-Muller, M.L., Lopes, C., Veber, P. and Charles, S.
 (2014) \emph{Statistical handling of reproduction data for exposure-response
 modelling}.
-\url{http://dx.doi.org/10.1021/es502009r}.
+\url{http://pubs.acs.org/doi/abs/10.1021/es502009r?journalCode=esthag}.
+
+Forfait-Dubuc, C., Charles, S., Billoir, E. and Delignette-Muller, M.L. (2012)
+\emph{Survival data analyses in ecotoxicology: critical effect concentrations, methods and models. What should we use?}
+\url{https://doi.org/10.1007/s10646-012-0860-0}
 
 Plummer, M. (2013) \emph{JAGS Version 4.0.0 user manual}.
 \url{http://sourceforge.net/projects/mcmc-jags/files/Manuals/4.x/jags_user_manual.pdf/download}.
 }
 \seealso{
 \code{\link[rjags]{rjags}},
-\code{\link[ggplot2]{ggplot}}
+\code{\link[ggplot2]{ggplot2}}
+}
+\author{
+Virgile Baudrot  <virgile.baudrot@posteo.net>,
+Sandrine Charles <sandrine.charles@univ-lyon1.fr>,
+Marie Laure Delignette-Muller <marielaure.delignettemuller@vetagro-sup.fr>,
+Wandrille Duchemin <wandrille.duchemin@insa-lyon.fr>,
+Guillaume Kon-Kam-king <guillaume.kon-kam-king@univ-lyon1.fr>,
+Christelle Lopes <christelle.lopes@univ-lyon1.fr>,
+Philippe Ruiz <philippe.ruiz@univ-lyon1.fr>,
+Philippe Veber <philippe.veber@univ-lyon1.fr>
+
+Maintainer: Philippe Veber <philippe.veber@univ-lyon1.fr>
 }
 \keyword{package}
-

@@ -5,23 +5,23 @@
 \title{Plotting method for \code{reproData} objects}
 \usage{
 \method{plot}{reproData}(x, xlab, ylab = "Cumulated Number of offspring",
-  main = NULL, concentration = NULL, style = "generic",
+  main = NULL, concentration = NULL, style = "ggplot",
   pool.replicate = FALSE, addlegend = FALSE, remove.someLabels = FALSE,
   ...)
 }
 \arguments{
 \item{x}{an object of class \code{reproData}}
 
-\item{xlab}{a title for the \eqn{x}-axis (optional)}
+\item{xlab}{label of the \eqn{X}-axis}
 
-\item{ylab}{a title for the \eqn{y}-axis}
+\item{ylab}{label of the \eqn{Y}-axis, by default \code{Cumulated Number of offspring}}
 
 \item{main}{main title for the plot}
 
 \item{concentration}{a numeric value corresponding to some concentration in
 \code{data}. If \code{concentration = NULL}, draws a plot for each concentration}
 
-\item{style}{graphical backend, can be \code{'generic'} or \code{'ggplot'}}
+\item{style}{graphical backend, can be \code{'ggplot'} or \code{'generic'}}
 
 \item{pool.replicate}{if \code{TRUE}, the datapoints of each replicate are
 summed for a same concentration}
@@ -38,23 +38,24 @@ This is the generic \code{plot} S3 method for the \code{reproData} class.
 It plots the cumulated number of offspring as a function of time.
 }
 \note{
-When \code{style = "ggplot"}, the function calls function
-\code{\link[ggplot2]{ggplot}} and returns an object of class \code{ggplot}
+When \code{style = "generic"}, the function calls the generic function
+\code{\link[graphics]{plot}}
+
+When \code{style = "ggplot"}, the function return an object of class
+ \code{gg} and \code{ggplot}, see function \code{\link[ggplot2]{ggplot}}
 }
 \examples{
-
-library(ggplot2)
-
 # (1) Load the data
 data(cadmium1)
+
+# (2) Create an object of class 'reproData'
 cadmium1 <- reproData(cadmium1)
 
-# (2) Plot the reproduction data
+# (3) Plot the reproduction data
 plot(cadmium1)
 
-# (3) Plot the reproduction data for a fixed concentration
-plot(cadmium1, concentration = 4.36, style = "ggplot")
+# (4) Plot the reproduction data for a fixed concentration
+plot(cadmium1, concentration = 4.36, style = "generic")
 
 }
 \keyword{plot}
-

@@ -4,17 +4,18 @@
 #' plots the predicted values with 95 \% credible intervals versus the observed
 #' values for \code{survFitTT} objects.
 #' 
-#' The coordinates of black points are the observed values of the number of survivor
-#' (poolled replicates) for a given concentration (x-scale) and the corresponding 
-#' predicted values (y-scale). 95 \% prediction intervals are added to each predicted
+#' The coordinates of black points are the observed values of the number of survivors
+#' (pooled replicates) for a given concentration (\eqn{X}-axis) and the corresponding 
+#' predicted values (\eqn{Y}-axis). 95\% prediction intervals are added to each predicted
 #' value, colored in green if this interval contains the observed value and in red
-#' in the other case.
+#' otherwise.
 #' The bisecting line (y = x) is added to the plot in order to see if each
 #' prediction interval contains each observed value. As replicates are shifted
 #' on the x-axis, this line is represented by steps.
 #'
 #' @param x An object of class \code{survFitTT}
-#' @param style Graphical package method: \code{generic} or \code{ggplot}
+#' @param style graphical backend, can be \code{'generic'} or \code{'ggplot'}
+#' @param main main title for the plot
 #' @param \dots Further arguments to be passed to generic methods
 #'
 #' @examples
@@ -39,20 +40,20 @@
 #' @importFrom graphics plot
 #' 
 #' @export
-ppc.survFitTT <- function(x, style = "generic", ...) {
+ppc.survFitTT <- function(x, style = "ggplot", main = NULL, ...) {
   if (!is(x, "survFitTT"))
     stop("x is not of class 'survFitTT'!")
   
-  xlab <- "Observed Nbr. of survivor"
-  ylab <- "Predicted Nbr. of survivor"
+  xlab <- "Observed nb of survivors"
+  ylab <- "Predicted nb of survivors"
   
-  ppc_gen(EvalsurvPpc(x), style, xlab, ylab)
+  ppc_gen(EvalsurvPpc(x), style, xlab, ylab, main)
 }
 
-ppc_gen <- function(tab, style, xlab, ylab) {
+ppc_gen <- function(tab, style, xlab, ylab, main) {
   
-  if (style == "generic") PpcGeneric(tab, xlab, ylab)
-  else if (style == "ggplot") PpcGG(tab, xlab, ylab)
+  if (style == "generic") PpcGeneric(tab, xlab, ylab, main)
+  else if (style == "ggplot") PpcGG(tab, xlab, ylab, main)
   else stop("Unknown style")
 }
 
@@ -99,7 +100,7 @@ EvalsurvPpc <- function(x) {
 }
 
 #' @importFrom graphics abline segments
-PpcGeneric <- function(tab, xlab, ylab) {
+PpcGeneric <- function(tab, xlab, ylab, main) {
   obs_val <- unique(tab[, "Obs"])
   sObs <- stepCalc(obs_val)$sObs
   stepX <- stepCalc(obs_val)$stepX
@@ -111,6 +112,7 @@ PpcGeneric <- function(tab, xlab, ylab) {
        type = "n",
        xlab = xlab,
        ylab = ylab,
+       main = main,
        xaxt = "n",
        yaxt = "n")
   
@@ -146,7 +148,7 @@ PpcGeneric <- function(tab, xlab, ylab) {
 
 #' @import ggplot2
 #' @importFrom  grid arrow unit
-PpcGG <- function(tab, xlab, ylab) {
+PpcGG <- function(tab, xlab, ylab, main) {
   obs_val <- unique(tab[, "Obs"])
   sObs <- stepCalc(obs_val)$sObs
   stepX <- stepCalc(obs_val)$stepX
@@ -174,7 +176,7 @@ PpcGG <- function(tab, xlab, ylab) {
     geom_point(aes(x = jittered_obs, y = P50), tab0) +
     expand_limits(y = 0) +
     expand_limits(x = 0) +
-    labs(x = xlab, y = ylab) +
+    labs(x = xlab, y = ylab, title = main) +
     theme_minimal()
   
   return(gf2)
