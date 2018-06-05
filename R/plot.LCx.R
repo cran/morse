@@ -8,6 +8,7 @@
 #' @param xlab A label for the \eqn{X}-axis, by default \code{Concentration}.
 #' @param ylab A label for the \eqn{Y}-axis, by default \code{Survival rate median and 95 CI}.
 #' @param main A main title for the plot.
+#' @param subtitle A subtitle for the plot
 #' @param \dots Further arguments to be passed to generic methods.
 #'
 #' @keywords plot
@@ -38,7 +39,9 @@
 plot.LCx <- function(x,
                      xlab = "Concentration",
                      ylab = "Survival rate \n median and 95 CI",
-                     main = NULL, ...){
+                     main = NULL,
+                     subtitle = NULL,
+                     ...){
   
   df_dose <- x$df_dose
   df_LCx <- x$df_LCx
@@ -48,7 +51,7 @@ plot.LCx <- function(x,
   
   # Check if df_LCx are not all NA:
   if(all(is.na(df_LCx$LCx))){
-    warning(paste0("No LCx can be computed at X=", X_prop_provided*100, " and time_LCx=", time_LCx, 
+    warning(paste0("No LCx can be computed at X=", 100-X_prop_provided*100, " and time_LCx=", time_LCx, 
                    "\nSee the grey dotted line on the graph does not cross zone of credible interval.",
                    "\nUse LCx function 'LCx' with other values for arguments 'time_LCx' (default is the maximum time of the experimental data),
 and/or other 'X'."))
@@ -64,7 +67,7 @@ and/or other 'X'."))
   
   
   if(is.null(main)){
-    main <- paste("Concentation-response curve: LC", X_prop_provided*100, " at time", time_LCx)
+    main <- paste("Concentation-response curve: LC", 100 - X_prop_provided*100, " at time", time_LCx)
   } 
   
   LCx_plt <- ggplot() + theme_minimal() +
@@ -72,6 +75,7 @@ and/or other 'X'."))
           legend.title = element_blank())+
     scale_y_continuous(limits = c(0,1)) +
     labs(title = main,
+         subtitle = subtitle,
          x = xlab,
          y = ylab) +
     geom_ribbon(data = df_dose,
@@ -89,9 +93,7 @@ and/or other 'X'."))
         
         scale_color_manual(values=c("orange", "black", "black"))
     }
-    
-  LCx_plt 
-  
+
   return(LCx_plt)
   
 }

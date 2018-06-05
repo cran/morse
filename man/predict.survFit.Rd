@@ -5,7 +5,7 @@
 \title{Predict method for \code{survFit} objects}
 \usage{
 \method{predict}{survFit}(object, data_predict = NULL, spaghetti = FALSE,
-  mcmc_size = NULL, ...)
+  mcmc_size = NULL, hb_value = TRUE, ratio_no.NA = 0.95, ...)
 }
 \arguments{
 \item{object}{An object of class \code{survFit}}
@@ -19,6 +19,12 @@ parameters drawn from the posterior distribution.}
 
 \item{mcmc_size}{Can be used to reduce the number of mcmc samples in order to speed up
 the computation.}
+
+\item{hb_value}{If \code{TRUE}, the background mortality \code{hb} is taken into account from the posterior.
+If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}.}
+
+\item{ratio_no.NA}{A numeric between 0 and 1 standing for the proportion of non-NA values
+required to compute quantile. The default is \eqn{0.95}.}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }

@@ -5,8 +5,8 @@
 \title{Plotting method for \code{survFitPredict} objects}
 \usage{
 \method{plot}{survFitPredict}(x, xlab = "Time", ylab = "Survival rate",
-  main = NULL, spaghetti = FALSE, one.plot = FALSE, mcmc_size = NULL,
-  ...)
+  main = NULL, spaghetti = FALSE, one.plot = FALSE, adddata = FALSE,
+  mcmc_size = NULL, ...)
 }
 \arguments{
 \item{x}{An object of class \code{survFitPredict}.}
@@ -17,11 +17,13 @@
 
 \item{main}{A main title for the plot.}
 
-\item{spaghetti}{if \code{TRUE}, draws a set of survival curves using
+\item{spaghetti}{If \code{TRUE}, draws a set of survival curves using
 parameters drawn from the posterior distribution}
 
 \item{one.plot}{if \code{TRUE}, draws all the estimated curves in
 one plot instead of one plot per concentration.}
+
+\item{adddata}{if \code{TRUE}, adds the observed data to the plot}
 
 \item{mcmc_size}{A numerical value refering by default to the size of the mcmc in object \code{survFitPredict}.
 This option is specific to \code{survFitPredict} objects for which computing time may be long.

@@ -5,7 +5,8 @@
 \title{Plotting method for \code{LCx} objects}
 \usage{
 \method{plot}{LCx}(x, xlab = "Concentration",
-  ylab = "Survival rate \\n median and 95 CI", main = NULL, ...)
+  ylab = "Survival rate \\n median and 95 CI", main = NULL,
+  subtitle = NULL, ...)
 }
 \arguments{
 \item{x}{An object of class \code{LCx}.}
@@ -15,6 +16,8 @@
 \item{ylab}{A label for the \eqn{Y}-axis, by default \code{Survival rate median and 95 CI}.}
 
 \item{main}{A main title for the plot.}
+
+\item{subtitle}{A subtitle for the plot}
 
 \item{\dots}{Further arguments to be passed to generic methods.}
 }

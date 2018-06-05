@@ -14,3 +14,6 @@ LCx(object, ...)
 \description{
 Predict median and 95\% credible interval of the x\% Lethal Concentration.
 }
+\details{
+When class of \code{object} is \code{survFit}, see \link[=LCx.survFit]{LCx.survFit}.
+}

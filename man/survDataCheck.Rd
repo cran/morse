@@ -24,7 +24,7 @@ Here is the list of possible error \code{id}s with their meaning:
 \code{NsurvInteger} \tab column \code{Nsurv} contains a value of class other than \code{integer} \cr
 \code{tablePositive} \tab some data are negative \cr
 \code{Nsurv0T0} \tab \code{Nsurv} is 0 at time 0 for some (concentration, replicate) \cr
-\code{duplicateID} \tab there are two identical (\code{replicate}, \code{conc}, \code{time}) triplets \cr
+\code{duplicateID} \tab there are two identical (\code{replicate}, \code{time}) couples \cr
 \code{NsurvIncrease} \tab \code{Nsurv} increases at some time point of some (concentration, replicate) \cr
 \code{maxTimeDiffer} \tab maximum time for concentration is lower than maximum time for survival \cr
 }
