@@ -1,11 +1,11 @@
-b7cee72c245af2303455647f02f6418d *DESCRIPTION
+9210394848056aecb1c123fa9200fe90 *DESCRIPTION
 70774aea1597fa74e70a375b58d5b93e *NAMESPACE
-7d9015294636f664c5ae181fa63be250 *NEWS
+13f6057725182bfa15afd48128234e53 *NEWS
 4b0b2f8e744668568db3ac71a470766f *R/JAGS_models.R
 313ee9246f73fe455c69e65715bc371b *R/LCx.R
 d7cd1af7e684b964e98141ac8c2a3bea *R/LCx.survFit.R
 fdceabff3f3bd5d9a417f003390be0d0 *R/MFx.R
-011d2b22b4110d7a1383af5c782be93c *R/MFx.survFit.R
+2b4d3371b30e63c7211a78774d8c8047 *R/MFx.survFit.R
 5cdeeca1c404921dd5d1bb609ef2c86b *R/modelData.R
 195eb18901f5200d3b2fc533652ec046 *R/modelData.survDataCstExp.R
 ead10e6a195acbd39179ceba5348368d *R/modelData.survDataVarExp.R
@@ -13,7 +13,7 @@ aad41864fd519790edc8a3f3c49a4ebd *R/morse-internal.R
 7a6523ba1994240cfd3b30dd0cf2f4ea *R/morse.R
 5a8a99fc51d01dd7391ac3bda88bfa32 *R/msgTable.R
 f91c9dd023c312eba5dacf209d2b1ad4 *R/plot.LCx.R
-4e8031615b2e6073df38cd4881f7772d *R/plot.MFx.R
+ce8e435e9361a9c23079696bb4f94bfb *R/plot.MFx.R
 9e9c8155e4cefb97aaff4251881c6b03 *R/plot.reproData.R
 25179784c0f21793fcc81d9af4472725 *R/plot.reproFitTT.R
 020dc40b2f2dfc5e00a5b5a8936b244c *R/plot.survDataCstExp.R
@@ -69,10 +69,10 @@ ae515b235fa82863eabb48506a666350 *data/copper.rda
 6fc6158100f9f8d68c10fcead6ccb042 *data/propiconazole_pulse_exposure.rda
 5fca286f306edf09f4423ff739993405 *data/zinc.rda
 b3a155f2ca1d3dd4d2ca570fd4ef80f1 *inst/doc/modelling.Snw
-da8822ae554c85c5889474ff96d73977 *inst/doc/modelling.pdf
+9308e6b51a368a545d7d866903b17582 *inst/doc/modelling.pdf
 fc206e20555c7da5806ad287f6d8bf79 *inst/doc/tutorial.R
-d4357967eaa90ceb0f5f3620c59e5dba *inst/doc/tutorial.Rmd
-3e72d5fb9ac4414fede8442d4bb6dbdf *inst/doc/tutorial.html
+b0ecae418f10b5550eab243d84dc414c *inst/doc/tutorial.Rmd
+524271b7f3c10a1808dd524e9de4d9d9 *inst/doc/tutorial.html
 217a982646a122c234069e97221d1782 *man/LCx.Rd
 ebb7aac1e1a1b99cdb924305470b0a65 *man/LCx.survFit.Rd
 54a0e755e46223030f3b4fad4199858d *man/MFx.Rd
@@ -144,4 +144,4 @@ e3b80edb098685200770d2680e9478f1 *tests/testthat/test-repro.R
 306aa7ccdbcae153612cdacbc540bbc6 *tests/testthat/test-surv.R
 c377c25900ea22078e38c5345054269b *tests/testthat/test-survFit.R
 b3a155f2ca1d3dd4d2ca570fd4ef80f1 *vignettes/modelling.Snw
-d4357967eaa90ceb0f5f3620c59e5dba *vignettes/tutorial.Rmd
+b0ecae418f10b5550eab243d84dc414c *vignettes/tutorial.Rmd
