@@ -6,7 +6,7 @@
 \usage{
 \method{plot}{survFitVarExp}(x, xlab = "Time", ylab = "Survival rate",
   main = NULL, spaghetti = FALSE, one.plot = FALSE, adddata = TRUE,
-  mcmc_size = NULL, ...)
+  mcmc_size = NULL, scales = "fixed", addConfInt = TRUE, ...)
 }
 \arguments{
 \item{x}{An object of class \code{survFit}.}
@@ -30,6 +30,12 @@ with (frequentist binomial) confidence intervals.}
 This option is specific to \code{survFitVarExp} objects for which computing time may be long.
 \code{mcmc_size} can be used to reduce the number of mcmc samples in order to speed up
 the computation.}
+
+\item{scales}{Shape the scale of axis. Default is \code{"fixed"}, but can be \code{"free"}, or free
+in only one dimension \code{"free_x"}, \code{"free_y"}. (See \code{ggplot2} documentation
+ for more details.)}
+
+\item{addConfInt}{If \code{TRUE}, add a \eqn{95\%} confidence interval on observed data from a binomial test}
 
 \item{\dots}{Further arguments to be passed to generic methods.}
 }

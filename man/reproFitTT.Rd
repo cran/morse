@@ -4,8 +4,8 @@
 \alias{reproFitTT}
 \title{Fits a Bayesian concentration-effect model for target-time reproduction analysis}
 \usage{
-reproFitTT(data, stoc.part = "bestfit", target.time = NULL, ecx = c(5, 10,
-  20, 50), n.chains = 3, quiet = FALSE)
+reproFitTT(data, stoc.part = "bestfit", target.time = NULL,
+  ecx = c(5, 10, 20, 50), n.chains = 3, quiet = FALSE)
 }
 \arguments{
 \item{data}{an object of class \code{reproData}}

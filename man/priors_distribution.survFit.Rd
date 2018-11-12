@@ -4,13 +4,17 @@
 \alias{priors_distribution.survFit}
 \title{Density distribution of priors from a \code{survFit} object.}
 \usage{
-\method{priors_distribution}{survFit}(object, size_sample = 1000, ...)
+\method{priors_distribution}{survFit}(object, size_sample = 1000,
+  EFSA_name = FALSE, ...)
 }
 \arguments{
 \item{object}{An object of class \code{survFit}.}
 
 \item{size_sample}{Size of the random generation of the distribution.
 Default is \code{1e3}.}
+
+\item{EFSA_name}{If \code{TRUE}, replace actual terminology by
+the one used in EFSA PPR Scientific Opinion.}
 
 \item{\dots}{Further arguments to be passed to generic methods.}
 }

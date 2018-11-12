@@ -6,8 +6,8 @@
 \usage{
 \method{plot}{reproData}(x, xlab, ylab = "Cumulated Number of offspring",
   main = NULL, concentration = NULL, style = "ggplot",
-  pool.replicate = FALSE, addlegend = FALSE, remove.someLabels = FALSE,
-  ...)
+  pool.replicate = FALSE, addlegend = FALSE,
+  remove.someLabels = FALSE, ...)
 }
 \arguments{
 \item{x}{an object of class \code{reproData}}

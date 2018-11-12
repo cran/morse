@@ -4,12 +4,16 @@
 \alias{summary.survFit}
 \title{Summary of \code{survFit} object}
 \usage{
-\method{summary}{survFit}(object, quiet = FALSE, ...)
+\method{summary}{survFit}(object, quiet = FALSE, EFSA_name = FALSE,
+  ...)
 }
 \arguments{
-\item{object}{an object of class \code{survFit}}
+\item{object}{An object of class \code{survFit}.}
 
-\item{quiet}{when \code{TRUE}, does not print}
+\item{quiet}{When \code{TRUE}, does not print.}
+
+\item{EFSA_name}{If \code{TRUE}, replace actual terminology by
+the one used in EFSA PPR Scientific Opinion.}
 
 \item{\dots}{Further arguments to be passed to generic methods.}
 }

@@ -109,9 +109,12 @@ predict.survFit <- function(object,
   
   mctot = do.call("rbind", mcmc.samples)
   kd = 10^mctot[, "kd_log10"]
-  
+
   if(hb_value == TRUE){
-    hb <- 10^mctot[, "hb_log10"]
+    # "hb" is not in survFit object of morse <v3.2.0
+    if("hb" %in% colnames(mctot)){
+      hb <- mctot[, "hb"]  
+    } else{ hb <- 10^mctot[, "hb_log10"] }
   } else if(hb_value == FALSE){
     hb <- rep(0, nrow(mctot))
   }
@@ -138,35 +141,32 @@ predict.survFit <- function(object,
     beta <- 10^mctot[, "beta_log10"]
     
     dtheo = lapply(k, function(kit) { # For each replicate
-      Surv.IT_Cext (Cw = ls_conc[[kit]],
+      Surv.IT_Cext(Cw = ls_conc[[kit]],
                     time = ls_time[[kit]],
                     kd = kd,
                     hb = hb,
                     alpha = alpha,
                     beta = beta)
     })
-    
   }
   
   # Transpose
   dtheo <- do.call("rbind", lapply(dtheo, t))
-  
   # replace NA by 0
-  #dtheo[is.na(dtheo)] <- 0
+  if(any(is.na(dtheo))){
+    stop("There is NA produced. \n You should try the function 'predict_ode()' which is much more robust but longer to compute.")
+  }
   
   df_quantile = dplyr::data_frame(
     time = df$time,
     conc = df$conc,
     replicate = df$replicate,
-    # q50 = apply(dtheo, 1, quantile, probs = 0.5, na.rm = TRUE),
-    # qinf95 = apply(dtheo, 1, quantile, probs = 0.025, na.rm = TRUE),
-    # qsup95 = apply(dtheo, 1, quantile, probs = 0.975, na.rm = TRUE)
-    # q50 = apply(dtheo, 1, quantile, probs = 0.5, na.rm = FALSE),
-    # qinf95 = apply(dtheo, 1, quantile, probs = 0.025, na.rm = FALSE),
-    # qsup95 = apply(dtheo, 1, quantile, probs = 0.975, na.rm = FALSE)
-    q50 = apply(dtheo, 1, quantile_fun, probs = 0.5, ratio_no.NA = ratio_no.NA),
-    qinf95 = apply(dtheo, 1, quantile_fun, probs = 0.025, ratio_no.NA = ratio_no.NA),
-    qsup95 = apply(dtheo, 1, quantile_fun, probs = 0.975, ratio_no.NA = ratio_no.NA)
+    q50 = apply(dtheo, 1, quantile, probs = 0.5, na.rm = TRUE),
+    qinf95 = apply(dtheo, 1, quantile, probs = 0.025, na.rm = TRUE),
+    qsup95 = apply(dtheo, 1, quantile, probs = 0.975, na.rm = TRUE)
+    # q50 = apply(dtheo, 1, quantile_fun, probs = 0.5, ratio_no.NA = ratio_no.NA),
+    # qinf95 = apply(dtheo, 1, quantile_fun, probs = 0.025, ratio_no.NA = ratio_no.NA),
+    # qsup95 = apply(dtheo, 1, quantile_fun, probs = 0.975, ratio_no.NA = ratio_no.NA)
   )
   
   if(spaghetti == TRUE){
@@ -180,7 +180,7 @@ predict.survFit <- function(object,
   
   return_object <- list(df_quantile = df_quantile,
                         df_spaghetti = df_spaghetti)
-    
+  
   class(return_object) <- c(class(return_object), "survFitPredict")
 
   return(return_object)
@@ -190,14 +190,16 @@ predict.survFit <- function(object,
 # Function quantile design to return NA when the number of X is too low
 #
 quantile_fun <- function(x, probs = 0.50, ratio_no.NA = 0.95){
-  if ((length(x) - sum(is.na(x))) < ratio_no.NA*length(x)){
-    return(NA)
+  if (sum(is.na(x)) >=1){
+    warning("There is NA produced.
+            You should try the function 'predict_ode()' which is much more robust but longer to compute.")
+    #return(NA)
   } else {
     return(quantile(x, probs = probs, na.rm = TRUE))
   }
 }
 
-# Survival function for "IT" model with external concentration changing with time
+# Survival function for "SD" model with external concentration changing with time
 #
 # @param Cw A scalar of external concentration
 # @param time A vector of time
@@ -213,7 +215,11 @@ quantile_fun <- function(x, probs = 0.50, ratio_no.NA = 0.95){
 Surv.SD_Cext <- function(Cw, time, kk, kd, z, hb){
   
   time.prec = dplyr::lag(time, 1) ; time.prec[1] = time[1] #   time[1] = tprec[1]
-  diff.int = (exp(time %*% t(kd)) * Cw + exp(time.prec %*% t(kd)) * Cw )/2 * (time-time.prec) #OK time[1]-tprec[1] = 0
+  
+  # Using log transfomration: log(a+b) = log(a) + log(1+b/a) may prevent the numerical issues raised by exponential
+  diff.int = (exp(time %*% t(kd)) + exp(time.prec %*% t(kd)) )*Cw/2 * (time-time.prec) #OK time[1]-tprec[1] = 0
+  #log_diff.int = time %*% t(kd) + log(1 + exp((time.prec - time) %*% t(kd)))
+  #diff.int = exp(log_diff.int) * Cw / 2 * (time - time.prec)
   
   D = kd * exp(-kd %*% t(time)) * t(apply(diff.int, 2, cumsum))
   
@@ -244,7 +250,11 @@ Surv.SD_Cext <- function(Cw, time, kk, kd, z, hb){
 Surv.IT_Cext <- function(Cw, time, kd, hb, alpha, beta){
   
   time.prec = dplyr::lag(time, 1) ; time.prec[1] = time[1] #   time[1] = tprec[1]
+  
+  # Using the log transfomration: log(a+b) = log(a) + log(1+b/a) may prevent the numerical issue by exponential
   diff.int = (exp(time %*% t(kd)) * Cw + exp(time.prec %*% t(kd)) * Cw )/2 * (time-time.prec) #OK time[1]-tprec[1] = 0
+  #log_diff.int = time %*% t(kd) + log(1 + exp((time.prec - time) %*% t(kd)))
+  #diff.int = exp(log_diff.int) * Cw / 2 * (time-time.prec)
   
   D <- kd * exp(-kd %*% t(time)) * t(apply(diff.int,2,cumsum))
   
@@ -284,3 +294,5 @@ predict_interpolate <- function(x, extend_time = 100){
   
   return(x_interpolate)
 }
+
+

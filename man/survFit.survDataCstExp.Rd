@@ -4,10 +4,10 @@
 \alias{survFit.survDataCstExp}
 \title{Fits a TKTD model for survival analysis using Bayesian inference for \code{survDataCstExp} object}
 \usage{
-\method{survFit}{survDataCstExp}(data, model_type = NULL, quiet = FALSE,
-  n.chains = 3, n.adapt = 3000, n.iter = NULL, n.warmup = NULL,
-  thin.interval = NULL, limit.sampling = TRUE, dic.compute = FALSE,
-  dic.type = "pD", ...)
+\method{survFit}{survDataCstExp}(data, model_type = NULL,
+  quiet = FALSE, n.chains = 3, n.adapt = 3000, n.iter = NULL,
+  n.warmup = NULL, thin.interval = NULL, limit.sampling = TRUE,
+  dic.compute = FALSE, dic.type = "pD", hb_value = TRUE, ...)
 }
 \arguments{
 \item{data}{An object of class \code{survDataCstExp}.}
@@ -38,6 +38,9 @@ the Deviance Information Criterion (DIC) with the \code{rjags} package}
 
 \item{dic.type}{type of penalty to use. A string identifying the type of penalty: \code{pD} or \code{popt}
 (see function \code{\link[rjags]{dic.samples}})}
+
+\item{hb_value}{If \code{TRUE}, the background mortality \code{hb} is taken into account.
+If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}.}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }

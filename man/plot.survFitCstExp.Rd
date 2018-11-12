@@ -6,7 +6,7 @@
 \usage{
 \method{plot}{survFitCstExp}(x, xlab = "Time", ylab = "Survival rate",
   main = NULL, concentration = NULL, spaghetti = FALSE,
-  one.plot = FALSE, adddata = FALSE, addlegend = FALSE,
+  one.plot = FALSE, adddata = TRUE, addlegend = FALSE,
   style = "ggplot", ...)
 }
 \arguments{
