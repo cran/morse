@@ -29,7 +29,7 @@ containing data from a reproduction toxicity assay meets the expectations
 of the function \code{\link{reproData}}.
 }
 \details{
-Since in morse' reproduction datasets are a special case of survival datasets,
+Since in morse' reproduction data sets are a special case of survival data sets,
 \code{reproDataCheck} performs the same verifications than
 \code{\link{survDataCheck}} plus additional ones that are specific to
 reproduction data.
@@ -47,7 +47,7 @@ function returns an empty dataframe.
 data(copper)
 reproDataCheck(copper)
 
-# Now we insert an error in the dataset, by setting a non-zero number of
+# Now we insert an error in the data set, by setting a non-zero number of
 # offspring at some time, although there is no surviving individual in the
 # replicate from the previous time point.
 copper[148, "Nrepro"] <- as.integer(1)

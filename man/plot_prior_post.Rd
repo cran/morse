@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_prior_post.R
 \name{plot_prior_post}
 \alias{plot_prior_post}
-\title{Plot posteriors vs priors}
+\title{Generic method to plot priors and posteriors.}
 \usage{
 plot_prior_post(x, ...)
 }
@@ -12,5 +12,5 @@ plot_prior_post(x, ...)
 \item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
-Plot posteriors vs priors of a \code{survFit} object
+Plot priors and posteriors of a \code{survFit} object
 }

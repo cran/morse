@@ -2,7 +2,7 @@
 % Please edit documentation in R/survData.R
 \name{survData_join}
 \alias{survData_join}
-\title{Joins a concentration with a survival dataset into an argument for 'survData'
+\title{Joins a concentration with a survival data set into an argument for 'survData'
 when the concentration varies over time}
 \usage{
 survData_join(x, y)
@@ -30,13 +30,13 @@ identification
 a dataframe suitable for `survData`
 }
 \description{
-This function joins two datasets, one for exposure measurements, the other
+This function joins two data sets, one for exposure measurements, the other
 for survival measurements, into a single dataframe that can be used
 with the \code{survData} function.
 }
 \examples{
 
-# (1) Load the two survival datasets
+# (1) Load the two survival data sets
 data(propiconazole_pulse_exposure)
 exposure <- propiconazole_pulse_exposure[,c("replicate", "time", "conc")]
 survival <- propiconazole_pulse_exposure[,c("replicate", "time", "Nsurv")]

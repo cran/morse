@@ -2,15 +2,15 @@
 % Please edit documentation in R/modelData.survDataCstExp.R
 \name{modelData.survDataCstExp}
 \alias{modelData.survDataCstExp}
-\title{Create a dataset to analyse a \code{survDataCstExp} object}
+\title{Create a data set to analyse a \code{survDataCstExp} object.}
 \usage{
 \method{modelData}{survDataCstExp}(x, model_type = NULL)
 }
 \arguments{
 \item{x}{An object of class \code{survData}}
 
-\item{model_type}{TK-TD GUTS model type ('SD' or 'IT')}
+\item{model_type}{TKTD GUTS model type ('SD' or 'IT')}
 }
 \description{
-Create a dataset to analyse a \code{survDataCstExp} object
+Create a data set to analyse a \code{survDataCstExp} object.
 }

@@ -3,7 +3,7 @@
 \docType{data}
 \name{propiconazole_pulse_exposure}
 \alias{propiconazole_pulse_exposure}
-\title{Survival dataset for \emph{Gammarus pulex} exposed to propiconazole
+\title{Survival data set for \emph{Gammarus pulex} exposed to propiconazole
 during 10 days with time-variable
 exposure concentration (non-standard pulsed toxicity experiments)}
 \format{A data frame with 74 observations on the following four variables:
@@ -20,7 +20,7 @@ replicate.}}}
 data(propiconazole_pulse_exposure)
 }
 \description{
-Survival dataset of laboratory toxicity tests with \emph{Gammarus pulex}
+Survival data set of laboratory toxicity tests with \emph{Gammarus pulex}
 freshwater invertebrates exposed to several profiles of concentrations
 (time-variable concentration for each time series)
 of one fungicide (propiconazole) during 10 days.
@@ -31,4 +31,5 @@ modelling of survival of \emph{Gammarus pulex} in multiple pulse exposures to
 propiconazole: model assumptions, calibration data requirements and predictive
 power, \emph{Ecotoxicology}, (21), 1828-1840.
 }
-\keyword{dataset}
+\keyword{data}
+\keyword{set}

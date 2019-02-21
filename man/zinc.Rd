@@ -3,7 +3,7 @@
 \docType{data}
 \name{zinc}
 \alias{zinc}
-\title{Reproduction and survival datasets for \emph{Daphnia magna} exposed to zinc
+\title{Reproduction and survival data sets for \emph{Daphnia magna} exposed to zinc
 during 21 days}
 \format{A data frame with 180 observations on the following five variables:
 \describe{ \item{\code{replicate}}{A vector of class \code{numeric} with the
@@ -20,7 +20,7 @@ replicate.} }}
 data(zinc)
 }
 \description{
-Reproduction and survival datasets of a chronic laboratory toxicity tests with
+Reproduction and survival data sets of a chronic laboratory toxicity tests with
 \emph{Daphnia magna} freshwater invertebrate exposed to four concentrations
 of zinc during 21 days. Four concentrations were
 tested with three replicates per concentration. Each replicate contained 20
@@ -31,4 +31,5 @@ Billoir, E.,Delignette-Muller, M.L., Pery, A.R.R. and
 Charles S. (2008) A Bayesian Approach to Analyzing Ecotoxicological Data,
 \emph{Environmental Science & Technology}, 42 (23), 8978-8984.
 }
-\keyword{dataset}
+\keyword{data}
+\keyword{set}

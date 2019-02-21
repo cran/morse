@@ -3,7 +3,7 @@
 \docType{data}
 \name{cadmium2}
 \alias{cadmium2}
-\title{Reproduction and survival datasets for \emph{Lymnaea stagnalis} exposed to cadmium during 28
+\title{Reproduction and survival data sets for \emph{Lymnaea stagnalis} exposed to cadmium during 28
 days}
 \format{A data frame with 612 observations of the following five variables:
 \describe{ \item{\code{replicate}}{A vector of class \code{numeric} with the
@@ -20,7 +20,7 @@ replicate.} }}
 data(cadmium2)
 }
 \description{
-Reproduction and survival datasets of chronic laboratory toxicity tests with
+Reproduction and survival data sets of chronic laboratory toxicity tests with
 snails (\emph{Lymnaea stagnalis}) exposed to six concentrations of cadmium
 during 28 days. Six concentrations were tested, with six replicates per
 concentration. Each replicate contained five organisms. Reproduction and
@@ -44,4 +44,5 @@ Thome, J.P., Tobor Kaplon, M., Weltje, L., Lagadic, L. (2016)
 Optimizing the design of a reproduction toxicity test with the pond snail Lymnaea stagnalis,
 \emph{Regulatory Toxicology and Pharmacology}, vol. 81 pp.47-56.
 }
-\keyword{dataset}
+\keyword{data}
+\keyword{set}

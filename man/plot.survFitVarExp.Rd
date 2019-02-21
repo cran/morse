@@ -23,8 +23,7 @@ parameters drawn from the posterior distribution}
 \item{one.plot}{if \code{TRUE}, draws all the estimated curves in
 one plot instead of one plot per concentration.}
 
-\item{adddata}{if \code{TRUE}, adds the observed data to the plot
-with (frequentist binomial) confidence intervals.}
+\item{adddata}{if \code{TRUE}, adds the observed data to the plot.}
 
 \item{mcmc_size}{A numerical value refering by default to the size of the mcmc in object \code{survFit}.
 This option is specific to \code{survFitVarExp} objects for which computing time may be long.
@@ -42,11 +41,11 @@ in only one dimension \code{"free_x"}, \code{"free_y"}. (See \code{ggplot2} docu
 \description{
 This is the generic \code{plot} S3 method for the
 \code{survFit}.  It plots the fit obtained for each
-concentration of chemical compound in the original dataset.
+concentration profile in the original dataset.
 }
 \details{
 The fitted curves represent the \strong{estimated survival rate} as a function
-of time for each concentration.
+of time for each concentration profile.
 The black dots depict the \strong{observed survival
 rate} at each time point. Note that since our model does not take
 inter-replicate variability into consideration, replicates are systematically

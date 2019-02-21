@@ -8,16 +8,21 @@
   EFSA_name = FALSE, ...)
 }
 \arguments{
-\item{x}{an object used to select a method \code{plot_prior_post}}
+\item{x}{an object of class \code{survFit} used to select a method \code{plot_prior_post}}
 
 \item{size_sample}{Size of the random generation of the distribution.
 Default is \code{1e3}.}
 
-\item{EFSA_name}{If \code{TRUE}, replace actual terminology by
-the one used in EFSA PPR Scientific Opinion.}
+\item{EFSA_name}{If \code{TRUE}, replace the current terminology by
+the one used in the recent EFSA PPR Scientific Opinion (2018).}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
 Plot posteriors vs priors of a \code{survFit} object
+}
+\references{
+EFSA PPR Scientific Opinion (2018)
+\emph{Scientific Opinion on the state of the art of Toxicokinetic/Toxicodynamic (TKTD) effect models for regulatory risk assessment of pesticides for aquatic organisms}
+\url{https://www.efsa.europa.eu/en/efsajournal/pub/5377}
 }

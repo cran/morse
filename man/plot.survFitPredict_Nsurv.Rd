@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.survFitPredict_Nsurv.R
 \name{plot.survFitPredict_Nsurv}
 \alias{plot.survFitPredict_Nsurv}
-\title{Plotting method for \code{survFitPredict_Nsurv} objects}
+\title{Plotting method for \code{survFitPredict_Nsurv} objects.}
 \usage{
 \method{plot}{survFitPredict_Nsurv}(x, xlab = "Time",
   ylab = "Number of survivors", main = NULL, spaghetti = FALSE,
@@ -32,16 +32,14 @@ the computation.}
 }
 \description{
 This is the generic \code{plot} S3 method for the
-\code{survFitPredict_Nsurv}.  It plots the fit obtained for each
-concentration of chemical compound in the provided dataset.
+\code{survFitPredict_Nsurv}.  It plots the predicted survival rate for each
+concentration of the chemical compound in the provided dataset.
 }
 \details{
-The fitted curves represent the \strong{estimated survival rate} as a function
+The fitted curves represent the \strong{predicted survival rate} as a function
 of time for each concentration.
-The black dots depict the \strong{observed survival
-rate} at each time point.
-The function plots both 95\% binomial credible intervals for the estimated survival
-rate.
+The function plots both the 95\% credible band and the predicted survival
+rate over time.
 If \code{spaghetti = TRUE}, the credible intervals are represented by two
 dotted lines limiting the credible band, and a spaghetti plot is added to this band.
 This spaghetti plot consists of the representation of simulated curves using parameter values

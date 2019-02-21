@@ -2,7 +2,7 @@
 % Please edit documentation in R/modelData.R
 \name{modelData}
 \alias{modelData}
-\title{Create a list giving data to use in Bayesian modelling}
+\title{Create a list giving data to use in Bayesian inference.}
 \usage{
 modelData(x, ...)
 }
@@ -12,8 +12,8 @@ modelData(x, ...)
 \item{\dots}{Further arguments to be passed to generic methods}
 }
 \value{
-A list for parameterization of priors for Bayesian modelling
+A list for parameterization of priors for Bayesian inference.
 }
 \description{
-Create a list giving data to use in Bayesian modelling
+Create a list giving data to use in Bayesian inference.
 }

@@ -12,7 +12,7 @@ priors_distribution(object, ...)
 \item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
-Return a \code{data.frame} with priors density distribution of parameters used in
+Return a \code{data.frame} with prior density distributions of parameters used in
 \code{object}.
 }
 \details{

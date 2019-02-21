@@ -24,7 +24,7 @@ data(propiconazole_pulse_exposure)
 dataset <- survData(propiconazole_pulse_exposure)
 
 \dontrun{
-# (3) Run the survFit function with TK-TD model 'SD' or 'IT' 
+# (3) Run the survFit function with TKTD model 'SD' or 'IT' 
 out <- survFit(dataset, model_type="SD")
 
 # (4) Print the survFit object

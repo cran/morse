@@ -59,7 +59,7 @@ distribution}
 for the MCMC computation}
 \item{mcmcInfo}{a table with the number of iterations, chains, adaptation, warmup and the thinning interval.} 
 \item{jags.data}{a list of the data passed to the JAGS model}
-\item{model_type}{the type of TK-TD model used: \code{SD} or \code{IT}}
+\item{model_type}{the type of TKTD model used: \code{SD} or \code{IT}}
 }
 \description{
 This function estimates the parameters of a TKTD model ('SD' or 'IT')
@@ -69,9 +69,9 @@ concentration with a mechanistic description of the effects on survival over
 time.
 }
 \details{
-The function \code{survFit} return the parameter estimates of Toxicokinetic-toxicodynamic (TK-TD) models
+The function \code{survFit} return the parameter estimates of Toxicokinetic-toxicodynamic (TKTD) models
 \code{SD} for 'Stochastic Death' or \code{IT} fo 'Individual Tolerance'.
-TK-TD models, and particularly the General Unified Threshold model of
+TKTD models, and particularly the General Unified Threshold model of
 Survival (GUTS), provide a consistent process-based
 framework to analyse both time and concentration dependent datasets.
 In GUTS-SD, all organisms are assumed to have the same internal concentration 
@@ -89,7 +89,7 @@ data(propiconazole)
 dataset  <- survData(propiconazole)
 
 \dontrun{
-# (3) Run the survFit function with TK-TD model 'SD' or 'IT' 
+# (3) Run the survFit function with TKTD model 'SD' or 'IT' 
 out <- survFit(dataset , model_type = "SD")
 
 # (4) Summarize look the estimated parameters

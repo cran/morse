@@ -12,6 +12,6 @@ predict_Nsurv(object, ...)
 \item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
-It provides simulation for "SD" or "IT" models under
+It provides the simulated number of survivors for "SD" or "IT" models under
 constant or time-variable exposure.
 }

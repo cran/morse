@@ -3,7 +3,7 @@
 \docType{data}
 \name{chlordan}
 \alias{chlordan}
-\title{Reproduction and survival datasets for \emph{Daphnia magna} exposed to
+\title{Reproduction and survival data sets for \emph{Daphnia magna} exposed to
 chlordan during 21 days}
 \format{A data frame with 1320 observations of the following five variables:
 \describe{ \item{\code{replicate}}{A vector of class \code{numeric} with
@@ -20,7 +20,7 @@ replicate.} }}
 data(chlordan)
 }
 \description{
-Reproduction and survival datasets of chronic laboratory toxicity tests with
+Reproduction and survival data sets of chronic laboratory toxicity tests with
 \emph{Daphnia magna} freshwater invertebrate exposed to six concentrations
 of one organochlorine insecticide (chlordan) during 21 days. Six concentrations were
 tested, with 10 replicates per concentration. Each replicate contained one
@@ -31,4 +31,5 @@ Manar, R., Bessi, H. and Vasseur, P. (2009) Reproductive effects
 and bioaccumulation of chlordan in Daphnia magna, \emph{Environmental
 Toxicology and Chemistry}, 28, 2150-2159.
 }
-\keyword{dataset}
+\keyword{data}
+\keyword{set}

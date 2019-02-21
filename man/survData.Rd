@@ -2,7 +2,7 @@
 % Please edit documentation in R/survData.R
 \name{survData}
 \alias{survData}
-\title{Creates a dataset for survival analysis}
+\title{Creates a data set for survival analysis}
 \usage{
 survData(x)
 }
@@ -30,7 +30,7 @@ can then be used for plotting and model fitting. It can also be used
 to generate \emph{individual-time} estimates.
 }
 \details{
-Survival datasets can be under either constant or time-variable exposure profile. The
+Survival data sets can be under either constant or time-variable exposure profile. The
 resulting object, in addition to its \code{survData} class, inherits the
 class \code{survDataCstExp} or \code{survDataVarExp} respectively.
 
@@ -39,7 +39,7 @@ toxicity test. Each line of the \code{data.frame}
 corresponds to one experimental measurement, that is a number of alive
 individuals at a given concentration at a given time point and in a given replicate.
  Note that either the concentration
-or the number of alive individuals may be missing. The dataset is inferred
+or the number of alive individuals may be missing. The data set is inferred
 to be under constant exposure if the concentration is constant for each
 replicate and systematically available. The function \code{survData} fails if
 \code{x} does not meet the
@@ -48,7 +48,7 @@ expected requirements. Please run \code{\link{survDataCheck}} to ensure
 }
 \examples{
 
-# (1) Load the survival dataset
+# (1) Load the survival data set
 data(zinc)
 
 # (2) Create an objet of class 'survData'

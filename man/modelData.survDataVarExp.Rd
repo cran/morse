@@ -2,7 +2,7 @@
 % Please edit documentation in R/modelData.survDataVarExp.R
 \name{modelData.survDataVarExp}
 \alias{modelData.survDataVarExp}
-\title{Create a dataset to analyse a \code{survDataVarExp} object}
+\title{Create a data set to analyse a \code{survDataVarExp} object.}
 \usage{
 \method{modelData}{survDataVarExp}(x, model_type = NULL,
   extend_time = 100, ...)
@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{An object of class \code{survData}}
 
-\item{model_type}{TK-TD GUTS model type ('SD' or 'IT')}
+\item{model_type}{TKTD GUTS model type ('SD' or 'IT')}
 
 \item{extend_time}{Number of for each replicate used for linear 
 interpolation (comprise between time to compute and fitting accuracy)}
@@ -18,5 +18,5 @@ interpolation (comprise between time to compute and fitting accuracy)}
 \item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
-Create a dataset to analyse a \code{survDataVarExp} object
+Create a data set to analyse a \code{survDataVarExp} object.
 }

@@ -3,7 +3,7 @@
 \docType{data}
 \name{propiconazole}
 \alias{propiconazole}
-\title{Survival dataset for \emph{Gammarus pulex} exposed to propiconazole
+\title{Survival data set for \emph{Gammarus pulex} exposed to propiconazole
 during four days}
 \format{A dataframe with 75 observations on the following four variables:
 \describe{ \item{\code{replicate}}{A vector of class \code{factor} with the
@@ -19,7 +19,7 @@ replicate.}}}
 data(propiconazole)
 }
 \description{
-Survival dataset of chronic laboratory toxicity tests with
+Survival data set of chronic laboratory toxicity tests with
 \emph{Gammarus pulex} freshwater invertebrate exposed to eight concentrations
 of one fungicide (propiconazole) during four days. Eight
 concentrations were tested with two replicates of 10 organisms per concentration.
@@ -31,4 +31,5 @@ modelling of survival of \emph{Gammarus pulex} in multiple pulse exposures to
 propiconazole: model assumptions, calibration data requirements and predictive
 power, \emph{Ecotoxicology}, (21), 1828-1840.
 }
-\keyword{dataset}
+\keyword{data}
+\keyword{set}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/survFit.R
 \name{priors_survData}
 \alias{priors_survData}
-\title{Create a list of scalars giving priors to use in Bayesian modelling}
+\title{Create a list of scalars giving priors to use in Bayesian inference.}
 \usage{
 priors_survData(x, model_type = NULL)
 }
@@ -12,10 +12,10 @@ priors_survData(x, model_type = NULL)
 \item{model_type}{TKTD model type ('SD' or 'IT')}
 }
 \value{
-A list for parameterization of priors for Bayesian modeling with JAGS
+A list for parameterization of priors for Bayesian inference with JAGS.
 }
 \description{
-Create a list of scalars giving priors to use in Bayesian modelling
+Create a list of scalars giving priors to use in Bayesian inference.
 }
 \examples{
 

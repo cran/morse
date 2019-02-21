@@ -1,8 +1,8 @@
 #' Predict method for \code{survFit} objects
 #' 
-#' This is a method to replace function \code{predict} used on \code{survFit}
-#' object when computing issue happen. \code{predict_ode} use the \code{deSolve}
-#' library to improve robustness. However, time to compute longer.
+#' This is a \code{method} to replace function \code{predict} used on \code{survFit}
+#' object when computing issues happen. \code{predict_ode} uses the \code{deSolve}
+#' library to improve robustness. However, time to compute may be longer.
 #' 
 #' 
 #' @param object an object used to select a method \code{ppc}
@@ -16,9 +16,9 @@ predict_ode <- function(object, ...){
 #' Predict method for \code{survFit} objects
 #'
 #' This is the generic \code{predict} S3 method for the \code{survFit} class.
-#' It provides simulation for "SD" or "IT" models under constant or time-variable exposure.
+#' It provides predicted survival rate for "SD" or "IT" models under constant or time-variable exposure.
 #'
-#' @param object An object of class \code{survFit}
+#' @param object An object of class \code{survFit}.
 #' @param data_predict A dataframe with three columns \code{time}, \code{conc} and \code{replicate}
 #'  used for prediction. If \code{NULL}, prediction is based on \code{x} object of 
 #'  class \code{survFit} used for fitting.
@@ -30,7 +30,7 @@ predict_ode <- function(object, ...){
 #' @param hb_value If \code{TRUE}, the background mortality \code{hb} is taken into account from the posterior.
 #' If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}.
 #' @param interpolate_length Length of the time sequence for which output is wanted.
-#' @param interpolate_method The interpolation method for concentration. See pacakge deSolve for details.
+#' @param interpolate_method The interpolation method for concentration. See package \code{deSolve} for details.
 #' Default is \code{linear}.
 #' @param \dots Further arguments to be passed to generic methods
 #' 
@@ -51,7 +51,7 @@ predict_ode <- function(object, ...){
 #'                                conc = c(0,5,30,30,0,0,5,30,15,0),
 #'                                replicate= rep("predict", 10))
 #'
-#' # (5) Predict on a new dataset
+#' # (5) Predict on a new data set
 #' predict_out <- predict_ode(object = out, data_predict = data_4prediction,
 #'                            mcmc_size = 1000, spaghetti = TRUE)
 #'
@@ -65,7 +65,7 @@ predict_ode <- function(object, ...){
 predict_ode.survFit <- function(object,
                                 data_predict = NULL,
                                 spaghetti = FALSE,
-                                mcmc_size = NULL,
+                                mcmc_size = 1000,
                                 hb_value = TRUE,
                                 interpolate_length = 100,
                                 interpolate_method = "linear",
@@ -357,20 +357,3 @@ model_IT <- function(t, State, parms, input) {
     
   })
 }
-
-
-### 
-# predict_interpolate_ode <- function(x, extend_time = 100){
-#   
-#   ## data.frame with time
-#   
-#   df_MinMax <- x %>%
-#     dplyr::group_by(replicate) %>%
-#     dplyr::summarise(min_time = min(time, na.rm = TRUE),
-#                      max_time = max(time, na.rm = TRUE)) %>%
-#     dplyr::group_by(replicate) %>%
-#     # dplyr::do(data.frame(replicate = .$replicate, time = seq(.$min_time, .$max_time, length = extend_time)))
-#     dplyr::do(data_frame(replicate = .$replicate, time = seq(.$min_time, .$max_time, length = extend_time)))
-# 
-#   return(df_MinMax)
-# }

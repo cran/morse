@@ -13,23 +13,31 @@
 }
 \value{
 The function return a list with three items:
-\item{Percent_PPC}{The criterion compares the predicted median numbers 
+\item{PPC}{The criterion, in percent, compares the predicted median numbers 
 of survivors associated to their uncertainty limits with the observed numbers
 of survivors. Based on experience, PPC resulting in less than \eqn{50\%} of the
 observations within the uncertainty limits indicate poor model performance. A fit of
 \eqn{100\%} may hide too large uncertainties of prediction (so covering all data).}
-\item{NRMSE}{The criterion is based on the classical root-mean-square error (RMSE),
+\item{PPC_global}{percentage of PPC for the whole data set by gathering replicates.}
+\item{NRMSE}{The criterion, in percent, is based on the classical root-mean-square error (RMSE),
  used to aggregate the magnitudes of the errors in predictions for various time-points
  into a single measure of predictive power. In order to provide a criterion expressed
   as a percentage, NRMSE is the normalised RMSE by the mean of the observations.}
-\item{SPPE}{The SPPE indicator is negative (between \eqn{0} and \eqn{-100\%} for an 
+ \item{NRMSE_global}{NRMSE for the whole data set by gathering replicates.}
+\item{SPPE}{The SPPE indicator, in percent, is negative (between \eqn{0} and \eqn{-100\%}) for an 
 underestimation of effects, and positive (between \eqn{0} and \eqn{100}) for an 
 overestimation of effects. An SPPE value of \eqn{0} means an exact prediction
- of the observed survival probability at the end of the experiment.}
+ of the observed survival probability at the end of the exposure profile.}
+ 
+ @references 
+ EFSA PPR Scientific Opinion (2018)
+\emph{Scientific Opinion on the state of the art of Toxicokinetic/Toxicodynamic (TKTD) effect models for regulatory risk assessment of pesticides for aquatic organisms}
+\url{https://www.efsa.europa.eu/en/efsajournal/pub/5377}
 }
 \description{
 Provide various criteria for assessment of the model performance:
-(i) percentage of observation within the 95% credible
+(i) percentage of observation within the 95\% credible
 interval of the Posterior Prediction Check (PPC), the Normalised Root Mean
-Square Error (NRMSE) and the Survival Probability Prediction Error (SPPE)
+Square Error (NRMSE) and the Survival Probability Prediction Error (SPPE) as
+reccommended by the recent Scientific Opinion from EFSA (2018).
 }

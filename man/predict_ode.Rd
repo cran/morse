@@ -12,7 +12,7 @@ predict_ode(object, ...)
 \item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
-This is a method to replace function \code{predict} used on \code{survFit}
-object when computing issue happen. \code{predict_ode} use the \code{deSolve}
-library to improve robustness. However, time to compute longer.
+This is a \code{method} to replace function \code{predict} used on \code{survFit}
+object when computing issues happen. \code{predict_ode} uses the \code{deSolve}
+library to improve robustness. However, time to compute may be longer.
 }

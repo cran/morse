@@ -8,10 +8,10 @@
 predict_Nsurv_check(object, ...)
 }
 \arguments{
-\item{object}{an object used to select a method \code{ppc_percent}}
+\item{object}{an object used to select a method \code{predict_Nsurv_check}}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
 \description{
-It returns measures of goodness-of-fit for prediction
+It returns measures of goodness-of-fit for predictions.
 }

@@ -6,9 +6,9 @@
 #' concentration with a mechanistic description of the effects on survival over
 #' time.
 #'
-#' The function \code{survFit} return the parameter estimates of Toxicokinetic-toxicodynamic (TK-TD) models
+#' The function \code{survFit} return the parameter estimates of Toxicokinetic-toxicodynamic (TKTD) models
 #' \code{SD} for 'Stochastic Death' or \code{IT} fo 'Individual Tolerance'.
-#' TK-TD models, and particularly the General Unified Threshold model of
+#' TKTD models, and particularly the General Unified Threshold model of
 #' Survival (GUTS), provide a consistent process-based
 #' framework to analyse both time and concentration dependent datasets.
 #' In GUTS-SD, all organisms are assumed to have the same internal concentration 
@@ -20,11 +20,9 @@
 #' @param data An object of class \code{survDataVarExp}.
 #' @param model_type can be \code{"SD"} or \code{"IT"} to choose
 #'   between "Stochastic Death" or "Individual Tolerance" models
-#'   (resp.). See modeling vignette for details.
+#'   (resp.). See the modeling vignette for details.
 #' @param quiet If \code{FALSE}, prints logs and progress bar from
 #'   JAGS.
-#' @param extend_time Number of for each replicate used for linear 
-#' interpolation (comprise between time to compute and fitting accuracy)
 #' @param n.chains A positive integer specifying the number of MCMC chains. The minimum required number 
 #' of chains is 2.
 #' @param n.adapt A positive integer specifying the number of iterations for adaptation. If \code{n.adapt} = 0
@@ -39,7 +37,9 @@
 #' @param dic.type type of penalty to use. A string identifying the type of penalty: \code{pD} or \code{popt}
 #'  (see function \code{\link[rjags]{dic.samples}})
 #' @param hb_value If \code{TRUE}, the background mortality \code{hb} is taken into account.
-#' If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}. 
+#' If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}.
+#' @param extend_time Number of for each replicate used for linear 
+#' interpolation (comprise between time to compute and fitting accuracy)
 #' @param \dots Further arguments to be passed to generic methods
 #'
 #' @return The function returns an object of class \code{survFitVarExp}, which is
@@ -56,7 +56,7 @@
 #' for the MCMC computation}
 #' \item{mcmcInfo}{a table with the number of iterations, chains, adaptation, warmup and the thinning interval} 
 #' \item{jags.data}{a list of the data passed to the JAGS model}
-#' \item{model_type}{the type of TK-TD model used: \code{SD} or \code{IT}}
+#' \item{model_type}{the type of TKTD model used: \code{SD} or \code{IT}}
 #'
 #' @references Jager, T., Albert, C., Preuss, T. G. and Ashauer, R. (2011) 
 #' General unified threshold model of survival-a toxicokinetic-toxicodynamic
@@ -75,7 +75,7 @@
 #' dataset <- survData(propiconazole_pulse_exposure)
 #'
 #' \dontrun{
-#' # (3) Run the survFit function with TK-TD model 'SD' or 'IT' 
+#' # (3) Run the survFit function with TKTD model 'SD' or 'IT' 
 #' out <- survFit(dataset , model_type = "SD")
 #'
 #' # (4) Summarize look the estimated parameters
@@ -88,14 +88,12 @@
 #' plot(out, spaghetti = TRUE)
 #' }
 #' 
-#' @export
 #' @import rjags
-#'
-
+#' 
+#' @export
 survFit.survDataVarExp <- function(data,
                                  model_type = NULL,
                                  quiet = FALSE,
-                                 extend_time = 100,
                                  n.chains = 3,
                                  n.adapt = 1000,
                                  n.iter = NULL,
@@ -105,6 +103,7 @@ survFit.survDataVarExp <- function(data,
                                  dic.compute = FALSE,
                                  dic.type = "pD",
                                  hb_value = TRUE,
+                                 extend_time = 100,
                                  ...){
   
   ##
@@ -115,11 +114,16 @@ survFit.survDataVarExp <- function(data,
   if(is.null(model_type) || ! (model_type %in% c("SD","IT"))) {
     stop("You need to specify a 'model_type' among 'SD' or 'IT'")
   }
-  
   ### check number of sample for the diagnostic procedure
   if (n.chains < 2) {
     stop('2 or more parallel chains required')
   }
+  ### warning message when hb_value = NULL
+  if(hb_value==FALSE){
+    warning("This is not an error message: the parameter 'hb' is fixed to 0. This means that the correlation between
+            'hb' and other parameters is ignored.")
+  }
+  
   
   ##
   ## Data and Priors for model

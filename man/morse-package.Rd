@@ -14,9 +14,9 @@ of \eqn{LC_{x}} (\eqn{X}\% Lethal Concentration) or,
 curves. The \eqn{LC_{x}}, \eqn{EC_{x}} and parameters of the curve are
 provided along with an indication of the uncertainty of the estimation.
 \code{morse} can also be used to get an estimation of the \eqn{NEC} (No Effect Concentration)
-by fitting a Toxico-Kinetic Toxico-Dynamic (TK-TD) model (GUTS: General Unified Threshold
+by fitting a Toxico-Kinetic Toxico-Dynamic (TKTD) model (GUTS: General Unified Threshold
 model of Survival). Within the TKTD-GUTS approach, \eqn{LC(x,t)}, \eqn{EC(x,t)} and \eqn{MF(x,t)}
-(\eqn{X}\% Multiplication Factors aka Lethal Profiles) can be explored in proportion \eqn{x} and 
+(\eqn{x}\% Multiplication Factors aka Lethal Profiles) can be explored in proportion \eqn{x} and 
 time \eqn{t}.
 }
 \details{
@@ -31,14 +31,20 @@ dedicated to survival (resp. reproduction) analysis start with a
 \code{surv} (resp. \code{repro}) prefix. \code{morse} provides a similar
 workflow in both cases:
 \enumerate{
-\item create and validate a dataset
-\item explore a dataset
-\item plot a dataset
-\item fit a model on a dataset and output the expected estimates
+\item create and validate a data set
+\item explore a data set
+\item plot a data set
+\item fit a model on a data set and output the expected estimates
 \item check goodness of fit with posterior preditive check plot (ppc)
-\item plot \eqn{LC(x,t)} and \eqn{MF(x,t)} for GUTS models
-\item compute goodness-of-fit measures (PPC percent, NRMSE and SPPE) for GUTS
 }
+
+More specifically, for survival data handles with TKTD `GUTS` model, \code{morse}
+provides:
+\enumerate{
+\item plot \eqn{LC(x,t)} and \eqn{MF(x,t)}.
+\item compute goodness-of-fit measures (PPC percent, NRMSE and SPPE)
+}
+
 Those steps are presented in more details in the "Tutorial" vignette, while
 a more formal description of the estimation procedures are provided in the
 vignette called "Models in \code{morse} package". Please refer to these documents
@@ -65,7 +71,7 @@ Delignette-Muller, M.L., Lopes, C., Veber, P. and Charles, S. (2014)
 
 Forfait-Dubuc, C., Charles, S., Billoir, E. and Delignette-Muller, M.L. (2012)
 \emph{Survival data analyses in ecotoxicology: critical effect concentrations, methods and models. What should we use?}
-\url{https://doi.org/10.1007/s10646-012-0860-0}
+\url{https://doi.org/10.1007/s10646-012-0860-0}.
 
 Plummer, M. (2013) \emph{JAGS Version 4.0.0 user manual}.
 \url{http://sourceforge.net/projects/mcmc-jags/files/Manuals/4.x/jags_user_manual.pdf/download}
@@ -77,6 +83,10 @@ Delignette-Muller, M. L., Ruiz, P. and Veber, P. (2017)
 Baudrot, V., Preux, S., Ducrot, V., Pavé, A. and Charles, S. (2018)
 \emph{New insights to compare and choose TKTD models for survival based on an inter-laboratory study for \emph{Lymnaea stagnalis} exposed to Cd}.
 \url{https://pubs.acs.org/doi/abs/10.1021/acs.est.7b05464}.
+
+EFSA PPR Scientific Opinion (2018)
+\emph{Scientific Opinion on the state of the art of Toxicokinetic/Toxicodynamic (TKTD) effect models for regulatory risk assessment of pesticides for aquatic organisms}
+\url{https://www.efsa.europa.eu/en/efsajournal/pub/5377}.
 }
 \seealso{
 \code{\link[rjags]{rjags}},
@@ -87,6 +97,7 @@ Virgile Baudrot  <virgile.baudrot@posteo.net>,
 Sandrine Charles <sandrine.charles@univ-lyon1.fr>,
 Marie Laure Delignette-Muller <marielaure.delignettemuller@vetagro-sup.fr>,
 Wandrille Duchemin <wandrille.duchemin@insa-lyon.fr>,
+Benoit Goussen <Benoit.Goussen@ibacon.com>,
 Guillaume Kon-Kam-king <guillaume.kon-kam-king@univ-lyon1.fr>,
 Christelle Lopes <christelle.lopes@univ-lyon1.fr>,
 Philippe Ruiz <philippe.ruiz@univ-lyon1.fr>,

@@ -3,7 +3,7 @@
 \docType{data}
 \name{cadmium1}
 \alias{cadmium1}
-\title{Reproduction and survival datasets for \emph{Daphnia magna} exposed to
+\title{Reproduction and survival data sets for \emph{Daphnia magna} exposed to
 cadmium during 21 days}
 \format{A data frame with 200 observations of the following five variables:
 \describe{
@@ -22,7 +22,7 @@ replicate.} }}
 data(cadmium1)
 }
 \description{
-Reproduction and survival datasets of chronic laboratory toxicity tests with
+Reproduction and survival data sets of chronic laboratory toxicity tests with
 \emph{Daphnia magna} freshwater invertebrate exposed to five concentrations
 of cadmium during 21 days. Five concentrations were
 tested, with four replicates per concentration. Each replicate contained 10
@@ -35,4 +35,5 @@ Comparison of toxicity tests with different exposure time patterns: The added
 value of dynamic modelling in predictive ecotoxicology, \emph{Ecotoxicology
 and Environmental Safety}, 75, 80-86.
 }
-\keyword{dataset}
+\keyword{data}
+\keyword{set}

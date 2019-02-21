@@ -5,23 +5,20 @@
 \title{Fits a TKTD model for survival analysis using Bayesian inference for \code{survDataVarExp} object}
 \usage{
 \method{survFit}{survDataVarExp}(data, model_type = NULL,
-  quiet = FALSE, extend_time = 100, n.chains = 3, n.adapt = 1000,
-  n.iter = NULL, n.warmup = NULL, thin.interval = NULL,
-  limit.sampling = TRUE, dic.compute = FALSE, dic.type = "pD",
-  hb_value = TRUE, ...)
+  quiet = FALSE, n.chains = 3, n.adapt = 1000, n.iter = NULL,
+  n.warmup = NULL, thin.interval = NULL, limit.sampling = TRUE,
+  dic.compute = FALSE, dic.type = "pD", hb_value = TRUE,
+  extend_time = 100, ...)
 }
 \arguments{
 \item{data}{An object of class \code{survDataVarExp}.}
 
 \item{model_type}{can be \code{"SD"} or \code{"IT"} to choose
 between "Stochastic Death" or "Individual Tolerance" models
-(resp.). See modeling vignette for details.}
+(resp.). See the modeling vignette for details.}
 
 \item{quiet}{If \code{FALSE}, prints logs and progress bar from
 JAGS.}
-
-\item{extend_time}{Number of for each replicate used for linear 
-interpolation (comprise between time to compute and fitting accuracy)}
 
 \item{n.chains}{A positive integer specifying the number of MCMC chains. The minimum required number 
 of chains is 2.}
@@ -47,6 +44,9 @@ the Deviance Information Criterion (DIC) with the \code{rjags} package}
 \item{hb_value}{If \code{TRUE}, the background mortality \code{hb} is taken into account.
 If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}.}
 
+\item{extend_time}{Number of for each replicate used for linear 
+interpolation (comprise between time to compute and fitting accuracy)}
+
 \item{\dots}{Further arguments to be passed to generic methods}
 }
 \value{
@@ -64,7 +64,7 @@ distribution}
 for the MCMC computation}
 \item{mcmcInfo}{a table with the number of iterations, chains, adaptation, warmup and the thinning interval} 
 \item{jags.data}{a list of the data passed to the JAGS model}
-\item{model_type}{the type of TK-TD model used: \code{SD} or \code{IT}}
+\item{model_type}{the type of TKTD model used: \code{SD} or \code{IT}}
 }
 \description{
 This function estimates the parameters of a TKTD ('SD' or 'IT')
@@ -74,9 +74,9 @@ concentration with a mechanistic description of the effects on survival over
 time.
 }
 \details{
-The function \code{survFit} return the parameter estimates of Toxicokinetic-toxicodynamic (TK-TD) models
+The function \code{survFit} return the parameter estimates of Toxicokinetic-toxicodynamic (TKTD) models
 \code{SD} for 'Stochastic Death' or \code{IT} fo 'Individual Tolerance'.
-TK-TD models, and particularly the General Unified Threshold model of
+TKTD models, and particularly the General Unified Threshold model of
 Survival (GUTS), provide a consistent process-based
 framework to analyse both time and concentration dependent datasets.
 In GUTS-SD, all organisms are assumed to have the same internal concentration 
@@ -94,7 +94,7 @@ data("propiconazole_pulse_exposure")
 dataset <- survData(propiconazole_pulse_exposure)
 
 \dontrun{
-# (3) Run the survFit function with TK-TD model 'SD' or 'IT' 
+# (3) Run the survFit function with TKTD model 'SD' or 'IT' 
 out <- survFit(dataset , model_type = "SD")
 
 # (4) Summarize look the estimated parameters

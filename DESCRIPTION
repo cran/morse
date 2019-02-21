@@ -2,7 +2,7 @@ Package: morse
 Type: Package
 Title: Modelling Tools for Reproduction and Survival Data in
         Ecotoxicology
-Version: 3.2.0
+Version: 3.2.2
 Encoding: UTF-8
 Author: 
     Virgile Baudrot [aut],
@@ -29,9 +29,9 @@ Imports: coda, deSolve, dplyr, epitools, graphics, grDevices, ggplot2
 License: GPL (>= 2)
 Suggests: knitr, rmarkdown, testthat
 VignetteBuilder: knitr
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 LazyData: true
 NeedsCompilation: no
-Packaged: 2018-11-07 14:46:32 UTC; vbaudrot
+Packaged: 2019-02-14 08:02:10 UTC; vbaudrot
 Repository: CRAN
-Date/Publication: 2018-11-12 16:40:08 UTC
+Date/Publication: 2019-02-21 23:30:11 UTC

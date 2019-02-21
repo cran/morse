@@ -12,8 +12,8 @@
 
 \item{quiet}{When \code{TRUE}, does not print.}
 
-\item{EFSA_name}{If \code{TRUE}, replace actual terminology by
-the one used in EFSA PPR Scientific Opinion.}
+\item{EFSA_name}{If \code{TRUE}, the current terminology by
+the one used in the recent EFSA PPR Scientific Opinion (2018).}
 
 \item{\dots}{Further arguments to be passed to generic methods.}
 }
@@ -41,5 +41,10 @@ out <- survFit(dat, model_type = "SD")
 summary(out)
 }
 
+}
+\references{
+EFSA PPR Scientific Opinion (2018)
+\emph{Scientific Opinion on the state of the art of Toxicokinetic/Toxicodynamic (TKTD) effect models for regulatory risk assessment of pesticides for aquatic organisms}
+\url{https://www.efsa.europa.eu/en/efsajournal/pub/5377}.
 }
 \keyword{summary}

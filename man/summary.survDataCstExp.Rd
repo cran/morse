@@ -20,7 +20,7 @@ The function returns a list with the following information:
 }
 \description{
 The generic \code{summary} S3 method for the \code{survDataCstExp} class provides
-information about the structure of the dataset and the experimental design.
+information about the structure of the data set and the experimental design.
 }
 \examples{
 # (1) Load the data
@@ -29,7 +29,7 @@ data(cadmium1)
 # (2) Create a survDataCstExp object
 dat <- survData(cadmium1)
 
-# (3) Summarize the dataset
+# (3) Summarize the data set
 summary(dat)
 
 }
