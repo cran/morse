@@ -1,6 +1,6 @@
-00a0518af91e8fe40645c74700b9034b *DESCRIPTION
+7d87eec1300bd3ab1ef982f995067e4b *DESCRIPTION
 5d3df205194620e2efd6892cd5349e11 *NAMESPACE
-5449c78f77341c1ad9b818215eb0faaa *NEWS
+f92c890c78a99a7e668f90b03764fda7 *NEWS
 4a070481df66c7b829c41e8691a93ff8 *R/JAGS_models.R
 313ee9246f73fe455c69e65715bc371b *R/LCx.R
 6d222ccce762c36d35db768f71720548 *R/LCx.survFit.R
@@ -9,8 +9,8 @@ fdceabff3f3bd5d9a417f003390be0d0 *R/MFx.R
 b7065407b14d108c79e6194bd91591de *R/modelData.R
 4c9418e6494ac2b0162ed40e7dfeac56 *R/modelData.survDataCstExp.R
 b49de90912114049daf3840883b31728 *R/modelData.survDataVarExp.R
-cc3f75454ace54897cfeb17bc2a803fd *R/morse-internal.R
-2c23bff1764f4efa057af30ad891275e *R/morse.R
+a6c33a5b132950e680211d95dd3cf4f7 *R/morse-internal.R
+221d029d1d31c9aeafc5102d3963ce89 *R/morse.R
 5a8a99fc51d01dd7391ac3bda88bfa32 *R/msgTable.R
 f91c9dd023c312eba5dacf209d2b1ad4 *R/plot.LCx.R
 ce8e435e9361a9c23079696bb4f94bfb *R/plot.MFx.R
@@ -27,7 +27,7 @@ f302208c3be32e3f40d418032951ecad *R/plot.survFitVarExp.R
 e1691b8ab92b4dfb0227543e558e165d *R/plotDoseResponse.R
 c1dfbfa25a28dbd9e6e515cf5bb54225 *R/plotDoseResponse.reproData.R
 1ec988b794d7a470bd3546c1f3650b93 *R/plotDoseResponse.survDataCstExp.R
-99bc87aae73d74bc94ec57420238d17c *R/plot_prior_post.R
+aa378af4e6831d8ae22fe9561649899d *R/plot_prior_post.R
 1186c4472a21402589e9108aad08034e *R/ppc.R
 60ff797e79d6673c865ca87ab5ebfb12 *R/ppc.reproFitTT.R
 4bd77634aa1686854768af4ea493bbff *R/ppc.survFitCstExp.R
@@ -37,7 +37,7 @@ c1dfbfa25a28dbd9e6e515cf5bb54225 *R/plotDoseResponse.reproData.R
 ec797a8c33fa537bb7040d6c7424a848 *R/ppc.survFitVarExp.R
 6086d79831abf068831fa25df4f9f29a *R/predict.survFit.R
 f8e6215c4255fb735e4fb6be3ca019d2 *R/predict_Nsurv.R
-bdb04887e889ee9e0f8094fd806ece91 *R/predict_Nsurv_check.R
+d48dd6b722db4e1d355096e2f14eda08 *R/predict_Nsurv_check.R
 d54d98c77f6efeac23a4cfbb681b8314 *R/predict_Nsurv_ode.R
 99ed0f4fe1751034e0163cf00fe9b9d4 *R/predict_ode.survFit.R
 be73be4f15813c4df67c2fe4fa8cd0b9 *R/print.reproFitTT.R
@@ -76,10 +76,10 @@ ae515b235fa82863eabb48506a666350 *data/copper.rda
 6fc6158100f9f8d68c10fcead6ccb042 *data/propiconazole_pulse_exposure.rda
 5fca286f306edf09f4423ff739993405 *data/zinc.rda
 b3a155f2ca1d3dd4d2ca570fd4ef80f1 *inst/doc/modelling.Snw
-806ea21c1fdb6aaefb086c79b4c7d696 *inst/doc/modelling.pdf
+43c2ce50319e3f419a1042320d326dce *inst/doc/modelling.pdf
 fc206e20555c7da5806ad287f6d8bf79 *inst/doc/tutorial.R
-ed2ff7a23d1e7ed51d7e22e494232c62 *inst/doc/tutorial.Rmd
-02eae22b54ca14b74c062d751aff3aaf *inst/doc/tutorial.html
+7bd559a87d77b79ef12d81fe0666d588 *inst/doc/tutorial.Rmd
+edd347745d5617991ccf147ea9c5c090 *inst/doc/tutorial.html
 217a982646a122c234069e97221d1782 *man/LCx.Rd
 ebb7aac1e1a1b99cdb924305470b0a65 *man/LCx.survFit.Rd
 54a0e755e46223030f3b4fad4199858d *man/MFx.Rd
@@ -93,7 +93,7 @@ d3d8974bd4ebbc3385bd2d8f7da7d60a *man/copper.Rd
 ab1dd3c228b4f36c5f54827d5c8682e2 *man/modelData.Rd
 5edf1862f83a2b4e773f80997bdbecc1 *man/modelData.survDataCstExp.Rd
 b7e3e94b04d377f2dfda64e6b786459f *man/modelData.survDataVarExp.Rd
-5f84d1351791638705e67d9563d10aec *man/morse-package.Rd
+172c80aa2b56601cd9c8cad801b2df8a *man/morse-package.Rd
 917025d1571e38bff98566eb7a6f7815 *man/plot.LCx.Rd
 734dad7ed0b214f374c11fa9aa58918a *man/plot.MFx.Rd
 95ace320f9cb27be430e3291b533655d *man/plot.reproData.Rd
@@ -165,4 +165,4 @@ e3b80edb098685200770d2680e9478f1 *tests/testthat/test-repro.R
 306aa7ccdbcae153612cdacbc540bbc6 *tests/testthat/test-surv.R
 c377c25900ea22078e38c5345054269b *tests/testthat/test-survFit.R
 b3a155f2ca1d3dd4d2ca570fd4ef80f1 *vignettes/modelling.Snw
-ed2ff7a23d1e7ed51d7e22e494232c62 *vignettes/tutorial.Rmd
+7bd559a87d77b79ef12d81fe0666d588 *vignettes/tutorial.Rmd

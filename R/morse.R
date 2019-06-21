@@ -69,6 +69,7 @@
 #' Guillaume Kon-Kam-king <guillaume.kon-kam-king@@univ-lyon1.fr>,
 #' Christelle Lopes <christelle.lopes@@univ-lyon1.fr>,
 #' Philippe Ruiz <philippe.ruiz@@univ-lyon1.fr>,
+#' Alexander Singer, <Alexander.Singer@@rifcon.de> 
 #' Philippe Veber <philippe.veber@@univ-lyon1.fr>
 #' 
 #' Maintainer: Philippe Veber <philippe.veber@@univ-lyon1.fr>
@@ -135,8 +136,6 @@ NULL
 #' and Environmental Safety}, 75, 80-86.
 #' @keywords data set
 NULL
-
-
 
 
 #' Reproduction and survival data sets for \emph{Lymnaea stagnalis} exposed to cadmium during 28
