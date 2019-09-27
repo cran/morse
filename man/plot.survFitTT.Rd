@@ -5,7 +5,7 @@
 \title{Plotting method for \code{survFitTT} objects}
 \usage{
 \method{plot}{survFitTT}(x, xlab = "Concentration",
-  ylab = "Survival rate", main = NULL, fitcol = "orange",
+  ylab = "Survival probability", main = NULL, fitcol = "orange",
   fitlty = 1, fitlwd = 1, spaghetti = FALSE, cicol = "orange",
   cilty = 2, cilwd = 1, ribcol = "grey70", adddata = FALSE,
   addlegend = FALSE, log.scale = FALSE, style = "ggplot", ...)
@@ -15,7 +15,7 @@
 
 \item{xlab}{a label for the \eqn{X}-axis, default is \code{Concentration}}
 
-\item{ylab}{a label for the \eqn{Y}-axis, default is \code{Survival rate}}
+\item{ylab}{a label for the \eqn{Y}-axis, default is \code{Survival probability}}
 
 \item{main}{main title for the plot}
 
@@ -53,15 +53,15 @@ This is the generic \code{plot} S3 method for the \code{survFitTT} class. It
 plots concentration-response fit under target time survival analysis.
 }
 \details{
-The fitted curve represents the \strong{estimated survival rate} at
+The fitted curve represents the \strong{estimated survival probability} at
 the target time as a function of the concentration of chemical compound;
 When \code{adddata = TRUE} the black dots depict the \strong{observed survival
-rate} at each tested concentration. Note that since our model does not take
+probability} at each tested concentration. Note that since our model does not take
 inter-replicate variability into consideration, replicates are systematically
 pooled in this plot.
 The function plots both 95\% credible intervals for the estimated survival
-rate (by default the grey area around the fitted curve) and 95\% binomial confidence
-intervals for the observed survival rate (as black segments if
+probability (by default the grey area around the fitted curve) and 95\% binomial confidence
+intervals for the observed survival probability (as black segments if
 \code{adddata = TRUE}).
 Both types of intervals are taken at the same level. Typically
 a good fit is expected to display a large overlap between the two intervals.

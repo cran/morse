@@ -5,7 +5,7 @@
 \title{Plotting method for \code{MFx} objects}
 \usage{
 \method{plot}{MFx}(x, x_variable = "MFx", xlab = NULL,
-  ylab = "Survival rate \\n median and 95 CI", main = NULL,
+  ylab = "Survival probability \\n median and 95 CI", main = NULL,
   log_scale = FALSE, ncol = 3, ...)
 }
 \arguments{
@@ -17,7 +17,7 @@ either \code{"MFx"} or \code{"Time"}. The default is \code{"MFx"}.}
 \item{xlab}{A label for the \eqn{X}-axis, by default \code{NULL} and depend on the
 argument \code{x_variable}.}
 
-\item{ylab}{A label for the \eqn{Y}-axis, by default \code{Survival rate median and 95 CI}.}
+\item{ylab}{A label for the \eqn{Y}-axis, by default \code{Survival probability median and 95 CI}.}
 
 \item{main}{A main title for the plot.}
 
@@ -29,7 +29,7 @@ argument \code{x_variable}.}
 }
 \description{
 This is the generic \code{plot} S3 method for the
-\code{MFx} class. It plots the survival rate as a function of
+\code{MFx} class. It plots the survival probability as a function of
 the multiplication factor applied or as a function of time.
 }
 \examples{

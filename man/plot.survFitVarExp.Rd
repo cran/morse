@@ -4,16 +4,17 @@
 \alias{plot.survFitVarExp}
 \title{Plotting method for \code{survFit} objects}
 \usage{
-\method{plot}{survFitVarExp}(x, xlab = "Time", ylab = "Survival rate",
-  main = NULL, spaghetti = FALSE, one.plot = FALSE, adddata = TRUE,
-  mcmc_size = NULL, scales = "fixed", addConfInt = TRUE, ...)
+\method{plot}{survFitVarExp}(x, xlab = "Time",
+  ylab = "Survival probability", main = NULL, spaghetti = FALSE,
+  one.plot = FALSE, adddata = TRUE, mcmc_size = NULL,
+  scales = "fixed", addConfInt = TRUE, ...)
 }
 \arguments{
 \item{x}{An object of class \code{survFit}.}
 
 \item{xlab}{A label for the \eqn{X}-axis, by default \code{Time}.}
 
-\item{ylab}{A label for the \eqn{Y}-axis, by default \code{Survival rate}.}
+\item{ylab}{A label for the \eqn{Y}-axis, by default \code{Survival probability}.}
 
 \item{main}{A main title for the plot.}
 
@@ -44,15 +45,15 @@ This is the generic \code{plot} S3 method for the
 concentration profile in the original dataset.
 }
 \details{
-The fitted curves represent the \strong{estimated survival rate} as a function
+The fitted curves represent the \strong{estimated survival probability} as a function
 of time for each concentration profile.
 The black dots depict the \strong{observed survival
-rate} at each time point. Note that since our model does not take
+probability} at each time point. Note that since our model does not take
 inter-replicate variability into consideration, replicates are systematically
 pooled in this plot.
 The function plots both 95\% binomial credible intervals for the estimated survival
-rate (by default the grey area around the fitted curve) and 95\% binomial confidence
-intervals for the observed survival rate (as black segments if
+probability (by default the grey area around the fitted curve) and 95\% binomial confidence
+intervals for the observed survival probability (as black segments if
 \code{adddata = TRUE}).
 Both types of intervals are taken at the same level. Typically
 a good fit is expected to display a large overlap between the two types of  intervals.

@@ -50,8 +50,8 @@ parameters drawn from the posterior distribution.}
 \value{
 The function returns an object of class \code{MFx}, which is a list
  with the following information:
- \item{X_prop}{Survival rate for \code{X} percent of reduction of the initial median 
-survival rate at time \code{time_MFx}.}
+ \item{X_prop}{Survival probability for \code{X} percent of reduction of the initial median 
+survival probability at time \code{time_MFx}.}
 \item{X_prop_provided}{A number giving the proportion of reduction in survival.}
 \item{time_MFx}{A number giving the time at which  \eqn{MF(x,t)} has to be
  estimated as provided in arguments or if NULL, the latest time point of the
@@ -59,17 +59,17 @@ survival rate at time \code{time_MFx}.}
 \item{df_MFx}{A \code{data.frame} with quantiles (median, 2.5\% and 97.5\%)
  of \eqn{MF(x,t)} at time \eqn{t}, \code{time_MFx}, for \eqn{x}\% of survival reduction.}
 \item{df_dose}{A \code{data.frame} with quantiles (median, 2.5\% and 97.5\%)
- of survival rate along the computed multiplication factor and at time \code{time_MFx}.}
+ of survival probability along the computed multiplication factor and at time \code{time_MFx}.}
 \item{MFx_tested}{A vector of all multiplication factors computed.} 
 \item{ls_predict}{A list of all object of class \code{survFitPredict} obtained
-from computing survival rate for every profiles build from the vector of
+from computing survival probability for every profiles build from the vector of
 multiplication factors \code{MFx_tested}.}
 }
 \description{
 The function \code{MFx}, \eqn{x}\% Multiplication Factor at time \eqn{t}, (\eqn{MF(x,t)}),
 is used to compute the multiplication factor
 applied to the concentration exposure profile in order to
-reduce by \eqn{x}\% (argument \code{X}) the survival rate at a
+reduce by \eqn{x}\% (argument \code{X}) the survival probability at a
  specified test duration \eqn{t} (argument \code{time_MFx}) (default is the maximum
  time point of the experiment).
  
@@ -81,7 +81,7 @@ reduce by \eqn{x}\% (argument \code{X}) the survival rate at a
  
  where \eqn{C_w(\tau \in T)} is the initial exposure profile without
  multiplication factor. And so the expression \eqn{S(MF(x,t)* C_w(\tau \in T), t)}
-  is the survival rate after an exposure profile
+  is the survival probability after an exposure profile
    \eqn{MF(x,t)* C_w(\tau \in T)} at time \eqn{t}.
 }
 \examples{

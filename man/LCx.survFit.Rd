@@ -27,16 +27,16 @@ define between 0 and the highest tested concentration of the experiment.}
 \value{
 The function returns an object of class \code{LCx}, which is a list
  with the following information:
-\item{X_prop}{Survival rate of individuals surviving considering the median
+\item{X_prop}{Survival probability of individuals surviving considering the median
  of the background mortality (i.e. \eqn{S(0, t)*(1- x/100)})}
-\item{X_prop_provided}{Survival rate of individuals surviving as provided in arguments (i.e. \eqn{(100-X)/100)}}
+\item{X_prop_provided}{Survival probability of individuals surviving as provided in arguments (i.e. \eqn{(100-X)/100)}}
 \item{time_LCx}{A number giving the time at which  \eqn{LC_{x}} has to be
  estimated as provided in arguments or if NULL, the latest time point of the
   experiment is used.}
 \item{df_LCx}{A \code{data.frame} with quantiles (median, 2.5\% and 97.5\%)
  of \eqn{LC_{X}} at time \code{time_LCx} for \eqn{X}\% of individuals}
 \item{df_dose}{A \code{data.frame} with four columns: \code{concentration}, and median \code{q50} and 95\% credible interval
- (\code{qinf95} and \code{qsup95}) of the survival rate at time \code{time_LCx}}
+ (\code{qinf95} and \code{qsup95}) of the survival probability at time \code{time_LCx}}
 }
 \description{
 The function \code{LCx}, \eqn{x}\% Lethal Concentration (\eqn{LC_x}), is use to compute
@@ -49,8 +49,8 @@ The function \code{LCx}, \eqn{x}\% Lethal Concentration (\eqn{LC_x}), is use to 
  
  \eqn{S(LC(x,t), t) = S(0, t)*(1- x/100)},
  
- where \eqn{S(LC(x,t), t)} is the survival rate at concentration
- \eqn{LC(x,t)} at time \eqn{t}, and \eqn{S(0,t)} is the survival rate at
+ where \eqn{S(LC(x,t), t)} is the survival probability at concentration
+ \eqn{LC(x,t)} at time \eqn{t}, and \eqn{S(0,t)} is the survival probability at
  no concentration (i.e. concentration is \eqn{0}) at time \eqn{t} which
  reflect the background mortality \eqn{h_b}:
  

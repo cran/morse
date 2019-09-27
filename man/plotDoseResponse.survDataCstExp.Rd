@@ -5,7 +5,7 @@
 \title{Plot dose-response from \code{survData} objects}
 \usage{
 \method{plotDoseResponse}{survDataCstExp}(x, xlab = "Concentration",
-  ylab = "Survival rate", main = NULL, target.time = NULL,
+  ylab = "Survival probability", main = NULL, target.time = NULL,
   style = "ggplot", log.scale = FALSE, remove.someLabels = FALSE,
   addlegend = TRUE, ...)
 }
@@ -14,7 +14,7 @@
 
 \item{xlab}{a label for the \eqn{X}-axis, by default \code{Concentration}}
 
-\item{ylab}{a label for the \eqn{Y}-axis, by default \code{Survival rate}}
+\item{ylab}{a label for the \eqn{Y}-axis, by default \code{Survival probability}}
 
 \item{main}{main title for the plot}
 
@@ -33,13 +33,13 @@
 }
 \description{
 This is the generic \code{plotDoseResponse} S3 method for the \code{survData}
-class. It plots the survival rate as a function of concentration at a given
+class. It plots the survival probability as a function of concentration at a given
 target time.
 }
 \details{
-The function plots the observed values of the survival rate at a given time point
+The function plots the observed values of the survival probability at a given time point
 as a function of concentration. The 95 \% binomial confidence interval is added
-to each survival rate. It is calculated using function
+to each survival probability. It is calculated using function
 \code{\link[stats]{binom.test}} from package \code{stats}.
 Replicates are systematically pooled in this plot.
 }

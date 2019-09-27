@@ -5,7 +5,7 @@
 \title{Plotting method for \code{LCx} objects}
 \usage{
 \method{plot}{LCx}(x, xlab = "Concentration",
-  ylab = "Survival rate \\n median and 95 CI", main = NULL,
+  ylab = "Survival probability \\n median and 95 CI", main = NULL,
   subtitle = NULL, ...)
 }
 \arguments{
@@ -13,7 +13,7 @@
 
 \item{xlab}{A label for the \eqn{X}-axis, by default \code{Concentration}.}
 
-\item{ylab}{A label for the \eqn{Y}-axis, by default \code{Survival rate median and 95 CI}.}
+\item{ylab}{A label for the \eqn{Y}-axis, by default \code{Survival probability median and 95 CI}.}
 
 \item{main}{A main title for the plot.}
 
@@ -23,7 +23,7 @@
 }
 \description{
 This is the generic \code{plot} S3 method for the
-\\code{LCx} class. It plots the survival rate as a function of concentration.
+\\code{LCx} class. It plots the survival probability as a function of concentration.
 }
 \examples{
 

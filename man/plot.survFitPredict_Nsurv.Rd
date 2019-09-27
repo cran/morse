@@ -13,7 +13,7 @@
 
 \item{xlab}{A label for the \eqn{X}-axis, by default \code{Time}.}
 
-\item{ylab}{A label for the \eqn{Y}-axis, by default \code{Survival rate}.}
+\item{ylab}{A label for the \eqn{Y}-axis, by default \code{Survival probability}.}
 
 \item{main}{A main title for the plot.}
 
@@ -32,14 +32,14 @@ the computation.}
 }
 \description{
 This is the generic \code{plot} S3 method for the
-\code{survFitPredict_Nsurv}.  It plots the predicted survival rate for each
+\code{survFitPredict_Nsurv}.  It plots the predicted survival probability for each
 concentration of the chemical compound in the provided dataset.
 }
 \details{
-The fitted curves represent the \strong{predicted survival rate} as a function
+The fitted curves represent the \strong{predicted survival probability} as a function
 of time for each concentration.
 The function plots both the 95\% credible band and the predicted survival
-rate over time.
+probability over time.
 If \code{spaghetti = TRUE}, the credible intervals are represented by two
 dotted lines limiting the credible band, and a spaghetti plot is added to this band.
 This spaghetti plot consists of the representation of simulated curves using parameter values
