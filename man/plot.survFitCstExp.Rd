@@ -4,10 +4,19 @@
 \alias{plot.survFitCstExp}
 \title{Plotting method for \code{survFit} objects}
 \usage{
-\method{plot}{survFitCstExp}(x, xlab = "Time",
-  ylab = "Survival probability", main = NULL, concentration = NULL,
-  spaghetti = FALSE, one.plot = FALSE, adddata = TRUE,
-  addlegend = FALSE, style = "ggplot", ...)
+\method{plot}{survFitCstExp}(
+  x,
+  xlab = "Time",
+  ylab = "Survival probability",
+  main = NULL,
+  concentration = NULL,
+  spaghetti = FALSE,
+  one.plot = FALSE,
+  adddata = TRUE,
+  addlegend = FALSE,
+  style = "ggplot",
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{survFit}.}

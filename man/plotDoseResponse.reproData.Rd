@@ -4,10 +4,20 @@
 \alias{plotDoseResponse.reproData}
 \title{Plot dose-response from \code{reproData} objects}
 \usage{
-\method{plotDoseResponse}{reproData}(x, xlab = "Concentration",
-  ylab = "Nb of offspring per ind.day", main = NULL, ylim = NULL,
-  target.time = NULL, style = "ggplot", log.scale = FALSE,
-  remove.someLabels = FALSE, axis = TRUE, addlegend = TRUE, ...)
+\method{plotDoseResponse}{reproData}(
+  x,
+  xlab = "Concentration",
+  ylab = "Nb of offspring per ind.day",
+  main = NULL,
+  ylim = NULL,
+  target.time = NULL,
+  style = "ggplot",
+  log.scale = FALSE,
+  remove.someLabels = FALSE,
+  axis = TRUE,
+  addlegend = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{an object of class \code{reproData}}

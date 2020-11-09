@@ -79,14 +79,14 @@
 #' @references 
 #' Delignette-Muller, M.L., Lopes, C., Veber, P. and Charles, S. (2014)
 #' \emph{Statistical handling of reproduction data for exposure-response modelling}.
-#' \url{http://pubs.acs.org/doi/abs/10.1021/es502009r?journalCode=esthag}.
+#' \url{https://pubs.acs.org/doi/abs/10.1021/es502009r?journalCode=esthag}.
 #' 
 #' Forfait-Dubuc, C., Charles, S., Billoir, E. and Delignette-Muller, M.L. (2012)
 #' \emph{Survival data analyses in ecotoxicology: critical effect concentrations, methods and models. What should we use?}
 #' \url{https://doi.org/10.1007/s10646-012-0860-0}.
 #'
 #' Plummer, M. (2013) \emph{JAGS Version 4.0.0 user manual}.
-#' \url{http://sourceforge.net/projects/mcmc-jags/files/Manuals/4.x/jags_user_manual.pdf/download}
+#' \url{https://sourceforge.net/projects/mcmc-jags/files/Manuals/4.x/jags_user_manual.pdf/download}
 #' 
 #' Delignette-Muller, M. L., Ruiz, P. and Veber, P. (2017)
 #' \emph{Robust Fit of Toxicokinetic--Toxicodynamic Models Using Prior Knowledge Contained in the Design of Survival Toxicity Tests}
@@ -311,6 +311,39 @@ NULL
 #'
 #' @keywords data set
 NULL
+
+
+#' Survival data set for \emph{Gammarus pulex} exposed to propiconazole
+#' during four days
+#'
+#' Survival data set of chronic laboratory toxicity tests with
+#' \emph{Gammarus pulex} freshwater invertebrate exposed to eight concentrations
+#' of one fungicide (propiconazole) during four days. Eight
+#' concentrations were tested with two replicates of 10 organisms per concentration.
+#' Survival is monitored at five time points.
+#'
+#'
+#' @name propiconazole_split
+#' @docType data
+#' @usage data(propiconazole_split)
+#' @format A dataframe with 75 observations on the following four variables:
+#' \describe{ \item{\code{replicate}}{A vector of class \code{factor} with the
+#' replicate code (\code{SC} for the control and \code{A1} to \code{G2} for other profiles).}
+#' \item{\code{conc}}{A vector of class \code{numeric} with propiconazole
+#' concentrations in \eqn{\mu mol.L^{-1}}.}
+#' \item{\code{time}}{A vector of class \code{integer} with the time points
+#' (in days from the beginning of the experiment \eqn{t = 0}).}
+#' \item{\code{Nsurv}}{A vector of class \code{integer} with the number of
+#' alive individuals at each time point for each concentration and each
+#' replicate.}}
+#' @references Nyman, A.-M., Schirmer, K., Ashauer, R., (2012) Toxicokinetic-toxicodynamic
+#' modelling of survival of \emph{Gammarus pulex} in multiple pulse exposures to
+#' propiconazole: model assumptions, calibration data requirements and predictive
+#' power, \emph{Ecotoxicology}, (21), 1828-1840.
+#'
+#' @keywords data set
+NULL
+
 
 
 #' Survival data set for \emph{Gammarus pulex} exposed to propiconazole

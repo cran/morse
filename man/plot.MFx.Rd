@@ -4,9 +4,16 @@
 \alias{plot.MFx}
 \title{Plotting method for \code{MFx} objects}
 \usage{
-\method{plot}{MFx}(x, x_variable = "MFx", xlab = NULL,
-  ylab = "Survival probability \\n median and 95 CI", main = NULL,
-  log_scale = FALSE, ncol = 3, ...)
+\method{plot}{MFx}(
+  x,
+  x_variable = "MFx",
+  xlab = NULL,
+  ylab = "Survival probability \\n median and 95 CI",
+  main = NULL,
+  log_scale = FALSE,
+  ncol = 3,
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{MFx}.}

@@ -4,11 +4,25 @@
 \alias{plot.survFitTT}
 \title{Plotting method for \code{survFitTT} objects}
 \usage{
-\method{plot}{survFitTT}(x, xlab = "Concentration",
-  ylab = "Survival probability", main = NULL, fitcol = "orange",
-  fitlty = 1, fitlwd = 1, spaghetti = FALSE, cicol = "orange",
-  cilty = 2, cilwd = 1, ribcol = "grey70", adddata = FALSE,
-  addlegend = FALSE, log.scale = FALSE, style = "ggplot", ...)
+\method{plot}{survFitTT}(
+  x,
+  xlab = "Concentration",
+  ylab = "Survival probability",
+  main = NULL,
+  fitcol = "orange",
+  fitlty = 1,
+  fitlwd = 1,
+  spaghetti = FALSE,
+  cicol = "orange",
+  cilty = 2,
+  cilwd = 1,
+  ribcol = "grey70",
+  adddata = FALSE,
+  addlegend = FALSE,
+  log.scale = FALSE,
+  style = "ggplot",
+  ...
+)
 }
 \arguments{
 \item{x}{an object of class \code{survFitTT}}

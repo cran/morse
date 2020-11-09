@@ -4,8 +4,22 @@
 \alias{survFit}
 \title{Fits a TKTD model for survival analysis using Bayesian inference}
 \usage{
-survFit(data, model_type, quiet, n.chains, n.adapt, n.iter, n.warmup,
-  thin.interval, limit.sampling, dic.compute, dic.type, hb_value, ...)
+survFit(
+  data,
+  model_type,
+  quiet,
+  n.chains,
+  n.adapt,
+  n.iter,
+  n.warmup,
+  thin.interval,
+  limit.sampling,
+  dic.compute,
+  dic.type,
+  hb_value,
+  hb_valueFIXED,
+  ...
+)
 }
 \arguments{
 \item{data}{an object used to select a method 'survFit'}
@@ -39,7 +53,10 @@ the Deviance Information Criterion (DIC) with the \code{rjags} package}
 (see function \code{\link[rjags]{dic.samples}})}
 
 \item{hb_value}{If \code{TRUE}, the background mortality \code{hb} is taken into account.
-If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}.}
+If \code{FALSE}, parameter \code{hb} is set to a fixed value defined by \code{hb_valueFIXED}. The default is \code{TRUE}.}
+
+\item{hb_valueFIXED}{If \code{hb_value} is \code{FALSE}, the argument \code{hb_valueFIXED}
+provides the values of parameter hb. Default is 0.}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
@@ -61,6 +78,7 @@ threshold (denoted \eqn{z}), and, once exceeded, the instantaneous probability
 to die increases linearly with the internal concentration.
 In GUTS-IT, the threshold concentration is distributed among all the organisms, and once 
 exceeded in one individual, this individual dies immediately.
+
 
 When class of \code{object} is \code{survDataCstExp}, see \link[=survFit.survDataCstExp]{survFit.survDataCstExp} ;
 and for a \code{survDataVarExp}, see \link[=survFit.survDataVarExp]{survFit.survDataVarExp}.

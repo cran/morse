@@ -5,8 +5,7 @@
 \title{Predict \eqn{x}\% Lethal Concentration at any specified time point for 
 a \code{survFit} object.}
 \usage{
-\method{LCx}{survFit}(object, X, time_LCx = NULL, conc_range = NULL,
-  npoints = 100, ...)
+\method{LCx}{survFit}(object, X, time_LCx = NULL, conc_range = NULL, npoints = 100, ...)
 }
 \arguments{
 \item{object}{An object of class \code{survFit}}

@@ -4,10 +4,18 @@
 \alias{plotDoseResponse.survDataCstExp}
 \title{Plot dose-response from \code{survData} objects}
 \usage{
-\method{plotDoseResponse}{survDataCstExp}(x, xlab = "Concentration",
-  ylab = "Survival probability", main = NULL, target.time = NULL,
-  style = "ggplot", log.scale = FALSE, remove.someLabels = FALSE,
-  addlegend = TRUE, ...)
+\method{plotDoseResponse}{survDataCstExp}(
+  x,
+  xlab = "Concentration",
+  ylab = "Survival probability",
+  main = NULL,
+  target.time = NULL,
+  style = "ggplot",
+  log.scale = FALSE,
+  remove.someLabels = FALSE,
+  addlegend = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{an object of class \code{survData}}

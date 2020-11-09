@@ -4,10 +4,19 @@
 \alias{plot.survFitTKTD}
 \title{Plotting method for \code{survFitTKTD} objects}
 \usage{
-\method{plot}{survFitTKTD}(x, xlab = "Time",
-  ylab = "Survival probablity", main = NULL, concentration = NULL,
-  spaghetti = FALSE, one.plot = FALSE, adddata = FALSE,
-  addlegend = FALSE, style = "ggplot", ...)
+\method{plot}{survFitTKTD}(
+  x,
+  xlab = "Time",
+  ylab = "Survival probablity",
+  main = NULL,
+  concentration = NULL,
+  spaghetti = FALSE,
+  one.plot = FALSE,
+  adddata = FALSE,
+  addlegend = FALSE,
+  style = "ggplot",
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{survFitTKTD}.}

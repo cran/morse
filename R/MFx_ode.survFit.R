@@ -1,7 +1,23 @@
+#' Predict x\% Multiplication Factor method for \code{survFit} objects
+#' 
+#' This is a \code{method} to replace function \code{MFx} used on \code{survFit}
+#' object when computing issues happen. \code{MFx_ode} uses the \code{deSolve}
+#' library to improve robustness. However, time to compute may be longer.
+#' 
+#' 
+#' @param object an object used to select a method \code{ppc}
+#' @param \dots Further arguments to be passed to generic methods
+#' 
+#' @export
+MFx_ode <- function(object, ...){
+  UseMethod("MFx_ode")
+}
+
+
 #' Predict x\% Multiplication Factor at any specified time point for 
 #' a \code{survFit} object.
 #' 
-#' The function \code{MFx}, \eqn{x}\% Multiplication Factor at time \eqn{t}, (\eqn{MF(x,t)}),
+#' The function \code{MFx_ode}, \eqn{x}\% Multiplication Factor at time \eqn{t}, (\eqn{MF(x,t)}),
 #' is used to compute the multiplication factor
 #' applied to the concentration exposure profile in order to
 #' reduce by \eqn{x}\% (argument \code{X}) the survival probability at a
@@ -43,8 +59,6 @@
 #' @param accuracy Accuracy of the multiplication factor. The default is 0.01.
 #' @param quiet If \code{FALSE}, print the evolution of accuracy.
 #' @param threshold_iter Threshold number of iteration.
-#' @param hb_valueFORCED If \code{hb_value} is \code{FALSE}, it fix \code{hb}.
-#' @param ode IF \code{ode} is \code{TRUE}, algo use predict_ode rather than predict. Default is \code{TRUE}.
 #' @param \dots Further arguments to be passed to generic methods
 #'
 #' @return The function returns an object of class \code{MFx}, which is a list
@@ -81,30 +95,32 @@
 #' data_4prediction <- data.frame(time = 1:10, conc = c(0,0.5,3,3,0,0,0.5,3,1.5,0))
 #' 
 #' # (5) estimate MF(x=30, t=4), that is for 30% reduction of survival at time 4
-#' MFx_SD_30.4 <- MFx(out_SD, data_predict = data_4prediction , X = 30, time_MFx = 4)
+#' MFx_SD_30.4 <- MFx_ode(out_SD, data_predict = data_4prediction , X = 30, time_MFx = 4)
 #' 
 #' # (5bis) estimate MF(x,t) along the MF_range from 5 to 10 (50) (X = NULL)
-#' MFx_SD_range <- MFx(out_SD, data_predict = data_4prediction ,
+#' MFx_SD_range <- MFx_ode(out_SD, data_predict = data_4prediction ,
 #'                     X = NULL, time_MFx = 4, MFx_range = seq(5, 10, length.out = 50))
 #' }
 #' 
 #' 
 #' @export
 #' 
-MFx.survFit <- function(object,
+MFx_ode.survFit <- function(object,
                         data_predict,
                         X = 50,
                         time_MFx = NULL,
                         MFx_range = c(0,1000),
                         mcmc_size = 1000,
-                        hb_value = TRUE,
+                        hb_value = FALSE,
                         spaghetti = FALSE,
                         accuracy = 0.01,
                         quiet = FALSE,
                         threshold_iter = 100,
-                        hb_valueFORCED = 0,
-                        ode=TRUE,
                         ...){
+  
+warning("The function 'MFx_ode' uses 'predict_ode' to compute the predictions for calculating the multiplication factors.
+This can take a very long time to compute (minutes to hours).\n
+Prefer the function 'MFx' when possible.")
   
   ## Analyse data_predict data.frame
   if(!all(colnames(data_predict) %in% c("conc", "time")) || ncol(data_predict) != 2){
@@ -113,43 +129,31 @@ MFx.survFit <- function(object,
   
   ## Check time_MFx
   if(is.null(time_MFx))  time_MFx = max(data_predict$time)
-
+  
   if(!(time_MFx %in% data_predict$time)){
     stop("Please provide a 'time_MFx' corresponding to a time-point at which concentration is provided.
-            Interpolation of concentration is too specific to be automatized.")
+         Interpolation of concentration is too specific to be automatized.")
   }
   
   ls_data_predict <- list()
   ls_predict <- list()
-
+  
   ls_data_predict[[1]] <- data_predict
   ls_data_predict[[1]]$replicate <- rep("predict_MFx_1", nrow(data_predict))
   
-  if(ode == TRUE){
-    ls_predict[[1]] <- predict_ode( object = object,
-                                data_predict = ls_data_predict[[1]],
-                                spaghetti = spaghetti,
-                                mcmc_size = mcmc_size,
-                                hb_value = hb_value,
-                                hb_valueFORCED = hb_valueFORCED )
-  } else{
-    ls_predict[[1]] <- predict( object = object,
-                                data_predict = ls_data_predict[[1]],
-                                spaghetti = spaghetti,
-                                mcmc_size = mcmc_size,
-                                hb_value = hb_value,
-                                hb_valueFORCED = hb_valueFORCED )
-  }
+  ls_predict[[1]] <- predict_ode( object = object,
+                              data_predict = ls_data_predict[[1]],
+                              spaghetti = spaghetti,
+                              mcmc_size = mcmc_size,
+                              hb_value = hb_value)
   
-
-
   filter_time_MFx = dplyr::filter(ls_predict[[1]]$df_quantile, time == time_MFx)
-
+  
   median_Mortality_test <- filter_time_MFx$q50
   theoretical_X <- (100 - X) / 100 * filter_time_MFx$q50 # Necessary to compared with accuracy
-
+  
   if(!is.null(X)){
-    binarySearch_MFx_q50 <- binarySearch_MFx(object = object,
+    binarySearch_MFx_q50 <- binarySearch_MFx_ode(object = object,
                                              spaghetti = spaghetti,
                                              mcmc_size = mcmc_size,
                                              hb_value = hb_value,
@@ -163,43 +167,37 @@ MFx.survFit <- function(object,
                                              ls_predict = ls_predict,
                                              quiet = quiet,
                                              quantile = "q50",
-                                             threshold_iter = threshold_iter,
-                                             hb_valueFORCED = hb_valueFORCED,
-                                             ode = ode) # "q50", "qinf95", "qsup95"
-    binarySearch_MFx_qinf95 <- binarySearch_MFx(object = object,
+                                             threshold_iter = threshold_iter) # "q50", "qinf95", "qsup95"
+    binarySearch_MFx_qinf95 <- binarySearch_MFx_ode(object = object,
                                                 spaghetti = spaghetti,
                                                 mcmc_size = mcmc_size,
                                                 hb_value = hb_value,
                                                 MFx_range = MFx_range,
                                                 time_MFx = time_MFx,
-                                               theoretical_X = theoretical_X,
-                                               value_mortality_test = filter_time_MFx$qinf95,
-                                               accuracy = accuracy,
-                                               data_predict = data_predict,
-                                               ls_data_predict = ls_data_predict,
-                                               ls_predict = ls_predict,
-                                               quiet = quiet,
-                                               quantile = "qinf95",
-                                               threshold_iter = threshold_iter,
-                                               hb_valueFORCED = hb_valueFORCED,
-                                               ode = ode) # "q50", "qinf95", "qsup95"
-    binarySearch_MFx_qsup95 <- binarySearch_MFx(object = object,
+                                                theoretical_X = theoretical_X,
+                                                value_mortality_test = filter_time_MFx$qinf95,
+                                                accuracy = accuracy,
+                                                data_predict = data_predict,
+                                                ls_data_predict = ls_data_predict,
+                                                ls_predict = ls_predict,
+                                                quiet = quiet,
+                                                quantile = "qinf95",
+                                                threshold_iter = threshold_iter) # "q50", "qinf95", "qsup95"
+    binarySearch_MFx_qsup95 <- binarySearch_MFx_ode(object = object,
                                                 spaghetti = spaghetti,
                                                 mcmc_size = mcmc_size,
                                                 hb_value = hb_value,
                                                 MFx_range = MFx_range,
                                                 time_MFx = time_MFx,
-                                               theoretical_X = theoretical_X,
-                                               value_mortality_test = filter_time_MFx$qsup95,
-                                               accuracy = accuracy,
-                                               data_predict = data_predict,
-                                               ls_data_predict = ls_data_predict,
-                                               ls_predict = ls_predict,
-                                               quiet = quiet,
-                                               quantile = "qsup95",
-                                               threshold_iter = threshold_iter,
-                                               hb_valueFORCED = hb_valueFORCED,
-                                               ode = ode) # "q50", "qinf95", "qsup95"
+                                                theoretical_X = theoretical_X,
+                                                value_mortality_test = filter_time_MFx$qsup95,
+                                                accuracy = accuracy,
+                                                data_predict = data_predict,
+                                                ls_data_predict = ls_data_predict,
+                                                ls_predict = ls_predict,
+                                                quiet = quiet,
+                                                quantile = "qsup95",
+                                                threshold_iter = threshold_iter) # "q50", "qinf95", "qsup95"
     
     #
     # Make a dataframe with quantile of all generated time series
@@ -246,7 +244,7 @@ MFx.survFit <- function(object,
     MFx <- MFx_range
     
     k <- 1:length(MFx_range)
-
+    
     ls_data_predict <- lapply(k, function(kit){
       profil_test <- data_predict
       profil_test$conc <- MFx[kit] * data_predict$conc
@@ -255,22 +253,11 @@ MFx.survFit <- function(object,
     })
     
     ls_predict <- lapply(k, function(kit){
-      if(ode == TRUE){
-        predict_ode(object = object,
-                data_predict = ls_data_predict[[kit]],
-                spaghetti = spaghetti,
-                mcmc_size = mcmc_size,
-                hb_value = hb_value,
-                hb_valueFORCED = hb_valueFORCED)
-      } else{
-        predict(object = object,
-                data_predict = ls_data_predict[[kit]],
-                spaghetti = spaghetti,
-                mcmc_size = mcmc_size,
-                hb_value = hb_value,
-                hb_valueFORCED = hb_valueFORCED)
-      }
-
+      predict_ode(object = object,
+              data_predict = ls_data_predict[[kit]],
+              spaghetti = spaghetti,
+              mcmc_size = mcmc_size,
+              hb_value = hb_value)
     })
     
     #
@@ -310,11 +297,11 @@ MFx.survFit <- function(object,
                          MFx = c(NA, NA, NA))
   }
   
-# warning("This is not an error message:
-# Just take into account that MFx as been estimated with a binary
-# search using the 'accuracy' argument. To improve the shape of the curve, you
-# can use X = NULL, and computed time series around the median MFx, with the
-#           vector `MFx_range`.")
+  # warning("This is not an error message:
+  # Just take into account that MFx as been estimated with a binary
+  # search using the 'accuracy' argument. To improve the shape of the curve, you
+  # can use X = NULL, and computed time series around the median MFx, with the
+  #           vector `MFx_range`.")
   
   ls_out = list(X_prop = theoretical_X,
                 X_prop_provided = X/100,
@@ -327,8 +314,51 @@ MFx.survFit <- function(object,
   class(ls_out) = c("list", "MFx")
   
   return(ls_out)
-}
+  }
 
+
+# points for LCx
+# 
+# 
+# pointsMFx <- function(df_dose, X_prop){
+#   
+#   if(min(df_dose$qinf95) < X_prop & X_prop < max(df_dose$qinf95)){
+#     df.qinf95 <- select(df_dose, c(MFx, qinf95))%>%
+#       dplyr::add_row(qinf95 = X_prop)%>%
+#       dplyr::arrange(qinf95)%>%
+#       dplyr::mutate(MFx = na.approx(MFx, qinf95, na.rm = FALSE))%>%
+#       dplyr::filter(qinf95 == X_prop)
+#     
+#     MFx_qinf95 <- df.qinf95$MFx
+#     
+#   } else {
+#     MFx_qinf95 <- NA
+#     
+#     warning(paste("No 95%inf for survival probability of", X_prop ,
+#                   " in the range of multiplication factors under consideration: [",
+#                   min(df_dose$MFx), ";", max(df_dose$MFx), "]"))
+#   }
+#   
+#   if(min(df_dose$qsup95) < X_prop & X_prop < max(df_dose$qsup95)){
+#     df.qsup95 <- select(df_dose, c(MFx,qsup95)) %>%
+#       add_row(qsup95 = X_prop) %>%
+#       arrange(qsup95) %>%
+#       mutate(MFx = na.approx(MFx,qsup95, na.rm = FALSE)) %>%
+#       filter(qsup95 == X_prop)
+#     
+#     MFx_qsup95 <- df.qsup95$MFx
+#     
+#   } else {
+#     
+#     MFx_qsup95 <- NA
+#     warning(paste("No 95%sup for survival probability of", X_prop,
+#                   " in the range of multiplication factors under consideration: [",
+#                   min(df_dose$MFx), ";", max(df_dose$MFx), "]"))
+#   }
+#   
+#   return(list(MFx_qinf95 = MFx_qinf95,
+#               MFx_qsup95 = MFx_qsup95))
+# }
 
 
 
@@ -341,7 +371,7 @@ MFx.survFit <- function(object,
 # binary search of MFx in O(log n)
 #
 
-binarySearch_MFx <- function(object,
+binarySearch_MFx_ode <- function(object,
                              spaghetti,
                              mcmc_size,
                              hb_value,
@@ -355,81 +385,65 @@ binarySearch_MFx <- function(object,
                              ls_predict,
                              quiet,
                              quantile, # "q50", "qinf95", "qsup95"
-                             threshold_iter,
-                             hb_valueFORCED,
-                             ode
-                             ){
-    #
-    # binary search of MFx in O(log n)
-    #
-    i = 1
-    MFx = 1
-    MFx_min = min(MFx_range)
-    MFx_max = max(MFx_range)
-    MFx_test = max(MFx_range)
+                             threshold_iter
+){
+  #
+  # binary search of MFx in O(log n)
+  #
+  i = 1
+  MFx = 1
+  MFx_min = min(MFx_range)
+  MFx_max = max(MFx_range)
+  MFx_test = max(MFx_range)
+  
+  while(abs(theoretical_X - value_mortality_test) > accuracy){
     
-    while(abs(theoretical_X - value_mortality_test) > accuracy){
-      
-      MFx = c(MFx, MFx_test)
-      
-      ls_data_predict[[i+1]] <- data_predict
-      ls_data_predict[[i+1]]$conc <- MFx_test * data_predict$conc
-      ls_data_predict[[i+1]]$replicate <- rep(paste0("predict_MFx_", MFx_test), nrow(data_predict))
-      
-      if(ode == TRUE){
-        ls_predict[[i+1]] <- predict_ode(object = object,
-                                     data_predict = ls_data_predict[[i+1]],
-                                     spaghetti = spaghetti,
-                                     mcmc_size = mcmc_size,
-                                     hb_value = hb_value,
-                                     hb_valueFORCED = hb_valueFORCED)
-      } else{
-        ls_predict[[i+1]] <- predict(object = object,
-                                     data_predict = ls_data_predict[[i+1]],
-                                     spaghetti = spaghetti,
-                                     mcmc_size = mcmc_size,
-                                     hb_value = hb_value,
-                                     hb_valueFORCED = hb_valueFORCED)
-      }
-      
-      
-      filter_time_MFx = dplyr::filter(ls_predict[[i+1]]$df_quantile, time == time_MFx)
-      if(quantile == "q50"){ value_mortality_test = filter_time_MFx$q50 }
-      if(quantile == "qinf95"){ value_mortality_test = filter_time_MFx$qinf95 }
-      if(quantile == "qsup95"){ value_mortality_test = filter_time_MFx$qsup95 }
-      
-      if(quiet == FALSE){
-        cat(quantile, i,"accuracy:", abs(theoretical_X - value_mortality_test), " with multiplication factor:",  MFx_test, "\n")
-      }
-      
-      i = i + 1
-      if(theoretical_X - value_mortality_test < 0){
-        MFx_min = MFx_test
-        MFx_test = MFx_test + (MFx_max - MFx_min)/2
-      }
-      if(theoretical_X - value_mortality_test > 0){
-        MFx_max = MFx_test
-        MFx_test = MFx_test - (MFx_max - MFx_min)/2
-      }
-      if(MFx_test == max(MFx_range)){
-        MFx_test <- NULL
-        warning(paste("For", quantile, ", the multiplication factor is over the bound of", max(MFx_range)))
-        break
-      }
-      if(i > threshold_iter){
-        MFx_test <- NULL
-        warning(paste("For", quantile, ", the number of iterations reached the threshold number of iterations of", threshold_iter))
-        break
-      }
+    MFx = c(MFx, MFx_test)
+    
+    ls_data_predict[[i+1]] <- data_predict
+    ls_data_predict[[i+1]]$conc <- MFx_test * data_predict$conc
+    ls_data_predict[[i+1]]$replicate <- rep(paste0("predict_MFx_", MFx_test), nrow(data_predict))
+    
+    ls_predict[[i+1]] <- predict_ode(object = object,
+                                 data_predict = ls_data_predict[[i+1]],
+                                 spaghetti = spaghetti,
+                                 mcmc_size = mcmc_size,
+                                 hb_value = hb_value)
+    
+    filter_time_MFx = dplyr::filter(ls_predict[[i+1]]$df_quantile, time == time_MFx)
+    if(quantile == "q50"){ value_mortality_test = filter_time_MFx$q50 }
+    if(quantile == "qinf95"){ value_mortality_test = filter_time_MFx$qinf95 }
+    if(quantile == "qsup95"){ value_mortality_test = filter_time_MFx$qsup95 }
+    
+    if(quiet == FALSE){
+      cat(quantile, i,"accuracy:", abs(theoretical_X - value_mortality_test), " with multiplication factor:",  MFx_test, "\n")
     }
-    k <- 1:length(MFx)
     
-    return(list(k = k,
-                MFx = MFx,
-                ls_predict = ls_predict,
-                ls_data_predict = ls_data_predict))
+    i = i + 1
+    if(theoretical_X - value_mortality_test < 0){
+      MFx_min = MFx_test
+      MFx_test = MFx_test + (MFx_max - MFx_min)/2
+    }
+    if(theoretical_X - value_mortality_test > 0){
+      MFx_max = MFx_test
+      MFx_test = MFx_test - (MFx_max - MFx_min)/2
+    }
+    if(MFx_test == max(MFx_range)){
+      MFx_test <- NULL
+      warning(paste("For", quantile, ", the multiplication factor is over the bound of", max(MFx_range)))
+      break
+    }
+    if(i > threshold_iter){
+      MFx_test <- NULL
+      warning(paste("For", quantile, ", the number of iterations reached the threshold number of iterations of", threshold_iter))
+      break
+    }
   }
+  k <- 1:length(MFx)
   
-  
-  
-  
+  return(list(k = k,
+              MFx = MFx,
+              ls_predict = ls_predict,
+              ls_data_predict = ls_data_predict))
+}
+

@@ -4,10 +4,18 @@
 \alias{plot.survDataCstExp}
 \title{Plotting method for \code{survData} objects}
 \usage{
-\method{plot}{survDataCstExp}(x, xlab = "Time",
-  ylab = "Number of survivors", main = NULL, concentration = NULL,
-  style = "ggplot", pool.replicate = FALSE, addlegend = FALSE,
-  remove.someLabels = FALSE, ...)
+\method{plot}{survDataCstExp}(
+  x,
+  xlab = "Time",
+  ylab = "Number of survivors",
+  main = NULL,
+  concentration = NULL,
+  style = "ggplot",
+  pool.replicate = FALSE,
+  addlegend = FALSE,
+  remove.someLabels = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{an object of class \code{survData}}

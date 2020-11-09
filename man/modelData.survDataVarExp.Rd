@@ -4,8 +4,7 @@
 \alias{modelData.survDataVarExp}
 \title{Create a data set to analyse a \code{survDataVarExp} object.}
 \usage{
-\method{modelData}{survDataVarExp}(x, model_type = NULL,
-  extend_time = 100, ...)
+\method{modelData}{survDataVarExp}(x, model_type = NULL, extend_time = 100, ...)
 }
 \arguments{
 \item{x}{An object of class \code{survData}}

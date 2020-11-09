@@ -19,6 +19,7 @@
 #' @param interpolate_length Length of the time sequence for which output is wanted.
 #' @param interpolate_method The interpolation method for concentration. See package \code{deSolve} for details.
 #' Default is \code{linear}.
+#' @param  hb_valueFORCED If \code{hb_value} is \code{FALSE}, it fix \code{hb}.
 #' @param \dots Further arguments to be passed to generic methods
 #' 
 #' @export
@@ -30,6 +31,7 @@ predict_Nsurv_ode <- function(object,
                                hb_value,
                                interpolate_length,
                                interpolate_method,
+                               hb_valueFORCED,
                                ...){
   UseMethod("predict_Nsurv_ode")
 }
@@ -46,6 +48,7 @@ predict_Nsurv_ode.survFit <- function(object,
                                   hb_value = TRUE,
                                   interpolate_length = 100,
                                   interpolate_method = "linear",
+                                  hb_valueFORCED = NA,
                                   ...) {
   x <- object # Renaming to satisfy CRAN checks on S3 methods
   # arguments should be named the same when declaring a
@@ -123,7 +126,15 @@ predict_Nsurv_ode.survFit <- function(object,
       hb <- mctot[, "hb"]  
     } else{ hb <- 10^mctot[, "hb_log10"] }
   } else if(hb_value == FALSE){
-    hb <- rep(0, nrow(mctot))
+    if(is.na(hb_valueFORCED)){
+      if(is.na(x$hb_valueFIXED)){
+        stop("Please provide value for `hb` using `hb_valueFORCED`.")
+      } else{
+        hb <- rep(x$hb_valueFIXED, nrow(mctot))
+      } 
+    } else{
+      hb <- rep(hb_valueFORCED, nrow(mctot))
+    }
   }
   
   k = 1:length(unique_replicate)
@@ -169,7 +180,7 @@ predict_Nsurv_ode.survFit <- function(object,
   # dtheo <- do.call("rbind", lapply(dtheo, t))
   
   # Computing Nsurv
-  df_mcmc <- as_data_frame(do.call("rbind", x$mcmc))
+  df_mcmc <- as_tibble(do.call("rbind", x$mcmc))
   NsurvPred_valid <- select(df_mcmc, contains("Nsurv_sim"))
   NsurvPred_check <- select(df_mcmc, contains("Nsurv_ppc"))
   
@@ -193,7 +204,7 @@ predict_Nsurv_ode.survFit <- function(object,
   } else{
     # --------------------
 
-    df_psurv <- as_data_frame(df_theo) %>%
+    df_psurv <- as_tibble(df_theo) %>%
       select(-conc) %>%
       mutate(time = df$time,
              replicate = df$replicate)
@@ -257,7 +268,7 @@ predict_Nsurv_ode.survFit <- function(object,
   
   if(spaghetti == TRUE){
     random_column <- sample(1:ncol(NsurvPred_valid), size = round(10/100 * ncol(NsurvPred_valid)))
-    df_spaghetti <- as_data_frame(NsurvPred_valid[, random_column]) %>%
+    df_spaghetti <- as_tibble(NsurvPred_valid[, random_column]) %>%
       mutate(time = data_predict$time,
              conc = data_predict$conc,
              replicate = data_predict$replicate,

@@ -4,9 +4,16 @@
 \alias{plot.survFitPredict}
 \title{Plotting method for \code{survFitPredict} objects}
 \usage{
-\method{plot}{survFitPredict}(x, xlab = "Time",
-  ylab = "Survival probability", main = NULL, spaghetti = FALSE,
-  one.plot = FALSE, mcmc_size = NULL, ...)
+\method{plot}{survFitPredict}(
+  x,
+  xlab = "Time",
+  ylab = "Survival probability",
+  main = NULL,
+  spaghetti = FALSE,
+  one.plot = FALSE,
+  mcmc_size = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{survFitPredict}.}

@@ -4,9 +4,14 @@
 \alias{plot.LCx}
 \title{Plotting method for \code{LCx} objects}
 \usage{
-\method{plot}{LCx}(x, xlab = "Concentration",
-  ylab = "Survival probability \\n median and 95 CI", main = NULL,
-  subtitle = NULL, ...)
+\method{plot}{LCx}(
+  x,
+  xlab = "Concentration",
+  ylab = "Survival probability \\n median and 95 CI",
+  main = NULL,
+  subtitle = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{LCx}.}

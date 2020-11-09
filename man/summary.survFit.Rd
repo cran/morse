@@ -4,8 +4,7 @@
 \alias{summary.survFit}
 \title{Summary of \code{survFit} object}
 \usage{
-\method{summary}{survFit}(object, quiet = FALSE, EFSA_name = FALSE,
-  ...)
+\method{summary}{survFit}(object, quiet = FALSE, EFSA_name = FALSE, ...)
 }
 \arguments{
 \item{object}{An object of class \code{survFit}.}

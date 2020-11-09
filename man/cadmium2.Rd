@@ -5,7 +5,8 @@
 \alias{cadmium2}
 \title{Reproduction and survival data sets for \emph{Lymnaea stagnalis} exposed to cadmium during 28
 days}
-\format{A data frame with 612 observations of the following five variables:
+\format{
+A data frame with 612 observations of the following five variables:
 \describe{ \item{\code{replicate}}{A vector of class \code{numeric} with the
 replicate code (\code{1} to \code{36}).} \item{\code{conc}}{A vector of
 class \code{integer} with the cadmium concentrations in \eqn{\mu g.L^{-1}}.}
@@ -15,7 +16,8 @@ class \code{integer} with the cadmium concentrations in \eqn{\mu g.L^{-1}}.}
 alive individuals at each time point for each concentration and each
 replicate.} \item{\code{Nrepro}}{A vector of class \code{integer} with the
 number of clutches at each time point for each concentration and each
-replicate.} }}
+replicate.} }
+}
 \usage{
 data(cadmium2)
 }

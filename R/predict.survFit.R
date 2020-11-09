@@ -15,6 +15,7 @@
 #' If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}.
 #' @param ratio_no.NA A numeric between 0 and 1 standing for the proportion of non-NA values
 #'  required to compute quantile. The default is \eqn{0.95}.
+#' @param  hb_valueFORCED If \code{hb_value} is \code{FALSE}, it fix \code{hb}.
 #' @param \dots Further arguments to be passed to generic methods
 #' 
 #' @examples 
@@ -48,6 +49,7 @@ predict.survFit <- function(object,
                             mcmc_size = NULL,
                             hb_value = TRUE,
                             ratio_no.NA = 0.95,
+                            hb_valueFORCED = NA,
                             ...) {
   x <- object # Renaming to satisfy CRAN checks on S3 methods
               # arguments should be named the same when declaring a
@@ -116,7 +118,15 @@ predict.survFit <- function(object,
       hb <- mctot[, "hb"]  
     } else{ hb <- 10^mctot[, "hb_log10"] }
   } else if(hb_value == FALSE){
-    hb <- rep(0, nrow(mctot))
+    if(is.na(hb_valueFORCED)){
+      if(is.na(x$hb_valueFIXED)){
+        stop("Please provide value for `hb` using `hb_valueFORCED`.")
+      } else{
+        hb <- rep(x$hb_valueFIXED, nrow(mctot))
+      } 
+    } else{
+      hb <- rep(hb_valueFORCED, nrow(mctot))
+    }
   }
  
   k = 1:length(unique_replicate)
@@ -154,10 +164,10 @@ predict.survFit <- function(object,
   dtheo <- do.call("rbind", lapply(dtheo, t))
   # replace NA by 0
   if(any(is.na(dtheo))){
-    stop("There is NA produced. \n You should try the function 'predict_ode()' which is much more robust but longer to compute.")
+    warning("There is NA produced. \n You should try the function 'predict_ode()' which is much more robust but longer to compute.")
   }
   
-  df_quantile = dplyr::data_frame(
+  df_quantile = dplyr::tibble(
     time = df$time,
     conc = df$conc,
     replicate = df$replicate,
@@ -171,7 +181,7 @@ predict.survFit <- function(object,
   
   if(spaghetti == TRUE){
     random_column <- sample(1:ncol(dtheo), size = round(10/100 * ncol(dtheo)))
-    df_spaghetti <- as_data_frame(dtheo[, random_column]) %>%
+    df_spaghetti <- as_tibble(dtheo[, random_column]) %>%
       mutate(time = df$time,
              conc = df$conc,
              replicate = df$replicate)
@@ -282,7 +292,7 @@ predict_interpolate <- function(x, extend_time = 100){
                      max_time = max(time, na.rm = TRUE)) %>%
     dplyr::group_by(replicate) %>%
     # dplyr::do(data.frame(replicate = .$replicate, time = seq(.$min_time, .$max_time, length = extend_time)))
-    dplyr::do(data_frame(replicate = .$replicate, time = seq(.$min_time, .$max_time, length = extend_time)))
+    dplyr::do(tibble(replicate = .$replicate, time = seq(.$min_time, .$max_time, length = extend_time)))
   
   x_interpolate <- dplyr::full_join(df_MinMax, x,
                                     by = c("replicate", "time")) %>%

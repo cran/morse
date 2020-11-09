@@ -5,7 +5,8 @@
 \alias{chlordan}
 \title{Reproduction and survival data sets for \emph{Daphnia magna} exposed to
 chlordan during 21 days}
-\format{A data frame with 1320 observations of the following five variables:
+\format{
+A data frame with 1320 observations of the following five variables:
 \describe{ \item{\code{replicate}}{A vector of class \code{numeric} with
 the replicate code (\code{1} to \code{60}).} \item{\code{conc}}{A vector of
 class \code{numeric} with the chlordan concentrations in \eqn{\mu
@@ -15,7 +16,8 @@ time points (in days from the beginning of the experiment \eqn{t = 0}).}
 alive individuals at each time point for each concentration and each
 replicate.} \item{\code{Nrepro}}{A vector of class \code{integer} with the
 number of offspring at each time point for each concentration and each
-replicate.} }}
+replicate.} }
+}
 \usage{
 data(chlordan)
 }

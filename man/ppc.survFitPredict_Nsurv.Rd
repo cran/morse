@@ -4,8 +4,13 @@
 \alias{ppc.survFitPredict_Nsurv}
 \title{Posterior predictive check plot for \code{survFitPredict_Nsurv} objects}
 \usage{
-\method{ppc}{survFitPredict_Nsurv}(x, xlab = "Observed nb of survivors",
-  ylab = "Predicted nb of survivors", main = NULL, ...)
+\method{ppc}{survFitPredict_Nsurv}(
+  x,
+  xlab = "Observed nb of survivors",
+  ylab = "Predicted nb of survivors",
+  main = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{survFitPredict_Nsurv}}

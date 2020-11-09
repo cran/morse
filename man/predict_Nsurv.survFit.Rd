@@ -4,8 +4,15 @@
 \alias{predict_Nsurv.survFit}
 \title{\code{Predict_Nsurv} method for \code{survFit} objects}
 \usage{
-\method{predict_Nsurv}{survFit}(object, data_predict = NULL,
-  spaghetti = FALSE, mcmc_size = NULL, hb_value = TRUE, ...)
+\method{predict_Nsurv}{survFit}(
+  object,
+  data_predict = NULL,
+  spaghetti = FALSE,
+  mcmc_size = NULL,
+  hb_value = TRUE,
+  hb_valueFORCED = NA,
+  ...
+)
 }
 \arguments{
 \item{object}{An object of class \code{survFit}}
@@ -22,6 +29,8 @@ the computation.}
 
 \item{hb_value}{If \code{TRUE}, the background mortality \code{hb} is taken into account from the posterior.
 If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}.}
+
+\item{hb_valueFORCED}{If \code{hb_value} is \code{FALSE}, it fix \code{hb}.}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }

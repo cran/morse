@@ -4,9 +4,15 @@
 \alias{plot.survDataVarExp}
 \title{Plotting method for \code{survDataVarExp} objects}
 \usage{
-\method{plot}{survDataVarExp}(x, xlab = "Time",
-  ylab = "Number of survivors", main = NULL, one.plot = FALSE,
-  facetting_level = NULL, ...)
+\method{plot}{survDataVarExp}(
+  x,
+  xlab = "Time",
+  ylab = "Number of survivors",
+  main = NULL,
+  one.plot = FALSE,
+  facetting_level = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{an object of class \code{survDataVarExp}}

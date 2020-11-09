@@ -4,8 +4,7 @@
 \alias{plot_prior_post.survFit}
 \title{Plot posteriors vs priors}
 \usage{
-\method{plot_prior_post}{survFit}(x, size_sample = 1000,
-  EFSA_name = FALSE, ...)
+\method{plot_prior_post}{survFit}(x, size_sample = 1000, EFSA_name = FALSE, ...)
 }
 \arguments{
 \item{x}{an object of class \code{survFit} used to select a method \code{plot_prior_post}}

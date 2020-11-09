@@ -4,9 +4,14 @@
 \alias{ppc.reproFitTT}
 \title{Posterior predictive check plot for \code{reproFitTT} objects}
 \usage{
-\method{ppc}{reproFitTT}(x, style = "ggplot",
+\method{ppc}{reproFitTT}(
+  x,
+  style = "ggplot",
   xlab = "Observed Cumul. Nbr. of offspring",
-  ylab = "Predicted Cumul. Nbr. of offspring", main = NULL, ...)
+  ylab = "Predicted Cumul. Nbr. of offspring",
+  main = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{reproFitTT}}

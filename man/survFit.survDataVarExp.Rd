@@ -4,11 +4,23 @@
 \alias{survFit.survDataVarExp}
 \title{Fits a TKTD model for survival analysis using Bayesian inference for \code{survDataVarExp} object}
 \usage{
-\method{survFit}{survDataVarExp}(data, model_type = NULL,
-  quiet = FALSE, n.chains = 3, n.adapt = 1000, n.iter = NULL,
-  n.warmup = NULL, thin.interval = NULL, limit.sampling = TRUE,
-  dic.compute = FALSE, dic.type = "pD", hb_value = TRUE,
-  extend_time = 100, ...)
+\method{survFit}{survDataVarExp}(
+  data,
+  model_type = NULL,
+  quiet = FALSE,
+  n.chains = 3,
+  n.adapt = 1000,
+  n.iter = NULL,
+  n.warmup = NULL,
+  thin.interval = NULL,
+  limit.sampling = TRUE,
+  dic.compute = FALSE,
+  dic.type = "pD",
+  hb_value = TRUE,
+  hb_valueFIXED = NA,
+  extend_time = 100,
+  ...
+)
 }
 \arguments{
 \item{data}{An object of class \code{survDataVarExp}.}
@@ -43,6 +55,9 @@ the Deviance Information Criterion (DIC) with the \code{rjags} package}
 
 \item{hb_value}{If \code{TRUE}, the background mortality \code{hb} is taken into account.
 If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}.}
+
+\item{hb_valueFIXED}{If \code{hb_value} is \code{FALSE}, then \code{hb_valueFiXED} is the value to fix \code{hb}.
+If \code{hb_value} is \code{FALSE} and  \code{hb_valueFiXED} is \code{NA}, then \code{hb} is fixed to \code{0}.}
 
 \item{extend_time}{Number of for each replicate used for linear 
 interpolation (comprise between time to compute and fitting accuracy)}

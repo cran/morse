@@ -26,6 +26,7 @@ predict_Nsurv <- function(object, ...){
 #'  the computation.
 #' @param hb_value If \code{TRUE}, the background mortality \code{hb} is taken into account from the posterior.
 #' If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}.
+#' @param  hb_valueFORCED If \code{hb_value} is \code{FALSE}, it fix \code{hb}.
 #' @param \dots Further arguments to be passed to generic methods
 #' 
 #' 
@@ -78,6 +79,7 @@ predict_Nsurv.survFit <- function(object,
                             spaghetti = FALSE,
                             mcmc_size = NULL,
                             hb_value = TRUE,
+                            hb_valueFORCED = NA,
                             ...) {
   x <- object # Renaming to satisfy CRAN checks on S3 methods
   # arguments should be named the same when declaring a
@@ -155,7 +157,15 @@ predict_Nsurv.survFit <- function(object,
       hb <- mctot[, "hb"]  
     } else{ hb <- 10^mctot[, "hb_log10"] }
   } else if(hb_value == FALSE){
-    hb <- rep(0, nrow(mctot))
+    if(is.na(hb_valueFORCED)){
+      if(is.na(x$hb_valueFIXED)){
+        stop("Please provide value for `hb` using `hb_valueFORCED`.")
+      } else{
+        hb <- rep(x$hb_valueFIXED, nrow(mctot))
+      } 
+    } else{
+      hb <- rep(hb_valueFORCED, nrow(mctot))
+    }
   }
   
   k = 1:length(unique_replicate)
@@ -194,7 +204,7 @@ predict_Nsurv.survFit <- function(object,
 
   # Computing Nsurv
   
-  df_mcmc <- as_data_frame(do.call("rbind", x$mcmc))
+  df_mcmc <- as_tibble(do.call("rbind", x$mcmc))
   NsurvPred_valid <- select(df_mcmc, contains("Nsurv_sim"))
   NsurvPred_check <- select(df_mcmc, contains("Nsurv_ppc"))
   
@@ -218,7 +228,7 @@ predict_Nsurv.survFit <- function(object,
   } else{
       # --------------------
       
-      df_psurv <- as_data_frame(dtheo) %>%
+      df_psurv <- as_tibble(dtheo) %>%
         mutate(time = df$time,
                replicate = df$replicate)
       
@@ -280,7 +290,7 @@ predict_Nsurv.survFit <- function(object,
 
   if(spaghetti == TRUE){
     random_column <- sample(1:ncol(NsurvPred_valid), size = round(10/100 * ncol(NsurvPred_valid)))
-    df_spaghetti <- as_data_frame(NsurvPred_valid[, random_column]) %>%
+    df_spaghetti <- as_tibble(NsurvPred_valid[, random_column]) %>%
       mutate(time = data_predict$time,
              conc = data_predict$conc,
              replicate = data_predict$replicate,

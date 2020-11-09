@@ -4,11 +4,24 @@
 \alias{plot.reproFitTT}
 \title{Plotting method for \code{reproFitTT} objects}
 \usage{
-\method{plot}{reproFitTT}(x, xlab = "Concentration",
-  ylab = "Nb of offspring per ind/day", main = NULL,
-  fitcol = "orange", fitlty = 1, fitlwd = 1, spaghetti = FALSE,
-  cicol = "orange", cilty = 2, cilwd = 1, ribcol = "grey70",
-  addlegend = FALSE, log.scale = FALSE, style = "ggplot", ...)
+\method{plot}{reproFitTT}(
+  x,
+  xlab = "Concentration",
+  ylab = "Nb of offspring per ind/day",
+  main = NULL,
+  fitcol = "orange",
+  fitlty = 1,
+  fitlwd = 1,
+  spaghetti = FALSE,
+  cicol = "orange",
+  cilty = 2,
+  cilwd = 1,
+  ribcol = "grey70",
+  addlegend = FALSE,
+  log.scale = FALSE,
+  style = "ggplot",
+  ...
+)
 }
 \arguments{
 \item{x}{an object of class \code{reproFitTT}}

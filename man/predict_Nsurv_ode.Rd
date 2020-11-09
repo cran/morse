@@ -4,8 +4,17 @@
 \alias{predict_Nsurv_ode}
 \title{Predict method for \code{survFit} objects}
 \usage{
-predict_Nsurv_ode(object, data_predict, spaghetti, mcmc_size, hb_value,
-  interpolate_length, interpolate_method, ...)
+predict_Nsurv_ode(
+  object,
+  data_predict,
+  spaghetti,
+  mcmc_size,
+  hb_value,
+  interpolate_length,
+  interpolate_method,
+  hb_valueFORCED,
+  ...
+)
 }
 \arguments{
 \item{object}{An object of class \code{survFit}.}
@@ -28,6 +37,8 @@ If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}.}
 
 \item{interpolate_method}{The interpolation method for concentration. See package \code{deSolve} for details.
 Default is \code{linear}.}
+
+\item{hb_valueFORCED}{If \code{hb_value} is \code{FALSE}, it fix \code{hb}.}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }

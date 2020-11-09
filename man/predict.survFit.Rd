@@ -4,9 +4,16 @@
 \alias{predict.survFit}
 \title{Predict method for \code{survFit} objects}
 \usage{
-\method{predict}{survFit}(object, data_predict = NULL,
-  spaghetti = FALSE, mcmc_size = NULL, hb_value = TRUE,
-  ratio_no.NA = 0.95, ...)
+\method{predict}{survFit}(
+  object,
+  data_predict = NULL,
+  spaghetti = FALSE,
+  mcmc_size = NULL,
+  hb_value = TRUE,
+  ratio_no.NA = 0.95,
+  hb_valueFORCED = NA,
+  ...
+)
 }
 \arguments{
 \item{object}{An object of class \code{survFit}}
@@ -26,6 +33,8 @@ If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}.}
 
 \item{ratio_no.NA}{A numeric between 0 and 1 standing for the proportion of non-NA values
 required to compute quantile. The default is \eqn{0.95}.}
+
+\item{hb_valueFORCED}{If \code{hb_value} is \code{FALSE}, it fix \code{hb}.}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }

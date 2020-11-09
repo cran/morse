@@ -4,10 +4,19 @@
 \alias{plot.survFitVarExp}
 \title{Plotting method for \code{survFit} objects}
 \usage{
-\method{plot}{survFitVarExp}(x, xlab = "Time",
-  ylab = "Survival probability", main = NULL, spaghetti = FALSE,
-  one.plot = FALSE, adddata = TRUE, mcmc_size = NULL,
-  scales = "fixed", addConfInt = TRUE, ...)
+\method{plot}{survFitVarExp}(
+  x,
+  xlab = "Time",
+  ylab = "Survival probability",
+  main = NULL,
+  spaghetti = FALSE,
+  one.plot = FALSE,
+  adddata = TRUE,
+  mcmc_size = NULL,
+  scales = "fixed",
+  addConfInt = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{survFit}.}

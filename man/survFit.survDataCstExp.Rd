@@ -4,10 +4,22 @@
 \alias{survFit.survDataCstExp}
 \title{Fits a TKTD model for survival analysis using Bayesian inference for \code{survDataCstExp} object}
 \usage{
-\method{survFit}{survDataCstExp}(data, model_type = NULL,
-  quiet = FALSE, n.chains = 3, n.adapt = 3000, n.iter = NULL,
-  n.warmup = NULL, thin.interval = NULL, limit.sampling = TRUE,
-  dic.compute = FALSE, dic.type = "pD", hb_value = TRUE, ...)
+\method{survFit}{survDataCstExp}(
+  data,
+  model_type = NULL,
+  quiet = FALSE,
+  n.chains = 3,
+  n.adapt = 3000,
+  n.iter = NULL,
+  n.warmup = NULL,
+  thin.interval = NULL,
+  limit.sampling = TRUE,
+  dic.compute = FALSE,
+  dic.type = "pD",
+  hb_value = TRUE,
+  hb_valueFIXED = NA,
+  ...
+)
 }
 \arguments{
 \item{data}{An object of class \code{survDataCstExp}.}
@@ -41,6 +53,9 @@ the Deviance Information Criterion (DIC) with the \code{rjags} package}
 
 \item{hb_value}{If \code{TRUE}, the background mortality \code{hb} is taken into account.
 If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}.}
+
+\item{hb_valueFIXED}{If \code{hb_value} is \code{FALSE}, then \code{hb_valueFiXED} is the value to fix \code{hb}.
+If \code{hb_value} is \code{FALSE} and  \code{hb_valueFiXED} is \code{NA}, then \code{hb} is fixed to \code{0}.}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }

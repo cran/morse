@@ -4,8 +4,7 @@
 \alias{priors_distribution.survFit}
 \title{Density distribution of priors from a \code{survFit} object.}
 \usage{
-\method{priors_distribution}{survFit}(object, size_sample = 1000,
-  EFSA_name = FALSE, ...)
+\method{priors_distribution}{survFit}(object, size_sample = 1000, EFSA_name = FALSE, ...)
 }
 \arguments{
 \item{object}{An object of class \code{survFit}.}

@@ -5,7 +5,8 @@
 \alias{dichromate}
 \title{Survival data set for \emph{Daphnia magna} exposed to dichromate
 during 21 days}
-\format{A data frame with 60 observations on the following four variables:
+\format{
+A data frame with 60 observations on the following four variables:
 \describe{ \item{\code{replicate}}{A vector of class \code{numeric} with the
 replicate code (\code{1}).} \item{\code{conc}}{A vector of
 class \code{numeric} with dichromate concentrations in \eqn{mg.L^{-1}}.}
@@ -13,7 +14,8 @@ class \code{numeric} with dichromate concentrations in \eqn{mg.L^{-1}}.}
 (in days from the beginning of the experiment \eqn{t = 0}).}
 \item{\code{Nsurv}}{A vector of class \code{integer} with the number of
 alive individuals at each time point for each concentration and each
-replicate.}}}
+replicate.}}
+}
 \usage{
 data(dichromate)
 }

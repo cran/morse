@@ -6,7 +6,8 @@
 \title{Survival data set for \emph{Gammarus pulex} exposed to propiconazole
 during 10 days with time-variable
 exposure concentration (non-standard pulsed toxicity experiments)}
-\format{A data frame with 74 observations on the following four variables:
+\format{
+A data frame with 74 observations on the following four variables:
 \describe{ \item{\code{replicate}}{A vector of class \code{factor} with the
 replicate code (\code{varControl}, \code{varA}, \code{varB} and \code{varC}).}
 \item{\code{conc}}{A vector of class \code{numeric} with propiconazole
@@ -15,7 +16,8 @@ concentrations in \eqn{\mu mol.L^{-1}}.}
 (in days from the beginning of the experiment \eqn{t = 0}).}
 \item{\code{Nsurv}}{A vector of class \code{integer} with the number of
 alive individuals at each time point for each concentration and each
-replicate.}}}
+replicate.}}
+}
 \usage{
 data(propiconazole_pulse_exposure)
 }

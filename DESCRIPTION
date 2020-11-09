@@ -2,7 +2,7 @@ Package: morse
 Type: Package
 Title: Modelling Tools for Reproduction and Survival Data in
         Ecotoxicology
-Version: 3.2.5
+Version: 3.2.7
 Encoding: UTF-8
 Author: 
     Virgile Baudrot [aut],
@@ -22,7 +22,7 @@ Description: Tools for ecotoxicologists and regulators dedicated to the
     mathematical and statistical modelling of toxicity test data. They use advanced and
     innovative methods for a valuable quantitative environmental risk assessment. See also
     Delignette-Muller et al. (2017) <doi:10.1021/acs.est.6b05326>. and Baudrot et al. (2018) <doi:10.1021/acs.est.7b05464>.
-Depends: R (>= 3.0.0)
+Depends: R (>= 3.5.0)
 SystemRequirements: JAGS (>= 4.0.0) (see
         http://mcmc-jags.sourceforge.net)
 Imports: coda, deSolve, dplyr, epitools, graphics, grDevices, ggplot2
@@ -31,9 +31,9 @@ Imports: coda, deSolve, dplyr, epitools, graphics, grDevices, ggplot2
 License: GPL (>= 2)
 Suggests: knitr, rmarkdown, testthat
 VignetteBuilder: knitr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 LazyData: true
 NeedsCompilation: no
-Packaged: 2019-09-26 08:31:34 UTC; vbaudrot
+Packaged: 2020-11-09 08:36:58 UTC; virgi
 Repository: CRAN
-Date/Publication: 2019-09-27 08:50:02 UTC
+Date/Publication: 2020-11-09 11:40:02 UTC

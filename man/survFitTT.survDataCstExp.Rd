@@ -4,8 +4,14 @@
 \alias{survFitTT.survDataCstExp}
 \title{Fits a Bayesian concentration-response model for target-time survival analysis}
 \usage{
-\method{survFitTT}{survDataCstExp}(data, target.time = NULL, lcx = c(5,
-  10, 20, 50), n.chains = 3, quiet = FALSE, ...)
+\method{survFitTT}{survDataCstExp}(
+  data,
+  target.time = NULL,
+  lcx = c(5, 10, 20, 50),
+  n.chains = 3,
+  quiet = FALSE,
+  ...
+)
 }
 \arguments{
 \item{data}{an object of class \code{survData}}
