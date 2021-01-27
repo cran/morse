@@ -3,6 +3,8 @@
 #' This is the generic \code{predict} S3 method for the \code{survFit} class.
 #' It provides simulation for "SD" or "IT" models under constant or time-variable exposure.
 #'
+#' @rdname predict
+#' 
 #' @param object An object of class \code{survFit}
 #' @param data_predict A dataframe with three columns \code{time}, \code{conc} and \code{replicate}
 #'  used for prediction. If \code{NULL}, prediction is based on \code{x} object of 
@@ -16,6 +18,7 @@
 #' @param ratio_no.NA A numeric between 0 and 1 standing for the proportion of non-NA values
 #'  required to compute quantile. The default is \eqn{0.95}.
 #' @param  hb_valueFORCED If \code{hb_value} is \code{FALSE}, it fix \code{hb}.
+#' @param extend_time Length of time points interpolated with variable exposure profiles
 #' @param \dots Further arguments to be passed to generic methods
 #' 
 #' @examples 
@@ -50,6 +53,7 @@ predict.survFit <- function(object,
                             hb_value = TRUE,
                             ratio_no.NA = 0.95,
                             hb_valueFORCED = NA,
+                            extend_time = 100,
                             ...) {
   x <- object # Renaming to satisfy CRAN checks on S3 methods
               # arguments should be named the same when declaring a
@@ -58,7 +62,6 @@ predict.survFit <- function(object,
   # Initialisation
   mcmc <- x$mcmc
   model_type <- x$model_type
-  extend_time <- 100
 
   if(is.null(data_predict)){
     if("survFitVarExp" %in% class(x)){
@@ -224,8 +227,7 @@ quantile_fun <- function(x, probs = 0.50, ratio_no.NA = 0.95){
 
 Surv.SD_Cext <- function(Cw, time, kk, kd, z, hb){
   
-  time.prec = dplyr::lag(time, 1) ; time.prec[1] = time[1] #   time[1] = tprec[1]
-  
+  time.prec = c(time[1], time[1:(length(time)-1)])
   # Using log transfomration: log(a+b) = log(a) + log(1+b/a) may prevent the numerical issues raised by exponential
   diff.int = (exp(time %*% t(kd)) + exp(time.prec %*% t(kd)) )*Cw/2 * (time-time.prec) #OK time[1]-tprec[1] = 0
   #log_diff.int = time %*% t(kd) + log(1 + exp((time.prec - time) %*% t(kd)))
@@ -235,8 +237,8 @@ Surv.SD_Cext <- function(Cw, time, kk, kd, z, hb){
   
   lambda = kk * pmax(D-z,0) + hb # the pmax function is important here for elementwise maximum with 0 and D[i,j]-z ATTENTION: pmax(0,D) != pmax(D,0)
   
-  lambda.prec = dplyr::lag(lambda, 1 ) ; lambda.prec[1] = lambda[1]
-  
+  lambda.prec = cbind(lambda[,1], lambda[,1:(ncol(lambda)-1)])
+
   int.lambda =  t(t((lambda + lambda.prec)/2) * (time-time.prec))
   
   S <- exp(-t(apply(int.lambda,1,cumsum)))
@@ -279,6 +281,7 @@ Surv.IT_Cext <- function(Cw, time, kd, hb, alpha, beta){
 # Create a dataset for survival analysis when the replicate of concentration is variable
 #
 # @param x An object of class \code{survData}
+# @param extend_time length of time points interpolated with variable exposure profiles
 #
 # @return A dataframe
 #
@@ -291,7 +294,6 @@ predict_interpolate <- function(x, extend_time = 100){
     dplyr::summarise(min_time = min(time, na.rm = TRUE),
                      max_time = max(time, na.rm = TRUE)) %>%
     dplyr::group_by(replicate) %>%
-    # dplyr::do(data.frame(replicate = .$replicate, time = seq(.$min_time, .$max_time, length = extend_time)))
     dplyr::do(tibble(replicate = .$replicate, time = seq(.$min_time, .$max_time, length = extend_time)))
   
   x_interpolate <- dplyr::full_join(df_MinMax, x,

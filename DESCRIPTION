@@ -2,7 +2,7 @@ Package: morse
 Type: Package
 Title: Modelling Tools for Reproduction and Survival Data in
         Ecotoxicology
-Version: 3.2.7
+Version: 3.3.0
 Encoding: UTF-8
 Author: 
     Virgile Baudrot [aut],
@@ -10,6 +10,7 @@ Author:
     Marie Laure Delignette-Muller [aut],
     Wandrille Duchemin [ctb],
     Benoit Goussen [ctb],
+    Nils Kehrein [ctb],
     Guillaume Kon-Kam-King [ctb],
     Christelle Lopes [ctb],
     Philippe Ruiz [aut],
@@ -33,7 +34,7 @@ Suggests: knitr, rmarkdown, testthat
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
 LazyData: true
-NeedsCompilation: no
-Packaged: 2020-11-09 08:36:58 UTC; virgi
+NeedsCompilation: yes
+Packaged: 2021-01-27 14:38:51 UTC; virgi
 Repository: CRAN
-Date/Publication: 2020-11-09 11:40:02 UTC
+Date/Publication: 2021-01-27 15:50:02 UTC

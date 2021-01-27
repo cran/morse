@@ -63,6 +63,9 @@ plot(out, spaghetti = TRUE , adddata = TRUE,
 
 }
 \references{
+Delignette-Muller ML, Ruiz P and Veber P (2017).
+\emph{Robust fit of toxicokinetic-toxicodynamic models using prior knowledge contained in the design of survival toxicity tests.}
+
 Bedaux, J., Kooijman, SALM (1994) Statistical analysis of toxicity tests,
 based on hazard modeling, \emph{Environmental and Ecological Statistics}, 1,
 303-314.

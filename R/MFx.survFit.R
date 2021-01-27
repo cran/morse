@@ -19,6 +19,7 @@
 #'   is the survival probability after an exposure profile
 #'    \eqn{MF(x,t)* C_w(\tau \in T)} at time \eqn{t}.
 #'   
+#' @rdname MFx
 #' 
 #' @param object An object of class \code{survFit}.
 #' @param data_predict A dataframe with two columns \code{time} and \code{conc}.
@@ -45,6 +46,9 @@
 #' @param threshold_iter Threshold number of iteration.
 #' @param hb_valueFORCED If \code{hb_value} is \code{FALSE}, it fix \code{hb}.
 #' @param ode IF \code{ode} is \code{TRUE}, algo use predict_ode rather than predict. Default is \code{TRUE}.
+#' @param interpolate_length Length of the time sequence for which output is wanted.
+#' @param interpolate_method The interpolation method for concentration. See package \code{deSolve} for details.
+#' Default is \code{linear}.
 #' @param \dots Further arguments to be passed to generic methods
 #'
 #' @return The function returns an object of class \code{MFx}, which is a list
@@ -104,6 +108,8 @@ MFx.survFit <- function(object,
                         threshold_iter = 100,
                         hb_valueFORCED = 0,
                         ode=TRUE,
+                        interpolate_length = NULL,
+                        interpolate_method = "linear",
                         ...){
   
   ## Analyse data_predict data.frame
@@ -131,7 +137,9 @@ MFx.survFit <- function(object,
                                 spaghetti = spaghetti,
                                 mcmc_size = mcmc_size,
                                 hb_value = hb_value,
-                                hb_valueFORCED = hb_valueFORCED )
+                                hb_valueFORCED = hb_valueFORCED,
+                                interpolate_length = interpolate_length,
+                                interpolate_method = interpolate_method)
   } else{
     ls_predict[[1]] <- predict( object = object,
                                 data_predict = ls_data_predict[[1]],

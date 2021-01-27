@@ -4,6 +4,7 @@
 #' object when computing issues happen. \code{MFx_ode} uses the \code{deSolve}
 #' library to improve robustness. However, time to compute may be longer.
 #' 
+#' @rdname MFx
 #' 
 #' @param object an object used to select a method \code{ppc}
 #' @param \dots Further arguments to be passed to generic methods
@@ -35,6 +36,7 @@ MFx_ode <- function(object, ...){
 #'   is the survival probability after an exposure profile
 #'    \eqn{MF(x,t)* C_w(\tau \in T)} at time \eqn{t}.
 #'   
+#' @rdname MFx   
 #' 
 #' @param object An object of class \code{survFit}.
 #' @param data_predict A dataframe with two columns \code{time} and \code{conc}.
@@ -116,6 +118,8 @@ MFx_ode.survFit <- function(object,
                         accuracy = 0.01,
                         quiet = FALSE,
                         threshold_iter = 100,
+                        interpolate_length = NULL,
+                        interpolate_method = "linear",
                         ...){
   
 warning("The function 'MFx_ode' uses 'predict_ode' to compute the predictions for calculating the multiplication factors.
@@ -145,7 +149,9 @@ Prefer the function 'MFx' when possible.")
                               data_predict = ls_data_predict[[1]],
                               spaghetti = spaghetti,
                               mcmc_size = mcmc_size,
-                              hb_value = hb_value)
+                              hb_value = hb_value,
+                              interpolate_length = interpolate_length,
+                              interpolate_method = interpolate_method)
   
   filter_time_MFx = dplyr::filter(ls_predict[[1]]$df_quantile, time == time_MFx)
   
@@ -167,7 +173,9 @@ Prefer the function 'MFx' when possible.")
                                              ls_predict = ls_predict,
                                              quiet = quiet,
                                              quantile = "q50",
-                                             threshold_iter = threshold_iter) # "q50", "qinf95", "qsup95"
+                                             threshold_iter = threshold_iter,
+                                             interpolate_length = interpolate_length,
+                                             interpolate_method = interpolate_method) # "q50", "qinf95", "qsup95"
     binarySearch_MFx_qinf95 <- binarySearch_MFx_ode(object = object,
                                                 spaghetti = spaghetti,
                                                 mcmc_size = mcmc_size,
@@ -182,7 +190,9 @@ Prefer the function 'MFx' when possible.")
                                                 ls_predict = ls_predict,
                                                 quiet = quiet,
                                                 quantile = "qinf95",
-                                                threshold_iter = threshold_iter) # "q50", "qinf95", "qsup95"
+                                                threshold_iter = threshold_iter,
+                                                interpolate_length = interpolate_length,
+                                                interpolate_method = interpolate_method) # "q50", "qinf95", "qsup95"
     binarySearch_MFx_qsup95 <- binarySearch_MFx_ode(object = object,
                                                 spaghetti = spaghetti,
                                                 mcmc_size = mcmc_size,
@@ -197,7 +207,9 @@ Prefer the function 'MFx' when possible.")
                                                 ls_predict = ls_predict,
                                                 quiet = quiet,
                                                 quantile = "qsup95",
-                                                threshold_iter = threshold_iter) # "q50", "qinf95", "qsup95"
+                                                threshold_iter = threshold_iter,
+                                                interpolate_length = interpolate_length,
+                                                interpolate_method = interpolate_method) # "q50", "qinf95", "qsup95"
     
     #
     # Make a dataframe with quantile of all generated time series
@@ -257,7 +269,9 @@ Prefer the function 'MFx' when possible.")
               data_predict = ls_data_predict[[kit]],
               spaghetti = spaghetti,
               mcmc_size = mcmc_size,
-              hb_value = hb_value)
+              hb_value = hb_value,
+              interpolate_length = interpolate_length,
+              interpolate_method = interpolate_method)
     })
     
     #
@@ -385,7 +399,9 @@ binarySearch_MFx_ode <- function(object,
                              ls_predict,
                              quiet,
                              quantile, # "q50", "qinf95", "qsup95"
-                             threshold_iter
+                             threshold_iter,
+                             interpolate_length,
+                             interpolate_method
 ){
   #
   # binary search of MFx in O(log n)
@@ -408,7 +424,9 @@ binarySearch_MFx_ode <- function(object,
                                  data_predict = ls_data_predict[[i+1]],
                                  spaghetti = spaghetti,
                                  mcmc_size = mcmc_size,
-                                 hb_value = hb_value)
+                                 hb_value = hb_value,
+                                 interpolate_length = interpolate_length,
+                                 interpolate_method = interpolate_method)
     
     filter_time_MFx = dplyr::filter(ls_predict[[i+1]]$df_quantile, time == time_MFx)
     if(quantile == "q50"){ value_mortality_test = filter_time_MFx$q50 }

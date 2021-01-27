@@ -4,6 +4,7 @@
 #' object when computing issues happen. \code{predict_nsurv_ode} uses the \code{deSolve}
 #' library to improve robustness. However, time to compute may be longer.
 #' 
+#' @rdname predict
 #' 
 #' @param object An object of class \code{survFit}.
 #' @param data_predict A dataframe with three columns \code{time}, \code{conc} and \code{replicate}
@@ -16,10 +17,11 @@
 #'  is 1000. If all MCMC is wanted, set argument to \code{NULL}.
 #' @param hb_value If \code{TRUE}, the background mortality \code{hb} is taken into account from the posterior.
 #' If \code{FALSE}, parameter \code{hb} is set to 0. The default is \code{TRUE}.
+#' @param  hb_valueFORCED If \code{hb_value} is \code{FALSE}, it fix \code{hb}.
+#' @param extend_time Length of time points interpolated with variable exposure profiles.
 #' @param interpolate_length Length of the time sequence for which output is wanted.
 #' @param interpolate_method The interpolation method for concentration. See package \code{deSolve} for details.
 #' Default is \code{linear}.
-#' @param  hb_valueFORCED If \code{hb_value} is \code{FALSE}, it fix \code{hb}.
 #' @param \dots Further arguments to be passed to generic methods
 #' 
 #' @export
@@ -29,9 +31,10 @@ predict_Nsurv_ode <- function(object,
                                spaghetti,
                                mcmc_size,
                                hb_value,
+                               hb_valueFORCED,
+                               extend_time,
                                interpolate_length,
                                interpolate_method,
-                               hb_valueFORCED,
                                ...){
   UseMethod("predict_Nsurv_ode")
 }
@@ -46,9 +49,10 @@ predict_Nsurv_ode.survFit <- function(object,
                                   spaghetti = FALSE,
                                   mcmc_size = 1000,
                                   hb_value = TRUE,
-                                  interpolate_length = 100,
-                                  interpolate_method = "linear",
                                   hb_valueFORCED = NA,
+                                  extend_time = 100,
+                                  interpolate_length = NULL,
+                                  interpolate_method = "linear",
                                   ...) {
   x <- object # Renaming to satisfy CRAN checks on S3 methods
   # arguments should be named the same when declaring a
@@ -59,12 +63,13 @@ predict_Nsurv_ode.survFit <- function(object,
             prediction on the Number of survivor.")
   }
   
-  message("Note that computing can be quite long (several minutes).")
+  message("Note that computing can be quite long (several minutes).
+  Tips: To reduce that time you can reduce Number of MCMC chains (default mcmc_size is set to 1000).")
   
   # Initialisation
   mcmc <- x$mcmc
   model_type <- x$model_type
-  extend_time <- interpolate_length
+  extend_time <- extend_time
   
   if(is.null(data_predict)){
     if("survFitVarExp" %in% class(x)){
@@ -152,7 +157,7 @@ predict_Nsurv_ode.survFit <- function(object,
                  hb=hb,
                  z=z,
                  mcmc_size = mcmc_size,
-                 interpolate_length = NULL,
+                 interpolate_length = interpolate_length,
                  interpolate_method = interpolate_method)
     })
     
@@ -171,7 +176,7 @@ predict_Nsurv_ode.survFit <- function(object,
                  alpha = alpha,
                  beta = beta,
                  mcmc_size = mcmc_size,
-                 interpolate_length = NULL,
+                 interpolate_length = interpolate_length,
                  interpolate_method = interpolate_method)
     })
   }
@@ -221,34 +226,42 @@ predict_Nsurv_ode.survFit <- function(object,
     mat_psurv <- df_filter %>%
       select(- c("time", "conc", "replicate",
                  "q50", "qinf95", "qsup95", 
-                 "Nsurv", "Nprec", "iter", "iter_prec"))
+                 "Nsurv", "Nprec", "iter", "iter_prec")) %>%
+      as.matrix()
     
     ncol_NsurvPred <- ncol(mat_psurv)
-    NsurvPred_check <- matrix(ncol = ncol_NsurvPred, nrow = nrow(mat_psurv))
+    nrow_NsurvPred <- nrow(mat_psurv)
+    iter = df_filter$iter
+    iter_prec = df_filter$iter_prec
+    
     NsurvPred_valid <- matrix(ncol = ncol_NsurvPred, nrow = nrow(mat_psurv))
+
+    Nprec <- cbind(df_filter$Nprec)[, rep(1,ncol_NsurvPred)]
     
-    iter <- df_filter$iter
-    iter_prec <- df_filter$iter_prec
-    Nprec <- df_filter$Nprec
+    mat_psurv_prec = matrix(ncol = ncol_NsurvPred, nrow = nrow_NsurvPred)
+    for(i in 1:nrow_NsurvPred){
+      if(iter[i] == iter_prec[i]){
+        mat_psurv_prec[i,] = mat_psurv[i,]
+      } else{
+        mat_psurv_prec[i,] = mat_psurv[i-1,]
+      }
+    }
+    mat_pSurv_ratio = mat_psurv / mat_psurv_prec
     
-    for(i in 1:nrow(mat_psurv)){
-      
-      NsurvPred_check[i, ] = rbinom(ncol_NsurvPred,
-                                    size = rep(Nprec[i], ncol_NsurvPred),
-                                    prob = ifelse(iter[i] == iter_prec[i],
-                                                  rep(1, ncol_NsurvPred),
-                                                  as.numeric(mat_psurv[i,] / mat_psurv[i-1,])))
-      for(j in 1:ncol(mat_psurv)){
-        NsurvPred_valid[i,j] = rbinom(1,
-                                      size = ifelse(iter[i] == iter_prec[i],
-                                                    Nprec[i],
-                                                    NsurvPred_valid[i-1,j]),
-                                      prob = ifelse(iter[i] == iter_prec[i],
-                                                    1,
-                                                    as.numeric(mat_psurv[i,j] / mat_psurv[i-1,j])))
-        
-        # print(paste("row", i, "col", j)
-        
+    NsurvPred_check_vector = rbinom(ncol_NsurvPred*nrow_NsurvPred,
+                                    size = Nprec,
+                                    prob =  mat_pSurv_ratio)
+    NsurvPred_check = matrix(NsurvPred_check_vector, byrow = FALSE, nrow = nrow_NsurvPred)
+    
+
+    NsurvPred_valid[1, ] = rep(Nprec[1], ncol_NsurvPred)
+    for(i in 2:nrow(mat_psurv)){
+      if(iter[i] == iter_prec[i]){
+        NsurvPred_valid[i,] = NsurvPred_check[i,]
+      } else{
+        NsurvPred_valid[i,] = rbinom(ncol_NsurvPred,
+                                     size = NsurvPred_valid[i-1,],
+                                     prob = mat_pSurv_ratio[i,])
       }
     }
     

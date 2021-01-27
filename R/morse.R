@@ -76,14 +76,17 @@
 #' @seealso \code{\link[rjags]{rjags}},
 #' \code{\link[ggplot2]{ggplot2}}
 #' 
-#' @references 
+#' @references
+#' Delignette-Muller, M.L., Ruiz P. and Veber P. (2017)
+#' \emph{Robust fit of toxicokinetic-toxicodynamic models using prior knowledge contained in the design of survival toxicity tests}.
+#' \url{https://pubs.acs.org/doi/10.1021/acs.est.6b05326}
+#' 
 #' Delignette-Muller, M.L., Lopes, C., Veber, P. and Charles, S. (2014)
 #' \emph{Statistical handling of reproduction data for exposure-response modelling}.
 #' \url{https://pubs.acs.org/doi/abs/10.1021/es502009r?journalCode=esthag}.
 #' 
 #' Forfait-Dubuc, C., Charles, S., Billoir, E. and Delignette-Muller, M.L. (2012)
 #' \emph{Survival data analyses in ecotoxicology: critical effect concentrations, methods and models. What should we use?}
-#' \url{https://doi.org/10.1007/s10646-012-0860-0}.
 #'
 #' Plummer, M. (2013) \emph{JAGS Version 4.0.0 user manual}.
 #' \url{https://sourceforge.net/projects/mcmc-jags/files/Manuals/4.x/jags_user_manual.pdf/download}
@@ -405,4 +408,24 @@ NULL
 #' Charles S. (2008) A Bayesian Approach to Analyzing Ecotoxicological Data,
 #' \emph{Environmental Science & Technology}, 42 (23), 8978-8984.
 #' @keywords data set
+NULL
+
+
+#' A simulated exposure profile with 11641 time points.
+#'
+#' Exposure profile of 11641 time points used for prediction.
+#'
+#' @name FOCUSprofile
+#' @docType data
+#' @usage data(FOCUSprofile)
+#' @format A data frame with 11641 observations on the following two variables:
+#' \describe{ \item{\code{time}}{A vector of class \code{numeric}.}
+#'  \item{\code{conc}}{A vector of class \code{numeric} with exposure concentrations.} and 
+#'  \item{\code{replicate}}{A vector of class \code{factor}.} }
+#' @keywords data set
+NULL
+
+## usethis namespace: start
+#' @useDynLib morse, .registration = TRUE
+## usethis namespace: end
 NULL
