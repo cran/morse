@@ -2,7 +2,7 @@ Package: morse
 Type: Package
 Title: Modelling Tools for Reproduction and Survival Data in
         Ecotoxicology
-Version: 3.3.0
+Version: 3.3.1
 Encoding: UTF-8
 Author: 
     Virgile Baudrot [aut],
@@ -35,6 +35,6 @@ VignetteBuilder: knitr
 RoxygenNote: 7.1.1
 LazyData: true
 NeedsCompilation: yes
-Packaged: 2021-01-27 14:38:51 UTC; virgi
+Packaged: 2021-02-04 14:09:23 UTC; virgi
 Repository: CRAN
-Date/Publication: 2021-01-27 15:50:02 UTC
+Date/Publication: 2021-02-04 18:00:07 UTC

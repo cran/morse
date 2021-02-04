@@ -1,6 +1,6 @@
-14dd373b44837f06210f4fa72719c821 *DESCRIPTION
+3309d56d4936d35367c4a722286d68d9 *DESCRIPTION
 827e58b3b38372198d7fab08ec30b1f5 *NAMESPACE
-80cf9c0a1a405eeb689f32af380dfbf0 *NEWS
+725f96a2324567da0c223c6b5ace6a02 *NEWS
 161dbd4865e4c0c2201441cb5662a2af *R/JAGS_models.R
 9bf6a570677a7bcb4d8e3e709643b4a0 *R/LCx.R
 b37d7823965d65b8135a3363b327d98d *R/LCx.survFit.R
@@ -57,8 +57,8 @@ dba5397c7c0b151df78bc2e4778f6fae *R/summary.reproData.R
 12cb7bb8ba9380f81d1c518fda4ef2fe *R/summary.survFit.R
 ee46245c23f05c0dd9a165af41737138 *R/summary.survFitTKTD.R
 a0688d37d08308ec32f21b57da1e1192 *R/summary.survFitTT.R
-ba66d5291199b0c15cc5e932de43e108 *R/survData.R
-5818ead6ac4a56a5a8b6e5791d39abc3 *R/survDataCheck.R
+544d644dcf75a93a56d518ad641ebfed *R/survData.R
+d500f0b243e9783a3944ea86de684427 *R/survDataCheck.R
 0350690cbe7ace81fec6187712f154b8 *R/survFit.R
 3fe44aaa20367786d5669da6da0c5165 *R/survFit.survDataCstExp.R
 9ca1ade2a54ebc4d9e78bb41d5f4f29a *R/survFit.survDataVarExp.R
@@ -82,10 +82,10 @@ a75eb12ac3166881056733921d37e27a *inst/doc/MinimalWorkingExample.R
 1db223bf9deb502090705e8662967a6e *inst/doc/MinimalWorkingExample.Rmd
 3d0fb4847d29a58769a48d68d4c398ff *inst/doc/MinimalWorkingExample.html
 9cc383acb11df8008197be63fb61fffb *inst/doc/modelling.Snw
-8ae5f59c9d3ff789667cc39d7689d2e2 *inst/doc/modelling.pdf
+9c3504f20f610b501d595b12f2726676 *inst/doc/modelling.pdf
 13e8dd1204aa8a06d2acb851924c8bbe *inst/doc/tutorial.R
 c0e76405bf7bb3e31e373211c0ed54c1 *inst/doc/tutorial.Rmd
-02e76506e45dbe0c9e17302378c9ad9c *inst/doc/tutorial.html
+e8cf15a7d18488b4be1d48f1c6ed4d1b *inst/doc/tutorial.html
 b63298f44cb392b43d595242eb7e8e48 *man/FOCUSprofile.Rd
 979ae5808deaa324bea2450e8e6c0a49 *man/LCX.Rd
 6302256dc2ad1d0564a82425b53f8965 *man/MFx.Rd
@@ -142,8 +142,7 @@ bfbcd1c708191d6f8721a321c6db3e60 *man/propiconazole_pulse_exposure.Rd
 d1618f0fc23e6a2f91838a9a22759792 *man/summary.survFit.Rd
 61466cfef5f79df580955521c4e50e2e *man/summary.survFitTKTD.Rd
 56cf7ec75ccba0ff49361efeac78c341 *man/summary.survFitTT.Rd
-e9357ad3bdbb7ae7a6a8a2c0d178619e *man/survData.Rd
-9e9c8ee89a0603541baec933c63eead9 *man/survDataCheck.Rd
+8e1228742560fc8fbed61885f210f98d *man/survData.Rd
 b22c028c8f7eadee2cb4c2409754bb6e *man/survData_join.Rd
 295c225ddb18fea88acee1b0ac5893ab *man/survFit.Rd
 79e2c6f353b16a083d02a6365be65397 *man/survFitTKTD.Rd
@@ -159,6 +158,7 @@ d6323ddc25c10200067d2e7fa2bb1306 *tests/testthat/test-LCx.R
 0cf86e48cbb4f7b516af471328f86533 *tests/testthat/test-ggplot.R
 12a07b82116dd8f134c12e7e07ca71ef *tests/testthat/test-modelData.R
 293a0c3dfd3ce0c095f0144d5ea28ee5 *tests/testthat/test-predict.R
+3f4a710f25273443e0b0199931859a18 *tests/testthat/test-read.R
 e3b80edb098685200770d2680e9478f1 *tests/testthat/test-repro.R
 0715ada1a25cc70d753584364318fc80 *tests/testthat/test-surv.R
 c377c25900ea22078e38c5345054269b *tests/testthat/test-survFit.R
