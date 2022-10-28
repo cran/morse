@@ -1,5 +1,16 @@
 === morse : MOdelling tools for Reproduction and Survival data in Ecotoxicology ===
 
+Version 3.3.2
+=============
+
+Change the Maintainer
+- Maintainer was P. Veber et becomes V. Baudrot 
+
+Re-write the vignette in sweave for pdf modelling.Snw into R markdown modeling.Rmd
+- remove modelling.Snw and add modeling.Rmd
+- add REFERENCES.bib
+
+
 
 Version 3.3.1
 =============
@@ -71,7 +82,7 @@ Version 3.2.2
 OTHER CHANGES
 - add warning message in 'survFit' function when 'hb_value' is fixed.
 - add function 'predict_Nsurv_ode' function to compute predictive function with
-the ODE solver from deSolve package.
+  the ODE solver from deSolve package.
 
 Version 3.2.1
 =============
@@ -92,11 +103,10 @@ BUG FIXES
 NEW FEATURES
 - add 'predict_Nsurv' function to compute prediction for the number of survivors.
 - add 'predict_Nsurv_check' function to compute criteria to check model.
-performance: (i) percentage of observation within the 95% credible interval of
-prediction drawn from posterior, (ii) the Normalised Root Mean Square Error
-(NRMSE) and (iii) the Survival-Probability Prediction Error (SPPE).
-- add 'ppc.survFitPredict_Nsurv' function to plot ppc for 'survFitPredict_Nsurv'
-object
+  performance: (i) percentage of observation within the 95% credible interval of
+  prediction drawn from posterior, (ii) the Normalised Root Mean Square Error
+  (NRMSE) and (iii) the Survival-Probability Prediction Error (SPPE).
+- add 'ppc.survFitPredict_Nsurv' function to plot ppc for 'survFitPredict_Nsurv' object
 - add 'plot.survFitPredict_Nsurv' function to plot 'survFitPredict_Nsurv' object
 - add 'Nsurv_ppc' and 'Nsurv_sim' in 'mcmc' object within 'survFit' class objects
 - Modif JAGS models to ensure probability use for binomial distribution is <1 (JAGS does not work with p=1).

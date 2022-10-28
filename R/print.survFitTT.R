@@ -7,6 +7,8 @@
 #' @param x An object of class \code{survFitTT}
 #' @param \dots Further arguments to be passed to generic methods
 #' 
+#' @return print the model text and the Jags Computing information
+#' 
 #' @examples
 #' # (1) Load the data
 #' data(cadmium1)
@@ -14,7 +16,7 @@
 #' # (2) Create an object of class 'survData'
 #' cadmium1 <- survData(cadmium1)
 #' 
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the survFitTT function with the log-logistic
 #' # binomial model
 #' out <- survFitTT(cadmium1, lcx = c(5, 10, 15, 20, 30, 50, 80),

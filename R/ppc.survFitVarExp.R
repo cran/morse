@@ -17,6 +17,8 @@
 #' @param ylab A label for the \eqn{Y}-axis, by default \code{Predicted nb of survivors}.
 #' @param main A main title for the plot.
 #' @param \dots Further arguments to be passed to generic methods
+#' 
+#' @return a plot of class \code{ggplot}
 #'
 #' @examples
 #'
@@ -26,7 +28,7 @@
 #' # (2) Create an object of class "survData"
 #' dat <- survData(propiconazole_pulse_exposure)
 #'
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the survFitTKTD function with the TKTD model ('SD' or 'IT')
 #' out <- survFit(dat, model_type = "SD")
 #'

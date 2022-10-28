@@ -60,9 +60,9 @@ survFit(
 )
 }
 \arguments{
-\item{data}{An object of class \code{survDataVarExp}.}
+\item{data}{An object of class \code{survDataCstExp} or \code{survDataVarExp}.}
 
-\item{model_type}{can be \code{"SD"} or \code{"IT"} to choose
+\item{model_type}{Can be \code{"SD"} or \code{"IT"} to choose
 between "Stochastic Death" or "Individual Tolerance" models
 (resp.). See the modeling vignette for details.}
 
@@ -102,6 +102,8 @@ If \code{hb_value} is \code{FALSE} and  \code{hb_valueFiXED} is \code{NA}, then 
 interpolation (comprise between time to compute and fitting accuracy)}
 }
 \value{
+an object of class \code{survFit}
+
 The function returns an object of class \code{survFitCstExp}, which is
 a list with the following information:
 \item{estim.par}{a table of the estimated parameters as medians and 95\%
@@ -140,21 +142,9 @@ for survival analysis using Bayesian inference. In this model,
 the survival rate of individuals is modeled as a function of the chemical compound
 concentration with a mechanistic description of the effects on survival over
 time.
-
-This function estimates the parameters of a TKTD model ('SD' or 'IT')
-for survival analysis using Bayesian inference. In this model,
-the survival rate of individuals is modeled as a function of the chemical compound
-concentration with a mechanistic description of the effects on survival over
-time.
-
-This function estimates the parameters of a TKTD ('SD' or 'IT')
-model for survival analysis using Bayesian inference. In this model,
-the survival rate of individuals is modeled as a function of the chemical compound
-concentration with a mechanistic description of the effects on survival over
-time.
 }
 \details{
-The function \code{survFit} return the parameter estimates of Toxicokinetic-toxicodynamic (TKTD) models
+The function \code{survFit} returns the parameter estimates of Toxicokinetic-toxicodynamic (TKTD) models
 \code{SD} for 'Stochastic Death' or \code{IT} fo 'Individual Tolerance'.
 TKTD models, and particularly the General Unified Threshold model of
 Survival (GUTS), provide a consistent process-based
@@ -168,123 +158,44 @@ exceeded in one individual, this individual dies immediately.
 
 When class of \code{object} is \code{survDataCstExp}, see \link[=survFit.survDataCstExp]{survFit.survDataCstExp} ;
 and for a \code{survDataVarExp}, see \link[=survFit.survDataVarExp]{survFit.survDataVarExp}.
-
-The function \code{survFit} return the parameter estimates of Toxicokinetic-toxicodynamic (TKTD) models
-\code{SD} for 'Stochastic Death' or \code{IT} fo 'Individual Tolerance'.
-TKTD models, and particularly the General Unified Threshold model of
-Survival (GUTS), provide a consistent process-based
-framework to analyse both time and concentration dependent datasets.
-In GUTS-SD, all organisms are assumed to have the same internal concentration 
-threshold (denoted \eqn{z}), and, once exceeded, the instantaneous probability
-to die increases linearly with the internal concentration.
-In GUTS-IT, the threshold concentration is distributed among all the organisms, and once 
-exceeded in one individual, this individual dies immediately.
-
-The function \code{survFit} return the parameter estimates of Toxicokinetic-toxicodynamic (TKTD) models
-\code{SD} for 'Stochastic Death' or \code{IT} fo 'Individual Tolerance'.
-TKTD models, and particularly the General Unified Threshold model of
-Survival (GUTS), provide a consistent process-based
-framework to analyse both time and concentration dependent datasets.
-In GUTS-SD, all organisms are assumed to have the same internal concentration 
-threshold (denoted \eqn{z}), and, once exceeded, the instantaneous probability
-to die increases linearly with the internal concentration.
-In GUTS-IT, the threshold concentration is distributed among all the organisms, and once 
-exceeded in one individual, this individual dies immediately.
 }
 \examples{
 
+# Example with time-variable exposure profile#'
 # (1) Load the survival data
 data(propiconazole)
-
 # (2) Create an object of class "survData"
 dataset  <- survData(propiconazole)
-
-\dontrun{
+\donttest{
 # (3) Run the survFit function with TKTD model 'SD' or 'IT' 
 out <- survFit(dataset , model_type = "SD")
-
 # (4) Summarize look the estimated parameters
 summary(out)
-
 # (5) Plot the fitted curve
 plot(out, adddata = TRUE)
-
-# (6) Plot the fitted curve with ggplot style and CI as spaghetti
-plot(out, spaghetti = TRUE , adddata = TRUE)
-}
-
-# When the data set include variable exposure profile, time for inference is longer
-
-# (1) Load the survival data with variable exposure profile
-data("propiconazole_pulse_exposure")
-
-# (2) Create an object of class "survData"
-dataset <- survData(propiconazole_pulse_exposure)
-
-\dontrun{
-# (3) Run the survFit function with TKTD model 'SD' or 'IT' 
-out <- survFit(dataset , model_type = "SD")
-
-# (4) Summarize look the estimated parameters
-summary(out)
-
-# (5) Plot the fitted curve
-plot(out, adddata = FALSE)
-
-# (6) Plot the fitted curve with ggplot style and CI as spaghetti
-plot(out, spaghetti = TRUE)
-}
-
-
-
-# (1) Load the survival data
-data(propiconazole)
-
-# (2) Create an object of class "survData"
-dataset  <- survData(propiconazole)
-
-\dontrun{
-# (3) Run the survFit function with TKTD model 'SD' or 'IT' 
-out <- survFit(dataset , model_type = "SD")
-
-# (4) Summarize look the estimated parameters
-summary(out)
-
-# (5) Plot the fitted curve
-plot(out, adddata = TRUE)
-
 # (6) Plot the fitted curve with ggplot style and CI as spaghetti
 plot(out, spaghetti = TRUE , adddata = TRUE)
 }
 
 
+# Example with time-variable exposure profile
 # (1) Load the survival data
 data("propiconazole_pulse_exposure")
-
 # (2) Create an object of class "survData"
 dataset <- survData(propiconazole_pulse_exposure)
-
-\dontrun{
+\donttest{
 # (3) Run the survFit function with TKTD model 'SD' or 'IT' 
 out <- survFit(dataset , model_type = "SD")
-
 # (4) Summarize look the estimated parameters
 summary(out)
-
 # (5) Plot the fitted curve
 plot(out, adddata = FALSE)
-
 # (6) Plot the fitted curve with ggplot style and CI as spaghetti
 plot(out, spaghetti = TRUE)
 }
 
 }
 \references{
-Jager, T., Albert, C., Preuss, T. G. and Ashauer, R. (2011) 
-General unified threshold model of survival-a toxicokinetic-toxicodynamic
- framework for ecotoxicology, \emph{Environmental Science and Technology}, 45, 2529-2540.
-303-314.
-
 Jager, T., Albert, C., Preuss, T. G. and Ashauer, R. (2011) 
 General unified threshold model of survival-a toxicokinetic-toxicodynamic
  framework for ecotoxicology, \emph{Environmental Science and Technology}, 45, 2529-2540.

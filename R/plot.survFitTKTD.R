@@ -40,6 +40,8 @@
 #' 
 #' @keywords plot 
 #' 
+#' @return a plot of class \code{ggplot}
+#' 
 #' @examples
 #' 
 #' # (1) Load the survival data
@@ -48,7 +50,7 @@
 #' # (2) Create an object of class "survData"
 #' dataset <- survData(propiconazole)
 #' 
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the survFitTKTD function ('SD' model only)
 #' out <- survFitTKTD(dataset)
 #'
@@ -220,6 +222,9 @@ survFitPlotCITKTD <- function(x) {
 survFitPlotTKTDGeneric <- function(data, dobs, xlab, ylab, main, concentration,
                                    one.plot, spaghetti, adddata,
                                    addlegend) {
+  
+  oldpar <- par(no.readonly = TRUE)
+  on.exit(par(oldpar))
   
   if (one.plot) {
     survFitPlotTKTDGenericOnePlot(data, dobs, xlab, ylab, main, adddata,

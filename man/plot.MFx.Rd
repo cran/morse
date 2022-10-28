@@ -34,6 +34,9 @@ argument \code{x_variable}.}
 
 \item{\dots}{Further arguments to be passed to generic methods.}
 }
+\value{
+a plot of class \code{ggplot}
+}
 \description{
 This is the generic \code{plot} S3 method for the
 \code{MFx} class. It plots the survival probability as a function of
@@ -47,7 +50,7 @@ data("propiconazole")
 # (2) Create an object of class 'survData'
 dataset <- survData(propiconazole)
 
-\dontrun{
+\donttest{
 # (3) Run the survFit function with model_type SD (or IT)
 out_SD <- survFit(dataset, model_type = "SD")
 

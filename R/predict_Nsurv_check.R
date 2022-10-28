@@ -8,6 +8,8 @@
 #' @param object an object used to select a method \code{predict_Nsurv_check}
 #' @param \dots Further arguments to be passed to generic methods
 #' 
+#' @return return a list of data.frame.
+#' 
 #' @export
 #'
 predict_Nsurv_check <- function(object, ...){

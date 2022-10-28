@@ -31,6 +31,8 @@
 #'
 #' @keywords plot
 #' 
+#' @return a plot of class \code{ggplot}
+#' 
 #' @examples 
 #'
 #' # (1) Load the survival data
@@ -39,7 +41,7 @@
 #' # (2) Create an object of class "survData"
 #' dataset <- survData(propiconazole_pulse_exposure)
 #'
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the survFit function
 #' out <- survFit(dataset , model_type = "SD")
 #'

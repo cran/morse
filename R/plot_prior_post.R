@@ -6,6 +6,8 @@
 #' @param x an object used to select a method \code{plot_prior_post}
 #' @param \dots Further arguments to be passed to generic methods
 #' 
+#' @return an object of class \code{plot_prior_post}
+#' 
 #' @export
 plot_prior_post <- function(x, ...){
   UseMethod("plot_prior_post")
@@ -20,8 +22,9 @@ plot_prior_post <- function(x, ...){
 #' Default is \code{1e3}.
 #' @param EFSA_name If \code{TRUE}, replace the current terminology by
 #'  the one used in the recent EFSA PPR Scientific Opinion (2018).
-#' 
 #' @param \dots Further arguments to be passed to generic methods
+#' 
+#' @return a plot of class \code{ggplot}
 #' 
 #' @references
 #' EFSA PPR Scientific Opinion (2018)

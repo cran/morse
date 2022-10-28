@@ -41,6 +41,9 @@ summed for a same concentration}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
+\value{
+a plot of class \code{ggplot}
+}
 \description{
 This is the generic \code{plot} S3 method for the \code{survData} class.
 It plots the number of survivors as a function of time.

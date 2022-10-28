@@ -17,6 +17,9 @@ the one used in the recent EFSA PPR Scientific Opinion (2018).}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
+\value{
+a plot of class \code{ggplot}
+}
 \description{
 Plot posteriors vs priors of a \code{survFit} object
 }

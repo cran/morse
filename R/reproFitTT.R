@@ -61,7 +61,7 @@
 #' # (2) Create an object of class "reproData"
 #' dataset <- reproData(cadmium1)
 #'
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the reproFitTT function with the log-logistic gamma-Poisson model
 #' out <- reproFitTT(dataset, stoc.part = "gammapoisson",
 #'                   ecx = c(5, 10, 15, 20, 30, 50, 80), quiet = TRUE)

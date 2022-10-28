@@ -26,6 +26,8 @@ define between 0 and the highest tested concentration of the experiment.}
 \item{npoints}{Number of time point in \code{conc_range} between 0 and the maximal concentration. 100 by default.}
 }
 \value{
+returns an object of class \code{LCx}.
+
 The function returns an object of class \code{LCx}, which is a list
  with the following information:
 \item{X_prop}{Survival probability of individuals surviving considering the median
@@ -73,7 +75,7 @@ data("propiconazole")
 # (2) Create an object of class 'survData'
 dataset <- survData(propiconazole)
 
-\dontrun{
+\donttest{
 # (3) Run the survFit function with model_type SD (or IT)
 out_SD <- survFit(dataset, model_type = "SD")
 

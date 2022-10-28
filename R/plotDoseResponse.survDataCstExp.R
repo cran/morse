@@ -31,6 +31,8 @@
 #' @seealso \code{\link[stats]{binom.test}}
 #'
 #' @keywords plot
+#' 
+#' @return a plot of class \code{ggplot}
 #'
 #' @examples
 #'

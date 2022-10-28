@@ -23,6 +23,8 @@
 #'  \code{gg} and \code{ggplot}, see function \code{\link[ggplot2]{ggplot}}
 #'
 #' @keywords plot
+#' 
+#' @return a plot of class \code{ggplot}
 #'
 #' @examples
 #' # (1) Load the data

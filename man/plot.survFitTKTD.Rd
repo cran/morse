@@ -45,6 +45,9 @@ with (frequentist binomial) confidence intervals}
 
 \item{\dots}{Further arguments to be passed to generic methods.}
 }
+\value{
+a plot of class \code{ggplot}
+}
 \description{
 This is the generic \code{plot} S3 method for the
 \code{survFitTKTD}.  It plots the fit obtained for each
@@ -77,7 +80,7 @@ data(propiconazole)
 # (2) Create an object of class "survData"
 dataset <- survData(propiconazole)
 
-\dontrun{
+\donttest{
 # (3) Run the survFitTKTD function ('SD' model only)
 out <- survFitTKTD(dataset)
 

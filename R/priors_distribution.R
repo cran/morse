@@ -8,6 +8,8 @@
 #' @param object An object used to select a method
 #' @param \dots Further arguments to be passed to generic methods
 #' 
+#' @return an object of class \code{priors_distribution}
+#' 
 #' @export
 #' 
 priors_distribution <- function(object, ...){
@@ -25,6 +27,8 @@ priors_distribution <- function(object, ...){
 #' @param EFSA_name If \code{TRUE}, replace the current terminology by
 #'  the one used in the recent EFSA PPR Scientific Opinion (2018).
 #' @param \dots Further arguments to be passed to generic methods.
+#' 
+#' @return a \code{data.frame} with prio distribution.
 #' 
 #' @references
 #' EFSA PPR Scientific Opinion (2018)

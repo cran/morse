@@ -14,7 +14,7 @@
 #' @return an object of class \code{ggplot}, see function \code{\link[ggplot2]{ggplot}}
 #'
 #' @keywords plot
-#'
+#' 
 #' @import ggplot2
 #' @importFrom graphics plot axis legend lines par points title
 #' @importFrom methods is

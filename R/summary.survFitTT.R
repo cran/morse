@@ -20,7 +20,7 @@
 #' # (2) Create a survData object
 #' cadmium1 <- survData(cadmium1)
 #'
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the survFitTT function with the log-logistic
 #' # binomial model
 #' out <- survFitTT(cadmium1, lcx = c(5, 10, 15, 20, 30, 50, 80),

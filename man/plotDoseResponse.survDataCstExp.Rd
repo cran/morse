@@ -39,6 +39,9 @@
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
+\value{
+a plot of class \code{ggplot}
+}
 \description{
 This is the generic \code{plotDoseResponse} S3 method for the \code{survData}
 class. It plots the survival probability as a function of concentration at a given

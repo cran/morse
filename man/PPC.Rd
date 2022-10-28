@@ -58,6 +58,21 @@ ppc(x, ...)
 
 \item{main}{A main title for the plot.}
 }
+\value{
+a plot of class \code{ggplot}
+
+a plot of class \code{ggplot}
+
+a plot of class \code{ggplot}
+
+a plot of class \code{ggplot}
+
+a plot of class \code{ggplot}
+
+a plot of class \code{ggplot}
+
+a plot of class \code{ggplot}
+}
 \description{
 Plots posterior predictive check for \code{reproFitTT}, \code{survFitTT},
  \code{survFitTKTD}, \code{survFitCstExp} and \code{survFitVarExp} objects.
@@ -155,7 +170,7 @@ data(cadmium1)
 # (2) Create an object of class "reproData"
 dataset <- reproData(cadmium1)
 
-\dontrun{
+\donttest{
 # (3) Run the reproFitTT function with the log-logistic gamma-Poisson model
 out <- reproFitTT(dataset, stoc.part = "gammapoisson",
 ecx = c(5, 10, 15, 20, 30, 50, 80), quiet = TRUE)
@@ -171,7 +186,7 @@ data(propiconazole)
 # (2) Create an object of class "survData"
 dataset <- survData(propiconazole)
 
-\dontrun{
+\donttest{
 # (3) Run the survFitTKTD function with the TKTD model ('SD' or 'IT')
 out <- survFit(dataset, model_type = "SD")
 
@@ -186,7 +201,7 @@ data(propiconazole)
 # (2) Create an object of class "survData"
 dat <- survData(propiconazole)
 
-\dontrun{
+\donttest{
 # (3) Run the survFitTKTD function with the TKTD model ('SD' only)
 out <- survFitTKTD(dat)
 
@@ -201,7 +216,7 @@ data(cadmium1)
 # (2) Create an object of class "survData"
 dat <- survData(cadmium1)
 
-\dontrun{
+\donttest{
 # (3) Run the survFitTT function with the log-logistic binomial model
 out <- survFitTT(dat, lcx = c(5, 10, 15, 20, 30, 50, 80),
 quiet = TRUE)
@@ -217,7 +232,7 @@ data(propiconazole_pulse_exposure)
 # (2) Create an object of class "survData"
 dat <- survData(propiconazole_pulse_exposure)
 
-\dontrun{
+\donttest{
 # (3) Run the survFitTKTD function with the TKTD model ('SD' or 'IT')
 out <- survFit(dat, model_type = "SD")
 

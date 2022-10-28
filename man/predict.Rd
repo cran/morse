@@ -78,6 +78,11 @@ required to compute quantile. The default is \eqn{0.95}.}
 Default is \code{linear}.}
 }
 \value{
+a \code{list} of \code{data.frame} with the quantiles of outputs in
+\code{df_quantiles} or all the MCMC chaines \code{df_spaghetti}
+
+an object of class \code{predict_Nsurv}.
+
 The function returns an object of class \code{survFitPredict_Nsurv}, which is
 a list with the two following \code{data.frame}:
 \item{df_quantile}{A \code{data.frame} with 10 columns, \code{time}, \code{conc},
@@ -94,6 +99,8 @@ while the \code{_valid} refers to the number of survivors predicted at time
 \eqn{t} based on the predicted number of survivors at time \eqn{t-1}.}
 \item{df_spaghetti}{NULL if arguement \code{spaghetti = FALSE}. With \code{spaghetti = TRUE}, it returns a
 dataframe with all simulations based on MCMC parameters from a \code{survFit} object.}
+
+an object of class \code{predict_Nsurv_ode}.
 }
 \description{
 This is the generic \code{predict} S3 method for the \code{survFit} class.
@@ -117,7 +124,7 @@ data("propiconazole_pulse_exposure")
 # (2) Create an object of class "survData"
 dataset <- survData(propiconazole_pulse_exposure)
 
-\dontrun{
+\donttest{
 # (3) Run the survFit function
 out <- survFit(dataset , model_type = "SD")
 
@@ -139,7 +146,7 @@ data("propiconazole_pulse_exposure")
 # (2) Create an object of class "survData"
 dataset <- survData(propiconazole_pulse_exposure)
 
-\dontrun{
+\donttest{
 # (3) Run the survFit function
 out <- survFit(dataset , model_type = "SD")
 

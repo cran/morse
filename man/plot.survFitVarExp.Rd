@@ -48,6 +48,9 @@ in only one dimension \code{"free_x"}, \code{"free_y"}. (See \code{ggplot2} docu
 
 \item{\dots}{Further arguments to be passed to generic methods.}
 }
+\value{
+a plot of class \code{ggplot}
+}
 \description{
 This is the generic \code{plot} S3 method for the
 \code{survFit}.  It plots the fit obtained for each
@@ -80,7 +83,7 @@ data("propiconazole_pulse_exposure")
 # (2) Create an object of class "survData"
 dataset <- survData(propiconazole_pulse_exposure)
 
-\dontrun{
+\donttest{
 # (3) Run the survFit function
 out <- survFit(dataset , model_type = "SD")
 

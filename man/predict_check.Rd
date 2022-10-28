@@ -16,6 +16,8 @@ predict_Nsurv_check(object, ...)
 \item{\dots}{Further arguments to be passed to generic methods}
 }
 \value{
+return a list of data.frame.
+
 The function return a list with three items:
 \item{PPC}{The criterion, in percent, compares the predicted median numbers 
 of survivors associated to their uncertainty limits with the observed numbers

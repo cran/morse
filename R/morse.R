@@ -51,7 +51,7 @@
 #' estimation. Note that the \code{rjags} package does not include a copy
 #' of the JAGS library: you need to install it separately. For instructions
 #' on downloading JAGS, see the home page at
-#' \url{http://mcmc-jags.sourceforge.net}. Once done, simply follow the steps
+#' \url{https://mcmc-jags.sourceforge.io}. Once done, simply follow the steps
 #' described in the tutorial vignette.
 #'
 #' \tabular{ll}{ Package: \tab morse\cr Type: \tab Package\cr Version: \tab
@@ -79,11 +79,9 @@
 #' @references
 #' Delignette-Muller, M.L., Ruiz P. and Veber P. (2017)
 #' \emph{Robust fit of toxicokinetic-toxicodynamic models using prior knowledge contained in the design of survival toxicity tests}.
-#' \url{https://pubs.acs.org/doi/10.1021/acs.est.6b05326}
 #' 
 #' Delignette-Muller, M.L., Lopes, C., Veber, P. and Charles, S. (2014)
 #' \emph{Statistical handling of reproduction data for exposure-response modelling}.
-#' \url{https://pubs.acs.org/doi/abs/10.1021/es502009r?journalCode=esthag}.
 #' 
 #' Forfait-Dubuc, C., Charles, S., Billoir, E. and Delignette-Muller, M.L. (2012)
 #' \emph{Survival data analyses in ecotoxicology: critical effect concentrations, methods and models. What should we use?}
@@ -91,13 +89,8 @@
 #' Plummer, M. (2013) \emph{JAGS Version 4.0.0 user manual}.
 #' \url{https://sourceforge.net/projects/mcmc-jags/files/Manuals/4.x/jags_user_manual.pdf/download}
 #' 
-#' Delignette-Muller, M. L., Ruiz, P. and Veber, P. (2017)
-#' \emph{Robust Fit of Toxicokinetic--Toxicodynamic Models Using Prior Knowledge Contained in the Design of Survival Toxicity Tests}
-#' \url{https://pubs.acs.org/doi/abs/10.1021/acs.est.6b05326}
-#'
 #' Baudrot, V., Preux, S., Ducrot, V., Pavé, A. and Charles, S. (2018)
-#' \emph{New insights to compare and choose TKTD models for survival based on an inter-laboratory study for \emph{Lymnaea stagnalis} exposed to Cd}.
-#' \url{https://pubs.acs.org/doi/abs/10.1021/acs.est.7b05464}.
+#' \emph{New insights to compare and choose TKTD models for survival based on an inter-laboratory study for Lymnaea stagnalis exposed to Cd}.
 #' 
 #' EFSA PPR Scientific Opinion (2018)
 #' \emph{Scientific Opinion on the state of the art of Toxicokinetic/Toxicodynamic (TKTD) effect models for regulatory risk assessment of pesticides for aquatic organisms}

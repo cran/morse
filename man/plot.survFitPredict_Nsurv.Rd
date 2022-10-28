@@ -37,6 +37,9 @@ the computation.}
 
 \item{\dots}{Further arguments to be passed to generic methods.}
 }
+\value{
+a plot of class \code{ggplot}
+}
 \description{
 This is the generic \code{plot} S3 method for the
 \code{survFitPredict_Nsurv}.  It plots the predicted survival probability for each

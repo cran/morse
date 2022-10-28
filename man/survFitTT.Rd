@@ -11,6 +11,9 @@ survFitTT(data, ...)
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
+\value{
+an object of class \code{survFitTT}
+}
 \description{
 Fits a Bayesian concentration-response model for target-time survival analysis
 }

@@ -21,6 +21,8 @@
 #' \code{\link[ggplot2]{ggplot}} and returns an object of class \code{ggplot}.
 #'
 #' @keywords plot
+#' 
+#' @return a plot of class \code{ggplot}
 #'
 #' @examples
 #' # (1) Load the data
@@ -99,6 +101,8 @@ dataPlotFullGeneric <- function(data, xlab, ylab, resp) {
   colors <- rainbow(length(unique(data$replicate)))
   pchs <- as.numeric(unique(data$replicate))
   # split of the graphical window in subplots
+  oldpar <- par(no.readonly = TRUE)
+  on.exit(par(oldpar)) 
   par(mfrow = plotMatrixGeometry(length(unique(data$conc))))
 
   by(data, data$conc, function(x) {

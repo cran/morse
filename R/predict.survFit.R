@@ -21,6 +21,9 @@
 #' @param extend_time Length of time points interpolated with variable exposure profiles
 #' @param \dots Further arguments to be passed to generic methods
 #' 
+#' @return a \code{list} of \code{data.frame} with the quantiles of outputs in
+#' \code{df_quantiles} or all the MCMC chaines \code{df_spaghetti}
+#' 
 #' @examples 
 #'
 #' # (1) Load the survival data
@@ -29,7 +32,7 @@
 #' # (2) Create an object of class "survData"
 #' dataset <- survData(propiconazole_pulse_exposure)
 #'
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the survFit function
 #' out <- survFit(dataset , model_type = "SD")
 #'

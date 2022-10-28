@@ -45,6 +45,9 @@
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
+\value{
+a plot of class \code{ggplot}
+}
 \description{
 This is the generic \code{plotDoseResponse} S3 method for the \code{reproData}
 class. It plots the number of offspring per individual-days as a function of

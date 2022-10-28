@@ -34,6 +34,8 @@
 #' @seealso \code{\link[epitools]{pois.exact}}
 #'
 #' @keywords plot
+#' 
+#' @return a plot of class \code{ggplot}
 #'
 #' @examples
 #' # (1) Load the data

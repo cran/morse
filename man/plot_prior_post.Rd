@@ -11,6 +11,9 @@ plot_prior_post(x, ...)
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
+\value{
+an object of class \code{plot_prior_post}
+}
 \description{
 Plot priors and posteriors of a \code{survFit} object
 }

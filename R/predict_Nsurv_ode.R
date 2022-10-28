@@ -24,6 +24,8 @@
 #' Default is \code{linear}.
 #' @param \dots Further arguments to be passed to generic methods
 #' 
+#' @return an object of class \code{predict_Nsurv_ode}.
+#' 
 #' @export
 #' 
 predict_Nsurv_ode <- function(object,
@@ -41,6 +43,9 @@ predict_Nsurv_ode <- function(object,
 
 #' @import deSolve
 #' @importFrom stats approxfun
+#' 
+#' @return a \code{list} of \code{data.frame} with the quantiles of outputs in
+#' \code{df_quantiles} or all the MCMC chaines \code{df_spaghetti}
 #' 
 #' @export
 #'

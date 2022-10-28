@@ -95,6 +95,8 @@ parameters drawn from the posterior distribution.}
 Default is \code{linear}.}
 }
 \value{
+returns an object of class \code{MFx}
+
 The function returns an object of class \code{MFx}, which is a list
  with the following information:
  \item{X_prop}{Survival probability for \code{X} percent of reduction of the initial median 
@@ -184,7 +186,7 @@ data("propiconazole")
 # (2) Create an object of class 'survData'
 dataset <- survData(propiconazole)
 
-\dontrun{
+\donttest{
 # (3) Run the survFit function with model_type SD (or IT)
 out_SD <- survFit(dataset, model_type = "SD")
 
@@ -207,7 +209,7 @@ data("propiconazole")
 # (2) Create an object of class 'survData'
 dataset <- survData(propiconazole)
 
-\dontrun{
+\donttest{
 # (3) Run the survFit function with model_type SD (or IT)
 out_SD <- survFit(dataset, model_type = "SD")
 

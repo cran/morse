@@ -20,6 +20,8 @@
 #' @param style graphical backend, can be \code{'generic'} or \code{'ggplot'}
 #' @param main main title for the plot
 #' @param \dots Further arguments to be passed to generic methods
+#' 
+#' @return a plot of class \code{ggplot}
 #'
 #' @examples
 #'
@@ -29,7 +31,7 @@
 #' # (2) Create an object of class "survData"
 #' dat <- survData(propiconazole)
 #'
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the survFitTKTD function with the TKTD model ('SD' only)
 #' out <- survFitTKTD(dat)
 #'

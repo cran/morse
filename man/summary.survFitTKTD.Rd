@@ -29,7 +29,7 @@ data(propiconazole)
 # (2) Create a survData object
 dat <- survData(propiconazole)
 
-\dontrun{
+\donttest{
 # (3) Run the survFitTKTD function
 out <- survFitTKTD(dat)
 

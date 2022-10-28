@@ -13,6 +13,8 @@
 #'
 #' @keywords plot
 #' 
+#' @return a plot of class \code{ggplot}
+#' 
 #' @examples 
 #' 
 #' # (1) Load the data
@@ -21,7 +23,7 @@
 #' # (2) Create an object of class 'survData'
 #' dataset <- survData(propiconazole)
 #' 
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the survFit function with model_type SD (or IT)
 #' out_SD <- survFit(dataset, model_type = "SD")
 #' 
@@ -67,7 +69,7 @@ and/or other 'X'."))
   
   
   if(is.null(main)){
-    main <- paste("Concentation-response curve: LC", 100 - X_prop_provided*100, " at time", time_LCx)
+    main <- paste("Concentration-response curve: LC", 100 - X_prop_provided*100, " at time", time_LCx)
   } 
   
   LCx_plt <- ggplot() + theme_minimal() +

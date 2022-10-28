@@ -6,6 +6,8 @@
 #' interpolation (comprise between time to compute and fitting accuracy)
 #' @param \dots Further arguments to be passed to generic methods
 #' 
+#' @return A list for parameterization of priors for Bayesian inference.
+#' 
 modelData.survDataVarExp <- function(x,
                                      model_type = NULL,
                                      extend_time = 100, ...){

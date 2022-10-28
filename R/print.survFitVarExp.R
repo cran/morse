@@ -9,6 +9,8 @@
 #'
 #' @keywords print
 #' 
+#' @return print the model text and the Jags Computing information
+#' 
 #' @examples
 #' # (1) Load the data
 #' data(propiconazole_pulse_exposure)
@@ -16,7 +18,7 @@
 #' # (2) Create a survData object
 #' dataset <- survData(propiconazole_pulse_exposure)
 #' 
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the survFit function with TKTD model 'SD' or 'IT' 
 #' out <- survFit(dataset, model_type="SD")
 #' 

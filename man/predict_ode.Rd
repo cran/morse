@@ -11,6 +11,9 @@ predict_ode(object, ...)
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
+\value{
+an object of class \code{predict_ode}
+}
 \description{
 This is a \code{method} to replace function \code{predict} used on \code{survFit}
 object when computing issues happen. \code{predict_ode} uses the \code{deSolve}

@@ -8,6 +8,8 @@
 #' @param object an object used to select a method \code{ppc}
 #' @param \dots Further arguments to be passed to generic methods
 #' 
+#' @return an object of class \code{predict_ode}
+#' 
 #' @export
 predict_ode <- function(object, ...){
   UseMethod("predict_ode")
@@ -35,6 +37,9 @@ predict_ode <- function(object, ...){
 #' @param  hb_valueFORCED If \code{hb_value} is \code{FALSE}, it fix \code{hb}.
 #' @param \dots Further arguments to be passed to generic methods
 #' 
+#' @return a \code{list} of \code{data.frame} with the quantiles of outputs in
+#' \code{df_quantiles} or all the MCMC chaines \code{df_spaghetti}
+#' 
 #' @examples 
 #'
 #' # (1) Load the survival data
@@ -43,7 +48,7 @@ predict_ode <- function(object, ...){
 #' # (2) Create an object of class "survData"
 #' dataset <- survData(propiconazole_pulse_exposure)
 #'
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the survFit function
 #' out <- survFit(dataset , model_type = "SD")
 #'

@@ -12,6 +12,8 @@
 #' 
 #' @rdname PPC
 #' 
+#' @return a plot of class \code{ggplot}
+#' 
 #' @param x an object used to select a method \code{ppc}
 #' @param \dots Further arguments to be passed to generic methods
 #' 

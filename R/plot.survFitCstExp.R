@@ -39,6 +39,8 @@
 #' @param \dots Further arguments to be passed to generic methods.
 #'
 #' @keywords plot
+#' 
+#' @return a plot of class \code{ggplot}
 #'
 #' @export
 #'

@@ -17,6 +17,9 @@ the one used in the recent EFSA PPR Scientific Opinion (2018).}
 
 \item{\dots}{Further arguments to be passed to generic methods.}
 }
+\value{
+a \code{data.frame} with prio distribution.
+}
 \description{
 Return a \code{data.frame} with priors distribution of parameters used in
 \code{object}.

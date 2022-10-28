@@ -19,6 +19,8 @@
 #' @param ylab A label for the \eqn{Y}-axis, by default \code{Predicted nb of survivors}.
 #' @param main A main title for the plot.
 #' @param \dots Further arguments to be passed to generic methods
+#' 
+#' @return a plot of class \code{ggplot}
 #'
 #' @export
 

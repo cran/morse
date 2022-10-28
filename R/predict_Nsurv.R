@@ -8,6 +8,8 @@
 #' @param object an object used to select a method
 #' @param \dots Further arguments to be passed to generic methods
 #' 
+#' @return an object of class \code{predict_Nsurv}.
+#' 
 #' @export
 predict_Nsurv <- function(object, ...){
   UseMethod("predict_Nsurv")
@@ -60,7 +62,7 @@ predict_Nsurv <- function(object, ...){
 #' # (2) Create an object of class "survData"
 #' dataset <- survData(propiconazole_pulse_exposure)
 #'
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the survFit function
 #' out <- survFit(dataset , model_type = "SD")
 #'

@@ -41,7 +41,7 @@ when new ones will appear.
 Again, feel free to report such messages if they disturb your data processing: [New Issue for morse R package](https://github.com/pveber/morse/issues)
 
 
-The `morse` package is linked to [JAGS](http://mcmc-jags.sourceforge.net/) and C++.
+The `morse` package is linked to [JAGS](https://mcmc-jags.sourceforge.io) and C++.
 
 ## JAGS
 

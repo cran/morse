@@ -42,6 +42,10 @@ Default is \code{linear}.}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
+\value{
+a \code{list} of \code{data.frame} with the quantiles of outputs in
+\code{df_quantiles} or all the MCMC chaines \code{df_spaghetti}
+}
 \description{
 This is the generic \code{predict} S3 method for the \code{survFit} class.
 It provides predicted survival rate for "SD" or "IT" models under constant or time-variable exposure.
@@ -54,7 +58,7 @@ data("propiconazole_pulse_exposure")
 # (2) Create an object of class "survData"
 dataset <- survData(propiconazole_pulse_exposure)
 
-\dontrun{
+\donttest{
 # (3) Run the survFit function
 out <- survFit(dataset , model_type = "SD")
 

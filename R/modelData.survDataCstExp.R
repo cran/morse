@@ -2,6 +2,8 @@
 #'
 #' @param x An object of class \code{survData}
 #' @param model_type TKTD GUTS model type ('SD' or 'IT')
+#' 
+#' @return A list for parameterization of priors for Bayesian inference.
 #'
 #'
 modelData.survDataCstExp <- function(x, model_type = NULL){

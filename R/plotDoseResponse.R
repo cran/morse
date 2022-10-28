@@ -5,7 +5,9 @@
 #' 
 #' @param x an object used to select a method \code{plotDoseRespons}
 #' @param \dots Further arguments to be passed to generic methods
-
+#' 
+#' @return a plot of class \code{ggplot}
+#' 
 #' @export
 plotDoseResponse <- function(x, ...){
   UseMethod("plotDoseResponse")

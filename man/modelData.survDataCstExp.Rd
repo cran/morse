@@ -11,6 +11,9 @@
 
 \item{model_type}{TKTD GUTS model type ('SD' or 'IT')}
 }
+\value{
+A list for parameterization of priors for Bayesian inference.
+}
 \description{
 Create a data set to analyse a \code{survDataCstExp} object.
 }

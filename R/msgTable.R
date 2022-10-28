@@ -22,10 +22,19 @@ msgTableSingleton <- function(id, msg) {
 msgTableIsEmpty <- function(x)
   dim(x)[1] == 0
   
+#' Print \code{msgTables} objects
+#' 
+#' Print in the REPL the \code{msgTables}
+#' 
+#' @param x an object of class \code{msgTables}
+#' @param \dots Further arguments to be passed to generic methods
+#' 
+#' @return Print in the REPL the \code{msgTables}
+#' 
 #' @export
 print.msgTable <- function(x, ...) {
   if (msgTableIsEmpty(x)) {
-    cat("No message\n")
+    cat("Correct format\n")
   }
   else {
     cat("Message(s):\n")

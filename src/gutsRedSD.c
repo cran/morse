@@ -2,6 +2,9 @@
 #include <Rinternals.h>
 #include <math.h>
 
+void gutsredsd_init(void (* odeparms)(int *, double *));
+void gutsredsd_free(void);
+
 /**
  * Number of MCMC iterations
  */
@@ -31,7 +34,7 @@ void gutsredsd_init(void (* odeparms)(int *, double *))
 {
   // get access to parameters supplied to deSolve
   SEXP (*fun)(void);
-  fun = (SEXP(*)())R_GetCCallable("deSolve", "get_deSolve_gparms");
+  fun = (SEXP(*)(void))R_GetCCallable("deSolve", "get_deSolve_gparms");
   if(LENGTH(fun())==0)
     error("no parameters supplied");
   
@@ -59,7 +62,7 @@ void gutsredsd_init(void (* odeparms)(int *, double *))
 /**
  * Free allocated memory
  */
-void gutsredsd_free()
+void gutsredsd_free(void)
 {
   Free(kd);
   Free(hb);

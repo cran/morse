@@ -62,6 +62,9 @@ to the plot}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
+\value{
+a plot of class \code{ggplot}
+}
 \description{
 This is the generic \code{plot} S3 method for the \code{survFitTT} class. It
 plots concentration-response fit under target time survival analysis.
@@ -97,7 +100,7 @@ data(cadmium1)
 # (2) Create an object of class "survData"
 dat <- survData(cadmium1)
 
-\dontrun{
+\donttest{
 # (3) Run the survFitTT function with the log-logistic
 #     binomial model
 out <- survFitTT(dat, lcx = c(5, 10, 15, 20, 30, 50, 80),

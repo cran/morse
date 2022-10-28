@@ -16,6 +16,9 @@ interpolation (comprise between time to compute and fitting accuracy)}
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
+\value{
+A list for parameterization of priors for Bayesian inference.
+}
 \description{
 Create a data set to analyse a \code{survDataVarExp} object.
 }

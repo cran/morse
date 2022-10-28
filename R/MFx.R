@@ -9,6 +9,8 @@
 #' @param object An object used to select a method
 #' @param \dots Further arguments to be passed to generic methods
 #' 
+#' @return returns an object of class \code{MFx}
+#' 
 #' @export
 #' 
 MFx <- function(object, ...){

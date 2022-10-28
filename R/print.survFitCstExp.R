@@ -7,6 +7,8 @@
 #' @param x An object of class \code{survFitCstExp}
 #' @param \dots Further arguments to be passed to generic methods.
 #' 
+#' @return print the model text and the Jags Computing information
+#' 
 #' @examples
 #' # (1) Load the data
 #' data(propiconazole)
@@ -14,7 +16,7 @@
 #' # (2) Create an object of class 'survData'
 #' dat <- survData(propiconazole)
 #' 
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the survFit function with TKTD model 'SD' or 'IT' 
 #' out <- survFit(dat, quiet = TRUE, model_type="SD")
 #' 

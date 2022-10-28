@@ -18,6 +18,8 @@
 #'
 #' @keywords plot
 #' 
+#' @return a plot of class \code{ggplot}
+#' 
 #' @examples 
 #' 
 #' # (1) Load the data
@@ -26,7 +28,7 @@
 #' # (2) Create an object of class 'survData'
 #' dataset <- survData(propiconazole)
 #' 
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the survFit function with model_type SD (or IT)
 #' out_SD <- survFit(dataset, model_type = "SD")
 #' 
@@ -125,8 +127,8 @@ plot.MFx <- function(x,
                    aes(x = x.pts, y = y.pts, color = pts.leg)) 
       
       warning("This is not an error message:
-Just take into account that MFx as been estimated with a binary
-search using the 'accuracy' argument. Cross point indicate the
+Just take into account that MFx has been estimated with a binary
+search using the 'accuracy' argument. Cross points indicate the
 position of evaluated time series. To improve the shape of the curve, you 
 can use X = NULL, and compute time series around the median MFx, with the
           vector `MFx_range`.")

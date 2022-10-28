@@ -195,7 +195,7 @@ survTKTDPARAMS <- function(mcmc) {
 #' # (2) Create an object of class "survData"
 #' dataset <- survData(propiconazole)
 #'
-#' \dontrun{
+#' \donttest{
 #' # (3) Run the survFitTKTD function
 #' out <- survFitTKTD(dataset)
 #'

@@ -11,6 +11,9 @@ plotDoseResponse(x, ...)
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
+\value{
+a plot of class \code{ggplot}
+}
 \description{
 Plots the response of the effect as a function of the concentration at a given
 target time.

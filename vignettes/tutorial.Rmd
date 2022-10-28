@@ -215,7 +215,7 @@ described for the analysis at target time.
 Here the goal is to estimate the relationship
 between chemical compound concentration, time and survival rate using the GUTS models.
 GUTS, for General Unified Threshold models of Survival, is a TKTD models generalising most of existing mechanistic models for survival description.
-For details about GUTS models, see the vignette [theory under modelling approaches](modelling.pdf), and the included references.
+For details about GUTS models, see the vignette *Models in 'morse' package*, and the included references.
 
 ## GUTS model with constant exposure concentrations
 
@@ -838,7 +838,7 @@ ppc(fit)
 
 As in the survival analysis, we assume that the reproduction rate per individual-day
 is a log-logistic function of the concentration. More details and parameter
-signification can be found in the [modelling vignette](modelling.pdf).
+signification can be found in the vignette *Models in 'morse' package*.
 
 ## Model comparison
 

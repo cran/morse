@@ -45,6 +45,9 @@ with (frequentist binomial) confidence intervals}
 
 \item{\dots}{Further arguments to be passed to generic methods.}
 }
+\value{
+a plot of class \code{ggplot}
+}
 \description{
 This is the generic \code{plot} S3 method for the
 \code{survFit}.  It plots the fit obtained for each

@@ -11,6 +11,9 @@ priors_distribution(object, ...)
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
+\value{
+an object of class \code{priors_distribution}
+}
 \description{
 Return a \code{data.frame} with prior density distributions of parameters used in
 \code{object}.

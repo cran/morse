@@ -11,6 +11,9 @@
 
 \item{\dots}{Further arguments to be passed to generic methods}
 }
+\value{
+print the model text and the Jags Computing information
+}
 \description{
 This is the generic \code{print} S3 method for the \code{survFitTT} class.
 It prints the underlying JAGS model and some information on the Bayesian 
@@ -23,7 +26,7 @@ data(cadmium1)
 # (2) Create an object of class 'survData'
 cadmium1 <- survData(cadmium1)
 
-\dontrun{
+\donttest{
 # (3) Run the survFitTT function with the log-logistic
 # binomial model
 out <- survFitTT(cadmium1, lcx = c(5, 10, 15, 20, 30, 50, 80),

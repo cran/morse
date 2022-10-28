@@ -30,6 +30,8 @@
 #'
 #' @keywords plot
 #' 
+#' @return a plot of class \code{ggplot}
+#' 
 #' @export
 #' 
 #' @importFrom tidyr gather
