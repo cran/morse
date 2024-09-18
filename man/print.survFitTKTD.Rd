@@ -19,20 +19,4 @@ This is the generic \code{print} S3 method for the \code{survFitTKTD} class.
 It prints the underlying JAGS model and some information on the Bayesian 
 inference procedure.
 }
-\examples{
-# (1) Load the data
-data(propiconazole)
-
-# (2) Create an object of class 'survData'
-dat <- survData(propiconazole)
-
-\donttest{
-# (3) Run the survFitTKTD function
-out <- survFitTKTD(dat, quiet = TRUE)
-
-# (4) Print the survFitTKTD object
-print(out)
-}
-
-}
 \keyword{print}

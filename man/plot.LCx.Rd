@@ -30,27 +30,7 @@
 a plot of class \code{ggplot}
 }
 \description{
-This is the generic \code{plot} S3 method for the
-\\code{LCx} class. It plots the survival probability as a function of concentration.
-}
-\examples{
-
-# (1) Load the data
-data("propiconazole")
-
-# (2) Create an object of class 'survData'
-dataset <- survData(propiconazole)
-
-\donttest{
-# (3) Run the survFit function with model_type SD (or IT)
-out_SD <- survFit(dataset, model_type = "SD")
-
-# (4) estimate LC50 at time 4
-LCx_SD <- LCx(out_SD, X = 50, time_LCx = 4)
-
-# (5) plot the object of class 'LCx'
-plot(LCx_SD)
-}
-
+This is the generic \code{plot} S3 method for the LCx class. 
+It plots the survival probability as a function of concentration.
 }
 \keyword{plot}

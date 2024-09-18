@@ -92,28 +92,4 @@ taken for this sample).
 When \code{style = "ggplot"}, the function calls function
 \code{\link[ggplot2]{ggplot}} and returns an object of class \code{ggplot}.
 }
-\examples{
-
-# (1) Load the data
-data(cadmium1)
-
-# (2) Create an object of class "survData"
-dat <- survData(cadmium1)
-
-\donttest{
-# (3) Run the survFitTT function with the log-logistic
-#     binomial model
-out <- survFitTT(dat, lcx = c(5, 10, 15, 20, 30, 50, 80),
-                 quiet = TRUE)
-
-# (4) Plot the fitted curve
-plot(out, log.scale = TRUE, adddata = TRUE)
-
-# (5) Plot the fitted curve with ggplot style
-plot(out, xlab = expression("Concentration in" ~ mu~g.L^{-1}),
-     fitcol = "blue", adddata = TRUE, cicol = "blue",
-     style = "ggplot")
-}
-
-}
 \keyword{plot}

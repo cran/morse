@@ -32,14 +32,4 @@ expected requirements. Please run \code{\link{reproDataCheck}} to ensure
 
 Note that experimental data with time-variable exposure are not supported.
 }
-\examples{
-
-# (1) Load reproduction dataset
-data(cadmium1)
-
-# (2) Create an object of class "reproData"
-dat <- reproData(cadmium1)
-class(dat)
-
-}
 \keyword{transformation}

@@ -24,22 +24,4 @@ This is the generic \code{summary} S3 method for the \code{survFitTT} class.
 It shows the quantiles of priors and posteriors on parameters and the quantiles
 of the posteriors on the LCx estimates.
 }
-\examples{
-# (1) Load the data
-data(cadmium1)
-
-# (2) Create a survData object
-cadmium1 <- survData(cadmium1)
-
-\donttest{
-# (3) Run the survFitTT function with the log-logistic
-# binomial model
-out <- survFitTT(cadmium1, lcx = c(5, 10, 15, 20, 30, 50, 80),
-                 quiet = TRUE)
-
-# (4) summarize the survFitTT object
-summary(out)
-}
-
-}
 \keyword{summary}

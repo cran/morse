@@ -4,7 +4,7 @@
 #' object when computing issues happen. \code{predict_nsurv_ode} uses the \code{deSolve}
 #' library to improve robustness. However, time to compute may be longer.
 #' 
-#' @rdname predict
+#' @name predict
 #' 
 #' @param object An object of class \code{survFit}.
 #' @param data_predict A dataframe with three columns \code{time}, \code{conc} and \code{replicate}
@@ -44,6 +44,7 @@ predict_Nsurv_ode <- function(object,
 #' @import deSolve
 #' @importFrom stats approxfun
 #' 
+#' @rdname predict
 #' @return a \code{list} of \code{data.frame} with the quantiles of outputs in
 #' \code{df_quantiles} or all the MCMC chaines \code{df_spaghetti}
 #' 
@@ -149,7 +150,7 @@ predict_Nsurv_ode.survFit <- function(object,
   
   k = 1:length(unique_replicate)
   
-  if(model_type == "SD"){
+  if (model_type == "SD") {
     kk <- 10^mctot[, "kk_log10"]
     z <- 10^mctot[, "z_log10"]
     
@@ -157,17 +158,17 @@ predict_Nsurv_ode.survFit <- function(object,
       SurvSD_ode(Cw = ls_conc[[kit]],
                  time = ls_time[[kit]],
                  replicate = unique_replicate[kit],
-                 kk=kk,
-                 kd=kd,
-                 hb=hb,
-                 z=z,
+                 kk = kk,
+                 kd = kd,
+                 hb = hb,
+                 z = z,
                  mcmc_size = mcmc_size,
                  interpolate_length = interpolate_length,
                  interpolate_method = interpolate_method)
     })
     
   }
-  if(model_type == "IT"){
+  if (model_type == "IT") {
     
     alpha <- 10^mctot[, "alpha_log10"]
     beta <- 10^mctot[, "beta_log10"]
@@ -194,10 +195,10 @@ predict_Nsurv_ode.survFit <- function(object,
   NsurvPred_valid <- select(df_mcmc, contains("Nsurv_sim"))
   NsurvPred_check <- select(df_mcmc, contains("Nsurv_ppc"))
   
-  if(is.null(data_predict) &
+  if (is.null(data_predict) &
      # The following condition are always true for survFit done after morse v3.2.0 !
      ncol(NsurvPred_valid) > 0 &
-     ncol(NsurvPred_check) > 0){
+     ncol(NsurvPred_check) > 0) {
     
     df_quantile <- data.frame(
       time = data_predict$time,
@@ -229,7 +230,7 @@ predict_Nsurv_ode.survFit <- function(object,
       ungroup()
     
     mat_psurv <- df_filter %>%
-      select(- c("time", "conc", "replicate",
+      select(-c("time", "conc", "replicate",
                  "q50", "qinf95", "qsup95", 
                  "Nsurv", "Nprec", "iter", "iter_prec")) %>%
       as.matrix()
@@ -244,8 +245,8 @@ predict_Nsurv_ode.survFit <- function(object,
     Nprec <- cbind(df_filter$Nprec)[, rep(1,ncol_NsurvPred)]
     
     mat_psurv_prec = matrix(ncol = ncol_NsurvPred, nrow = nrow_NsurvPred)
-    for(i in 1:nrow_NsurvPred){
-      if(iter[i] == iter_prec[i]){
+    for (i in 1:nrow_NsurvPred) {
+      if (iter[i] == iter_prec[i]) {
         mat_psurv_prec[i,] = mat_psurv[i,]
       } else{
         mat_psurv_prec[i,] = mat_psurv[i-1,]
@@ -260,12 +261,12 @@ predict_Nsurv_ode.survFit <- function(object,
     
 
     NsurvPred_valid[1, ] = rep(Nprec[1], ncol_NsurvPred)
-    for(i in 2:nrow(mat_psurv)){
-      if(iter[i] == iter_prec[i]){
+    for (i in 2:nrow(mat_psurv)) {
+      if (iter[i] == iter_prec[i]) {
         NsurvPred_valid[i,] = NsurvPred_check[i,]
       } else{
         NsurvPred_valid[i,] = rbinom(ncol_NsurvPred,
-                                     size = NsurvPred_valid[i-1,],
+                                     size = NsurvPred_valid[i - 1,],
                                      prob = mat_pSurv_ratio[i,])
       }
     }
@@ -284,7 +285,7 @@ predict_Nsurv_ode.survFit <- function(object,
     
   } 
   
-  if(spaghetti == TRUE){
+  if (spaghetti == TRUE) {
     random_column <- sample(1:ncol(NsurvPred_valid), size = round(10/100 * ncol(NsurvPred_valid)))
     df_spaghetti <- as_tibble(NsurvPred_valid[, random_column]) %>%
       mutate(time = data_predict$time,

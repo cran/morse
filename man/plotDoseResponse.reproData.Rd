@@ -69,20 +69,6 @@ When \code{style = "generic"}, the function calls the generic function
 When \code{style = "ggplot"}, the function return an object of class
 \code{ggplot}, see function \code{\link[ggplot2]{ggplot}}
 }
-\examples{
-# (1) Load the data
-data(zinc)
-
-# (2) Create an object of class 'reproData'
-zinc_rpr <- reproData(zinc)
-
-# (3) Plot dose-response
-plotDoseResponse(zinc_rpr)
-
-# (4) Plot dose-response with a generic style
-plotDoseResponse(zinc_rpr, style = "generic")
-
-}
 \seealso{
 \code{\link[epitools]{pois.exact}}
 }

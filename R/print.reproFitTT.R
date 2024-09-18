@@ -9,23 +9,6 @@
 #' 
 #' @return print the model text and the Jags Computing information
 #' 
-#' @examples
-#' # (1) Load the data
-#' data(cadmium1)
-#' 
-#' # (2) Create an object of class 'reproData'
-#' cadmium1 <- reproData(cadmium1)
-#' 
-#' \donttest{
-#' # (3) Run the reproFitTT function with the log-logistic
-#' # model
-#' out <- reproFitTT(cadmium1, ecx = c(5, 10, 15, 20, 30, 50, 80),
-#' quiet = TRUE)
-#' 
-#' # (4) Print the reproFitTT object
-#' print(out)
-#' }
-#' 
 #' @keywords print
 #' 
 #' @export

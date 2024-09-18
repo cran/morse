@@ -16,24 +16,6 @@
 #' \item{jags.data}{a list of the data passed to the JAGS model}
 #' \item{model_type}{the type of TKTD model used: \code{SD} or \code{IT}}
 #'
-#' @examples
-#' 
-#' # Example with time-variable exposure profile#'
-#' # (1) Load the survival data
-#' data(propiconazole)
-#' # (2) Create an object of class "survData"
-#' dataset  <- survData(propiconazole)
-#' \donttest{
-#' # (3) Run the survFit function with TKTD model 'SD' or 'IT' 
-#' out <- survFit(dataset , model_type = "SD")
-#' # (4) Summarize look the estimated parameters
-#' summary(out)
-#' # (5) Plot the fitted curve
-#' plot(out, adddata = TRUE)
-#' # (6) Plot the fitted curve with ggplot style and CI as spaghetti
-#' plot(out, spaghetti = TRUE , adddata = TRUE)
-#' }
-#'
 #' @import rjags
 #' @importFrom stats update
 #' @importFrom dplyr group_by summarise filter

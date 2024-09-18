@@ -12,15 +12,6 @@
 #' \item{NbsurvTimeRep}{nb of survivors. for all replicates and time points}
 #' \item{ConcTimeRep}{Concentration for all replicates and time points}
 #' 
-#' @examples
-#' # (1) Load the data
-#' data(propiconazole_pulse_exposure)
-#' 
-#' # (2) Create a survDataVarExp object
-#' out <- survData(propiconazole_pulse_exposure)
-#' 
-#' # (3) Summarize the data set
-#' summary(out)
 #' 
 #' @keywords summary
 #' 

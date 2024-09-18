@@ -43,15 +43,6 @@
 #' @keywords transformation
 #'
 #' @importFrom tibble as_tibble
-#' 
-#' @examples
-#'
-#' # (1) Load the survival data set
-#' data(zinc)
-#'
-#' # (2) Create an objet of class 'survData'
-#' dat <- survData(zinc)
-#' class(dat)
 #'
 #' @export
 #' 
@@ -62,7 +53,7 @@ survData <- function(x) {
   if (dim(survDataCheck(x, diagnosis.plot = FALSE))[1] > 0)
     stop("The [x] argument is not well-formed, please use [survDataCheck] for details.")
 
-  if (!("Ninit" %in% colnames(x))){
+  if (!("Ninit" %in% colnames(x))) {
     x$Ninit <- Ninit(x)
   }
   
@@ -84,17 +75,6 @@ survData <- function(x) {
 #' @return a boolean \code{TRUE} if concentration in \code{replicate} is constant,
 #'  or \code{FALSE} if the concentration in at least one of the replicates is time-variable,
 #'  and/or if \code{NA} occures. 
-#'
-#' @examples
-#'
-#' # (1) Load the survival data set and test if concentration in replicates is constant
-#' data("propiconazole")
-#' is_exposure_constant(propiconazole)
-#' is_exposure_constant(survData(propiconazole))
-#'
-#'  # (1) Load the survival data set and test if concentration in replicates is constant
-#' data("propiconazole_pulse_exposure") 
-#' is_exposure_constant(propiconazole_pulse_exposure)
 #' 
 #' @export
 #' 
@@ -118,15 +98,15 @@ is_exposure_constant <- function(x) {
 #
 Nindtime <- function(x) {
   x <- x[!is.na(x$Nsurv),]
-  T <- sort(unique(x$time)) # observation times
+  Tr <- sort(unique(x$time)) # observation times
   Nindtime <- rep(0,dim(x)[1])
-  for (i in 2:length(T)) {
-    now <- x$time == T[i]
-    before <- x$time == T[i - 1]
+  for (i in 2:length(Tr)) {
+    now <- x$time == Tr[i]
+    before <- x$time == Tr[i - 1]
     Nindtime[now] <-
       Nindtime[before] +
-      (x$Nsurv[before] - x$Nsurv[now]) * ((T[i] - T[i - 1]) / 2) +
-      x$Nsurv[now] * (T[i] - T[i - 1])
+      (x$Nsurv[before] - x$Nsurv[now]) * ((Tr[i] - Tr[i - 1]) / 2) +
+      x$Nsurv[now] * (Tr[i] - Tr[i - 1])
   }
   return(Nindtime)
 }
@@ -173,17 +153,6 @@ Ninit <- function(x) {
 #' }
 #' 
 #' @return a dataframe suitable for `survData`
-#'
-#' @examples
-#'
-#' # (1) Load the two survival data sets
-#' data(propiconazole_pulse_exposure)
-#' exposure <- propiconazole_pulse_exposure[,c("replicate", "time", "conc")]
-#' survival <- propiconazole_pulse_exposure[,c("replicate", "time", "Nsurv")]
-#'
-#' # (2) Create an objet of class 'survData'
-#' dat_join <- survData(survData_join(exposure, survival))
-#' class(dat_join)
 #'
 #' @export
 #'

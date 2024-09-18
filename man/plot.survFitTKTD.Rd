@@ -72,30 +72,4 @@ This spaghetti plot consists of the representation of simulated curves using par
 sampled in the posterior distribution (2\% of the MCMC chains are randomly
 taken for this sample).
 }
-\examples{
-
-# (1) Load the survival data
-data(propiconazole)
-
-# (2) Create an object of class "survData"
-dataset <- survData(propiconazole)
-
-\donttest{
-# (3) Run the survFitTKTD function ('SD' model only)
-out <- survFitTKTD(dataset)
-
-# (4) Plot the fitted curves in one plot 
-plot(out)
-
-# (5) Plot one fitted curve per concentration with credible limits as
-# spaghetti, data and confidence intervals
-# and with a ggplot style
-plot(out, spaghetti = TRUE , adddata = TRUE, one.plot = FALSE,
-     style = "ggplot")
-
-# (6) Plot fitted curve for one specific concentration
-plot(out, concentration = 36, style = "ggplot")
-}
-
-}
 \keyword{plot}

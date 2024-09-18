@@ -45,28 +45,6 @@
 #' 
 #' @return a plot of class \code{ggplot}
 #' 
-#' @examples
-#'
-#' # (1) Load the survival data
-#' data("propiconazole_pulse_exposure")
-#'
-#' # (2) Create an object of class "survData"
-#' dataset <- survData(propiconazole_pulse_exposure)
-#'
-#' \donttest{
-#' # (3) Run the survFit function
-#' out <- survFit(dataset , model_type = "SD")
-#'
-#' # (4) Summary look the estimated values (parameters)
-#' summary(out)
-#'
-#' # (5) Plot the fitted curve
-#' plot(out, adddata = FALSE)
-#'
-#' # (6) Plot the fitted curve with ggplot style and CI as spaghetti
-#' plot(out, spaghetti = TRUE)
-#' }
-#' 
 #' @export
 #' 
 #' @importFrom stats predict

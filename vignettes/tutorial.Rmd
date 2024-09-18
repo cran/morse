@@ -350,20 +350,20 @@ data("propiconazole_pulse_exposure")
 survDataCheck(propiconazole_pulse_exposure)
 
 # (3) create a `survData` object
-dat <- survData(propiconazole_pulse_exposure)
+dat_ <- survData(propiconazole_pulse_exposure)
 
 # (4) represent the number of survivor as a function of time
-plot(dat)
+plot(dat_)
 
 # (5) check information on the experimental design
-summary(dat)
+summary(dat_)
 ```
 
 ### GUTS model "SD"
 
 ```{r fitvarSD, echo=TRUE, cache=TRUE, eval=FALSE}
 # (6) fit the TKTD model SD
-fit_varSD <- survFit(dat, quiet = TRUE, model_type = "SD")
+fit_varSD <- survFit(dat_, quiet = TRUE, model_type = "SD")
 ```
 
 ```{r, cache=TRUE, eval=FALSE}
@@ -387,7 +387,7 @@ ppc(fit_varSD)
 
 ```{r fitvarIT, echo=TRUE, cache=TRUE, eval=FALSE}
 # fit a TKTD model IT
-fit_varIT <- survFit(dat, quiet = TRUE, model_type = "IT")
+fit_varIT <- survFit(dat_, quiet = TRUE, model_type = "IT")
 ```
 
 ```{r, cache=TRUE, eval=FALSE}

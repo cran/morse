@@ -25,22 +25,6 @@ The function returns a list with the following information:
 This is the generic \code{summary} S3 method for the \code{survFit} class.
 It shows the quantiles of priors and posteriors on parameters.
 }
-\examples{
-# (1) Load the data
-data(propiconazole)
-
-# (2) Create a survData object
-dat <- survData(propiconazole)
-
-\donttest{
-# (3) Run the survFit function
-out <- survFit(dat, model_type = "SD")
-
-# (4) summarize the survFit object
-summary(out)
-}
-
-}
 \references{
 EFSA PPR Scientific Opinion (2018)
 \emph{Scientific Opinion on the state of the art of Toxicokinetic/Toxicodynamic (TKTD) effect models for regulatory risk assessment of pesticides for aquatic organisms}

@@ -159,42 +159,6 @@ exceeded in one individual, this individual dies immediately.
 When class of \code{object} is \code{survDataCstExp}, see \link[=survFit.survDataCstExp]{survFit.survDataCstExp} ;
 and for a \code{survDataVarExp}, see \link[=survFit.survDataVarExp]{survFit.survDataVarExp}.
 }
-\examples{
-
-# Example with time-variable exposure profile#'
-# (1) Load the survival data
-data(propiconazole)
-# (2) Create an object of class "survData"
-dataset  <- survData(propiconazole)
-\donttest{
-# (3) Run the survFit function with TKTD model 'SD' or 'IT' 
-out <- survFit(dataset , model_type = "SD")
-# (4) Summarize look the estimated parameters
-summary(out)
-# (5) Plot the fitted curve
-plot(out, adddata = TRUE)
-# (6) Plot the fitted curve with ggplot style and CI as spaghetti
-plot(out, spaghetti = TRUE , adddata = TRUE)
-}
-
-
-# Example with time-variable exposure profile
-# (1) Load the survival data
-data("propiconazole_pulse_exposure")
-# (2) Create an object of class "survData"
-dataset <- survData(propiconazole_pulse_exposure)
-\donttest{
-# (3) Run the survFit function with TKTD model 'SD' or 'IT' 
-out <- survFit(dataset , model_type = "SD")
-# (4) Summarize look the estimated parameters
-summary(out)
-# (5) Plot the fitted curve
-plot(out, adddata = FALSE)
-# (6) Plot the fitted curve with ggplot style and CI as spaghetti
-plot(out, spaghetti = TRUE)
-}
-
-}
 \references{
 Jager, T., Albert, C., Preuss, T. G. and Ashauer, R. (2011) 
 General unified threshold model of survival-a toxicokinetic-toxicodynamic

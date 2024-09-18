@@ -54,30 +54,6 @@ predict_Nsurv <- function(object, ...){
 #' dataframe with all simulations based on MCMC parameters from a \code{survFit} object.}
 #' 
 #' 
-#' @examples 
-#'
-#' # (1) Load the survival data
-#' data("propiconazole_pulse_exposure")
-#'
-#' # (2) Create an object of class "survData"
-#' dataset <- survData(propiconazole_pulse_exposure)
-#'
-#' \donttest{
-#' # (3) Run the survFit function
-#' out <- survFit(dataset , model_type = "SD")
-#'
-#' # (4) Create a new data table for prediction
-#' data_4prediction <- data.frame(time = 1:10,
-#'                                conc = c(0,5,30,30,0,0,5,30,15,0),
-#'                                replicate= rep("predict", 10),
-#'                                Nsurv = c(20,20,17,16,15,15,15,14,13,12))
-#'
-#' # (5) Predict Nsurv on a new data set
-#' predict_out <- predict_Nsurv(object = out, data_predict = data_4prediction, spaghetti = TRUE)
-#'
-#' }
-#' 
-#' 
 #' @export
 #'
 predict_Nsurv.survFit <- function(object,

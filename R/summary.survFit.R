@@ -18,28 +18,12 @@
 #' \emph{Scientific Opinion on the state of the art of Toxicokinetic/Toxicodynamic (TKTD) effect models for regulatory risk assessment of pesticides for aquatic organisms}
 #' \url{https://www.efsa.europa.eu/en/efsajournal/pub/5377}.
 #'
-#' @examples
-#' # (1) Load the data
-#' data(propiconazole)
-#'
-#' # (2) Create a survData object
-#' dat <- survData(propiconazole)
-#'
-#' \donttest{
-#' # (3) Run the survFit function
-#' out <- survFit(dat, model_type = "SD")
-#'
-#' # (4) summarize the survFit object
-#' summary(out)
-#' }
-#'
 #' @keywords summary
 #'
 #' @importFrom stats qnorm qunif
 #' 
 #' @export
 #' 
-
 summary.survFit <- function(object,
                             quiet = FALSE,
                             EFSA_name = FALSE,
@@ -47,7 +31,7 @@ summary.survFit <- function(object,
   
   estim_parameters <- object$estim.par
   
-  if(EFSA_name == TRUE){
+  if (EFSA_name == TRUE){
     parameters_SD_HBon = c("kD", "hb", "zw", "bw")
     parameters_SD_HBoff = c("kD", "zw", "bw")
     parameters_IT_HBon = c("kD", "hb", "mw", "beta")

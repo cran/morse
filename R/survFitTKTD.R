@@ -184,32 +184,8 @@ survTKTDPARAMS <- function(mcmc) {
 #' based on hazard modeling, \emph{Environmental and Ecological Statistics}, 1,
 #' 303-314.
 #' 
-#' 
 #' @keywords estimation
 #
-#' @examples
-#'
-#' # (1) Load the survival data
-#' data(propiconazole)
-#'
-#' # (2) Create an object of class "survData"
-#' dataset <- survData(propiconazole)
-#'
-#' \donttest{
-#' # (3) Run the survFitTKTD function
-#' out <- survFitTKTD(dataset)
-#'
-#' # (4) Summarize look the estimated parameters
-#' summary(out)
-#'
-#' # (5) Plot the fitted curve
-#' plot(out, adddata = TRUE)
-#'
-#' # (6) Plot the fitted curve with ggplot style and CI as spaghetti
-#' plot(out, spaghetti = TRUE , adddata = TRUE,
-#'      style = "ggplot")
-#' }
-#'
 #' @export
 #' @import rjags
 #' @importFrom dplyr group_by summarise filter

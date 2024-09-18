@@ -9,21 +9,6 @@
 #' 
 #' @return print the model text and the Jags Computing information
 #' 
-#' @examples
-#' # (1) Load the data
-#' data(propiconazole)
-#' 
-#' # (2) Create an object of class 'survData'
-#' dat <- survData(propiconazole)
-#' 
-#' \donttest{
-#' # (3) Run the survFitTKTD function
-#' out <- survFitTKTD(dat, quiet = TRUE)
-#' 
-#' # (4) Print the survFitTKTD object
-#' print(out)
-#' }
-#' 
 #' @keywords print
 #' 
 #' @export

@@ -38,11 +38,12 @@ MFx_ode(object, ...)
   time_MFx = NULL,
   MFx_range = c(0, 1000),
   mcmc_size = 1000,
-  hb_value = FALSE,
+  hb_value = TRUE,
   spaghetti = FALSE,
   accuracy = 0.01,
   quiet = FALSE,
   threshold_iter = 100,
+  hb_valueFORCED = 0,
   interpolate_length = NULL,
   interpolate_method = "linear",
   ...
@@ -177,52 +178,4 @@ reduce by \eqn{x}\% (argument \code{X}) the survival probability at a
 }
 \details{
 When class of \code{object} is \code{survFit}, see \link[=MFx.survFit]{MFx.survFit}.
-}
-\examples{
-
-# (1) Load the data
-data("propiconazole")
-
-# (2) Create an object of class 'survData'
-dataset <- survData(propiconazole)
-
-\donttest{
-# (3) Run the survFit function with model_type SD (or IT)
-out_SD <- survFit(dataset, model_type = "SD")
-
-# (4) data to predict
-data_4prediction <- data.frame(time = 1:10, conc = c(0,0.5,3,3,0,0,0.5,3,1.5,0))
-
-# (5) estimate MF(x=30, t=4), that is for 30\% reduction of survival at time 4
-MFx_SD_30.4 <- MFx(out_SD, data_predict = data_4prediction , X = 30, time_MFx = 4)
-
-# (5bis) estimate MF(x,t) along the MF_range from 5 to 10 (50) (X = NULL)
-MFx_SD_range <- MFx(out_SD, data_predict = data_4prediction ,
-                    X = NULL, time_MFx = 4, MFx_range = seq(5, 10, length.out = 50))
-}
-
-
-
-# (1) Load the data
-data("propiconazole")
-
-# (2) Create an object of class 'survData'
-dataset <- survData(propiconazole)
-
-\donttest{
-# (3) Run the survFit function with model_type SD (or IT)
-out_SD <- survFit(dataset, model_type = "SD")
-
-# (4) data to predict
-data_4prediction <- data.frame(time = 1:10, conc = c(0,0.5,3,3,0,0,0.5,3,1.5,0))
-
-# (5) estimate MF(x=30, t=4), that is for 30\% reduction of survival at time 4
-MFx_SD_30.4 <- MFx_ode(out_SD, data_predict = data_4prediction , X = 30, time_MFx = 4)
-
-# (5bis) estimate MF(x,t) along the MF_range from 5 to 10 (50) (X = NULL)
-MFx_SD_range <- MFx_ode(out_SD, data_predict = data_4prediction ,
-                    X = NULL, time_MFx = 4, MFx_range = seq(5, 10, length.out = 50))
-}
-
-
 }

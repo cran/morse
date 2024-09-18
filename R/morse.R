@@ -59,7 +59,6 @@
 #'
 #' @name morse-package
 #' @aliases morse-package morse
-#' @docType package
 #' @author
 #' Virgile Baudrot  <virgile.baudrot@@posteo.net>,
 #' Sandrine Charles <sandrine.charles@@univ-lyon1.fr>,
@@ -96,6 +95,7 @@
 #' \emph{Scientific Opinion on the state of the art of Toxicokinetic/Toxicodynamic (TKTD) effect models for regulatory risk assessment of pesticides for aquatic organisms}
 #' \url{https://www.efsa.europa.eu/en/efsajournal/pub/5377}.
 #' 
+#' @useDynLib morse, .registration = TRUE
 NULL
 
 
@@ -416,9 +416,4 @@ NULL
 #'  \item{\code{conc}}{A vector of class \code{numeric} with exposure concentrations.} and 
 #'  \item{\code{replicate}}{A vector of class \code{factor}.} }
 #' @keywords data set
-NULL
-
-## usethis namespace: start
-#' @useDynLib morse, .registration = TRUE
-## usethis namespace: end
 NULL

@@ -1,7 +1,8 @@
-#' Plotting method for \code{LCx} objects
+#' @title Plotting method for \code{LCx} objects
 #'
-#' This is the generic \code{plot} S3 method for the
-#' \\code{LCx} class. It plots the survival probability as a function of concentration.
+#' @description
+#' This is the generic \code{plot} S3 method for the LCx class. 
+#' It plots the survival probability as a function of concentration.
 #'
 #'
 #' @param x An object of class \code{LCx}.
@@ -14,29 +15,8 @@
 #' @keywords plot
 #' 
 #' @return a plot of class \code{ggplot}
-#' 
-#' @examples 
-#' 
-#' # (1) Load the data
-#' data("propiconazole")
-#' 
-#' # (2) Create an object of class 'survData'
-#' dataset <- survData(propiconazole)
-#' 
-#' \donttest{
-#' # (3) Run the survFit function with model_type SD (or IT)
-#' out_SD <- survFit(dataset, model_type = "SD")
-#' 
-#' # (4) estimate LC50 at time 4
-#' LCx_SD <- LCx(out_SD, X = 50, time_LCx = 4)
-#' 
-#' # (5) plot the object of class 'LCx'
-#' plot(LCx_SD)
-#' }
 #'
 #' @export
-#'
-#'
 #'
 plot.LCx <- function(x,
                      xlab = "Concentration",
@@ -52,7 +32,7 @@ plot.LCx <- function(x,
   time_LCx <- x$time_LCx
   
   # Check if df_LCx are not all NA:
-  if(all(is.na(df_LCx$LCx))){
+  if (all(is.na(df_LCx$LCx))) {
     warning(paste0("No LCx can be computed at X=", 100-X_prop_provided*100, " and time_LCx=", time_LCx, 
                    "\nSee the grey dotted line on the graph does not cross zone of credible interval.",
                    "\nUse LCx function 'LCx' with other values for arguments 'time_LCx' (default is the maximum time of the experimental data),

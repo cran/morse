@@ -22,20 +22,4 @@ The function returns a list with the following information:
 This is the generic \code{summary} S3 methode for the \code{survFitTKTD} class.
 It shows the quantiles of priors and posteriors on parameters.
 }
-\examples{
-# (1) Load the data
-data(propiconazole)
-
-# (2) Create a survData object
-dat <- survData(propiconazole)
-
-\donttest{
-# (3) Run the survFitTKTD function
-out <- survFitTKTD(dat)
-
-# (4) summarize the survFitTKTD object
-summary(out)
-}
-
-}
 \keyword{summary}

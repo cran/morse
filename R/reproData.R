@@ -26,15 +26,6 @@
 #'
 #' @keywords transformation
 #'
-#' @examples
-#'
-#' # (1) Load reproduction dataset
-#' data(cadmium1)
-#'
-#' # (2) Create an object of class "reproData"
-#' dat <- reproData(cadmium1)
-#' class(dat)
-#'
 #' @export
 reproData <- function(x) {
 
@@ -74,6 +65,5 @@ Nreprocumul <- function(x) {
     before <- x$time == T[i - 1]
     Nreprocumul[now] <- Nreprocumul[before] + x$Nrepro[now]
   }
-
   return(Nreprocumul)
 }

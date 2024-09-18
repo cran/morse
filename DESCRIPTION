@@ -1,7 +1,7 @@
 Package: morse
 Type: Package
 Title: Modelling Reproduction and Survival Data in Ecotoxicology
-Version: 3.3.2
+Version: 3.3.4
 Encoding: UTF-8
 Authors@R: c(
     person("Virgile", "Baudrot", role = c("aut","cre"), email = "virgile.baudrot@qonfluens.com"),
@@ -17,8 +17,8 @@ Authors@R: c(
     person("Philippe", "Veber", role = "aut")
     )
 Maintainer: Virgile Baudrot <virgile.baudrot@qonfluens.com>
-URL: https://cran.r-project.org/package=morse
-BugReports: https://gitlab.com/qonfluens/model/morse
+URL: https://gitlab.in2p3.fr/mosaic-software/morse
+BugReports: https://gitlab.in2p3.fr/mosaic-software/morse/-/issues
 Description: Advanced methods for a valuable quantitative environmental risk 
    assessment using Bayesian inference of survival and reproduction Data. Among
    others, it facilitates Bayesian inference of the general unified
@@ -27,7 +27,7 @@ Description: Advanced methods for a valuable quantitative environmental risk
    as well as complementary details in Baudrot et al. (2018)
    <doi:10.1021/acs.est.7b05464> and Delignette-Muller et al.
    (2017) <doi:10.1021/acs.est.6b05326>.
-Depends: R (>= 3.5.0)
+Depends: R (>= 4.0.0)
 SystemRequirements: JAGS (>= 4.0.0) (see
         https://mcmc-jags.sourceforge.io)
 Imports: coda, deSolve, dplyr, epitools, graphics, grDevices, ggplot2
@@ -36,10 +36,10 @@ Imports: coda, deSolve, dplyr, epitools, graphics, grDevices, ggplot2
 License: MIT + file LICENSE
 Suggests: knitr, rmarkdown, testthat
 VignetteBuilder: knitr
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.1
 LazyData: true
 NeedsCompilation: yes
-Packaged: 2022-10-28 08:37:34 UTC; virgi
+Packaged: 2024-09-18 12:22:58 UTC; virgile
 Author: Virgile Baudrot [aut, cre],
   Sandrine Charles [aut],
   Marie Laure Delignette-Muller [aut],
@@ -52,4 +52,4 @@ Author: Virgile Baudrot [aut, cre],
   Alexander Singer [ctb],
   Philippe Veber [aut]
 Repository: CRAN
-Date/Publication: 2022-10-28 11:45:09 UTC
+Date/Publication: 2024-09-18 13:30:06 UTC

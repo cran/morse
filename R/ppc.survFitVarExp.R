@@ -20,24 +20,8 @@
 #' 
 #' @return a plot of class \code{ggplot}
 #'
-#' @examples
-#'
-#' # (1) Load the data
-#' data(propiconazole_pulse_exposure)
-#'
-#' # (2) Create an object of class "survData"
-#' dat <- survData(propiconazole_pulse_exposure)
-#'
-#' \donttest{
-#' # (3) Run the survFitTKTD function with the TKTD model ('SD' or 'IT')
-#' out <- survFit(dat, model_type = "SD")
-#'
-#' # (4) Plot observed versus predicted values
-#' ppc(out)
-#' }
-#'
 #' @export
-
+#' 
 ppc.survFitVarExp <- function(x,
                               xlab = "Observed nb of survivors",
                               ylab = "Predicted nb of survivors",

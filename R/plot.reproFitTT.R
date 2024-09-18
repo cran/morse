@@ -52,26 +52,6 @@
 #' 
 #' @return a plot of class \code{ggplot}
 #' 
-#' @examples
-#'
-#' # (1) Load the data
-#' data(cadmium1)
-#'
-#' # (2) Create an object of class "reproData"
-#' dataset <- reproData(cadmium1)
-#'
-#' \donttest{
-#' # (3) Run the reproFitTT function with the log-logistic gamma-Poisson model
-#' out <- reproFitTT(dataset, stoc.part = "gammapoisson",
-#'                   ecx = c(5, 10, 15, 20, 30, 50, 80), quiet = TRUE)
-#'
-#'
-#' # (4) Plot the fitted curve with generic style
-#' plot(out, xlab = expression("Concentration in" ~ mu~g.L^{-1}),
-#'      fitcol = "blue", cicol = "lightblue",
-#'      main = "Log-logistic response to concentration")
-#' }
-#' 
 #' @export
 plot.reproFitTT <- function(x,
                             xlab = "Concentration",

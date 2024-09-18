@@ -1,12 +1,10 @@
+#' @description
 #' Create a data set to analyse a \code{survDataCstExp} object.
 #'
-#' @param x An object of class \code{survData}
-#' @param model_type TKTD GUTS model type ('SD' or 'IT')
-#' 
+#' @rdname modelData
 #' @return A list for parameterization of priors for Bayesian inference.
 #'
-#'
-modelData.survDataCstExp <- function(x, model_type = NULL){
+modelData.survDataCstExp <- function(x, model_type = NULL, ...){
   
   ## 1. Gather replicate when there is the same constante concentration
   x_gather <- gather_survDataCstExp(x)
@@ -38,12 +36,12 @@ modelData.survDataCstExp <- function(x, model_type = NULL){
   
   ### other parameters specific to model IT
   
-  if(model_type == "IT"){
+  if (model_type == "IT") {
     dataList$i_prec <- x_dev$i_prec
     dataList$replicate_ID <- x_dev$replicate_ID
     dataList$time_ID <- x_dev$time_ID
   }
-  if(model_type == "SD"){
+  if (model_type == "SD") {
     dataList$tprec <- x_dev$tprec
     dataList$i_prec <- x_dev$i_prec
   }
@@ -71,7 +69,7 @@ gather_survDataCstExp <- function(x){
   
   bool_checkTimeReplicate <- checkTimeReplicate(x)
   
-  if( bool_checkTimeReplicate ){
+  if ( bool_checkTimeReplicate ) {
     ### Sum Nsurv data for each (conc, time) couple
     x_dev <- x %>%
       dplyr::group_by(conc, time) %>%

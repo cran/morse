@@ -1,24 +1,20 @@
+#' @description
 #' Create a data set to analyse a \code{survDataVarExp} object.
 #'
-#' @param x An object of class \code{survData}
-#' @param model_type TKTD GUTS model type ('SD' or 'IT')
-#' @param extend_time Number of for each replicate used for linear 
-#' interpolation (comprise between time to compute and fitting accuracy)
-#' @param \dots Further arguments to be passed to generic methods
-#' 
+#' @rdname modelData
 #' @return A list for parameterization of priors for Bayesian inference.
 #' 
 modelData.survDataVarExp <- function(x,
                                      model_type = NULL,
                                      extend_time = 100, ...){
   
-  
   ## 0. Creation of additional variable
   ## - tprec: previous time
   ## - Nprec: previous number of survivors
   ## - time_ID_red: identification of row number inside a group
   ## - i_row: identification of row number (for every group)
-  ## - i_prec: identification of previous row number (for every group) exept when time_ID_red (in group) is 1
+  ## - i_prec: identification of previous row number (for every group) except
+  ## when time_ID_red (in group) is 1
   
   x_interpolate <- survData_interpolate(x,  extend_time = extend_time) %>%
     dplyr::arrange(replicate, time)

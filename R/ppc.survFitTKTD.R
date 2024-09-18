@@ -23,28 +23,12 @@
 #' 
 #' @return a plot of class \code{ggplot}
 #'
-#' @examples
-#'
-#' # (1) Load the data
-#' data(propiconazole)
-#'
-#' # (2) Create an object of class "survData"
-#' dat <- survData(propiconazole)
-#'
-#' \donttest{
-#' # (3) Run the survFitTKTD function with the TKTD model ('SD' only)
-#' out <- survFitTKTD(dat)
-#'
-#' # (4) Plot observed versus predicted values
-#' ppc(out)
-#' }
-#'
 #' @import ggplot2
 #' @import grDevices
 #' @importFrom graphics plot
 #' 
 #' @export
-ppc.survFitTKTD <- function(x, style = "ggplot", main = NULL,...) {
+ppc.survFitTKTD <- function(x, style = "ggplot", main = NULL, ...) {
   if (!is(x, "survFitTKTD"))
     stop("x is not of class 'survFitTKTD'!")
   

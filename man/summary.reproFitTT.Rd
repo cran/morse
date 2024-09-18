@@ -24,22 +24,4 @@ This is the generic \code{summary} S3 method for the \code{reproFitTT} class.
 It shows the quantiles of priors and posteriors on parameters
 and the quantiles of the posterior on the ECx estimates.
 }
-\examples{
-# (1) Load the data
-data(cadmium1)
-
-# (2) Create a reproData object
-cadmium1 <- reproData(cadmium1)
-
-\donttest{
-# (3) Run the reproFitTT function with the log-logistic
-# model
-out <- reproFitTT(cadmium1, ecx = c(5, 10, 15, 20, 30, 50, 80),
-quiet = TRUE)
-
-# (4) summarize the reproFitTT object
-summary(out)
-}
-
-}
 \keyword{summary}

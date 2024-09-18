@@ -19,15 +19,3 @@ a boolean \code{TRUE} if concentration in \code{replicate} is constant,
 Test in a well-formed argument to function 'survData' if the concentration
 is constant and different from \code{NA} for each replicate (each time-serie)
 }
-\examples{
-
-# (1) Load the survival data set and test if concentration in replicates is constant
-data("propiconazole")
-is_exposure_constant(propiconazole)
-is_exposure_constant(survData(propiconazole))
-
- # (1) Load the survival data set and test if concentration in replicates is constant
-data("propiconazole_pulse_exposure") 
-is_exposure_constant(propiconazole_pulse_exposure)
-
-}

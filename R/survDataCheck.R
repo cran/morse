@@ -34,18 +34,7 @@
 #' other errors.
 #'
 #' @seealso \code{\link{survData}}
-#'
-#' @examples
-#' # Run the check data function
-#' data(zinc)
-#' survDataCheck(zinc)
-#'
-#' # Now we insert an error in the dataset, by artificially increasing the
-#' # number of survivors at a given time point, in such a way that the number
-#' # of indivuals increases in the corresponding replicate
-#' zinc[25, "Nsurv"] <- as.integer(20)
-#' survDataCheck(zinc, diagnosis.plot = TRUE)
-#'
+#' 
 #' @importFrom magrittr '%>%'
 #' @importFrom dplyr arrange
 #' @importFrom dplyr mutate

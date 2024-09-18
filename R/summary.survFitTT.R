@@ -13,22 +13,6 @@
 #' \item{Qposteriors}{quantiles of the model posteriors}
 #' \item{QLCx}{quantiles of LCx estimates}
 #'
-#' @examples
-#' # (1) Load the data
-#' data(cadmium1)
-#'
-#' # (2) Create a survData object
-#' cadmium1 <- survData(cadmium1)
-#'
-#' \donttest{
-#' # (3) Run the survFitTT function with the log-logistic
-#' # binomial model
-#' out <- survFitTT(cadmium1, lcx = c(5, 10, 15, 20, 30, 50, 80),
-#'                  quiet = TRUE)
-#'
-#' # (4) summarize the survFitTT object
-#' summary(out)
-#' }
 #'
 #' @keywords summary
 #'

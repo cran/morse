@@ -123,21 +123,19 @@ survTKTDConfInt_CstExp <- function(x) {
   return(ci)
 }
 
-Surv_SD <- function(Cw, time, kk, kd, z, hb)
-{
+Surv_SD <- function(Cw, time, kk, kd, z, hb) {
   S <- exp(-hb*time)
   x <- ifelse(Cw > z, 1 - z/Cw, NA)
   tz <- -(1/kd)*log(x)
   y <- ifelse(time > tz,
-              exp( kk/kd*Cw*(exp(-kd*tz) -exp(-kd*time))
-                   - kk*(Cw-z)*(time - tz)),
+              exp( kk/kd*Cw*(exp(-kd*tz) - exp(-kd*time))
+                   - kk*(Cw - z)*(time - tz)),
               NA)
   return(ifelse(!is.na(x) & !is.na(y), S * y, S))
 }
 
-Surv_IT <- function(Cw, time, kd, hb, alpha, beta)
-{
-  D <- Cw*(1-exp(-kd %*% t(time)))
+Surv_IT <- function(Cw, time, kd, hb, alpha, beta){
+  D <- Cw*(1 - exp(-kd %*% t(time)))
   D.max <- t(apply(D, 1, cummax))
   S <- exp(-hb %*% t(time)) * (1 - plogis(log(D.max), location = log(alpha), scale = 1/beta))
   return(S)
@@ -163,7 +161,7 @@ survFitPlotCITKTD_CstExp <- function(x) {
     hb <- mctot[, "hb"]
   } else{ hb <- 10^mctot[, "hb_log10"] }
   
-  # all theorical
+  # all theoretical
   k <- 1:length(concobs)
   j <- 1:npoints
   

@@ -46,23 +46,6 @@
 #' \item{df_dose}{A \code{data.frame} with four columns: \code{concentration}, and median \code{q50} and 95\% credible interval
 #'  (\code{qinf95} and \code{qsup95}) of the survival probability at time \code{time_LCx}}
 #' 
-#'    
-#' @examples 
-#' 
-#' # (1) Load the data
-#' data("propiconazole")
-#' 
-#' # (2) Create an object of class 'survData'
-#' dataset <- survData(propiconazole)
-#' 
-#' \donttest{
-#' # (3) Run the survFit function with model_type SD (or IT)
-#' out_SD <- survFit(dataset, model_type = "SD")
-#' 
-#' # (4) estimate LC50 at time 4
-#' LCx(out_SD, X = 50, time_LCx = 4)
-#' }
-#' 
 #' @import zoo
 #' @importFrom stats approx
 #' 
@@ -119,7 +102,7 @@ doseResponse_survFitCstExp <- function(x, time_LCx,
   
   model_type = x$model_type
   
-  # prameters
+  # parameters
   mctot <- do.call("rbind", x$mcmc)
   kd <- 10^mctot[, "kd_log10"]
   # "hb" is not in survFit object of morse <v3.2.0

@@ -85,7 +85,9 @@ using the JAGS software [@rjags2016] with the following priors:
 -   we assume the range of tested concentrations in an experiment is
     chosen to contain the $LC_{50}$ with high probability. More
     formally, we choose:
-    $$\log_{10} e \sim \mathcal{N}\left(\frac{\log_{10} (\min_i c_i) + \log_{10} (\max_i c_i)}{2}, \frac{\log_{10} (\max_i c_i) - \log_{10} (\min_i c_i)}{4} \right)$$
+    $$\log_{10} e \sim \mathcal{N}\left(\frac{\log_{10} (\min_i c_i) + 
+    \log_{10} (\max_i c_i)}{2}, \frac{\log_{10} (\max_i c_i) -
+    \log_{10} (\min_i c_i)}{4} \right)$$
     which implies $e$ has a probability slightly higher than 0.95 to lie
     between the minimum and the maximum tested concentrations.
 -   we choose a quasi non-informative prior distribution for the shape

@@ -3,7 +3,7 @@ knitr::opts_chunk$set(fig.width = 7,
                       fig.height = 4,
                       cache = TRUE)
 
-## ---- echo=FALSE, results='hide', message=FALSE-------------------------------
+## ----echo=FALSE, results='hide', message=FALSE--------------------------------
 library(morse)
 library(dplyr)
 
@@ -18,14 +18,14 @@ head(dat)
 ## ----step3TT, cache=TRUE------------------------------------------------------
 plot(dat, pool.replicate = FALSE)
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ----cache=TRUE---------------------------------------------------------------
 plot(dat, concentration = 124, addlegend = TRUE,
      pool.replicate = FALSE, style ="generic")
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ----cache=TRUE---------------------------------------------------------------
 plotDoseResponse(dat, target.time = 21, addlegend = TRUE)
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ----cache=TRUE---------------------------------------------------------------
 summary(dat)
 
 ## ----step4TT, results="hide", cache=TRUE--------------------------------------
@@ -39,7 +39,7 @@ summary(fit)
 ## ----step4TTplot, cache=TRUE--------------------------------------------------
 plot(fit, log.scale = TRUE, adddata = TRUE,   addlegend = TRUE)
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ----cache=TRUE---------------------------------------------------------------
 plot(fit, log.scale = TRUE, style = "generic", adddata = TRUE, addlegend = TRUE)
 
 ## ----wrongTT, results="hide", cache=TRUE--------------------------------------
@@ -73,7 +73,7 @@ ppc(fit)
 #  # (6) fit the TKTD model SD
 #  fit_cstSD <- survFit(dat, quiet = TRUE, model_type = "SD")
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  # (7) summary of parameters estimates
 #  summary(fit_cstSD)
 #  # OR
@@ -82,13 +82,13 @@ ppc(fit)
 ## ----PLOTpriors_post_cstSD, cache=TRUE, eval=FALSE----------------------------
 #  plot_prior_post(fit_cstSD)
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  plot(fit_cstSD)
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  plot(fit_cstSD, adddata = FALSE)
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  ppc(fit_cstSD)
 
 ## ----fitcstSDFIXhb, cache=TRUE, eval=FALSE------------------------------------
@@ -104,7 +104,7 @@ ppc(fit)
 ## ----fitcstIT, echo=TRUE, cache=TRUE, eval=FALSE------------------------------
 #  fit_cstIT <- survFit(dat, quiet = TRUE, model_type = "IT")
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  summary(fit_cstIT)
 #  # OR
 #  fit_cstIT$estim.par
@@ -112,10 +112,10 @@ ppc(fit)
 ## ----PLOTpriors_post_cstIT, cache=TRUE, eval=FALSE----------------------------
 #  plot_prior_post(fit_cstIT)
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  plot(fit_cstIT)
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  ppc(fit_cstIT)
 
 ## ----TKTDvar, cache=TRUE, eval=FALSE------------------------------------------
@@ -126,46 +126,46 @@ ppc(fit)
 #  survDataCheck(propiconazole_pulse_exposure)
 #  
 #  # (3) create a `survData` object
-#  dat <- survData(propiconazole_pulse_exposure)
+#  dat_ <- survData(propiconazole_pulse_exposure)
 #  
 #  # (4) represent the number of survivor as a function of time
-#  plot(dat)
+#  plot(dat_)
 #  
 #  # (5) check information on the experimental design
-#  summary(dat)
+#  summary(dat_)
 
 ## ----fitvarSD, echo=TRUE, cache=TRUE, eval=FALSE------------------------------
 #  # (6) fit the TKTD model SD
-#  fit_varSD <- survFit(dat, quiet = TRUE, model_type = "SD")
+#  fit_varSD <- survFit(dat_, quiet = TRUE, model_type = "SD")
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  # (7) summary of the fit object
 #  summary(fit_varSD)
 
 ## ----PLOTpriors_post_varSD, cache=TRUE, eval=FALSE----------------------------
 #  plot_prior_post(fit_varSD)
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  plot(fit_varSD)
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  ppc(fit_varSD)
 
 ## ----fitvarIT, echo=TRUE, cache=TRUE, eval=FALSE------------------------------
 #  # fit a TKTD model IT
-#  fit_varIT <- survFit(dat, quiet = TRUE, model_type = "IT")
+#  fit_varIT <- survFit(dat_, quiet = TRUE, model_type = "IT")
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  # (7) summary of the fit object
 #  summary(fit_varIT)
 
 ## ----PLOTpriors_post_varIT, cache=TRUE, eval=FALSE----------------------------
 #  plot_prior_post(fit_varIT)
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  plot(fit_varIT)
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  ppc(fit_varIT)
 
 ## ----predict, cache=TRUE, eval=FALSE------------------------------------------
@@ -303,7 +303,7 @@ ppc(fit)
 #  # (4) Plot the survival rate versus time. Control (MFx = 1) and estimated MFx.
 #  plot(MFx_PRZ_cstSD_4MFx, x_variable =  "Time")
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  MFx_PRZ_cstSD_4MFx$df_MFx
 
 ## ----MFx_x10, cache=TRUE, eval=FALSE------------------------------------------
@@ -346,7 +346,7 @@ ppc(fit)
 #  # Plot Survival rate as function of time.
 #  plot(MFx_PRZ_cstSD_4pred_range, x_variable = "Time")
 
-## ---- cache=TRUE, eval=FALSE--------------------------------------------------
+## ----cache=TRUE, eval=FALSE---------------------------------------------------
 #  # Plot a specific time series.
 #  plot(MFx_PRZ_cstSD_4pred_range$ls_predict[[4]])
 
@@ -357,7 +357,7 @@ ppc(fit)
 ## ----plotMFx_PRZ_cstSD_4MFxFIXhb, cache=TRUE, eval=FALSE----------------------
 #  plot(MFx_PRZ_cstSD_4MFxFIXhb)
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ----cache=TRUE---------------------------------------------------------------
 # (1) load data set
 data(cadmium2)
 
@@ -383,18 +383,18 @@ fit <- reproFitTT(dat, stoc.part = "bestfit",
                   quiet = TRUE)
 summary(fit)
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ----cache=TRUE---------------------------------------------------------------
 plot(fit, log.scale = TRUE, adddata = TRUE,
      cicol = "orange",
      addlegend = TRUE)
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ----cache=TRUE---------------------------------------------------------------
 ppc(fit)
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ----cache=TRUE---------------------------------------------------------------
 summary(fit)
 
-## ---- cache=TRUE--------------------------------------------------------------
+## ----cache=TRUE---------------------------------------------------------------
 dat <- reproData(cadmium2)
 plot(survData(dat))
 

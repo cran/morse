@@ -23,22 +23,6 @@
 #' 
 #' @return a plot of class \code{ggplot}
 #'
-#' @examples
-#'
-#' # (1) Load the data
-#' data(propiconazole)
-#'
-#' # (2) Create an object of class "survData"
-#' dataset <- survData(propiconazole)
-#'
-#' \donttest{
-#' # (3) Run the survFitTKTD function with the TKTD model ('SD' or 'IT')
-#' out <- survFit(dataset, model_type = "SD")
-#'
-#' # (4) Plot observed versus predicted values
-#' ppc(out)
-#' }
-#'
 #' @import ggplot2
 #' @import grDevices
 #' @importFrom graphics plot

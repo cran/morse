@@ -80,30 +80,6 @@ MFx_ode <- function(object, ...){
 #' from computing survival probability for every profiles build from the vector of
 #' multiplication factors \code{MFx_tested}.}
 #' 
-#'    
-#' @examples 
-#' 
-#' # (1) Load the data
-#' data("propiconazole")
-#' 
-#' # (2) Create an object of class 'survData'
-#' dataset <- survData(propiconazole)
-#' 
-#' \donttest{
-#' # (3) Run the survFit function with model_type SD (or IT)
-#' out_SD <- survFit(dataset, model_type = "SD")
-#' 
-#' # (4) data to predict
-#' data_4prediction <- data.frame(time = 1:10, conc = c(0,0.5,3,3,0,0,0.5,3,1.5,0))
-#' 
-#' # (5) estimate MF(x=30, t=4), that is for 30% reduction of survival at time 4
-#' MFx_SD_30.4 <- MFx_ode(out_SD, data_predict = data_4prediction , X = 30, time_MFx = 4)
-#' 
-#' # (5bis) estimate MF(x,t) along the MF_range from 5 to 10 (50) (X = NULL)
-#' MFx_SD_range <- MFx_ode(out_SD, data_predict = data_4prediction ,
-#'                     X = NULL, time_MFx = 4, MFx_range = seq(5, 10, length.out = 50))
-#' }
-#' 
 #' 
 #' @export
 #' 
@@ -113,11 +89,12 @@ MFx_ode.survFit <- function(object,
                         time_MFx = NULL,
                         MFx_range = c(0,1000),
                         mcmc_size = 1000,
-                        hb_value = FALSE,
+                        hb_value = TRUE,
                         spaghetti = FALSE,
                         accuracy = 0.01,
                         quiet = FALSE,
                         threshold_iter = 100,
+                        hb_valueFORCED = 0,
                         interpolate_length = NULL,
                         interpolate_method = "linear",
                         ...){
@@ -150,6 +127,7 @@ Prefer the function 'MFx' when possible.")
                               spaghetti = spaghetti,
                               mcmc_size = mcmc_size,
                               hb_value = hb_value,
+                              hb_valueFORCED = hb_valueFORCED,
                               interpolate_length = interpolate_length,
                               interpolate_method = interpolate_method)
   
@@ -331,51 +309,6 @@ Prefer the function 'MFx' when possible.")
   }
 
 
-# points for LCx
-# 
-# 
-# pointsMFx <- function(df_dose, X_prop){
-#   
-#   if(min(df_dose$qinf95) < X_prop & X_prop < max(df_dose$qinf95)){
-#     df.qinf95 <- select(df_dose, c(MFx, qinf95))%>%
-#       dplyr::add_row(qinf95 = X_prop)%>%
-#       dplyr::arrange(qinf95)%>%
-#       dplyr::mutate(MFx = na.approx(MFx, qinf95, na.rm = FALSE))%>%
-#       dplyr::filter(qinf95 == X_prop)
-#     
-#     MFx_qinf95 <- df.qinf95$MFx
-#     
-#   } else {
-#     MFx_qinf95 <- NA
-#     
-#     warning(paste("No 95%inf for survival probability of", X_prop ,
-#                   " in the range of multiplication factors under consideration: [",
-#                   min(df_dose$MFx), ";", max(df_dose$MFx), "]"))
-#   }
-#   
-#   if(min(df_dose$qsup95) < X_prop & X_prop < max(df_dose$qsup95)){
-#     df.qsup95 <- select(df_dose, c(MFx,qsup95)) %>%
-#       add_row(qsup95 = X_prop) %>%
-#       arrange(qsup95) %>%
-#       mutate(MFx = na.approx(MFx,qsup95, na.rm = FALSE)) %>%
-#       filter(qsup95 == X_prop)
-#     
-#     MFx_qsup95 <- df.qsup95$MFx
-#     
-#   } else {
-#     
-#     MFx_qsup95 <- NA
-#     warning(paste("No 95%sup for survival probability of", X_prop,
-#                   " in the range of multiplication factors under consideration: [",
-#                   min(df_dose$MFx), ";", max(df_dose$MFx), "]"))
-#   }
-#   
-#   return(list(MFx_qinf95 = MFx_qinf95,
-#               MFx_qsup95 = MFx_qsup95))
-# }
-
-
-
 ##########################
 #
 #
@@ -464,4 +397,3 @@ binarySearch_MFx_ode <- function(object,
               ls_predict = ls_predict,
               ls_data_predict = ls_data_predict))
 }
-

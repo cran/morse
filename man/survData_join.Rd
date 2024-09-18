@@ -34,15 +34,3 @@ This function joins two data sets, one for exposure measurements, the other
 for survival measurements, into a single dataframe that can be used
 with the \code{survData} function.
 }
-\examples{
-
-# (1) Load the two survival data sets
-data(propiconazole_pulse_exposure)
-exposure <- propiconazole_pulse_exposure[,c("replicate", "time", "conc")]
-survival <- propiconazole_pulse_exposure[,c("replicate", "time", "Nsurv")]
-
-# (2) Create an objet of class 'survData'
-dat_join <- survData(survData_join(exposure, survival))
-class(dat_join)
-
-}

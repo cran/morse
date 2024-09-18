@@ -37,19 +37,6 @@
 #' 
 #' @return a plot of class \code{ggplot}
 #'
-#' @examples
-#' # (1) Load the data
-#' data(zinc)
-#' 
-#' # (2) Create an object of class 'reproData'
-#' zinc_rpr <- reproData(zinc)
-#'
-#' # (3) Plot dose-response
-#' plotDoseResponse(zinc_rpr)
-#'
-#' # (4) Plot dose-response with a generic style
-#' plotDoseResponse(zinc_rpr, style = "generic")
-#'
 #' @import ggplot2
 #' @import grDevices
 #' @importFrom dplyr filter

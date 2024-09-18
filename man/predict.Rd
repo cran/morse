@@ -5,7 +5,9 @@
 \alias{predict.survFit}
 \alias{predict_Nsurv}
 \alias{predict_Nsurv.survFit}
+\alias{predict}
 \alias{predict_Nsurv_ode}
+\alias{predict_Nsurv_ode.survFit}
 \title{Predict method for \code{survFit} objects}
 \usage{
 \method{predict}{survFit}(
@@ -43,6 +45,19 @@ predict_Nsurv_ode(
   extend_time,
   interpolate_length,
   interpolate_method,
+  ...
+)
+
+\method{predict_Nsurv_ode}{survFit}(
+  object,
+  data_predict = NULL,
+  spaghetti = FALSE,
+  mcmc_size = 1000,
+  hb_value = TRUE,
+  hb_valueFORCED = NA,
+  extend_time = 100,
+  interpolate_length = NULL,
+  interpolate_method = "linear",
   ...
 )
 }
@@ -101,6 +116,9 @@ while the \code{_valid} refers to the number of survivors predicted at time
 dataframe with all simulations based on MCMC parameters from a \code{survFit} object.}
 
 an object of class \code{predict_Nsurv_ode}.
+
+a \code{list} of \code{data.frame} with the quantiles of outputs in
+\code{df_quantiles} or all the MCMC chaines \code{df_spaghetti}
 }
 \description{
 This is the generic \code{predict} S3 method for the \code{survFit} class.
@@ -115,51 +133,4 @@ time-variable exposure.
 This is a \code{method} to replace function \code{predict_Nsurv} used on \code{survFit}
 object when computing issues happen. \code{predict_nsurv_ode} uses the \code{deSolve}
 library to improve robustness. However, time to compute may be longer.
-}
-\examples{
-
-# (1) Load the survival data
-data("propiconazole_pulse_exposure")
-
-# (2) Create an object of class "survData"
-dataset <- survData(propiconazole_pulse_exposure)
-
-\donttest{
-# (3) Run the survFit function
-out <- survFit(dataset , model_type = "SD")
-
-# (4) Create a new data table for prediction
-data_4prediction <- data.frame(time = 1:10,
-                               conc = c(0,5,30,30,0,0,5,30,15,0),
-                               replicate= rep("predict", 10))
-
-# (5) Predict on a new dataset
-predict_out <- predict(object = out, data_predict = data_4prediction, spaghetti = TRUE)
-
-}
-
-
-
-# (1) Load the survival data
-data("propiconazole_pulse_exposure")
-
-# (2) Create an object of class "survData"
-dataset <- survData(propiconazole_pulse_exposure)
-
-\donttest{
-# (3) Run the survFit function
-out <- survFit(dataset , model_type = "SD")
-
-# (4) Create a new data table for prediction
-data_4prediction <- data.frame(time = 1:10,
-                               conc = c(0,5,30,30,0,0,5,30,15,0),
-                               replicate= rep("predict", 10),
-                               Nsurv = c(20,20,17,16,15,15,15,14,13,12))
-
-# (5) Predict Nsurv on a new data set
-predict_out <- predict_Nsurv(object = out, data_predict = data_4prediction, spaghetti = TRUE)
-
-}
-
-
 }

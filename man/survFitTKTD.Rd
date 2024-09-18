@@ -38,30 +38,6 @@ the survival rate of individuals is modeled as a function of the chemical compou
 concentration with a mechanistic description of the effects on survival over
 time.
 }
-\examples{
-
-# (1) Load the survival data
-data(propiconazole)
-
-# (2) Create an object of class "survData"
-dataset <- survData(propiconazole)
-
-\donttest{
-# (3) Run the survFitTKTD function
-out <- survFitTKTD(dataset)
-
-# (4) Summarize look the estimated parameters
-summary(out)
-
-# (5) Plot the fitted curve
-plot(out, adddata = TRUE)
-
-# (6) Plot the fitted curve with ggplot style and CI as spaghetti
-plot(out, spaghetti = TRUE , adddata = TRUE,
-     style = "ggplot")
-}
-
-}
 \references{
 Delignette-Muller ML, Ruiz P and Veber P (2017).
 \emph{Robust fit of toxicokinetic-toxicodynamic models using prior knowledge contained in the design of survival toxicity tests.}

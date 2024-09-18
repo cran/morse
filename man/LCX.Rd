@@ -67,20 +67,3 @@ The function \code{LCx}, \eqn{x}\% Lethal Concentration (\eqn{LC_x}), is use to 
 \details{
 When class of \code{object} is \code{survFit}, see \link[=LCx.survFit]{LCx.survFit}.
 }
-\examples{
-
-# (1) Load the data
-data("propiconazole")
-
-# (2) Create an object of class 'survData'
-dataset <- survData(propiconazole)
-
-\donttest{
-# (3) Run the survFit function with model_type SD (or IT)
-out_SD <- survFit(dataset, model_type = "SD")
-
-# (4) estimate LC50 at time 4
-LCx(out_SD, X = 50, time_LCx = 4)
-}
-
-}

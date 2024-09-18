@@ -72,19 +72,4 @@ account ("gamma-Poisson" model). When setting \code{stoc.part} to
 \code{"bestfit"}, a model comparison procedure is used to choose between
 both. More details are presented in the vignette accompanying the package.
 }
-\examples{
-
-# (1) Load the data
-data(cadmium1)
-
-# (2) Create an object of class "reproData"
-dataset <- reproData(cadmium1)
-
-\donttest{
-# (3) Run the reproFitTT function with the log-logistic gamma-Poisson model
-out <- reproFitTT(dataset, stoc.part = "gammapoisson",
-                  ecx = c(5, 10, 15, 20, 30, 50, 80), quiet = TRUE)
-}
-
-}
 \keyword{estimation}

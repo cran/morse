@@ -3,7 +3,7 @@ datasets <- c("cadmium1",
               "copper",
               "chlordan",
               "zinc")
-data(list=datasets)
+data(list = datasets)
 
 failswith_id <- function(dataset, id) {
     gen_failswith_id(reproDataCheck, dataset, id)

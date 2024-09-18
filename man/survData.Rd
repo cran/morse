@@ -79,26 +79,6 @@ If an error of type \code{dataframeExpected} or \code{missingColumn} is
 detected, the function \code{survDataCheck} is stopped before looking for
 other errors.
 }
-\examples{
-
-# (1) Load the survival data set
-data(zinc)
-
-# (2) Create an objet of class 'survData'
-dat <- survData(zinc)
-class(dat)
-
-# Run the check data function
-data(zinc)
-survDataCheck(zinc)
-
-# Now we insert an error in the dataset, by artificially increasing the
-# number of survivors at a given time point, in such a way that the number
-# of indivuals increases in the corresponding replicate
-zinc[25, "Nsurv"] <- as.integer(20)
-survDataCheck(zinc, diagnosis.plot = TRUE)
-
-}
 \seealso{
 \code{\link{survDataCheck}}
 

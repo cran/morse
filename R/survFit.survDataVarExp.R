@@ -17,24 +17,6 @@
 #' \item{model_type}{the type of TKTD model used: \code{SD} or \code{IT}}
 #' 
 #' 
-#' @examples
-#'
-#' # Example with time-variable exposure profile
-#' # (1) Load the survival data
-#' data("propiconazole_pulse_exposure")
-#' # (2) Create an object of class "survData"
-#' dataset <- survData(propiconazole_pulse_exposure)
-#' \donttest{
-#' # (3) Run the survFit function with TKTD model 'SD' or 'IT' 
-#' out <- survFit(dataset , model_type = "SD")
-#' # (4) Summarize look the estimated parameters
-#' summary(out)
-#' # (5) Plot the fitted curve
-#' plot(out, adddata = FALSE)
-#' # (6) Plot the fitted curve with ggplot style and CI as spaghetti
-#' plot(out, spaghetti = TRUE)
-#' }
-#' 
 #' @import rjags
 #' 
 #' @export
@@ -59,7 +41,7 @@ survFit.survDataVarExp <- function(data,
   ##
 
   ### ensures model_type is one of "SD" and "IT"
-  if(is.null(model_type) || ! (model_type %in% c("SD","IT"))) {
+  if (is.null(model_type) || ! (model_type %in% c("SD","IT"))) {
     stop("You need to specify a 'model_type' among 'SD' or 'IT'")
   }
   ### check number of sample for the diagnostic procedure
@@ -67,7 +49,7 @@ survFit.survDataVarExp <- function(data,
     stop('2 or more parallel chains required')
   }
   ### warning message when hb_value = NULL
-  if(hb_value==FALSE){
+  if (hb_value==FALSE){
     warning("This is not an error message: the parameter 'hb' is fixed. This means that the correlation between
             'hb' and other parameters is ignored.")
     ### Set default hb_valueFIXED

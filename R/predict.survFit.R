@@ -24,29 +24,6 @@
 #' @return a \code{list} of \code{data.frame} with the quantiles of outputs in
 #' \code{df_quantiles} or all the MCMC chaines \code{df_spaghetti}
 #' 
-#' @examples 
-#'
-#' # (1) Load the survival data
-#' data("propiconazole_pulse_exposure")
-#'
-#' # (2) Create an object of class "survData"
-#' dataset <- survData(propiconazole_pulse_exposure)
-#'
-#' \donttest{
-#' # (3) Run the survFit function
-#' out <- survFit(dataset , model_type = "SD")
-#'
-#' # (4) Create a new data table for prediction
-#' data_4prediction <- data.frame(time = 1:10,
-#'                                conc = c(0,5,30,30,0,0,5,30,15,0),
-#'                                replicate= rep("predict", 10))
-#'
-#' # (5) Predict on a new dataset
-#' predict_out <- predict(object = out, data_predict = data_4prediction, spaghetti = TRUE)
-#'
-#' }
-#' 
-#' 
 #' @export
 #'
 predict.survFit <- function(object,
@@ -118,14 +95,14 @@ predict.survFit <- function(object,
   mctot = do.call("rbind", mcmc.samples)
   kd = 10^mctot[, "kd_log10"]
 
-  if(hb_value == TRUE){
+  if (hb_value == TRUE) {
     # "hb" is not in survFit object of morse <v3.2.0
-    if("hb" %in% colnames(mctot)){
+    if ("hb" %in% colnames(mctot)) {
       hb <- mctot[, "hb"]  
     } else{ hb <- 10^mctot[, "hb_log10"] }
-  } else if(hb_value == FALSE){
-    if(is.na(hb_valueFORCED)){
-      if(is.na(x$hb_valueFIXED)){
+  } else if (hb_value == FALSE){
+    if (is.na(hb_valueFORCED)) {
+      if (is.na(x$hb_valueFIXED)) {
         stop("Please provide value for `hb` using `hb_valueFORCED`.")
       } else{
         hb <- rep(x$hb_valueFIXED, nrow(mctot))
@@ -137,7 +114,7 @@ predict.survFit <- function(object,
  
   k = 1:length(unique_replicate)
   
-  if(model_type == "SD"){
+  if (model_type == "SD") {
     kk <- 10^mctot[, "kk_log10"]
     z <- 10^mctot[, "z_log10"]
     
@@ -151,7 +128,7 @@ predict.survFit <- function(object,
     })
     
   }
-  if(model_type == "IT"){
+  if (model_type == "IT") {
     
     alpha <- 10^mctot[, "alpha_log10"]
     beta <- 10^mctot[, "beta_log10"]
@@ -227,7 +204,6 @@ quantile_fun <- function(x, probs = 0.50, ratio_no.NA = 0.95){
 #
 # @return A matrix generate with coda.samples() function
 #
-
 Surv.SD_Cext <- function(Cw, time, kk, kd, z, hb){
   
   time.prec = c(time[1], time[1:(length(time)-1)])

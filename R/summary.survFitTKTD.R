@@ -11,21 +11,6 @@
 #' \item{Qpriors}{quantiles of the model priors}
 #' \item{Qposteriors}{quantiles of the model posteriors}
 #'
-#' @examples
-#' # (1) Load the data
-#' data(propiconazole)
-#'
-#' # (2) Create a survData object
-#' dat <- survData(propiconazole)
-#'
-#' \donttest{
-#' # (3) Run the survFitTKTD function
-#' out <- survFitTKTD(dat)
-#'
-#' # (4) summarize the survFitTKTD object
-#' summary(out)
-#' }
-#'
 #' @keywords summary
 #'
 #' @importFrom stats qnorm qunif

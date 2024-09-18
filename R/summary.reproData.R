@@ -12,16 +12,6 @@
 #' \code{\link{summary.survDataCstExp}} plus an additional one:
 #' \item{NboffTimeConc}{nb of offspring for all concentrations and time points}
 #' 
-#' @examples
-#' # (1) Load the data
-#' data(cadmium1)
-#' 
-#' # (2) Create a reproData object
-#' cadmium1 <- reproData(cadmium1)
-#' 
-#' # (3) Summarize the data set
-#' summary(cadmium1)
-#' 
 #' @keywords summary
 #' 
 #' @export

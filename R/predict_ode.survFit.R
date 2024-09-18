@@ -40,29 +40,6 @@ predict_ode <- function(object, ...){
 #' @return a \code{list} of \code{data.frame} with the quantiles of outputs in
 #' \code{df_quantiles} or all the MCMC chaines \code{df_spaghetti}
 #' 
-#' @examples 
-#'
-#' # (1) Load the survival data
-#' data("propiconazole_pulse_exposure")
-#'
-#' # (2) Create an object of class "survData"
-#' dataset <- survData(propiconazole_pulse_exposure)
-#'
-#' \donttest{
-#' # (3) Run the survFit function
-#' out <- survFit(dataset , model_type = "SD")
-#'
-#' # (4) Create a new data table for prediction
-#' data_4prediction <- data.frame(time = 1:10,
-#'                                conc = c(0,5,30,30,0,0,5,30,15,0),
-#'                                replicate= rep("predict", 10))
-#'
-#' # (5) Predict on a new data set
-#' predict_out <- predict_ode(object = out, data_predict = data_4prediction,
-#'                            mcmc_size = 1000, spaghetti = TRUE)
-#'
-#' }
-#' 
 #' @import deSolve
 #' @importFrom stats approxfun
 #' 

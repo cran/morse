@@ -19,22 +19,4 @@ This is the generic \code{print} S3 method for the \code{survFitTT} class.
 It prints the underlying JAGS model and some information on the Bayesian 
 inference procedure.
 }
-\examples{
-# (1) Load the data
-data(cadmium1)
-
-# (2) Create an object of class 'survData'
-cadmium1 <- survData(cadmium1)
-
-\donttest{
-# (3) Run the survFitTT function with the log-logistic
-# binomial model
-out <- survFitTT(cadmium1, lcx = c(5, 10, 15, 20, 30, 50, 80),
-                 quiet = TRUE)
-
-# (4) Print the survFitTT object
-print(out)
-}
-
-}
 \keyword{print}

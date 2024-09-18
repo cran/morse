@@ -1,5 +1,24 @@
 === morse : MOdelling tools for Reproduction and Survival data in Ecotoxicology ===
 
+Version 3.3.4
+=============
+
+CHANGE IN DOCUMENTATION
+- Improve documentation (label sections).
+- Fix typo on documentation to pass CRAN checks.
+- Remove all dontrun example to pass CRAN submission
+
+CHANGE IN CODE
+- Fix C++ failed in CRAN checks: function definition by adding dependency to lib stdlib.h
+
+
+Version 3.3.3
+=============
+
+Change repository URL
+- Change repository from gitlab/qonfluens to mosaic-software repository: https://gitlab.in2p3.fr/mosaic-software/
+- Change roxygens (R documentation) new keywords
+
 Version 3.3.2
 =============
 
@@ -10,14 +29,11 @@ Re-write the vignette in sweave for pdf modelling.Snw into R markdown modeling.R
 - remove modelling.Snw and add modeling.Rmd
 - add REFERENCES.bib
 
-
-
 Version 3.3.1
 =============
 
 FIX ISSUE Github #286 Accomodate new value for default.stringAsFactors()
 - replicate in survData are now only of class factor
-
 
 Version 3.3.0
 =============

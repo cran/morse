@@ -11,16 +11,6 @@
 #' \item{NbrepTimeConc}{nb of replicates for all concentrations and time points}
 #' \item{NbsurvTimeConc}{nb of survivors. for all concentrations and time points}
 #' 
-#' @examples
-#' # (1) Load the data
-#' data(cadmium1)
-#' 
-#' # (2) Create a survDataCstExp object
-#' dat <- survData(cadmium1)
-#' 
-#' # (3) Summarize the data set
-#' summary(dat)
-#' 
 #' @keywords summary
 #' 
 #' @export
