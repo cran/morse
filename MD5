@@ -1,7 +1,7 @@
-0cd75875b1af04d26821eee152a8e16d *DESCRIPTION
+2516266452aa923cf57af363057b36f3 *DESCRIPTION
 b7b4b32eb2a63a5410442d2a79581bc0 *LICENSE
 3ffa36679b4766f21de8f4655218ed41 *NAMESPACE
-fb612bbd8653ee71ede76d15fa927d79 *NEWS
+262dd923525f5f2592ea7b14be2ef7de *NEWS
 6b9bcaf5c331da046fa042ee9317910c *R/JAGS_models.R
 bb32d9928f65b79b7403b173ca5ca28d *R/LCx.R
 eb5a5ead35ba346379b2ff33ae601a73 *R/LCx.survFit.R
@@ -11,7 +11,7 @@ b5a7c4b93bd154f030f0da9513779e43 *R/MFx.R
 ae30e0e6237a645b5cadb2b8812247cd *R/modelData.R
 0ee9f30a787441ad617810aa79b66a82 *R/modelData.survDataCstExp.R
 0c89275e478c92580c9c426f68cb0fd7 *R/modelData.survDataVarExp.R
-3fe9daaa7e399a31a14f597b9f1e94bc *R/morse-internal.R
+477bf3529a181e2b91b86be877a17ef6 *R/morse-internal.R
 c1860bb7d5bc0f6be95577c5bc25eccc *R/morse.R
 73aea1ecc02aeb6b53c6cfa6b8460861 *R/msgTable.R
 3b372a4a77f4bf5ac21fb701c5790bc1 *R/plot.LCx.R
@@ -67,7 +67,7 @@ d13bd232273e291ed13e89085129454f *R/survFit.survDataCstExp.R
 139d8f27f802a9250a16a43063fb4bba *R/survFitTT.R
 7dbceffa23d237fabcde0deaaed904df *R/survFitTT.survDataCstExp.R
 3a960e88df1ed779ed33e632ffb3ae31 *R/survFit_utils.R
-a6655a00efabd878882a38d9ec998907 *build/vignette.rds
+dfa29f3801f4393d358db7a9f3b82fec *build/vignette.rds
 d05c8bf5e85647d41b9e5ee1ac7ad565 *data/FOCUSprofile.rda
 95c3a65381997244d73369c6d6364551 *data/cadmium1.rda
 3cc9183ab0ad2d787bf2d61f9b255b19 *data/cadmium2.rda
@@ -78,14 +78,14 @@ ae515b235fa82863eabb48506a666350 *data/copper.rda
 6fc6158100f9f8d68c10fcead6ccb042 *data/propiconazole_pulse_exposure.rda
 21a48c47d15e0d10f45c1213d90c07bc *data/propiconazole_split.rda
 5fca286f306edf09f4423ff739993405 *data/zinc.rda
-97736d72d5aa30887f5a5df9d95e0b75 *inst/doc/MinimalWorkingExample.R
+5f46c7653aaf4c13f1b3eaf49d0aa4be *inst/doc/MinimalWorkingExample.R
 3a3372dd875a30319494121c00538b3d *inst/doc/MinimalWorkingExample.Rmd
-fa4807ed1de3aaa63e463641ce0cf0f4 *inst/doc/MinimalWorkingExample.html
+8346bbd35e3f9436d312457abbd7cadd *inst/doc/MinimalWorkingExample.html
 ac67cf14dfcb236595a907a4c192b7db *inst/doc/modelling.Rmd
-3d72e4b855b3797db5c7bcc1eb884939 *inst/doc/modelling.html
-3028377be462cd341172d0cf28e436a6 *inst/doc/tutorial.R
+acd948e8ab075f8345f7d2fd33d5889b *inst/doc/modelling.html
+4cdaf50f858bffa2ba2e6e554d829062 *inst/doc/tutorial.R
 617cbb6d6b805072fd17c60c30b3160a *inst/doc/tutorial.Rmd
-863d5b767a251701fd07313751d9d20c *inst/doc/tutorial.html
+bf2ef516afd7a4739c08e9069ecd2cb6 *inst/doc/tutorial.html
 b63298f44cb392b43d595242eb7e8e48 *man/FOCUSprofile.Rd
 2ffe012751b159b7ae48fafc04aeb65f *man/LCX.Rd
 dcfba01f69ad629846f9c618a43a263c *man/MFx.Rd
@@ -153,7 +153,7 @@ e8b3a31fc9f808130f9fb7229dc165f7 *src/gutsRedSD.c
 baa5cef8ee58af876f1f5b860ad11b52 *src/registerDynamicSymbol.c
 6fae2cf7fd012967d5c7dfc5111a9433 *tests/testthat.R
 a35d621c410a73771c54f687add957ad *tests/testthat/helper-utils.R
-9de4174c530fd4175b9fc7ea62bac858 *tests/testthat/test-LCx.R
+dd41f3b48002651b2f3796de0a708857 *tests/testthat/test-LCx.R
 8df75286eb2b94b8063c6e5fc53f8d0d *tests/testthat/test-MFx.R
 0cf86e48cbb4f7b516af471328f86533 *tests/testthat/test-ggplot.R
 7ee867f5b8b88ffb95a447a0911b1a54 *tests/testthat/test-modelData.R

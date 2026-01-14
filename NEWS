@@ -1,5 +1,12 @@
 === morse : MOdelling tools for Reproduction and Survival data in Ecotoxicology ===
 
+
+Version 3.3.5
+=============
+
+CHANGE IN CODE
+- Add "id" in global variable following change in dplyr package.
+
 Version 3.3.4
 =============
 
