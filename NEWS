@@ -1,6 +1,12 @@
 === morse : MOdelling tools for Reproduction and Survival data in Ecotoxicology ===
 
 
+Version 3.6.0
+=============
+
+CHANGE IN CODE
+- Remove dependency on epitools package (replaced by internal function using stats::qgamma).
+
 Version 3.3.5
 =============
 

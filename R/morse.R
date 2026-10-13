@@ -93,7 +93,7 @@
 #' 
 #' EFSA PPR Scientific Opinion (2018)
 #' \emph{Scientific Opinion on the state of the art of Toxicokinetic/Toxicodynamic (TKTD) effect models for regulatory risk assessment of pesticides for aquatic organisms}
-#' \url{https://www.efsa.europa.eu/en/efsajournal/pub/5377}.
+#' \doi{10.2903/j.efsa.2018.5377}.
 #' 
 #' @useDynLib morse, .registration = TRUE
 NULL

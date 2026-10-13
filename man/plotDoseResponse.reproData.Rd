@@ -57,8 +57,8 @@ concentration at a given target time.
 The function plots the observed values of the reproduction rate (number of
 reproduction outputs per individual-day) at a given time point as a function of
 concentration. The 95 \% Poisson confidence interval is added to each reproduction
-rate. It is calculated using function \code{\link[epitools]{pois.exact}}
-from package \code{epitools}.
+rate. It is the exact Poisson confidence interval, calculated from the
+quantiles of the gamma distribution (see \code{\link[stats]{qgamma}}).
 As replicates are not pooled in this plot, overlapped points are shifted on
 the x-axis to help the visualization of replicates.
 }
@@ -68,8 +68,5 @@ When \code{style = "generic"}, the function calls the generic function
 
 When \code{style = "ggplot"}, the function return an object of class
 \code{ggplot}, see function \code{\link[ggplot2]{ggplot}}
-}
-\seealso{
-\code{\link[epitools]{pois.exact}}
 }
 \keyword{plot}

@@ -240,3 +240,22 @@ plotMatrixGeometry <- function(nblevels) {
   return(c(PlotPar[i], PlotPar[i + 1]))
 }
 
+
+#' @importFrom stats qgamma
+poisExactCI <- function(x, pt = 1, conf.level = 0.95) {
+  # exact confidence interval of a Poisson rate
+
+  # INPUT:
+  # - x: vector of counts
+  # - pt: vector of person-time at risk (here number of individual-days)
+  # - conf.level: confidence level
+  # OUTPUT:
+  # - data frame with the lower and upper bounds of the CI (2 columns
+  # (lower, upper) and length(x) rows)
+
+  alpha <- 1 - conf.level
+  lower <- ifelse(x == 0, 0, qgamma(alpha / 2, shape = x)) / pt
+  upper <- qgamma(1 - alpha / 2, shape = x + 1) / pt
+
+  return(data.frame(lower = lower, upper = upper))
+}

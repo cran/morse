@@ -228,7 +228,6 @@ reproSpaghetti <- function(fit, x) {
   return(dtheof)
 }
 
-#' @importFrom epitools pois.exact
 reproFitPlotGenericCredInt <- function(x, data_conc, transf_data_conc, data_resp,
                                        curv_conc, curv_resp,
                                        cred.int, spaghetti.CI, dataCIm,
