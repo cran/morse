@@ -310,9 +310,9 @@ reproFitPlotGGCredInt <- function(curv_resp, cred.int, spaghetti.CI, dataCIm,
   
   plt_3 <- plt_31 +
     geom_line(data = data.three, aes(conc, qinf95, color = Cred.Lim),
-              linetype = cilty, size = cilwd) +
+              linetype = cilty, linewidth = cilwd) +
     geom_line(data = data.three, aes(conc, qsup95, color = Cred.Lim),
-              linetype = cilty, size = cilwd) +
+              linetype = cilty, linewidth = cilwd) +
     scale_color_manual("", values = valCols$cols4) +
     theme_minimal()
   
@@ -334,11 +334,11 @@ reproFitPlotGGCredInt <- function(curv_resp, cred.int, spaghetti.CI, dataCIm,
   
   plt_4 <- plt_40 +
     geom_line(data = data.three, aes(conc, qinf95),
-              linetype = cilty, size = cilwd, color = valCols$cols4) +
+              linetype = cilty, linewidth = cilwd, color = valCols$cols4) +
     geom_line(data = data.three, aes(conc, qsup95),
-              linetype = cilty, size = cilwd, color = valCols$cols4) +
+              linetype = cilty, linewidth = cilwd, color = valCols$cols4) +
     geom_line(aes(conc, resp), curv_resp,
-              linetype = fitlty, size = fitlwd, color = valCols$cols2) +
+              linetype = fitlty, linewidth = fitlwd, color = valCols$cols2) +
     ylim(0, ylim_CI + 0.2) +
     labs(x = xlab, y = ylab) +
     ggtitle(main) + theme_minimal()
@@ -375,7 +375,7 @@ reproFitPlotGG <- function(x, data_conc, transf_data_conc, data_resp,
     # curve (to create the legend)
     plt_2 <- ggplot(curv_resp) +
       geom_line(data = curv_resp, aes(conc, resp, colour = Line),
-                linetype = fitlty, size = fitlwd) +
+                linetype = fitlty, linewidth = fitlwd) +
       scale_color_manual("", values = valCols$cols2) +
       theme_minimal()
     

@@ -1,6 +1,13 @@
 === morse : MOdelling tools for Reproduction and Survival data in Ecotoxicology ===
 
 
+Version 3.6.1
+=============
+
+CHANGE IN CODE
+- Exclude dplyr::collapse from imports to fix the "replacing previous import 'dplyr::collapse' by 'rjags::collapse'" warning on R-devel.
+- Replace deprecated ggplot2 'size' aesthetic for lines by 'linewidth' (requires ggplot2 >= 3.4.0).
+
 Version 3.6.0
 =============
 

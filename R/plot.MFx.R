@@ -142,14 +142,14 @@ can use X = NULL, and compute time series around the median MFx, with the
                     fill = "grey30", alpha = 0.4) +
         geom_line(data = final_predict,
                   aes(x = time, y = q50),
-                  col="orange", size = 1) +
+                  col="orange", linewidth = 1) +
         # initial predict
         geom_ribbon(data = initial_predict,
                     aes(x = time, ymin = qinf95, ymax = qsup95),
                     fill = "grey60", alpha = 0.4) +
         geom_line(data = initial_predict,
                   aes(x = time, y = q50),
-                  col="orange", size = 0.3) +
+                  col="orange", linewidth = 0.3) +
         # arrow
         geom_segment(aes(x = x$time_MFx, y = y_arrow,
                          xend = x$time_MFx, yend =  yend_arrow),
@@ -167,7 +167,7 @@ can use X = NULL, and compute time series around the median MFx, with the
                     fill = "grey30", alpha = 0.4) +
         geom_line(data = predict_MFx_quantile,
                   aes(x = time, y = q50),
-                  col="orange", size = 1) +
+                  col="orange", linewidth = 1) +
         facet_wrap( ~ round(MFx, digits = 2), ncol = ncol)
     }
   }

@@ -356,9 +356,9 @@ survFitPlotGGCredInt <- function(x, data, curv_resp, conf.int, cred.int,
   
   plt_32 <- plt_302 +
     geom_line(data = data.four, aes(conc, qinf95, color = Cred.Lim),
-              linetype = cilty, size = cilwd) +
+              linetype = cilty, linewidth = cilwd) +
     geom_line(data = data.four, aes(conc, qsup95, color = Cred.Lim),
-              linetype = cilty, size = cilwd) +
+              linetype = cilty, linewidth = cilwd) +
     scale_color_manual("", values = valCols$cols4) +
     theme_minimal()
   
@@ -378,11 +378,11 @@ survFitPlotGGCredInt <- function(x, data, curv_resp, conf.int, cred.int,
   
   plt_401 <- plt_40 +
     geom_line(data = data.four, aes(conc, qinf95),
-              linetype = cilty, size = cilwd, color = valCols$cols4) +
+              linetype = cilty, linewidth = cilwd, color = valCols$cols4) +
     geom_line(data = data.four, aes(conc, qsup95),
-              linetype = cilty, size = cilwd, color = valCols$cols4) +
+              linetype = cilty, linewidth = cilwd, color = valCols$cols4) +
     geom_line(data = curv_resp, aes(conc, resp),
-              linetype = fitlty, size = fitlwd, color = valCols$cols2) +
+              linetype = fitlty, linewidth = fitlwd, color = valCols$cols2) +
     scale_color_discrete(guide = "none") +
     ylim(0, 1) +
     labs(x = xlab, y = ylab) +
@@ -433,7 +433,7 @@ survFitPlotGG <- function(x,
   # curve (to create the legend)
   plt_2 <- ggplot(data) +
     geom_line(data = curv_resp, aes(conc, resp, colour = Line),
-              linetype = fitlty, size = fitlwd) +
+              linetype = fitlty, linewidth = fitlwd) +
     scale_colour_manual("", values = valCols$cols2) +
     theme_minimal()
   

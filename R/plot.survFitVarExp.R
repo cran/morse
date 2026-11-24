@@ -130,7 +130,7 @@ plot.survFitVarExp <- function(x,
   plt <- plt +
     geom_line(data = df_prediction,
               aes(x = time, y = q50, group = replicate),
-              col="orange", size = 1)
+              col="orange", linewidth = 1)
     
   # facetting
   if(one.plot == FALSE){

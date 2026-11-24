@@ -429,7 +429,7 @@ survFitPlotTKTDGGNoOnePlot <- function(data, dobs, xlab, ylab, main, spaghetti,
       geom_segment(aes(x = time, xend = time, y = qinf95, yend = qsup95,
                        linetype = Conf.Int),
                    dobs, col = valCols$cols3,
-                   size = 0.5) +
+                   linewidth = 0.5) +
       scale_fill_hue("")
   } else {
     gf <- gf

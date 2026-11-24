@@ -83,7 +83,7 @@ plot.survFitPredict_Nsurv<- function(x,
   plt <- plt +
     geom_line(data = df_prediction,
               aes(x = time, y = q50, group = replicate),
-              col="orange", size = 1) +
+              col="orange", linewidth = 1) +
     geom_point(data = df_prediction,
                aes(x = time, y = Nsurv, group = replicate))
   
@@ -106,7 +106,7 @@ plot.survFitPredict_Nsurv<- function(x,
                 fill = "grey70", alpha = 0.4) +
     geom_line(data = df_prediction,
               aes(x = time, y = Nsurv_q50_valid, group = replicate),
-              col="orange", size = 1) +
+              col="orange", linewidth = 1) +
     geom_point(data = df_prediction,
                aes(x = time, y = Nsurv, group = replicate))
     
